@@ -1,0 +1,13 @@
+{
+  "repo": "netbird",
+  "feeds": [
+    {
+      "source": "https://netbird.io/blog/",
+      "feed_url": "https://netbird.io/blog/rss.xml",
+      "saved": 6,
+      "title": "Netbird Blog"
+    }
+  ],
+  "post_count": 6,
+  "fetched": "2026-05-03T23:32:45Z"
+}
