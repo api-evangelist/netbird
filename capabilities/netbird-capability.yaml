@@ -1,0 +1,2553 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  tags:
+  - Netbird
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: netbird
+    baseUri: https://api.netbird.io
+    description: NetBird REST API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{NETBIRD_TOKEN}}'
+    resources:
+    - name: api-instance
+      path: /api/instance
+      operations:
+      - name: get-api-instance
+        method: GET
+        description: Get Instance Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-instance-version
+      path: /api/instance/version
+      operations:
+      - name: get-api-instance-version
+        method: GET
+        description: Get Version Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-setup
+      path: /api/setup
+      operations:
+      - name: post-api-setup
+        method: POST
+        description: Setup Instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-peers-peerid-jobs
+      path: /api/peers/{peerId}/jobs
+      operations:
+      - name: get-api-peers-peerid-jobs
+        method: GET
+        description: List Jobs
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-api-peers-peerid-jobs
+        method: POST
+        description: Create Job
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-peers-peerid-jobs-jobid
+      path: /api/peers/{peerId}/jobs/{jobId}
+      operations:
+      - name: get-api-peers-peerid-jobs-jobid
+        method: GET
+        description: Get Job
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a peer
+        - name: jobId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-accounts
+      path: /api/accounts
+      operations:
+      - name: get-api-accounts
+        method: GET
+        description: List all Accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-accounts-accountid
+      path: /api/accounts/{accountId}
+      operations:
+      - name: delete-api-accounts-accountid
+        method: DELETE
+        description: Delete an Account
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of an account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: put-api-accounts-accountid
+        method: PUT
+        description: Update an Account
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of an account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users
+      path: /api/users
+      operations:
+      - name: get-api-users
+        method: GET
+        description: List all Users
+        inputParameters:
+        - name: service_user
+          in: query
+          type: boolean
+          description: Filters users and returns either regular users or service users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-api-users
+        method: POST
+        description: Create a User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users-userid
+      path: /api/users/{userId}
+      operations:
+      - name: put-api-users-userid
+        method: PUT
+        description: Update a User
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-api-users-userid
+        method: DELETE
+        description: Delete a User
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users-userid-tokens
+      path: /api/users/{userId}/tokens
+      operations:
+      - name: get-api-users-userid-tokens
+        method: GET
+        description: List all Tokens
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-api-users-userid-tokens
+        method: POST
+        description: Create a Token
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users-userid-tokens-tokenid
+      path: /api/users/{userId}/tokens/{tokenId}
+      operations:
+      - name: get-api-users-userid-tokens-tokenid
+        method: GET
+        description: Retrieve a Token
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a user
+        - name: tokenId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-api-users-userid-tokens-tokenid
+        method: DELETE
+        description: Delete a Token
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a user
+        - name: tokenId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users-userid-invite
+      path: /api/users/{userId}/invite
+      operations:
+      - name: post-api-users-userid-invite
+        method: POST
+        description: Resend user invitation
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users-userid-approve
+      path: /api/users/{userId}/approve
+      operations:
+      - name: post-api-users-userid-approve
+        method: POST
+        description: Approve user
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users-userid-reject
+      path: /api/users/{userId}/reject
+      operations:
+      - name: delete-api-users-userid-reject
+        method: DELETE
+        description: Reject user
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users-userid-password
+      path: /api/users/{userId}/password
+      operations:
+      - name: put-api-users-userid-password
+        method: PUT
+        description: Change user password
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users-current
+      path: /api/users/current
+      operations:
+      - name: get-api-users-current
+        method: GET
+        description: Retrieve current user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users-invites
+      path: /api/users/invites
+      operations:
+      - name: get-api-users-invites
+        method: GET
+        description: List user invites
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-api-users-invites
+        method: POST
+        description: Create a user invite
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users-invites-inviteid
+      path: /api/users/invites/{inviteId}
+      operations:
+      - name: delete-api-users-invites-inviteid
+        method: DELETE
+        description: Delete a user invite
+        inputParameters:
+        - name: inviteId
+          in: path
+          type: string
+          required: true
+          description: The ID of the invite to delete
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users-invites-inviteid-regenerate
+      path: /api/users/invites/{inviteId}/regenerate
+      operations:
+      - name: post-api-users-invites-inviteid-regenerate
+        method: POST
+        description: Regenerate a user invite
+        inputParameters:
+        - name: inviteId
+          in: path
+          type: string
+          required: true
+          description: The ID of the invite to regenerate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users-invites-token
+      path: /api/users/invites/{token}
+      operations:
+      - name: get-api-users-invites-token
+        method: GET
+        description: Get invite information
+        inputParameters:
+        - name: token
+          in: path
+          type: string
+          required: true
+          description: The invite token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-users-invites-token-accept
+      path: /api/users/invites/{token}/accept
+      operations:
+      - name: post-api-users-invites-token-accept
+        method: POST
+        description: Accept an invite
+        inputParameters:
+        - name: token
+          in: path
+          type: string
+          required: true
+          description: The invite token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-peers
+      path: /api/peers
+      operations:
+      - name: get-api-peers
+        method: GET
+        description: List all Peers
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Filter peers by name
+        - name: ip
+          in: query
+          type: string
+          description: Filter peers by IP address
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-peers-peerid
+      path: /api/peers/{peerId}
+      operations:
+      - name: get-api-peers-peerid
+        method: GET
+        description: Retrieve a Peer
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: put-api-peers-peerid
+        method: PUT
+        description: Update a Peer
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-api-peers-peerid
+        method: DELETE
+        description: Delete a Peer
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-peers-peerid-accessible-peers
+      path: /api/peers/{peerId}/accessible-peers
+      operations:
+      - name: get-api-peers-peerid-accessible-peers
+        method: GET
+        description: List accessible Peers
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-peers-peerid-temporary-access
+      path: /api/peers/{peerId}/temporary-access
+      operations:
+      - name: post-api-peers-peerid-temporary-access
+        method: POST
+        description: Create a Temporary Access Peer
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-peers-peerid-ingress-ports
+      path: /api/peers/{peerId}/ingress/ports
+      operations:
+      - name: get-api-peers-peerid-ingress-ports
+        method: GET
+        description: List all Port Allocations
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a peer
+        - name: name
+          in: query
+          type: string
+          description: Filters ingress port allocations by name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-api-peers-peerid-ingress-ports
+        method: POST
+        description: Create a Port Allocation
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-peers-peerid-ingress-ports-allocationid
+      path: /api/peers/{peerId}/ingress/ports/{allocationId}
+      operations:
+      - name: get-api-peers-peerid-ingress-ports-allocationid
+        method: GET
+        description: Retrieve a Port Allocation
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a peer
+        - name: allocationId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of an ingress port allocation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: put-api-peers-peerid-ingress-ports-allocationid
+        method: PUT
+        description: Update a Port Allocation
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a peer
+        - name: allocationId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of an ingress port allocation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-api-peers-peerid-ingress-ports-allocation
+        method: DELETE
+        description: Delete a Port Allocation
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a peer
+        - name: allocationId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of an ingress port allocation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-ingress-peers
+      path: /api/ingress/peers
+      operations:
+      - name: get-api-ingress-peers
+        method: GET
+        description: List all Ingress Peers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-api-ingress-peers
+        method: POST
+        description: Create a Ingress Peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-ingress-peers-ingresspeerid
+      path: /api/ingress/peers/{ingressPeerId}
+      operations:
+      - name: get-api-ingress-peers-ingresspeerid
+        method: GET
+        description: Retrieve a Ingress Peer
+        inputParameters:
+        - name: ingressPeerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of an ingress peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: put-api-ingress-peers-ingresspeerid
+        method: PUT
+        description: Update a Ingress Peer
+        inputParameters:
+        - name: ingressPeerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of an ingress peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-api-ingress-peers-ingresspeerid
+        method: DELETE
+        description: Delete a Ingress Peer
+        inputParameters:
+        - name: ingressPeerId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of an ingress peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-setup-keys
+      path: /api/setup-keys
+      operations:
+      - name: get-api-setup-keys
+        method: GET
+        description: List all Setup Keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-api-setup-keys
+        method: POST
+        description: Create a Setup Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-setup-keys-keyid
+      path: /api/setup-keys/{keyId}
+      operations:
+      - name: get-api-setup-keys-keyid
+        method: GET
+        description: Retrieve a Setup Key
+        inputParameters:
+        - name: keyId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a setup key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: put-api-setup-keys-keyid
+        method: PUT
+        description: Update a Setup Key
+        inputParameters:
+        - name: keyId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a setup key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-api-setup-keys-keyid
+        method: DELETE
+        description: Delete a Setup Key
+        inputParameters:
+        - name: keyId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a setup key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-groups
+      path: /api/groups
+      operations:
+      - name: get-api-groups
+        method: GET
+        description: List all Groups
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Filter groups by name (exact match)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-api-groups
+        method: POST
+        description: Create a Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-groups-groupid
+      path: /api/groups/{groupId}
+      operations:
+      - name: get-api-groups-groupid
+        method: GET
+        description: Retrieve a Group
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: put-api-groups-groupid
+        method: PUT
+        description: Update a Group
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-api-groups-groupid
+        method: DELETE
+        description: Delete a Group
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-policies
+      path: /api/policies
+      operations:
+      - name: get-api-policies
+        method: GET
+        description: List all Policies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post-api-policies
+        method: POST
+        description: Create a Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-policies-policyid
+      path: /api/policies/{policyId}
+      operations:
+      - name: get-api-policies-policyid
+        method: GET
+        description: Retrieve a Policy
+        inputParameters:
+        - name: policyId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: put-api-policies-policyid
+        method: PUT
+        description: Update a Policy
+        inputParameters:
+        - name: policyId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-api-policies-policyid
+        method: DELETE
+        description: Delete a Policy
+        inputParameters:
+        - name: policyId
+          in: path
+          type: string
+          required: true
+          description: The unique identifier of a policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-routes
+      path: /api/routes
+      operations:
+      - name: get-api-routes
+        method: GET
+        description: List all Routes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: netbird-rest
+    description: REST adapter for NetBird REST API.
+    resources:
+    - path: /api/instance
+      name: get-api-instance
+      operations:
+      - method: GET
+        name: get-api-instance
+        description: Get Instance Status
+        call: netbird.get-api-instance
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/instance/version
+      name: get-api-instance-version
+      operations:
+      - method: GET
+        name: get-api-instance-version
+        description: Get Version Info
+        call: netbird.get-api-instance-version
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/setup
+      name: post-api-setup
+      operations:
+      - method: POST
+        name: post-api-setup
+        description: Setup Instance
+        call: netbird.post-api-setup
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/peers/{peerId}/jobs
+      name: get-api-peers-peerid-jobs
+      operations:
+      - method: GET
+        name: get-api-peers-peerid-jobs
+        description: List Jobs
+        call: netbird.get-api-peers-peerid-jobs
+        with:
+          peerId: rest.peerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/peers/{peerId}/jobs
+      name: post-api-peers-peerid-jobs
+      operations:
+      - method: POST
+        name: post-api-peers-peerid-jobs
+        description: Create Job
+        call: netbird.post-api-peers-peerid-jobs
+        with:
+          peerId: rest.peerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/peers/{peerId}/jobs/{jobId}
+      name: get-api-peers-peerid-jobs-jobid
+      operations:
+      - method: GET
+        name: get-api-peers-peerid-jobs-jobid
+        description: Get Job
+        call: netbird.get-api-peers-peerid-jobs-jobid
+        with:
+          peerId: rest.peerId
+          jobId: rest.jobId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/accounts
+      name: get-api-accounts
+      operations:
+      - method: GET
+        name: get-api-accounts
+        description: List all Accounts
+        call: netbird.get-api-accounts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/accounts/{accountId}
+      name: delete-api-accounts-accountid
+      operations:
+      - method: DELETE
+        name: delete-api-accounts-accountid
+        description: Delete an Account
+        call: netbird.delete-api-accounts-accountid
+        with:
+          accountId: rest.accountId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/accounts/{accountId}
+      name: put-api-accounts-accountid
+      operations:
+      - method: PUT
+        name: put-api-accounts-accountid
+        description: Update an Account
+        call: netbird.put-api-accounts-accountid
+        with:
+          accountId: rest.accountId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users
+      name: get-api-users
+      operations:
+      - method: GET
+        name: get-api-users
+        description: List all Users
+        call: netbird.get-api-users
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users
+      name: post-api-users
+      operations:
+      - method: POST
+        name: post-api-users
+        description: Create a User
+        call: netbird.post-api-users
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/{userId}
+      name: put-api-users-userid
+      operations:
+      - method: PUT
+        name: put-api-users-userid
+        description: Update a User
+        call: netbird.put-api-users-userid
+        with:
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/{userId}
+      name: delete-api-users-userid
+      operations:
+      - method: DELETE
+        name: delete-api-users-userid
+        description: Delete a User
+        call: netbird.delete-api-users-userid
+        with:
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/{userId}/tokens
+      name: get-api-users-userid-tokens
+      operations:
+      - method: GET
+        name: get-api-users-userid-tokens
+        description: List all Tokens
+        call: netbird.get-api-users-userid-tokens
+        with:
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/{userId}/tokens
+      name: post-api-users-userid-tokens
+      operations:
+      - method: POST
+        name: post-api-users-userid-tokens
+        description: Create a Token
+        call: netbird.post-api-users-userid-tokens
+        with:
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/{userId}/tokens/{tokenId}
+      name: get-api-users-userid-tokens-tokenid
+      operations:
+      - method: GET
+        name: get-api-users-userid-tokens-tokenid
+        description: Retrieve a Token
+        call: netbird.get-api-users-userid-tokens-tokenid
+        with:
+          userId: rest.userId
+          tokenId: rest.tokenId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/{userId}/tokens/{tokenId}
+      name: delete-api-users-userid-tokens-tokenid
+      operations:
+      - method: DELETE
+        name: delete-api-users-userid-tokens-tokenid
+        description: Delete a Token
+        call: netbird.delete-api-users-userid-tokens-tokenid
+        with:
+          userId: rest.userId
+          tokenId: rest.tokenId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/{userId}/invite
+      name: post-api-users-userid-invite
+      operations:
+      - method: POST
+        name: post-api-users-userid-invite
+        description: Resend user invitation
+        call: netbird.post-api-users-userid-invite
+        with:
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/{userId}/approve
+      name: post-api-users-userid-approve
+      operations:
+      - method: POST
+        name: post-api-users-userid-approve
+        description: Approve user
+        call: netbird.post-api-users-userid-approve
+        with:
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/{userId}/reject
+      name: delete-api-users-userid-reject
+      operations:
+      - method: DELETE
+        name: delete-api-users-userid-reject
+        description: Reject user
+        call: netbird.delete-api-users-userid-reject
+        with:
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/{userId}/password
+      name: put-api-users-userid-password
+      operations:
+      - method: PUT
+        name: put-api-users-userid-password
+        description: Change user password
+        call: netbird.put-api-users-userid-password
+        with:
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/current
+      name: get-api-users-current
+      operations:
+      - method: GET
+        name: get-api-users-current
+        description: Retrieve current user
+        call: netbird.get-api-users-current
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/invites
+      name: get-api-users-invites
+      operations:
+      - method: GET
+        name: get-api-users-invites
+        description: List user invites
+        call: netbird.get-api-users-invites
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/invites
+      name: post-api-users-invites
+      operations:
+      - method: POST
+        name: post-api-users-invites
+        description: Create a user invite
+        call: netbird.post-api-users-invites
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/invites/{inviteId}
+      name: delete-api-users-invites-inviteid
+      operations:
+      - method: DELETE
+        name: delete-api-users-invites-inviteid
+        description: Delete a user invite
+        call: netbird.delete-api-users-invites-inviteid
+        with:
+          inviteId: rest.inviteId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/invites/{inviteId}/regenerate
+      name: post-api-users-invites-inviteid-regenerate
+      operations:
+      - method: POST
+        name: post-api-users-invites-inviteid-regenerate
+        description: Regenerate a user invite
+        call: netbird.post-api-users-invites-inviteid-regenerate
+        with:
+          inviteId: rest.inviteId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/invites/{token}
+      name: get-api-users-invites-token
+      operations:
+      - method: GET
+        name: get-api-users-invites-token
+        description: Get invite information
+        call: netbird.get-api-users-invites-token
+        with:
+          token: rest.token
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/users/invites/{token}/accept
+      name: post-api-users-invites-token-accept
+      operations:
+      - method: POST
+        name: post-api-users-invites-token-accept
+        description: Accept an invite
+        call: netbird.post-api-users-invites-token-accept
+        with:
+          token: rest.token
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/peers
+      name: get-api-peers
+      operations:
+      - method: GET
+        name: get-api-peers
+        description: List all Peers
+        call: netbird.get-api-peers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/peers/{peerId}
+      name: get-api-peers-peerid
+      operations:
+      - method: GET
+        name: get-api-peers-peerid
+        description: Retrieve a Peer
+        call: netbird.get-api-peers-peerid
+        with:
+          peerId: rest.peerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/peers/{peerId}
+      name: put-api-peers-peerid
+      operations:
+      - method: PUT
+        name: put-api-peers-peerid
+        description: Update a Peer
+        call: netbird.put-api-peers-peerid
+        with:
+          peerId: rest.peerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/peers/{peerId}
+      name: delete-api-peers-peerid
+      operations:
+      - method: DELETE
+        name: delete-api-peers-peerid
+        description: Delete a Peer
+        call: netbird.delete-api-peers-peerid
+        with:
+          peerId: rest.peerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/peers/{peerId}/accessible-peers
+      name: get-api-peers-peerid-accessible-peers
+      operations:
+      - method: GET
+        name: get-api-peers-peerid-accessible-peers
+        description: List accessible Peers
+        call: netbird.get-api-peers-peerid-accessible-peers
+        with:
+          peerId: rest.peerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/peers/{peerId}/temporary-access
+      name: post-api-peers-peerid-temporary-access
+      operations:
+      - method: POST
+        name: post-api-peers-peerid-temporary-access
+        description: Create a Temporary Access Peer
+        call: netbird.post-api-peers-peerid-temporary-access
+        with:
+          peerId: rest.peerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/peers/{peerId}/ingress/ports
+      name: get-api-peers-peerid-ingress-ports
+      operations:
+      - method: GET
+        name: get-api-peers-peerid-ingress-ports
+        description: List all Port Allocations
+        call: netbird.get-api-peers-peerid-ingress-ports
+        with:
+          peerId: rest.peerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/peers/{peerId}/ingress/ports
+      name: post-api-peers-peerid-ingress-ports
+      operations:
+      - method: POST
+        name: post-api-peers-peerid-ingress-ports
+        description: Create a Port Allocation
+        call: netbird.post-api-peers-peerid-ingress-ports
+        with:
+          peerId: rest.peerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/peers/{peerId}/ingress/ports/{allocationId}
+      name: get-api-peers-peerid-ingress-ports-allocationid
+      operations:
+      - method: GET
+        name: get-api-peers-peerid-ingress-ports-allocationid
+        description: Retrieve a Port Allocation
+        call: netbird.get-api-peers-peerid-ingress-ports-allocationid
+        with:
+          peerId: rest.peerId
+          allocationId: rest.allocationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/peers/{peerId}/ingress/ports/{allocationId}
+      name: put-api-peers-peerid-ingress-ports-allocationid
+      operations:
+      - method: PUT
+        name: put-api-peers-peerid-ingress-ports-allocationid
+        description: Update a Port Allocation
+        call: netbird.put-api-peers-peerid-ingress-ports-allocationid
+        with:
+          peerId: rest.peerId
+          allocationId: rest.allocationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/peers/{peerId}/ingress/ports/{allocationId}
+      name: delete-api-peers-peerid-ingress-ports-allocation
+      operations:
+      - method: DELETE
+        name: delete-api-peers-peerid-ingress-ports-allocation
+        description: Delete a Port Allocation
+        call: netbird.delete-api-peers-peerid-ingress-ports-allocation
+        with:
+          peerId: rest.peerId
+          allocationId: rest.allocationId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/ingress/peers
+      name: get-api-ingress-peers
+      operations:
+      - method: GET
+        name: get-api-ingress-peers
+        description: List all Ingress Peers
+        call: netbird.get-api-ingress-peers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/ingress/peers
+      name: post-api-ingress-peers
+      operations:
+      - method: POST
+        name: post-api-ingress-peers
+        description: Create a Ingress Peer
+        call: netbird.post-api-ingress-peers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/ingress/peers/{ingressPeerId}
+      name: get-api-ingress-peers-ingresspeerid
+      operations:
+      - method: GET
+        name: get-api-ingress-peers-ingresspeerid
+        description: Retrieve a Ingress Peer
+        call: netbird.get-api-ingress-peers-ingresspeerid
+        with:
+          ingressPeerId: rest.ingressPeerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/ingress/peers/{ingressPeerId}
+      name: put-api-ingress-peers-ingresspeerid
+      operations:
+      - method: PUT
+        name: put-api-ingress-peers-ingresspeerid
+        description: Update a Ingress Peer
+        call: netbird.put-api-ingress-peers-ingresspeerid
+        with:
+          ingressPeerId: rest.ingressPeerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/ingress/peers/{ingressPeerId}
+      name: delete-api-ingress-peers-ingresspeerid
+      operations:
+      - method: DELETE
+        name: delete-api-ingress-peers-ingresspeerid
+        description: Delete a Ingress Peer
+        call: netbird.delete-api-ingress-peers-ingresspeerid
+        with:
+          ingressPeerId: rest.ingressPeerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/setup-keys
+      name: get-api-setup-keys
+      operations:
+      - method: GET
+        name: get-api-setup-keys
+        description: List all Setup Keys
+        call: netbird.get-api-setup-keys
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/setup-keys
+      name: post-api-setup-keys
+      operations:
+      - method: POST
+        name: post-api-setup-keys
+        description: Create a Setup Key
+        call: netbird.post-api-setup-keys
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/setup-keys/{keyId}
+      name: get-api-setup-keys-keyid
+      operations:
+      - method: GET
+        name: get-api-setup-keys-keyid
+        description: Retrieve a Setup Key
+        call: netbird.get-api-setup-keys-keyid
+        with:
+          keyId: rest.keyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/setup-keys/{keyId}
+      name: put-api-setup-keys-keyid
+      operations:
+      - method: PUT
+        name: put-api-setup-keys-keyid
+        description: Update a Setup Key
+        call: netbird.put-api-setup-keys-keyid
+        with:
+          keyId: rest.keyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/setup-keys/{keyId}
+      name: delete-api-setup-keys-keyid
+      operations:
+      - method: DELETE
+        name: delete-api-setup-keys-keyid
+        description: Delete a Setup Key
+        call: netbird.delete-api-setup-keys-keyid
+        with:
+          keyId: rest.keyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/groups
+      name: get-api-groups
+      operations:
+      - method: GET
+        name: get-api-groups
+        description: List all Groups
+        call: netbird.get-api-groups
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/groups
+      name: post-api-groups
+      operations:
+      - method: POST
+        name: post-api-groups
+        description: Create a Group
+        call: netbird.post-api-groups
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/groups/{groupId}
+      name: get-api-groups-groupid
+      operations:
+      - method: GET
+        name: get-api-groups-groupid
+        description: Retrieve a Group
+        call: netbird.get-api-groups-groupid
+        with:
+          groupId: rest.groupId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/groups/{groupId}
+      name: put-api-groups-groupid
+      operations:
+      - method: PUT
+        name: put-api-groups-groupid
+        description: Update a Group
+        call: netbird.put-api-groups-groupid
+        with:
+          groupId: rest.groupId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/groups/{groupId}
+      name: delete-api-groups-groupid
+      operations:
+      - method: DELETE
+        name: delete-api-groups-groupid
+        description: Delete a Group
+        call: netbird.delete-api-groups-groupid
+        with:
+          groupId: rest.groupId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/policies
+      name: get-api-policies
+      operations:
+      - method: GET
+        name: get-api-policies
+        description: List all Policies
+        call: netbird.get-api-policies
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/policies
+      name: post-api-policies
+      operations:
+      - method: POST
+        name: post-api-policies
+        description: Create a Policy
+        call: netbird.post-api-policies
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/policies/{policyId}
+      name: get-api-policies-policyid
+      operations:
+      - method: GET
+        name: get-api-policies-policyid
+        description: Retrieve a Policy
+        call: netbird.get-api-policies-policyid
+        with:
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/policies/{policyId}
+      name: put-api-policies-policyid
+      operations:
+      - method: PUT
+        name: put-api-policies-policyid
+        description: Update a Policy
+        call: netbird.put-api-policies-policyid
+        with:
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/policies/{policyId}
+      name: delete-api-policies-policyid
+      operations:
+      - method: DELETE
+        name: delete-api-policies-policyid
+        description: Delete a Policy
+        call: netbird.delete-api-policies-policyid
+        with:
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /api/routes
+      name: get-api-routes
+      operations:
+      - method: GET
+        name: get-api-routes
+        description: List all Routes
+        call: netbird.get-api-routes
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: netbird-mcp
+    transport: http
+    description: MCP adapter for NetBird REST API for AI agent use.
+    tools:
+    - name: get-api-instance
+      description: Get Instance Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-instance
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-instance-version
+      description: Get Version Info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-instance-version
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-setup
+      description: Setup Instance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird.post-api-setup
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-peers-peerid-jobs
+      description: List Jobs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-peers-peerid-jobs
+      with:
+        peerId: tools.peerId
+      inputParameters:
+      - name: peerId
+        type: string
+        description: The unique identifier of a peer
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-peers-peerid-jobs
+      description: Create Job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird.post-api-peers-peerid-jobs
+      with:
+        peerId: tools.peerId
+      inputParameters:
+      - name: peerId
+        type: string
+        description: The unique identifier of a peer
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-peers-peerid-jobs-jobid
+      description: Get Job
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-peers-peerid-jobs-jobid
+      with:
+        peerId: tools.peerId
+        jobId: tools.jobId
+      inputParameters:
+      - name: peerId
+        type: string
+        description: The unique identifier of a peer
+        required: true
+      - name: jobId
+        type: string
+        description: The unique identifier of a job
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-accounts
+      description: List all Accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-accounts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-accounts-accountid
+      description: Delete an Account
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird.delete-api-accounts-accountid
+      with:
+        accountId: tools.accountId
+      inputParameters:
+      - name: accountId
+        type: string
+        description: The unique identifier of an account
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: put-api-accounts-accountid
+      description: Update an Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird.put-api-accounts-accountid
+      with:
+        accountId: tools.accountId
+      inputParameters:
+      - name: accountId
+        type: string
+        description: The unique identifier of an account
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-users
+      description: List all Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-users
+      with:
+        service_user: tools.service_user
+      inputParameters:
+      - name: service_user
+        type: boolean
+        description: Filters users and returns either regular users or service users
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-users
+      description: Create a User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird.post-api-users
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: put-api-users-userid
+      description: Update a User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird.put-api-users-userid
+      with:
+        userId: tools.userId
+      inputParameters:
+      - name: userId
+        type: string
+        description: The unique identifier of a user
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-users-userid
+      description: Delete a User
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird.delete-api-users-userid
+      with:
+        userId: tools.userId
+      inputParameters:
+      - name: userId
+        type: string
+        description: The unique identifier of a user
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-users-userid-tokens
+      description: List all Tokens
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-users-userid-tokens
+      with:
+        userId: tools.userId
+      inputParameters:
+      - name: userId
+        type: string
+        description: The unique identifier of a user
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-users-userid-tokens
+      description: Create a Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird.post-api-users-userid-tokens
+      with:
+        userId: tools.userId
+      inputParameters:
+      - name: userId
+        type: string
+        description: The unique identifier of a user
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-users-userid-tokens-tokenid
+      description: Retrieve a Token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-users-userid-tokens-tokenid
+      with:
+        userId: tools.userId
+        tokenId: tools.tokenId
+      inputParameters:
+      - name: userId
+        type: string
+        description: The unique identifier of a user
+        required: true
+      - name: tokenId
+        type: string
+        description: The unique identifier of a token
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-users-userid-tokens-tokenid
+      description: Delete a Token
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird.delete-api-users-userid-tokens-tokenid
+      with:
+        userId: tools.userId
+        tokenId: tools.tokenId
+      inputParameters:
+      - name: userId
+        type: string
+        description: The unique identifier of a user
+        required: true
+      - name: tokenId
+        type: string
+        description: The unique identifier of a token
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-users-userid-invite
+      description: Resend user invitation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird.post-api-users-userid-invite
+      with:
+        userId: tools.userId
+      inputParameters:
+      - name: userId
+        type: string
+        description: The unique identifier of a user
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-users-userid-approve
+      description: Approve user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird.post-api-users-userid-approve
+      with:
+        userId: tools.userId
+      inputParameters:
+      - name: userId
+        type: string
+        description: The unique identifier of a user
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-users-userid-reject
+      description: Reject user
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird.delete-api-users-userid-reject
+      with:
+        userId: tools.userId
+      inputParameters:
+      - name: userId
+        type: string
+        description: The unique identifier of a user
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: put-api-users-userid-password
+      description: Change user password
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird.put-api-users-userid-password
+      with:
+        userId: tools.userId
+      inputParameters:
+      - name: userId
+        type: string
+        description: The unique identifier of a user
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-users-current
+      description: Retrieve current user
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-users-current
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-users-invites
+      description: List user invites
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-users-invites
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-users-invites
+      description: Create a user invite
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird.post-api-users-invites
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-users-invites-inviteid
+      description: Delete a user invite
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird.delete-api-users-invites-inviteid
+      with:
+        inviteId: tools.inviteId
+      inputParameters:
+      - name: inviteId
+        type: string
+        description: The ID of the invite to delete
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-users-invites-inviteid-regenerate
+      description: Regenerate a user invite
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird.post-api-users-invites-inviteid-regenerate
+      with:
+        inviteId: tools.inviteId
+      inputParameters:
+      - name: inviteId
+        type: string
+        description: The ID of the invite to regenerate
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-users-invites-token
+      description: Get invite information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-users-invites-token
+      with:
+        token: tools.token
+      inputParameters:
+      - name: token
+        type: string
+        description: The invite token
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-users-invites-token-accept
+      description: Accept an invite
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird.post-api-users-invites-token-accept
+      with:
+        token: tools.token
+      inputParameters:
+      - name: token
+        type: string
+        description: The invite token
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-peers
+      description: List all Peers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-peers
+      with:
+        name: tools.name
+        ip: tools.ip
+      inputParameters:
+      - name: name
+        type: string
+        description: Filter peers by name
+      - name: ip
+        type: string
+        description: Filter peers by IP address
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-peers-peerid
+      description: Retrieve a Peer
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-peers-peerid
+      with:
+        peerId: tools.peerId
+      inputParameters:
+      - name: peerId
+        type: string
+        description: The unique identifier of a peer
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: put-api-peers-peerid
+      description: Update a Peer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird.put-api-peers-peerid
+      with:
+        peerId: tools.peerId
+      inputParameters:
+      - name: peerId
+        type: string
+        description: The unique identifier of a peer
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-peers-peerid
+      description: Delete a Peer
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird.delete-api-peers-peerid
+      with:
+        peerId: tools.peerId
+      inputParameters:
+      - name: peerId
+        type: string
+        description: The unique identifier of a peer
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-peers-peerid-accessible-peers
+      description: List accessible Peers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-peers-peerid-accessible-peers
+      with:
+        peerId: tools.peerId
+      inputParameters:
+      - name: peerId
+        type: string
+        description: The unique identifier of a peer
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-peers-peerid-temporary-access
+      description: Create a Temporary Access Peer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird.post-api-peers-peerid-temporary-access
+      with:
+        peerId: tools.peerId
+      inputParameters:
+      - name: peerId
+        type: string
+        description: The unique identifier of a peer
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-peers-peerid-ingress-ports
+      description: List all Port Allocations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-peers-peerid-ingress-ports
+      with:
+        peerId: tools.peerId
+        name: tools.name
+      inputParameters:
+      - name: peerId
+        type: string
+        description: The unique identifier of a peer
+        required: true
+      - name: name
+        type: string
+        description: Filters ingress port allocations by name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-peers-peerid-ingress-ports
+      description: Create a Port Allocation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird.post-api-peers-peerid-ingress-ports
+      with:
+        peerId: tools.peerId
+      inputParameters:
+      - name: peerId
+        type: string
+        description: The unique identifier of a peer
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-peers-peerid-ingress-ports-allocationid
+      description: Retrieve a Port Allocation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-peers-peerid-ingress-ports-allocationid
+      with:
+        peerId: tools.peerId
+        allocationId: tools.allocationId
+      inputParameters:
+      - name: peerId
+        type: string
+        description: The unique identifier of a peer
+        required: true
+      - name: allocationId
+        type: string
+        description: The unique identifier of an ingress port allocation
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: put-api-peers-peerid-ingress-ports-allocationid
+      description: Update a Port Allocation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird.put-api-peers-peerid-ingress-ports-allocationid
+      with:
+        peerId: tools.peerId
+        allocationId: tools.allocationId
+      inputParameters:
+      - name: peerId
+        type: string
+        description: The unique identifier of a peer
+        required: true
+      - name: allocationId
+        type: string
+        description: The unique identifier of an ingress port allocation
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-peers-peerid-ingress-ports-allocation
+      description: Delete a Port Allocation
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird.delete-api-peers-peerid-ingress-ports-allocation
+      with:
+        peerId: tools.peerId
+        allocationId: tools.allocationId
+      inputParameters:
+      - name: peerId
+        type: string
+        description: The unique identifier of a peer
+        required: true
+      - name: allocationId
+        type: string
+        description: The unique identifier of an ingress port allocation
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-ingress-peers
+      description: List all Ingress Peers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-ingress-peers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-ingress-peers
+      description: Create a Ingress Peer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird.post-api-ingress-peers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-ingress-peers-ingresspeerid
+      description: Retrieve a Ingress Peer
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-ingress-peers-ingresspeerid
+      with:
+        ingressPeerId: tools.ingressPeerId
+      inputParameters:
+      - name: ingressPeerId
+        type: string
+        description: The unique identifier of an ingress peer
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: put-api-ingress-peers-ingresspeerid
+      description: Update a Ingress Peer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird.put-api-ingress-peers-ingresspeerid
+      with:
+        ingressPeerId: tools.ingressPeerId
+      inputParameters:
+      - name: ingressPeerId
+        type: string
+        description: The unique identifier of an ingress peer
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-ingress-peers-ingresspeerid
+      description: Delete a Ingress Peer
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird.delete-api-ingress-peers-ingresspeerid
+      with:
+        ingressPeerId: tools.ingressPeerId
+      inputParameters:
+      - name: ingressPeerId
+        type: string
+        description: The unique identifier of an ingress peer
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-setup-keys
+      description: List all Setup Keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-setup-keys
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-setup-keys
+      description: Create a Setup Key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird.post-api-setup-keys
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-setup-keys-keyid
+      description: Retrieve a Setup Key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-setup-keys-keyid
+      with:
+        keyId: tools.keyId
+      inputParameters:
+      - name: keyId
+        type: string
+        description: The unique identifier of a setup key
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: put-api-setup-keys-keyid
+      description: Update a Setup Key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird.put-api-setup-keys-keyid
+      with:
+        keyId: tools.keyId
+      inputParameters:
+      - name: keyId
+        type: string
+        description: The unique identifier of a setup key
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-setup-keys-keyid
+      description: Delete a Setup Key
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird.delete-api-setup-keys-keyid
+      with:
+        keyId: tools.keyId
+      inputParameters:
+      - name: keyId
+        type: string
+        description: The unique identifier of a setup key
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-groups
+      description: List all Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-groups
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: Filter groups by name (exact match)
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-groups
+      description: Create a Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird.post-api-groups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-groups-groupid
+      description: Retrieve a Group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-groups-groupid
+      with:
+        groupId: tools.groupId
+      inputParameters:
+      - name: groupId
+        type: string
+        description: The unique identifier of a group
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: put-api-groups-groupid
+      description: Update a Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird.put-api-groups-groupid
+      with:
+        groupId: tools.groupId
+      inputParameters:
+      - name: groupId
+        type: string
+        description: The unique identifier of a group
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-groups-groupid
+      description: Delete a Group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird.delete-api-groups-groupid
+      with:
+        groupId: tools.groupId
+      inputParameters:
+      - name: groupId
+        type: string
+        description: The unique identifier of a group
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-policies
+      description: List all Policies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-policies
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-api-policies
+      description: Create a Policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird.post-api-policies
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-policies-policyid
+      description: Retrieve a Policy
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-policies-policyid
+      with:
+        policyId: tools.policyId
+      inputParameters:
+      - name: policyId
+        type: string
+        description: The unique identifier of a policy
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: put-api-policies-policyid
+      description: Update a Policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird.put-api-policies-policyid
+      with:
+        policyId: tools.policyId
+      inputParameters:
+      - name: policyId
+        type: string
+        description: The unique identifier of a policy
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-policies-policyid
+      description: Delete a Policy
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird.delete-api-policies-policyid
+      with:
+        policyId: tools.policyId
+      inputParameters:
+      - name: policyId
+        type: string
+        description: The unique identifier of a policy
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-routes
+      description: List all Routes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird.get-api-routes
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    NETBIRD_TOKEN: NETBIRD_TOKEN
