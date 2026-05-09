@@ -3,11 +3,11 @@
   "feeds": [
     {
       "source": "https://netbird.io/blog/",
-      "feed_url": "https://netbird.io/blog/rss.xml",
-      "saved": 6,
-      "title": "Netbird Blog"
+      "feed_url": "https://netbird.io/blog/atom.xml",
+      "title": "Netbird Blog",
+      "saved": 0
     }
   ],
   "post_count": 6,
-  "fetched": "2026-05-03T23:32:45Z"
+  "fetched": "2026-05-09T20:17:51Z"
 }
