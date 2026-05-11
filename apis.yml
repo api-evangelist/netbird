@@ -57,6 +57,10 @@ common:
     url: https://github.com/netbirdio/netbird
   - type: Blog
     url: https://netbird.io/blog/
+  - type: Integrations
+    url: https://netbird.io/integrations
+integrations:
+  - name: Become a Partner
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
