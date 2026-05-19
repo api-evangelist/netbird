@@ -1,0 +1,213 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — Tokens
+  description: 'NetBird REST API — Tokens. 4 operations. Lead operation: List all Tokens. Self-contained Naftiko capability
+    covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - Tokens
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-tokens
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — Tokens business capability. Self-contained, no shared references.
+    resources:
+    - name: api-users-userId-tokens
+      path: /api/users/{userId}/tokens
+      operations:
+      - name: get
+        method: GET
+        description: List all Tokens
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          description: The unique identifier of a user
+          required: true
+      - name: post
+        method: POST
+        description: Create a Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          description: The unique identifier of a user
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-users-userId-tokens-tokenId
+      path: /api/users/{userId}/tokens/{tokenId}
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve a Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          description: The unique identifier of a user
+          required: true
+        - name: tokenId
+          in: path
+          type: string
+          description: The unique identifier of a token
+          required: true
+      - name: delete
+        method: DELETE
+        description: Delete a Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          description: The unique identifier of a user
+          required: true
+        - name: tokenId
+          in: path
+          type: string
+          description: The unique identifier of a token
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-tokens-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — Tokens. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/users/{userid}/tokens
+      name: api-users-userid-tokens
+      description: REST surface for api-users-userId-tokens.
+      operations:
+      - method: GET
+        name: get
+        description: List all Tokens
+        call: netbird-tokens.get
+        with:
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Create a Token
+        call: netbird-tokens.post
+        with:
+          userId: rest.userId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/users/{userid}/tokens/{tokenid}
+      name: api-users-userid-tokens-tokenid
+      description: REST surface for api-users-userId-tokens-tokenId.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve a Token
+        call: netbird-tokens.get
+        with:
+          userId: rest.userId
+          tokenId: rest.tokenId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a Token
+        call: netbird-tokens.delete
+        with:
+          userId: rest.userId
+          tokenId: rest.tokenId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-tokens-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — Tokens. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-all-tokens
+      description: List all Tokens
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-tokens.get
+      with:
+        userId: tools.userId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-token
+      description: Create a Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-tokens.post
+      with:
+        userId: tools.userId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-token
+      description: Retrieve a Token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-tokens.get
+      with:
+        userId: tools.userId
+        tokenId: tools.tokenId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-token
+      description: Delete a Token
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-tokens.delete
+      with:
+        userId: tools.userId
+        tokenId: tools.tokenId
+      outputParameters:
+      - type: object
+        mapping: $.

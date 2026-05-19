@@ -1,66 +1,138 @@
 aid: netbird
 name: NetBird
-description: >-
-  NetBird is an Open-Source Zero Trust Networking platform that allows you to
-  create secure private networks for your organization or home. We designed
-  NetBird to be simple and fast, requiring near-zero configuration effort and
-  leaving behind the hassle of opening ports, complex firewall rules, VPN
-  gateways, etc.
+description: NetBird is an Open-Source Zero Trust Networking platform that allows you to create secure private networks for
+  your organization or home. We designed NetBird to be simple and fast, requiring near-zero configuration effort and leaving
+  behind the hassle of opening ports, complex firewall rules, VPN gateways, etc.
 type: Index
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
+- Networking
+- VPN
+- Zero Trust
+- Open Source
+- WireGuard
+- Security
+created: '2025-02-09'
+modified: '2026-05-19'
+url: https://raw.githubusercontent.com/api-evangelist/netbird/refs/heads/main/apis.yml
+specificationVersion: '0.19'
+apis:
+- aid: netbird:netbird
+  name: NetBird
+  description: NetBird is an Open-Source Zero Trust Networking platform that allows you to create secure private networks
+    for your organization or home. We designed NetBird to be simple and fast, requiring near-zero configuration effort and
+    leaving behind the hassle of opening ports, complex firewall rules, VPN gateways, etc.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
   - Networking
   - VPN
   - Zero Trust
   - Open Source
   - WireGuard
   - Security
-created: '2025-02-09'
-modified: '2026-04-28'
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/netbird/refs/heads/main/apis.yml
-specificationVersion: '0.19'
-apis:
-  - aid: netbird:netbird
-    name: NetBird
-    description: >-
-      NetBird is an Open-Source Zero Trust Networking platform that allows you
-      to create secure private networks for your organization or home. We
-      designed NetBird to be simple and fast, requiring near-zero configuration
-      effort and leaving behind the hassle of opening ports, complex firewall
-      rules, VPN gateways, etc.
-    humanURL: https://docs.netbird.io/
-    baseURL: https://api.netbird.io
-    tags:
-      - Networking
-      - VPN
-      - Zero Trust
-      - Open Source
-      - WireGuard
-      - Security
-    properties:
-      - type: Documentation
-        url: https://docs.netbird.io/
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/netbird/refs/heads/main/openapi/netbird-openapi.yml
-common:
-  - type: Website
-    url: https://netbird.io/
+  properties:
   - type: Documentation
     url: https://docs.netbird.io/
-  - type: API Documentation
-    url: https://docs.netbird.io/api
-  - type: GitHub
-    url: https://github.com/netbirdio/netbird
-  - type: Blog
-    url: https://netbird.io/blog/
-  - type: Integrations
-    url: https://netbird.io/integrations
+  - type: OpenAPI
+    url: https://raw.githubusercontent.com/api-evangelist/netbird/refs/heads/main/openapi/netbird-openapi.yml
+  - type: NaftikoCapability
+    url: capabilities/netbird-aws-marketplace.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-accounts.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-checkout.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-dns.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-dns-zones.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-edr-falcon-integrations.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-edr-fleetdm-integrations.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-edr-huntress-integrations.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-edr-intune-integrations.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-edr-peers.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-edr-sentinelone-integrations.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-event-streaming-integrations.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-events.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-geo-locations.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-groups.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-idp-azure-integrations.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-idp-google-integrations.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-idp-okta-scim-integrations.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-idp-scim-integrations.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-identity-providers.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-ingress-ports.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-instance.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-invoice.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-jobs.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-msp.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-networks.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-notifications.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-peers.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-plans.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-policies.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-portal.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-posture-checks.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-routes.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-services.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-setup-keys.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-subscription.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-tokens.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-usage.yaml
+  - type: NaftikoCapability
+    url: capabilities/netbird-users.yaml
+common:
+- type: LinkedIn
+  url: https://www.linkedin.com/company/netbirdio
+- type: Website
+  url: https://netbird.io/
+- type: Documentation
+  url: https://docs.netbird.io/
+- type: API Documentation
+  url: https://docs.netbird.io/api
+- type: GitHub
+  url: https://github.com/netbirdio/netbird
+- type: Blog
+  url: https://netbird.io/blog/
+- type: Integrations
+  url: https://netbird.io/integrations
 integrations:
-  - name: Become a Partner
+- name: Become a Partner
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com

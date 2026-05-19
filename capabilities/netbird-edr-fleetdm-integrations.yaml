@@ -1,0 +1,165 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — EDR FleetDM Integrations
+  description: 'NetBird REST API — EDR FleetDM Integrations. 4 operations. Lead operation: Create EDR FleetDM Integration.
+    Self-contained Naftiko capability covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - EDR FleetDM Integrations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-edr-fleetdm-integrations
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — EDR FleetDM Integrations business capability. Self-contained, no shared references.
+    resources:
+    - name: api-integrations-edr-fleetdm
+      path: /api/integrations/edr/fleetdm
+      operations:
+      - name: createfleetdmedrintegration
+        method: POST
+        description: Create EDR FleetDM Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: get
+        method: GET
+        description: Get EDR FleetDM Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatefleetdmedrintegration
+        method: PUT
+        description: Update EDR FleetDM Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: delete
+        method: DELETE
+        description: Delete EDR FleetDM Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-edr-fleetdm-integrations-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — EDR FleetDM Integrations. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/integrations/edr/fleetdm
+      name: api-integrations-edr-fleetdm
+      description: REST surface for api-integrations-edr-fleetdm.
+      operations:
+      - method: POST
+        name: createfleetdmedrintegration
+        description: Create EDR FleetDM Integration
+        call: netbird-edr-fleetdm-integrations.createfleetdmedrintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: get
+        description: Get EDR FleetDM Integration
+        call: netbird-edr-fleetdm-integrations.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatefleetdmedrintegration
+        description: Update EDR FleetDM Integration
+        call: netbird-edr-fleetdm-integrations.updatefleetdmedrintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete EDR FleetDM Integration
+        call: netbird-edr-fleetdm-integrations.delete
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-edr-fleetdm-integrations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — EDR FleetDM Integrations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: create-edr-fleetdm-integration
+      description: Create EDR FleetDM Integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-edr-fleetdm-integrations.createfleetdmedrintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-edr-fleetdm-integration
+      description: Get EDR FleetDM Integration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-edr-fleetdm-integrations.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-edr-fleetdm-integration
+      description: Update EDR FleetDM Integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-edr-fleetdm-integrations.updatefleetdmedrintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-edr-fleetdm-integration
+      description: Delete EDR FleetDM Integration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-edr-fleetdm-integrations.delete
+      outputParameters:
+      - type: object
+        mapping: $.

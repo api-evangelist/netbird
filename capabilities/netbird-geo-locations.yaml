@@ -1,0 +1,111 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — Geo Locations
+  description: 'NetBird REST API — Geo Locations. 2 operations. Lead operation: List all country codes. Self-contained Naftiko
+    capability covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - Geo Locations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-geo-locations
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — Geo Locations business capability. Self-contained, no shared references.
+    resources:
+    - name: api-locations-countries
+      path: /api/locations/countries
+      operations:
+      - name: get
+        method: GET
+        description: List all country codes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-locations-countries-country-cities
+      path: /api/locations/countries/{country}/cities
+      operations:
+      - name: get
+        method: GET
+        description: List all city names by country
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: country
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-geo-locations-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — Geo Locations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/locations/countries
+      name: api-locations-countries
+      description: REST surface for api-locations-countries.
+      operations:
+      - method: GET
+        name: get
+        description: List all country codes
+        call: netbird-geo-locations.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/locations/countries/{country}/cities
+      name: api-locations-countries-country-cities
+      description: REST surface for api-locations-countries-country-cities.
+      operations:
+      - method: GET
+        name: get
+        description: List all city names by country
+        call: netbird-geo-locations.get
+        with:
+          country: rest.country
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-geo-locations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — Geo Locations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-all-country-codes
+      description: List all country codes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-geo-locations.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-city-names-country
+      description: List all city names by country
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-geo-locations.get
+      with:
+        country: tools.country
+      outputParameters:
+      - type: object
+        mapping: $.

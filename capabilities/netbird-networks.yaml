@@ -1,0 +1,700 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — Networks
+  description: 'NetBird REST API — Networks. 16 operations. Lead operation: List all Networks. Self-contained Naftiko capability
+    covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - Networks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-networks
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — Networks business capability. Self-contained, no shared references.
+    resources:
+    - name: api-networks
+      path: /api/networks
+      operations:
+      - name: get
+        method: GET
+        description: List all Networks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post
+        method: POST
+        description: Create a Network
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-networks-routers
+      path: /api/networks/routers
+      operations:
+      - name: get
+        method: GET
+        description: List all Network Routers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-networks-networkId
+      path: /api/networks/{networkId}
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve a Network
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkId
+          in: path
+          type: string
+          description: The unique identifier of a network
+          required: true
+      - name: put
+        method: PUT
+        description: Update a Network
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkId
+          in: path
+          type: string
+          description: The unique identifier of a network
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete a Network
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkId
+          in: path
+          type: string
+          description: The unique identifier of a network
+          required: true
+    - name: api-networks-networkId-resources
+      path: /api/networks/{networkId}/resources
+      operations:
+      - name: get
+        method: GET
+        description: List all Network Resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkId
+          in: path
+          type: string
+          description: The unique identifier of a network
+          required: true
+      - name: post
+        method: POST
+        description: Create a Network Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkId
+          in: path
+          type: string
+          description: The unique identifier of a network
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-networks-networkId-resources-resourceId
+      path: /api/networks/{networkId}/resources/{resourceId}
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve a Network Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkId
+          in: path
+          type: string
+          description: The unique identifier of a network
+          required: true
+        - name: resourceId
+          in: path
+          type: string
+          description: The unique identifier of a network resource
+          required: true
+      - name: put
+        method: PUT
+        description: Update a Network Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkId
+          in: path
+          type: string
+          description: The unique identifier of a network
+          required: true
+        - name: resourceId
+          in: path
+          type: string
+          description: The unique identifier of a resource
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete a Network Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkId
+          in: path
+          type: string
+          required: true
+        - name: resourceId
+          in: path
+          type: string
+          required: true
+    - name: api-networks-networkId-routers
+      path: /api/networks/{networkId}/routers
+      operations:
+      - name: get
+        method: GET
+        description: List all Network Routers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkId
+          in: path
+          type: string
+          description: The unique identifier of a network
+          required: true
+      - name: post
+        method: POST
+        description: Create a Network Router
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkId
+          in: path
+          type: string
+          description: The unique identifier of a network
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-networks-networkId-routers-routerId
+      path: /api/networks/{networkId}/routers/{routerId}
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve a Network Router
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkId
+          in: path
+          type: string
+          description: The unique identifier of a network
+          required: true
+        - name: routerId
+          in: path
+          type: string
+          description: The unique identifier of a router
+          required: true
+      - name: put
+        method: PUT
+        description: Update a Network Router
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkId
+          in: path
+          type: string
+          description: The unique identifier of a network
+          required: true
+        - name: routerId
+          in: path
+          type: string
+          description: The unique identifier of a router
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete a Network Router
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: networkId
+          in: path
+          type: string
+          required: true
+        - name: routerId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-networks-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — Networks. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/networks
+      name: api-networks
+      description: REST surface for api-networks.
+      operations:
+      - method: GET
+        name: get
+        description: List all Networks
+        call: netbird-networks.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Create a Network
+        call: netbird-networks.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/networks/routers
+      name: api-networks-routers
+      description: REST surface for api-networks-routers.
+      operations:
+      - method: GET
+        name: get
+        description: List all Network Routers
+        call: netbird-networks.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/networks/{networkid}
+      name: api-networks-networkid
+      description: REST surface for api-networks-networkId.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve a Network
+        call: netbird-networks.get
+        with:
+          networkId: rest.networkId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: put
+        description: Update a Network
+        call: netbird-networks.put
+        with:
+          networkId: rest.networkId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a Network
+        call: netbird-networks.delete
+        with:
+          networkId: rest.networkId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/networks/{networkid}/resources
+      name: api-networks-networkid-resources
+      description: REST surface for api-networks-networkId-resources.
+      operations:
+      - method: GET
+        name: get
+        description: List all Network Resources
+        call: netbird-networks.get
+        with:
+          networkId: rest.networkId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Create a Network Resource
+        call: netbird-networks.post
+        with:
+          networkId: rest.networkId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/networks/{networkid}/resources/{resourceid}
+      name: api-networks-networkid-resources-resourceid
+      description: REST surface for api-networks-networkId-resources-resourceId.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve a Network Resource
+        call: netbird-networks.get
+        with:
+          networkId: rest.networkId
+          resourceId: rest.resourceId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: put
+        description: Update a Network Resource
+        call: netbird-networks.put
+        with:
+          networkId: rest.networkId
+          resourceId: rest.resourceId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a Network Resource
+        call: netbird-networks.delete
+        with:
+          networkId: rest.networkId
+          resourceId: rest.resourceId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/networks/{networkid}/routers
+      name: api-networks-networkid-routers
+      description: REST surface for api-networks-networkId-routers.
+      operations:
+      - method: GET
+        name: get
+        description: List all Network Routers
+        call: netbird-networks.get
+        with:
+          networkId: rest.networkId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Create a Network Router
+        call: netbird-networks.post
+        with:
+          networkId: rest.networkId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/networks/{networkid}/routers/{routerid}
+      name: api-networks-networkid-routers-routerid
+      description: REST surface for api-networks-networkId-routers-routerId.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve a Network Router
+        call: netbird-networks.get
+        with:
+          networkId: rest.networkId
+          routerId: rest.routerId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: put
+        description: Update a Network Router
+        call: netbird-networks.put
+        with:
+          networkId: rest.networkId
+          routerId: rest.routerId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a Network Router
+        call: netbird-networks.delete
+        with:
+          networkId: rest.networkId
+          routerId: rest.routerId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-networks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — Networks. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-all-networks
+      description: List all Networks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-networks.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-network
+      description: Create a Network
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-networks.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-network-routers
+      description: List all Network Routers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-networks.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-network
+      description: Retrieve a Network
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-networks.get
+      with:
+        networkId: tools.networkId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-network
+      description: Update a Network
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-networks.put
+      with:
+        networkId: tools.networkId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-network
+      description: Delete a Network
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-networks.delete
+      with:
+        networkId: tools.networkId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-network-resources
+      description: List all Network Resources
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-networks.get
+      with:
+        networkId: tools.networkId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-network-resource
+      description: Create a Network Resource
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-networks.post
+      with:
+        networkId: tools.networkId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-network-resource
+      description: Retrieve a Network Resource
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-networks.get
+      with:
+        networkId: tools.networkId
+        resourceId: tools.resourceId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-network-resource
+      description: Update a Network Resource
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-networks.put
+      with:
+        networkId: tools.networkId
+        resourceId: tools.resourceId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-network-resource
+      description: Delete a Network Resource
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-networks.delete
+      with:
+        networkId: tools.networkId
+        resourceId: tools.resourceId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-network-routers-2
+      description: List all Network Routers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-networks.get
+      with:
+        networkId: tools.networkId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-network-router
+      description: Create a Network Router
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-networks.post
+      with:
+        networkId: tools.networkId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-network-router
+      description: Retrieve a Network Router
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-networks.get
+      with:
+        networkId: tools.networkId
+        routerId: tools.routerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-network-router
+      description: Update a Network Router
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-networks.put
+      with:
+        networkId: tools.networkId
+        routerId: tools.routerId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-network-router
+      description: Delete a Network Router
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-networks.delete
+      with:
+        networkId: tools.networkId
+        routerId: tools.routerId
+      outputParameters:
+      - type: object
+        mapping: $.

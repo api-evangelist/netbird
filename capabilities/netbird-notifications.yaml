@@ -1,0 +1,229 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — Notifications
+  description: 'NetBird REST API — Notifications. 6 operations. Lead operation: List Notification Channels. Self-contained
+    Naftiko capability covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - Notifications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-notifications
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — Notifications business capability. Self-contained, no shared references.
+    resources:
+    - name: api-integrations-notifications-channels
+      path: /api/integrations/notifications/channels
+      operations:
+      - name: listnotificationchannels
+        method: GET
+        description: List Notification Channels
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createnotificationchannel
+        method: POST
+        description: Create Notification Channel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-integrations-notifications-channels-channelId
+      path: /api/integrations/notifications/channels/{channelId}
+      operations:
+      - name: getnotificationchannel
+        method: GET
+        description: Get Notification Channel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatenotificationchannel
+        method: PUT
+        description: Update Notification Channel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletenotificationchannel
+        method: DELETE
+        description: Delete Notification Channel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-integrations-notifications-types
+      path: /api/integrations/notifications/types
+      operations:
+      - name: listnotificationeventtypes
+        method: GET
+        description: List Notification Event Types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-notifications-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — Notifications. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/integrations/notifications/channels
+      name: api-integrations-notifications-channels
+      description: REST surface for api-integrations-notifications-channels.
+      operations:
+      - method: GET
+        name: listnotificationchannels
+        description: List Notification Channels
+        call: netbird-notifications.listnotificationchannels
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createnotificationchannel
+        description: Create Notification Channel
+        call: netbird-notifications.createnotificationchannel
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/integrations/notifications/channels/{channelid}
+      name: api-integrations-notifications-channels-channelid
+      description: REST surface for api-integrations-notifications-channels-channelId.
+      operations:
+      - method: GET
+        name: getnotificationchannel
+        description: Get Notification Channel
+        call: netbird-notifications.getnotificationchannel
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatenotificationchannel
+        description: Update Notification Channel
+        call: netbird-notifications.updatenotificationchannel
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletenotificationchannel
+        description: Delete Notification Channel
+        call: netbird-notifications.deletenotificationchannel
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/integrations/notifications/types
+      name: api-integrations-notifications-types
+      description: REST surface for api-integrations-notifications-types.
+      operations:
+      - method: GET
+        name: listnotificationeventtypes
+        description: List Notification Event Types
+        call: netbird-notifications.listnotificationeventtypes
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-notifications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — Notifications. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-notification-channels
+      description: List Notification Channels
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-notifications.listnotificationchannels
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-notification-channel
+      description: Create Notification Channel
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-notifications.createnotificationchannel
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-notification-channel
+      description: Get Notification Channel
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-notifications.getnotificationchannel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-notification-channel
+      description: Update Notification Channel
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-notifications.updatenotificationchannel
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-notification-channel
+      description: Delete Notification Channel
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-notifications.deletenotificationchannel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-notification-event-types
+      description: List Notification Event Types
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-notifications.listnotificationeventtypes
+      outputParameters:
+      - type: object
+        mapping: $.

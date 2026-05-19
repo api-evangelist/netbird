@@ -1,0 +1,154 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — Accounts
+  description: 'NetBird REST API — Accounts. 3 operations. Lead operation: List all Accounts. Self-contained Naftiko capability
+    covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - Accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-accounts
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — Accounts business capability. Self-contained, no shared references.
+    resources:
+    - name: api-accounts
+      path: /api/accounts
+      operations:
+      - name: get
+        method: GET
+        description: List all Accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-accounts-accountId
+      path: /api/accounts/{accountId}
+      operations:
+      - name: delete
+        method: DELETE
+        description: Delete an Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          description: The unique identifier of an account
+          required: true
+      - name: put
+        method: PUT
+        description: Update an Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: accountId
+          in: path
+          type: string
+          description: The unique identifier of an account
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-accounts-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — Accounts. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/accounts
+      name: api-accounts
+      description: REST surface for api-accounts.
+      operations:
+      - method: GET
+        name: get
+        description: List all Accounts
+        call: netbird-accounts.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/accounts/{accountid}
+      name: api-accounts-accountid
+      description: REST surface for api-accounts-accountId.
+      operations:
+      - method: DELETE
+        name: delete
+        description: Delete an Account
+        call: netbird-accounts.delete
+        with:
+          accountId: rest.accountId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: put
+        description: Update an Account
+        call: netbird-accounts.put
+        with:
+          accountId: rest.accountId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — Accounts. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-all-accounts
+      description: List all Accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-accounts.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-account
+      description: Delete an Account
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-accounts.delete
+      with:
+        accountId: tools.accountId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-account
+      description: Update an Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-accounts.put
+      with:
+        accountId: tools.accountId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

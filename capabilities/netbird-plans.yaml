@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — Plans
+  description: 'NetBird REST API — Plans. 1 operations. Lead operation: Get available plans. Self-contained Naftiko capability
+    covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - Plans
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-plans
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — Plans business capability. Self-contained, no shared references.
+    resources:
+    - name: api-integrations-billing-plans
+      path: /api/integrations/billing/plans
+      operations:
+      - name: get
+        method: GET
+        description: Get available plans
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-plans-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — Plans. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/integrations/billing/plans
+      name: api-integrations-billing-plans
+      description: REST surface for api-integrations-billing-plans.
+      operations:
+      - method: GET
+        name: get
+        description: Get available plans
+        call: netbird-plans.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-plans-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — Plans. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-available-plans
+      description: Get available plans
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-plans.get
+      outputParameters:
+      - type: object
+        mapping: $.

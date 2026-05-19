@@ -1,0 +1,261 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — IDP SCIM Integrations
+  description: 'NetBird REST API — IDP SCIM Integrations. 7 operations. Lead operation: Create SCIM IDP Integration. Self-contained
+    Naftiko capability covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - IDP SCIM Integrations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-idp-scim-integrations
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — IDP SCIM Integrations business capability. Self-contained, no shared references.
+    resources:
+    - name: api-integrations-scim-idp
+      path: /api/integrations/scim-idp
+      operations:
+      - name: createscimintegration
+        method: POST
+        description: Create SCIM IDP Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: getallscimintegrations
+        method: GET
+        description: Get All SCIM IDP Integrations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-integrations-scim-idp-id
+      path: /api/integrations/scim-idp/{id}
+      operations:
+      - name: getscimintegration
+        method: GET
+        description: Get SCIM IDP Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatescimintegration
+        method: PUT
+        description: Update SCIM IDP Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletescimintegration
+        method: DELETE
+        description: Delete SCIM IDP Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-integrations-scim-idp-id-logs
+      path: /api/integrations/scim-idp/{id}/logs
+      operations:
+      - name: getscimintegrationlogs
+        method: GET
+        description: Get SCIM Integration Sync Logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-integrations-scim-idp-id-token
+      path: /api/integrations/scim-idp/{id}/token
+      operations:
+      - name: regeneratescimtoken
+        method: POST
+        description: Regenerate SCIM Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-idp-scim-integrations-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — IDP SCIM Integrations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/integrations/scim-idp
+      name: api-integrations-scim-idp
+      description: REST surface for api-integrations-scim-idp.
+      operations:
+      - method: POST
+        name: createscimintegration
+        description: Create SCIM IDP Integration
+        call: netbird-idp-scim-integrations.createscimintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getallscimintegrations
+        description: Get All SCIM IDP Integrations
+        call: netbird-idp-scim-integrations.getallscimintegrations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/integrations/scim-idp/{id}
+      name: api-integrations-scim-idp-id
+      description: REST surface for api-integrations-scim-idp-id.
+      operations:
+      - method: GET
+        name: getscimintegration
+        description: Get SCIM IDP Integration
+        call: netbird-idp-scim-integrations.getscimintegration
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatescimintegration
+        description: Update SCIM IDP Integration
+        call: netbird-idp-scim-integrations.updatescimintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletescimintegration
+        description: Delete SCIM IDP Integration
+        call: netbird-idp-scim-integrations.deletescimintegration
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/integrations/scim-idp/{id}/logs
+      name: api-integrations-scim-idp-id-logs
+      description: REST surface for api-integrations-scim-idp-id-logs.
+      operations:
+      - method: GET
+        name: getscimintegrationlogs
+        description: Get SCIM Integration Sync Logs
+        call: netbird-idp-scim-integrations.getscimintegrationlogs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/integrations/scim-idp/{id}/token
+      name: api-integrations-scim-idp-id-token
+      description: REST surface for api-integrations-scim-idp-id-token.
+      operations:
+      - method: POST
+        name: regeneratescimtoken
+        description: Regenerate SCIM Token
+        call: netbird-idp-scim-integrations.regeneratescimtoken
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-idp-scim-integrations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — IDP SCIM Integrations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: create-scim-idp-integration
+      description: Create SCIM IDP Integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-idp-scim-integrations.createscimintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-scim-idp-integrations
+      description: Get All SCIM IDP Integrations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-idp-scim-integrations.getallscimintegrations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-scim-idp-integration
+      description: Get SCIM IDP Integration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-idp-scim-integrations.getscimintegration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-scim-idp-integration
+      description: Update SCIM IDP Integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-idp-scim-integrations.updatescimintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-scim-idp-integration
+      description: Delete SCIM IDP Integration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-idp-scim-integrations.deletescimintegration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-scim-integration-sync-logs
+      description: Get SCIM Integration Sync Logs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-idp-scim-integrations.getscimintegrationlogs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: regenerate-scim-token
+      description: Regenerate SCIM Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-idp-scim-integrations.regeneratescimtoken
+      outputParameters:
+      - type: object
+        mapping: $.

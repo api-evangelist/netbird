@@ -1,0 +1,224 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — Setup Keys
+  description: 'NetBird REST API — Setup Keys. 5 operations. Lead operation: List all Setup Keys. Self-contained Naftiko capability
+    covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - Setup Keys
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-setup-keys
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — Setup Keys business capability. Self-contained, no shared references.
+    resources:
+    - name: api-setup-keys
+      path: /api/setup-keys
+      operations:
+      - name: get
+        method: GET
+        description: List all Setup Keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post
+        method: POST
+        description: Create a Setup Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-setup-keys-keyId
+      path: /api/setup-keys/{keyId}
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve a Setup Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: keyId
+          in: path
+          type: string
+          description: The unique identifier of a setup key
+          required: true
+      - name: put
+        method: PUT
+        description: Update a Setup Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: keyId
+          in: path
+          type: string
+          description: The unique identifier of a setup key
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete a Setup Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: keyId
+          in: path
+          type: string
+          description: The unique identifier of a setup key
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-setup-keys-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — Setup Keys. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/setup-keys
+      name: api-setup-keys
+      description: REST surface for api-setup-keys.
+      operations:
+      - method: GET
+        name: get
+        description: List all Setup Keys
+        call: netbird-setup-keys.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Create a Setup Key
+        call: netbird-setup-keys.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/setup-keys/{keyid}
+      name: api-setup-keys-keyid
+      description: REST surface for api-setup-keys-keyId.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve a Setup Key
+        call: netbird-setup-keys.get
+        with:
+          keyId: rest.keyId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: put
+        description: Update a Setup Key
+        call: netbird-setup-keys.put
+        with:
+          keyId: rest.keyId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a Setup Key
+        call: netbird-setup-keys.delete
+        with:
+          keyId: rest.keyId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-setup-keys-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — Setup Keys. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-all-setup-keys
+      description: List all Setup Keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-setup-keys.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-setup-key
+      description: Create a Setup Key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-setup-keys.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-setup-key
+      description: Retrieve a Setup Key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-setup-keys.get
+      with:
+        keyId: tools.keyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-setup-key
+      description: Update a Setup Key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-setup-keys.put
+      with:
+        keyId: tools.keyId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-setup-key
+      description: Delete a Setup Key
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-setup-keys.delete
+      with:
+        keyId: tools.keyId
+      outputParameters:
+      - type: object
+        mapping: $.

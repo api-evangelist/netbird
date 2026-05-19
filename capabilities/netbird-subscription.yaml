@@ -1,0 +1,105 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — Subscription
+  description: 'NetBird REST API — Subscription. 2 operations. Lead operation: Get current subscription. Self-contained Naftiko
+    capability covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - Subscription
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-subscription
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — Subscription business capability. Self-contained, no shared references.
+    resources:
+    - name: api-integrations-billing-subscription
+      path: /api/integrations/billing/subscription
+      operations:
+      - name: get
+        method: GET
+        description: Get current subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: put
+        method: PUT
+        description: Change subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-subscription-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — Subscription. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/integrations/billing/subscription
+      name: api-integrations-billing-subscription
+      description: REST surface for api-integrations-billing-subscription.
+      operations:
+      - method: GET
+        name: get
+        description: Get current subscription
+        call: netbird-subscription.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: put
+        description: Change subscription
+        call: netbird-subscription.put
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-subscription-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — Subscription. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-current-subscription
+      description: Get current subscription
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-subscription.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: change-subscription
+      description: Change subscription
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-subscription.put
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,291 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — DNS
+  description: 'NetBird REST API — DNS. 7 operations. Lead operation: List all Nameserver Groups. Self-contained Naftiko capability
+    covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - DNS
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-dns
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — DNS business capability. Self-contained, no shared references.
+    resources:
+    - name: api-dns-nameservers
+      path: /api/dns/nameservers
+      operations:
+      - name: get
+        method: GET
+        description: List all Nameserver Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post
+        method: POST
+        description: Create a Nameserver Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-dns-nameservers-nsgroupId
+      path: /api/dns/nameservers/{nsgroupId}
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve a Nameserver Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: nsgroupId
+          in: path
+          type: string
+          description: The unique identifier of a Nameserver Group
+          required: true
+      - name: put
+        method: PUT
+        description: Update a Nameserver Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: nsgroupId
+          in: path
+          type: string
+          description: The unique identifier of a Nameserver Group
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete a Nameserver Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: nsgroupId
+          in: path
+          type: string
+          description: The unique identifier of a Nameserver Group
+          required: true
+    - name: api-dns-settings
+      path: /api/dns/settings
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve DNS settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: put
+        method: PUT
+        description: Update DNS Settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-dns-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — DNS. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/dns/nameservers
+      name: api-dns-nameservers
+      description: REST surface for api-dns-nameservers.
+      operations:
+      - method: GET
+        name: get
+        description: List all Nameserver Groups
+        call: netbird-dns.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Create a Nameserver Group
+        call: netbird-dns.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/dns/nameservers/{nsgroupid}
+      name: api-dns-nameservers-nsgroupid
+      description: REST surface for api-dns-nameservers-nsgroupId.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve a Nameserver Group
+        call: netbird-dns.get
+        with:
+          nsgroupId: rest.nsgroupId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: put
+        description: Update a Nameserver Group
+        call: netbird-dns.put
+        with:
+          nsgroupId: rest.nsgroupId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a Nameserver Group
+        call: netbird-dns.delete
+        with:
+          nsgroupId: rest.nsgroupId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/dns/settings
+      name: api-dns-settings
+      description: REST surface for api-dns-settings.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve DNS settings
+        call: netbird-dns.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: put
+        description: Update DNS Settings
+        call: netbird-dns.put
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-dns-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — DNS. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-all-nameserver-groups
+      description: List all Nameserver Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-dns.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-nameserver-group
+      description: Create a Nameserver Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-dns.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-nameserver-group
+      description: Retrieve a Nameserver Group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-dns.get
+      with:
+        nsgroupId: tools.nsgroupId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-nameserver-group
+      description: Update a Nameserver Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-dns.put
+      with:
+        nsgroupId: tools.nsgroupId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-nameserver-group
+      description: Delete a Nameserver Group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-dns.delete
+      with:
+        nsgroupId: tools.nsgroupId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-dns-settings
+      description: Retrieve DNS settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-dns.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-dns-settings
+      description: Update DNS Settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-dns.put
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

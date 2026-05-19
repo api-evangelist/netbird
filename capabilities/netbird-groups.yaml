@@ -1,0 +1,233 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — Groups
+  description: 'NetBird REST API — Groups. 5 operations. Lead operation: List all Groups. Self-contained Naftiko capability
+    covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-groups
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: api-groups
+      path: /api/groups
+      operations:
+      - name: get
+        method: GET
+        description: List all Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Filter groups by name (exact match)
+      - name: post
+        method: POST
+        description: Create a Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-groups-groupId
+      path: /api/groups/{groupId}
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve a Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          description: The unique identifier of a group
+          required: true
+      - name: put
+        method: PUT
+        description: Update a Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          description: The unique identifier of a group
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete a Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupId
+          in: path
+          type: string
+          description: The unique identifier of a group
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-groups-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — Groups. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/groups
+      name: api-groups
+      description: REST surface for api-groups.
+      operations:
+      - method: GET
+        name: get
+        description: List all Groups
+        call: netbird-groups.get
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Create a Group
+        call: netbird-groups.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/groups/{groupid}
+      name: api-groups-groupid
+      description: REST surface for api-groups-groupId.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve a Group
+        call: netbird-groups.get
+        with:
+          groupId: rest.groupId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: put
+        description: Update a Group
+        call: netbird-groups.put
+        with:
+          groupId: rest.groupId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a Group
+        call: netbird-groups.delete
+        with:
+          groupId: rest.groupId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — Groups. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-all-groups
+      description: List all Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-groups.get
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-group
+      description: Create a Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-groups.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-group
+      description: Retrieve a Group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-groups.get
+      with:
+        groupId: tools.groupId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-group
+      description: Update a Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-groups.put
+      with:
+        groupId: tools.groupId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-group
+      description: Delete a Group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-groups.delete
+      with:
+        groupId: tools.groupId
+      outputParameters:
+      - type: object
+        mapping: $.

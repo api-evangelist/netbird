@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — Portal
+  description: 'NetBird REST API — Portal. 1 operations. Lead operation: Get customer portal URL. Self-contained Naftiko capability
+    covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - Portal
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-portal
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — Portal business capability. Self-contained, no shared references.
+    resources:
+    - name: api-integrations-billing-portal
+      path: /api/integrations/billing/portal
+      operations:
+      - name: get
+        method: GET
+        description: Get customer portal URL
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: baseURL
+          in: query
+          type: string
+          description: The base URL for the redirect after accessing the portal.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-portal-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — Portal. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/integrations/billing/portal
+      name: api-integrations-billing-portal
+      description: REST surface for api-integrations-billing-portal.
+      operations:
+      - method: GET
+        name: get
+        description: Get customer portal URL
+        call: netbird-portal.get
+        with:
+          baseURL: rest.baseURL
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-portal-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — Portal. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-customer-portal-url
+      description: Get customer portal URL
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-portal.get
+      with:
+        baseURL: tools.baseURL
+      outputParameters:
+      - type: object
+        mapping: $.

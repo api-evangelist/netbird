@@ -1,0 +1,261 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — IDP Okta SCIM Integrations
+  description: 'NetBird REST API — IDP Okta SCIM Integrations. 7 operations. Lead operation: Create Okta SCIM IDP Integration.
+    Self-contained Naftiko capability covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - IDP Okta SCIM Integrations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-idp-okta-scim-integrations
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — IDP Okta SCIM Integrations business capability. Self-contained, no shared references.
+    resources:
+    - name: api-integrations-okta-scim-idp
+      path: /api/integrations/okta-scim-idp
+      operations:
+      - name: createoktascimintegration
+        method: POST
+        description: Create Okta SCIM IDP Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: getalloktascimintegrations
+        method: GET
+        description: Get All Okta SCIM IDP Integrations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-integrations-okta-scim-idp-id
+      path: /api/integrations/okta-scim-idp/{id}
+      operations:
+      - name: getoktascimintegration
+        method: GET
+        description: Get Okta SCIM IDP Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateoktascimintegration
+        method: PUT
+        description: Update Okta SCIM IDP Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteoktascimintegration
+        method: DELETE
+        description: Delete Okta SCIM IDP Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-integrations-okta-scim-idp-id-logs
+      path: /api/integrations/okta-scim-idp/{id}/logs
+      operations:
+      - name: getoktascimintegrationlogs
+        method: GET
+        description: Get Okta SCIM Integration Sync Logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-integrations-okta-scim-idp-id-token
+      path: /api/integrations/okta-scim-idp/{id}/token
+      operations:
+      - name: regenerateoktascimtoken
+        method: POST
+        description: Regenerate Okta SCIM Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-idp-okta-scim-integrations-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — IDP Okta SCIM Integrations. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/integrations/okta-scim-idp
+      name: api-integrations-okta-scim-idp
+      description: REST surface for api-integrations-okta-scim-idp.
+      operations:
+      - method: POST
+        name: createoktascimintegration
+        description: Create Okta SCIM IDP Integration
+        call: netbird-idp-okta-scim-integrations.createoktascimintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getalloktascimintegrations
+        description: Get All Okta SCIM IDP Integrations
+        call: netbird-idp-okta-scim-integrations.getalloktascimintegrations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/integrations/okta-scim-idp/{id}
+      name: api-integrations-okta-scim-idp-id
+      description: REST surface for api-integrations-okta-scim-idp-id.
+      operations:
+      - method: GET
+        name: getoktascimintegration
+        description: Get Okta SCIM IDP Integration
+        call: netbird-idp-okta-scim-integrations.getoktascimintegration
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateoktascimintegration
+        description: Update Okta SCIM IDP Integration
+        call: netbird-idp-okta-scim-integrations.updateoktascimintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteoktascimintegration
+        description: Delete Okta SCIM IDP Integration
+        call: netbird-idp-okta-scim-integrations.deleteoktascimintegration
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/integrations/okta-scim-idp/{id}/logs
+      name: api-integrations-okta-scim-idp-id-logs
+      description: REST surface for api-integrations-okta-scim-idp-id-logs.
+      operations:
+      - method: GET
+        name: getoktascimintegrationlogs
+        description: Get Okta SCIM Integration Sync Logs
+        call: netbird-idp-okta-scim-integrations.getoktascimintegrationlogs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/integrations/okta-scim-idp/{id}/token
+      name: api-integrations-okta-scim-idp-id-token
+      description: REST surface for api-integrations-okta-scim-idp-id-token.
+      operations:
+      - method: POST
+        name: regenerateoktascimtoken
+        description: Regenerate Okta SCIM Token
+        call: netbird-idp-okta-scim-integrations.regenerateoktascimtoken
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-idp-okta-scim-integrations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — IDP Okta SCIM Integrations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: create-okta-scim-idp-integration
+      description: Create Okta SCIM IDP Integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-idp-okta-scim-integrations.createoktascimintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-okta-scim-idp
+      description: Get All Okta SCIM IDP Integrations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-idp-okta-scim-integrations.getalloktascimintegrations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-okta-scim-idp-integration
+      description: Get Okta SCIM IDP Integration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-idp-okta-scim-integrations.getoktascimintegration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-okta-scim-idp-integration
+      description: Update Okta SCIM IDP Integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-idp-okta-scim-integrations.updateoktascimintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-okta-scim-idp-integration
+      description: Delete Okta SCIM IDP Integration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-idp-okta-scim-integrations.deleteoktascimintegration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-okta-scim-integration-sync
+      description: Get Okta SCIM Integration Sync Logs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-idp-okta-scim-integrations.getoktascimintegrationlogs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: regenerate-okta-scim-token
+      description: Regenerate Okta SCIM Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-idp-okta-scim-integrations.regenerateoktascimtoken
+      outputParameters:
+      - type: object
+        mapping: $.

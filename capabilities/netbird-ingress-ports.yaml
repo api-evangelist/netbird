@@ -1,0 +1,454 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — Ingress Ports
+  description: 'NetBird REST API — Ingress Ports. 10 operations. Lead operation: List all Ingress Peers. Self-contained Naftiko
+    capability covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - Ingress Ports
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-ingress-ports
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — Ingress Ports business capability. Self-contained, no shared references.
+    resources:
+    - name: api-ingress-peers
+      path: /api/ingress/peers
+      operations:
+      - name: get
+        method: GET
+        description: List all Ingress Peers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: post
+        method: POST
+        description: Create a Ingress Peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-ingress-peers-ingressPeerId
+      path: /api/ingress/peers/{ingressPeerId}
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve a Ingress Peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: ingressPeerId
+          in: path
+          type: string
+          description: The unique identifier of an ingress peer
+          required: true
+      - name: put
+        method: PUT
+        description: Update a Ingress Peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: ingressPeerId
+          in: path
+          type: string
+          description: The unique identifier of an ingress peer
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete a Ingress Peer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: ingressPeerId
+          in: path
+          type: string
+          description: The unique identifier of an ingress peer
+          required: true
+    - name: api-peers-peerId-ingress-ports
+      path: /api/peers/{peerId}/ingress/ports
+      operations:
+      - name: get
+        method: GET
+        description: List all Port Allocations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          description: The unique identifier of a peer
+          required: true
+        - name: name
+          in: query
+          type: string
+          description: Filters ingress port allocations by name
+      - name: post
+        method: POST
+        description: Create a Port Allocation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          description: The unique identifier of a peer
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: api-peers-peerId-ingress-ports-allocationId
+      path: /api/peers/{peerId}/ingress/ports/{allocationId}
+      operations:
+      - name: get
+        method: GET
+        description: Retrieve a Port Allocation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          description: The unique identifier of a peer
+          required: true
+        - name: allocationId
+          in: path
+          type: string
+          description: The unique identifier of an ingress port allocation
+          required: true
+      - name: put
+        method: PUT
+        description: Update a Port Allocation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          description: The unique identifier of a peer
+          required: true
+        - name: allocationId
+          in: path
+          type: string
+          description: The unique identifier of an ingress port allocation
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: delete
+        method: DELETE
+        description: Delete a Port Allocation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: peerId
+          in: path
+          type: string
+          description: The unique identifier of a peer
+          required: true
+        - name: allocationId
+          in: path
+          type: string
+          description: The unique identifier of an ingress port allocation
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-ingress-ports-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — Ingress Ports. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/ingress/peers
+      name: api-ingress-peers
+      description: REST surface for api-ingress-peers.
+      operations:
+      - method: GET
+        name: get
+        description: List all Ingress Peers
+        call: netbird-ingress-ports.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Create a Ingress Peer
+        call: netbird-ingress-ports.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/ingress/peers/{ingresspeerid}
+      name: api-ingress-peers-ingresspeerid
+      description: REST surface for api-ingress-peers-ingressPeerId.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve a Ingress Peer
+        call: netbird-ingress-ports.get
+        with:
+          ingressPeerId: rest.ingressPeerId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: put
+        description: Update a Ingress Peer
+        call: netbird-ingress-ports.put
+        with:
+          ingressPeerId: rest.ingressPeerId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a Ingress Peer
+        call: netbird-ingress-ports.delete
+        with:
+          ingressPeerId: rest.ingressPeerId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/peers/{peerid}/ingress/ports
+      name: api-peers-peerid-ingress-ports
+      description: REST surface for api-peers-peerId-ingress-ports.
+      operations:
+      - method: GET
+        name: get
+        description: List all Port Allocations
+        call: netbird-ingress-ports.get
+        with:
+          peerId: rest.peerId
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: post
+        description: Create a Port Allocation
+        call: netbird-ingress-ports.post
+        with:
+          peerId: rest.peerId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/peers/{peerid}/ingress/ports/{allocationid}
+      name: api-peers-peerid-ingress-ports-allocationid
+      description: REST surface for api-peers-peerId-ingress-ports-allocationId.
+      operations:
+      - method: GET
+        name: get
+        description: Retrieve a Port Allocation
+        call: netbird-ingress-ports.get
+        with:
+          peerId: rest.peerId
+          allocationId: rest.allocationId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: put
+        description: Update a Port Allocation
+        call: netbird-ingress-ports.put
+        with:
+          peerId: rest.peerId
+          allocationId: rest.allocationId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete a Port Allocation
+        call: netbird-ingress-ports.delete
+        with:
+          peerId: rest.peerId
+          allocationId: rest.allocationId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-ingress-ports-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — Ingress Ports. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-all-ingress-peers
+      description: List all Ingress Peers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-ingress-ports.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-ingress-peer
+      description: Create a Ingress Peer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-ingress-ports.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-ingress-peer
+      description: Retrieve a Ingress Peer
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-ingress-ports.get
+      with:
+        ingressPeerId: tools.ingressPeerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-ingress-peer
+      description: Update a Ingress Peer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-ingress-ports.put
+      with:
+        ingressPeerId: tools.ingressPeerId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-ingress-peer
+      description: Delete a Ingress Peer
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-ingress-ports.delete
+      with:
+        ingressPeerId: tools.ingressPeerId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-port-allocations
+      description: List all Port Allocations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-ingress-ports.get
+      with:
+        peerId: tools.peerId
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-port-allocation
+      description: Create a Port Allocation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-ingress-ports.post
+      with:
+        peerId: tools.peerId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-port-allocation
+      description: Retrieve a Port Allocation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-ingress-ports.get
+      with:
+        peerId: tools.peerId
+        allocationId: tools.allocationId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-port-allocation
+      description: Update a Port Allocation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-ingress-ports.put
+      with:
+        peerId: tools.peerId
+        allocationId: tools.allocationId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-port-allocation
+      description: Delete a Port Allocation
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-ingress-ports.delete
+      with:
+        peerId: tools.peerId
+        allocationId: tools.allocationId
+      outputParameters:
+      - type: object
+        mapping: $.

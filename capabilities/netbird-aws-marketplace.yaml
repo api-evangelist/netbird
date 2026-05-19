@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — AWS Marketplace
+  description: 'NetBird REST API — AWS Marketplace. 2 operations. Lead operation: Activate AWS Marketplace subscription..
+    Self-contained Naftiko capability covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - AWS Marketplace
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-aws-marketplace
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — AWS Marketplace business capability. Self-contained, no shared references.
+    resources:
+    - name: api-integrations-billing-aws-marketplace-activate
+      path: /api/integrations/billing/aws/marketplace/activate
+      operations:
+      - name: post
+        method: POST
+        description: Activate AWS Marketplace subscription.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-integrations-billing-aws-marketplace-enrich
+      path: /api/integrations/billing/aws/marketplace/enrich
+      operations:
+      - name: post
+        method: POST
+        description: Enrich AWS Marketplace subscription with Account ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-aws-marketplace-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — AWS Marketplace. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/integrations/billing/aws/marketplace/activate
+      name: api-integrations-billing-aws-marketplace-activate
+      description: REST surface for api-integrations-billing-aws-marketplace-activate.
+      operations:
+      - method: POST
+        name: post
+        description: Activate AWS Marketplace subscription.
+        call: netbird-aws-marketplace.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/integrations/billing/aws/marketplace/enrich
+      name: api-integrations-billing-aws-marketplace-enrich
+      description: REST surface for api-integrations-billing-aws-marketplace-enrich.
+      operations:
+      - method: POST
+        name: post
+        description: Enrich AWS Marketplace subscription with Account ID.
+        call: netbird-aws-marketplace.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-aws-marketplace-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — AWS Marketplace. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: activate-aws-marketplace-subscription
+      description: Activate AWS Marketplace subscription.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-aws-marketplace.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: enrich-aws-marketplace-subscription-account
+      description: Enrich AWS Marketplace subscription with Account ID.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-aws-marketplace.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

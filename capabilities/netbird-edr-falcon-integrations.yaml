@@ -1,0 +1,165 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — EDR Falcon Integrations
+  description: 'NetBird REST API — EDR Falcon Integrations. 4 operations. Lead operation: Create EDR Falcon Integration. Self-contained
+    Naftiko capability covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - EDR Falcon Integrations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-edr-falcon-integrations
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — EDR Falcon Integrations business capability. Self-contained, no shared references.
+    resources:
+    - name: api-integrations-edr-falcon
+      path: /api/integrations/edr/falcon
+      operations:
+      - name: createfalconedrintegration
+        method: POST
+        description: Create EDR Falcon Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: get
+        method: GET
+        description: Get EDR Falcon Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatefalconedrintegration
+        method: PUT
+        description: Update EDR Falcon Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: delete
+        method: DELETE
+        description: Delete EDR Falcon Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-edr-falcon-integrations-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — EDR Falcon Integrations. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/integrations/edr/falcon
+      name: api-integrations-edr-falcon
+      description: REST surface for api-integrations-edr-falcon.
+      operations:
+      - method: POST
+        name: createfalconedrintegration
+        description: Create EDR Falcon Integration
+        call: netbird-edr-falcon-integrations.createfalconedrintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: get
+        description: Get EDR Falcon Integration
+        call: netbird-edr-falcon-integrations.get
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatefalconedrintegration
+        description: Update EDR Falcon Integration
+        call: netbird-edr-falcon-integrations.updatefalconedrintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Delete EDR Falcon Integration
+        call: netbird-edr-falcon-integrations.delete
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-edr-falcon-integrations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — EDR Falcon Integrations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: create-edr-falcon-integration
+      description: Create EDR Falcon Integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-edr-falcon-integrations.createfalconedrintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-edr-falcon-integration
+      description: Get EDR Falcon Integration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-edr-falcon-integrations.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-edr-falcon-integration
+      description: Update EDR Falcon Integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-edr-falcon-integrations.updatefalconedrintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-edr-falcon-integration
+      description: Delete EDR Falcon Integration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-edr-falcon-integrations.delete
+      outputParameters:
+      - type: object
+        mapping: $.

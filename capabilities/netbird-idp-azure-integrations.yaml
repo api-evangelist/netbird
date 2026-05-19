@@ -1,0 +1,261 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NetBird REST API — IDP Azure Integrations
+  description: 'NetBird REST API — IDP Azure Integrations. 7 operations. Lead operation: Create Azure IDP Integration. Self-contained
+    Naftiko capability covering one Netbird business surface.'
+  tags:
+  - Netbird
+  - IDP Azure Integrations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NETBIRD_API_KEY: NETBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: netbird-idp-azure-integrations
+    baseUri: https://api.netbird.io
+    description: NetBird REST API — IDP Azure Integrations business capability. Self-contained, no shared references.
+    resources:
+    - name: api-integrations-azure-idp
+      path: /api/integrations/azure-idp
+      operations:
+      - name: createazureintegration
+        method: POST
+        description: Create Azure IDP Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: getallazureintegrations
+        method: GET
+        description: Get All Azure IDP Integrations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-integrations-azure-idp-id
+      path: /api/integrations/azure-idp/{id}
+      operations:
+      - name: getazureintegration
+        method: GET
+        description: Get Azure IDP Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateazureintegration
+        method: PUT
+        description: Update Azure IDP Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteazureintegration
+        method: DELETE
+        description: Delete Azure IDP Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-integrations-azure-idp-id-logs
+      path: /api/integrations/azure-idp/{id}/logs
+      operations:
+      - name: getazureintegrationlogs
+        method: GET
+        description: Get Azure Integration Sync Logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-integrations-azure-idp-id-sync
+      path: /api/integrations/azure-idp/{id}/sync
+      operations:
+      - name: syncazureintegration
+        method: POST
+        description: Sync Azure IDP Integration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.NETBIRD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: netbird-idp-azure-integrations-rest
+    port: 8080
+    description: REST adapter for NetBird REST API — IDP Azure Integrations. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/integrations/azure-idp
+      name: api-integrations-azure-idp
+      description: REST surface for api-integrations-azure-idp.
+      operations:
+      - method: POST
+        name: createazureintegration
+        description: Create Azure IDP Integration
+        call: netbird-idp-azure-integrations.createazureintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getallazureintegrations
+        description: Get All Azure IDP Integrations
+        call: netbird-idp-azure-integrations.getallazureintegrations
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/integrations/azure-idp/{id}
+      name: api-integrations-azure-idp-id
+      description: REST surface for api-integrations-azure-idp-id.
+      operations:
+      - method: GET
+        name: getazureintegration
+        description: Get Azure IDP Integration
+        call: netbird-idp-azure-integrations.getazureintegration
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateazureintegration
+        description: Update Azure IDP Integration
+        call: netbird-idp-azure-integrations.updateazureintegration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteazureintegration
+        description: Delete Azure IDP Integration
+        call: netbird-idp-azure-integrations.deleteazureintegration
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/integrations/azure-idp/{id}/logs
+      name: api-integrations-azure-idp-id-logs
+      description: REST surface for api-integrations-azure-idp-id-logs.
+      operations:
+      - method: GET
+        name: getazureintegrationlogs
+        description: Get Azure Integration Sync Logs
+        call: netbird-idp-azure-integrations.getazureintegrationlogs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/integrations/azure-idp/{id}/sync
+      name: api-integrations-azure-idp-id-sync
+      description: REST surface for api-integrations-azure-idp-id-sync.
+      operations:
+      - method: POST
+        name: syncazureintegration
+        description: Sync Azure IDP Integration
+        call: netbird-idp-azure-integrations.syncazureintegration
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: netbird-idp-azure-integrations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NetBird REST API — IDP Azure Integrations. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: create-azure-idp-integration
+      description: Create Azure IDP Integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-idp-azure-integrations.createazureintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-azure-idp-integrations
+      description: Get All Azure IDP Integrations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-idp-azure-integrations.getallazureintegrations
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-azure-idp-integration
+      description: Get Azure IDP Integration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-idp-azure-integrations.getazureintegration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-azure-idp-integration
+      description: Update Azure IDP Integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: netbird-idp-azure-integrations.updateazureintegration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-azure-idp-integration
+      description: Delete Azure IDP Integration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: netbird-idp-azure-integrations.deleteazureintegration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-azure-integration-sync-logs
+      description: Get Azure Integration Sync Logs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: netbird-idp-azure-integrations.getazureintegrationlogs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sync-azure-idp-integration
+      description: Sync Azure IDP Integration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: netbird-idp-azure-integrations.syncazureintegration
+      outputParameters:
+      - type: object
+        mapping: $.
