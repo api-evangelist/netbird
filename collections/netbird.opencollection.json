@@ -1,0 +1,4548 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Instance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Instance Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/instance"
+          },
+          "docs": "Returns the instance status including whether initial setup is required. This endpoint does not require authentication."
+        },
+        {
+          "info": {
+            "name": "Get Version Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/instance/version",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns version information for NetBird components including the current management server version and latest available versions from GitHub."
+        },
+        {
+          "info": {
+            "name": "Setup Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/setup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates the initial admin user for the instance. This endpoint does not require authentication but only works when setup is required (no accounts exist and embedded IDP is enabled).\n\nWhen the management server is started with `NB_SETUP_PAT_ENABLED=true` and the request includes `create_pat: true`, the endpoint also provisions the NetBird account for the new owner user and returns the plain text Personal Access Token in `personal_access_token`. The optional `pat_expire_in` value applies only when"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers/:peerId/jobs",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve all jobs for a given peer"
+        },
+        {
+          "info": {
+            "name": "Create Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/peers/:peerId/jobs",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new job for a given peer"
+        },
+        {
+          "info": {
+            "name": "Get Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers/:peerId/jobs/:jobId",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              },
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a job"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve details of a specific job"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/accounts",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of accounts of a user. Always returns a list of one account."
+        },
+        {
+          "info": {
+            "name": "Update an Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/accounts/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update information about an account"
+        },
+        {
+          "info": {
+            "name": "Delete an Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/accounts/:accountId",
+            "params": [
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an account"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes an account and all its resources. Only account owners can delete accounts."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/users",
+            "params": [
+              {
+                "name": "service_user",
+                "value": "",
+                "type": "query",
+                "description": "Filters users and returns either regular users or service users"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all users"
+        },
+        {
+          "info": {
+            "name": "Create a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new service user or sends an invite to a regular user"
+        },
+        {
+          "info": {
+            "name": "Update a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update information about a User"
+        },
+        {
+          "info": {
+            "name": "Delete a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/users/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a user"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "This method removes a user from accessing the system. For this leaves the IDP user intact unless the `--user-delete-from-idp` is passed to management startup."
+        },
+        {
+          "info": {
+            "name": "Resend user invitation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/users/:userId/invite",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a user"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Resend user invitation"
+        },
+        {
+          "info": {
+            "name": "Approve user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/users/:userId/approve",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a user"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Approve a user that is pending approval"
+        },
+        {
+          "info": {
+            "name": "Reject user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/users/:userId/reject",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a user"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Reject a user that is pending approval by removing them from the account"
+        },
+        {
+          "info": {
+            "name": "Change user password",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/users/:userId/password",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Change the password for a user. Only available when embedded IdP is enabled. Users can only change their own password."
+        },
+        {
+          "info": {
+            "name": "Retrieve current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/users/current",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about the current user"
+        },
+        {
+          "info": {
+            "name": "List user invites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/users/invites",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all pending invites for the account. Only available when embedded IdP is enabled."
+        },
+        {
+          "info": {
+            "name": "Create a user invite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/users/invites",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates an invite link for a new user. Only available when embedded IdP is enabled. The user is not created until they accept the invite."
+        },
+        {
+          "info": {
+            "name": "Delete a user invite",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/users/invites/:inviteId",
+            "params": [
+              {
+                "name": "inviteId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the invite to delete"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a pending invite. Only available when embedded IdP is enabled."
+        },
+        {
+          "info": {
+            "name": "Regenerate a user invite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/users/invites/:inviteId/regenerate",
+            "params": [
+              {
+                "name": "inviteId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the invite to regenerate"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Regenerates an invite link for an existing invite. Invalidates the previous token and creates a new one."
+        },
+        {
+          "info": {
+            "name": "Get invite information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/users/invites/:token",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The invite token"
+              }
+            ]
+          },
+          "docs": "Retrieves public information about an invite. This endpoint is unauthenticated and protected by the token itself."
+        },
+        {
+          "info": {
+            "name": "Accept an invite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/users/invites/:token/accept",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The invite token"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Accepts an invite and creates the user with the provided password. This endpoint is unauthenticated and protected by the token itself."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/users/:userId/tokens",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a user"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all tokens for a user"
+        },
+        {
+          "info": {
+            "name": "Create a Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/users/:userId/tokens",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new token for a user"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/users/:userId/tokens/:tokenId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a user"
+              },
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a token"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a specific token for a user"
+        },
+        {
+          "info": {
+            "name": "Delete a Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/users/:userId/tokens/:tokenId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a user"
+              },
+              {
+                "name": "tokenId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a token"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a token for a user"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Peers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter peers by name"
+              },
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query",
+                "description": "Filter peers by IP address"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all peers"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers/:peerId",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a peer"
+        },
+        {
+          "info": {
+            "name": "Update a Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/peers/:peerId",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update information about a peer"
+        },
+        {
+          "info": {
+            "name": "Delete a Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/peers/:peerId",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a peer"
+        },
+        {
+          "info": {
+            "name": "List accessible Peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers/:peerId/accessible-peers",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of peers that the specified peer can connect to within the network."
+        },
+        {
+          "info": {
+            "name": "Create a Temporary Access Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/peers/:peerId/temporary-access",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a temporary access peer that can be used to access this peer and this peer only. The temporary access peer and its access policies will be automatically deleted after it disconnects."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Ingress Ports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Port Allocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers/:peerId/ingress/ports",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filters ingress port allocations by name"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all ingress port allocations for a peer"
+        },
+        {
+          "info": {
+            "name": "Create a Port Allocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/peers/:peerId/ingress/ports",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new ingress port allocation for a peer"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Port Allocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers/:peerId/ingress/ports/:allocationId",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              },
+              {
+                "name": "allocationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an ingress port allocation"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about an ingress port allocation"
+        },
+        {
+          "info": {
+            "name": "Update a Port Allocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/peers/:peerId/ingress/ports/:allocationId",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              },
+              {
+                "name": "allocationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an ingress port allocation"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update information about an ingress port allocation"
+        },
+        {
+          "info": {
+            "name": "Delete a Port Allocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/peers/:peerId/ingress/ports/:allocationId",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              },
+              {
+                "name": "allocationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an ingress port allocation"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an ingress port allocation"
+        },
+        {
+          "info": {
+            "name": "List all Ingress Peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/ingress/peers",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all ingress peers"
+        },
+        {
+          "info": {
+            "name": "Create a Ingress Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/ingress/peers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new ingress peer"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Ingress Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/ingress/peers/:ingressPeerId",
+            "params": [
+              {
+                "name": "ingressPeerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an ingress peer"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about an ingress peer"
+        },
+        {
+          "info": {
+            "name": "Update a Ingress Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/ingress/peers/:ingressPeerId",
+            "params": [
+              {
+                "name": "ingressPeerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an ingress peer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update information about an ingress peer"
+        },
+        {
+          "info": {
+            "name": "Delete a Ingress Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/ingress/peers/:ingressPeerId",
+            "params": [
+              {
+                "name": "ingressPeerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an ingress peer"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an ingress peer"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Setup Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Setup Keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/setup-keys",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all Setup Keys"
+        },
+        {
+          "info": {
+            "name": "Create a Setup Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/setup-keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a setup key"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Setup Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/setup-keys/:keyId",
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a setup key"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a setup key"
+        },
+        {
+          "info": {
+            "name": "Update a Setup Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/setup-keys/:keyId",
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a setup key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update information about a setup key"
+        },
+        {
+          "info": {
+            "name": "Delete a Setup Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/setup-keys/:keyId",
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a setup key"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a Setup Key"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/groups",
+            "params": [
+              {
+                "name": "name",
+                "value": "devs",
+                "type": "query",
+                "description": "Filter groups by name (exact match)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all groups"
+        },
+        {
+          "info": {
+            "name": "Create a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/groups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a group"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a group"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a group"
+        },
+        {
+          "info": {
+            "name": "Update a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update/Replace a group"
+        },
+        {
+          "info": {
+            "name": "Delete a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a group"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a group"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/policies",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all policies"
+        },
+        {
+          "info": {
+            "name": "Create a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/policies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a policy"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/policies/:policyId",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a policy"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a Policies"
+        },
+        {
+          "info": {
+            "name": "Update a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/policies/:policyId",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a policy"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update/Replace a Policy"
+        },
+        {
+          "info": {
+            "name": "Delete a Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/policies/:policyId",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a policy"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a policy"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Routes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Routes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/routes",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all routes"
+        },
+        {
+          "info": {
+            "name": "Create a Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/routes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a Route"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/routes/:routeId",
+            "params": [
+              {
+                "name": "routeId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a route"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a Routes"
+        },
+        {
+          "info": {
+            "name": "Update a Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/routes/:routeId",
+            "params": [
+              {
+                "name": "routeId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a route"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update/Replace a Route"
+        },
+        {
+          "info": {
+            "name": "Delete a Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/routes/:routeId",
+            "params": [
+              {
+                "name": "routeId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a route"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a route"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Networks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Networks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/networks",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all networks"
+        },
+        {
+          "info": {
+            "name": "Create a Network",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/networks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a Network"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Network",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/networks/:networkId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a Network"
+        },
+        {
+          "info": {
+            "name": "Update a Network",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/networks/:networkId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update/Replace a Network"
+        },
+        {
+          "info": {
+            "name": "Delete a Network",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/networks/:networkId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a network"
+        },
+        {
+          "info": {
+            "name": "List all Network Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/networks/:networkId/resources",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all resources in a network"
+        },
+        {
+          "info": {
+            "name": "Create a Network Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/networks/:networkId/resources",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a Network Resource"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Network Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/networks/:networkId/resources/:resourceId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network resource"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a Network Resource"
+        },
+        {
+          "info": {
+            "name": "Update a Network Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/networks/:networkId/resources/:resourceId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a Network Resource"
+        },
+        {
+          "info": {
+            "name": "Delete a Network Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/networks/:networkId/resources/:resourceId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a network resource"
+        },
+        {
+          "info": {
+            "name": "List all Network Routers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/networks/:networkId/routers",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all routers in a network"
+        },
+        {
+          "info": {
+            "name": "Create a Network Router",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/networks/:networkId/routers",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a Network Router"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Network Router",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/networks/:networkId/routers/:routerId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              },
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a router"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a Network Router"
+        },
+        {
+          "info": {
+            "name": "Update a Network Router",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/networks/:networkId/routers/:routerId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              },
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a router"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a Network Router"
+        },
+        {
+          "info": {
+            "name": "Delete a Network Router",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/networks/:networkId/routers/:routerId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a network router"
+        },
+        {
+          "info": {
+            "name": "List all Network Routers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/networks/routers",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all routers in a network"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "DNS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Nameserver Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/dns/nameservers",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all Nameserver Groups"
+        },
+        {
+          "info": {
+            "name": "Create a Nameserver Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/dns/nameservers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a Nameserver Group"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Nameserver Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/dns/nameservers/:nsgroupId",
+            "params": [
+              {
+                "name": "nsgroupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a Nameserver Group"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a Nameserver Groups"
+        },
+        {
+          "info": {
+            "name": "Update a Nameserver Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/dns/nameservers/:nsgroupId",
+            "params": [
+              {
+                "name": "nsgroupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a Nameserver Group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update/Replace a Nameserver Group"
+        },
+        {
+          "info": {
+            "name": "Delete a Nameserver Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/dns/nameservers/:nsgroupId",
+            "params": [
+              {
+                "name": "nsgroupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a Nameserver Group"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a Nameserver Group"
+        },
+        {
+          "info": {
+            "name": "Retrieve DNS settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/dns/settings",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a DNS settings object"
+        },
+        {
+          "info": {
+            "name": "Update DNS Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/dns/settings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a DNS settings object"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "DNS Zones",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all DNS Zones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/dns/zones",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all custom DNS zones"
+        },
+        {
+          "info": {
+            "name": "Create a DNS Zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/dns/zones",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new custom DNS zone"
+        },
+        {
+          "info": {
+            "name": "Retrieve a DNS Zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns information about a specific DNS zone"
+        },
+        {
+          "info": {
+            "name": "Update a DNS Zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a custom DNS zone"
+        },
+        {
+          "info": {
+            "name": "Delete a DNS Zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a custom DNS zone"
+        },
+        {
+          "info": {
+            "name": "List all DNS Records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId/records",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all DNS records in a zone"
+        },
+        {
+          "info": {
+            "name": "Create a DNS Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId/records",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new DNS record in a zone"
+        },
+        {
+          "info": {
+            "name": "Retrieve a DNS Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId/records/:recordId",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              },
+              {
+                "name": "recordId",
+                "value": "chacbco6lnnbn6cg5s92",
+                "type": "path",
+                "description": "The unique identifier of a DNS record"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns information about a specific DNS record"
+        },
+        {
+          "info": {
+            "name": "Update a DNS Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId/records/:recordId",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              },
+              {
+                "name": "recordId",
+                "value": "chacbco6lnnbn6cg5s92",
+                "type": "path",
+                "description": "The unique identifier of a DNS record"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a DNS record in a zone"
+        },
+        {
+          "info": {
+            "name": "Delete a DNS Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId/records/:recordId",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              },
+              {
+                "name": "recordId",
+                "value": "chacbco6lnnbn6cg5s92",
+                "type": "path",
+                "description": "The unique identifier of a DNS record"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a DNS record from a zone"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Audit Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/events/audit",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all audit events"
+        },
+        {
+          "info": {
+            "name": "List all Traffic Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/events/network-traffic",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user ID"
+              },
+              {
+                "name": "reporter_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by reporter ID"
+              },
+              {
+                "name": "protocol",
+                "value": "",
+                "type": "query",
+                "description": "Filter by protocol"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by event type"
+              },
+              {
+                "name": "connection_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by connection type"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Filter by direction"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Case-insensitive partial match on user email, source/destination names, and source/destination addresses"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date for filtering events (ISO 8601 format, e.g., 2024-01-01T00:00:00Z)."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End date for filtering events (ISO 8601 format, e.g., 2024-01-31T23:59:59Z)."
+              }
+            ]
+          },
+          "docs": "Returns a list of all network traffic events"
+        },
+        {
+          "info": {
+            "name": "List all Reverse Proxy Access Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/events/proxy",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (1-indexed)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page (max 100)"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by (url sorts by host then path)"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order (ascending or descending)"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "General search across request ID, host, path, source IP, user email, and user name"
+              },
+              {
+                "name": "source_ip",
+                "value": "",
+                "type": "query",
+                "description": "Filter by source IP address"
+              },
+              {
+                "name": "host",
+                "value": "",
+                "type": "query",
+                "description": "Filter by host header"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Filter by request path (supports partial matching)"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by authenticated user ID"
+              },
+              {
+                "name": "user_email",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user email (partial matching)"
+              },
+              {
+                "name": "user_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user name (partial matching)"
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query",
+                "description": "Filter by HTTP method"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status (success = 2xx/3xx, failed = 1xx/4xx/5xx)"
+              },
+              {
+                "name": "status_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter by HTTP status code"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp >= start_date (RFC3339 format)"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp <= end_date (RFC3339 format)"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all reverse proxy access log entries"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Posture Checks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Posture Checks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/posture-checks",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all posture checks"
+        },
+        {
+          "info": {
+            "name": "Create a Posture Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/posture-checks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a posture check"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Posture Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/posture-checks/:postureCheckId",
+            "params": [
+              {
+                "name": "postureCheckId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a posture check"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a posture check"
+        },
+        {
+          "info": {
+            "name": "Update a Posture Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/posture-checks/:postureCheckId",
+            "params": [
+              {
+                "name": "postureCheckId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a posture check"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update/Replace a posture check"
+        },
+        {
+          "info": {
+            "name": "Delete a Posture Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/posture-checks/:postureCheckId",
+            "params": [
+              {
+                "name": "postureCheckId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a posture check"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a posture check"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Geo Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all country codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/locations/countries",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get list of all country in 2-letter ISO 3166-1 alpha-2 codes"
+        },
+        {
+          "info": {
+            "name": "List all city names by country",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/locations/countries/:country/cities",
+            "params": [
+              {
+                "name": "country",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a list of all English city names for a given country code"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Identity Providers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Identity Providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/identity-providers",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all identity providers configured for the account"
+        },
+        {
+          "info": {
+            "name": "Create an Identity Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/identity-providers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new identity provider configuration"
+        },
+        {
+          "info": {
+            "name": "Retrieve an Identity Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/identity-providers/:idpId",
+            "params": [
+              {
+                "name": "idpId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an identity provider"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a specific identity provider"
+        },
+        {
+          "info": {
+            "name": "Update an Identity Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/identity-providers/:idpId",
+            "params": [
+              {
+                "name": "idpId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an identity provider"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing identity provider configuration"
+        },
+        {
+          "info": {
+            "name": "Delete an Identity Provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/identity-providers/:idpId",
+            "params": [
+              {
+                "name": "idpId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an identity provider"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an identity provider configuration"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Usage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/billing/usage"
+          },
+          "docs": "Get current usage"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Subscription",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/billing/subscription"
+          },
+          "docs": "Get current subscription"
+        },
+        {
+          "info": {
+            "name": "Change subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/billing/subscription",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change subscription"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get available plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/billing/plans"
+          },
+          "docs": "Get available plans"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Checkout",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create checkout session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/billing/checkout",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create checkout session"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Portal",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get customer portal URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/billing/portal",
+            "params": [
+              {
+                "name": "baseURL",
+                "value": "https://app.netbird.io/plans",
+                "type": "query",
+                "description": "The base URL for the redirect after accessing the portal."
+              }
+            ]
+          },
+          "docs": "Get customer portal URL"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Invoice",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get account's paid invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/billing/invoices"
+          },
+          "docs": "Get account's paid invoices"
+        },
+        {
+          "info": {
+            "name": "Get account invoice URL to Stripe.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/billing/invoices/:id/pdf",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the invoice"
+              }
+            ]
+          },
+          "docs": "Get account invoice URL to Stripe."
+        },
+        {
+          "info": {
+            "name": "Get account invoice CSV.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/billing/invoices/:id/csv",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the invoice"
+              }
+            ]
+          },
+          "docs": "Get account invoice CSV."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AWS Marketplace",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activate AWS Marketplace subscription.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/billing/aws/marketplace/activate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activate AWS Marketplace subscription."
+        },
+        {
+          "info": {
+            "name": "Enrich AWS Marketplace subscription with Account ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/billing/aws/marketplace/enrich",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enrich AWS Marketplace subscription with Account ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "MSP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get MSP tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants"
+          },
+          "docs": "Get MSP tenants"
+        },
+        {
+          "info": {
+            "name": "Create MSP tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create MSP tenant"
+        },
+        {
+          "info": {
+            "name": "Update MSP tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a tenant account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update MSP tenant"
+        },
+        {
+          "info": {
+            "name": "Unlink a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants/:id/unlink",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a tenant account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unlink a tenant"
+        },
+        {
+          "info": {
+            "name": "Verify a tenant domain DNS challenge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants/:id/dns",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a tenant account"
+              }
+            ]
+          },
+          "docs": "Verify a tenant domain DNS challenge"
+        },
+        {
+          "info": {
+            "name": "Create subscription for Tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants/:id/subscription",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a tenant account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create subscription for Tenant"
+        },
+        {
+          "info": {
+            "name": "Invite existing account as a Tenant to the MSP account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants/:id/invite",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an existing tenant account"
+              }
+            ]
+          },
+          "docs": "Invite existing account as a Tenant to the MSP account"
+        },
+        {
+          "info": {
+            "name": "Response by the invited Tenant account owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants/:id/invite",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an existing tenant account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Response by the invited Tenant account owner"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "EDR Intune Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get EDR Intune Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/edr/intune"
+          },
+          "docs": "Retrieves a specific EDR Intune integration by its ID."
+        },
+        {
+          "info": {
+            "name": "Create EDR Intune Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/edr/intune",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new EDR Intune integration for the authenticated account.\n"
+        },
+        {
+          "info": {
+            "name": "Update EDR Intune Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/edr/intune",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing EDR Intune Integration. The request body structure is `EDRIntuneRequest`.\n"
+        },
+        {
+          "info": {
+            "name": "Delete EDR Intune Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/edr/intune"
+          },
+          "docs": "Deletes an EDR Intune Integration by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "EDR SentinelOne Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get EDR SentinelOne Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/edr/sentinelone"
+          },
+          "docs": "Retrieves a specific EDR SentinelOne integration by its ID."
+        },
+        {
+          "info": {
+            "name": "Create EDR SentinelOne Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/edr/sentinelone",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new EDR SentinelOne integration"
+        },
+        {
+          "info": {
+            "name": "Update EDR SentinelOne Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/edr/sentinelone",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing EDR SentinelOne Integration."
+        },
+        {
+          "info": {
+            "name": "Delete EDR SentinelOne Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/edr/sentinelone"
+          },
+          "docs": "Deletes an EDR SentinelOne Integration by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "EDR Falcon Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get EDR Falcon Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/edr/falcon"
+          },
+          "docs": "Retrieves a specific EDR Falcon integration by its ID."
+        },
+        {
+          "info": {
+            "name": "Create EDR Falcon Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/edr/falcon",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new EDR Falcon integration"
+        },
+        {
+          "info": {
+            "name": "Update EDR Falcon Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/edr/falcon",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing EDR Falcon Integration."
+        },
+        {
+          "info": {
+            "name": "Delete EDR Falcon Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/edr/falcon"
+          },
+          "docs": "Deletes an existing EDR Falcon Integration by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IDP Google Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Google IDP Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/google-idp"
+          },
+          "docs": "Retrieves all Google Workspace IDP integrations for the authenticated account"
+        },
+        {
+          "info": {
+            "name": "Create Google IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/google-idp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Google Workspace IDP integration"
+        },
+        {
+          "info": {
+            "name": "Get Google IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/google-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Google IDP integration."
+              }
+            ]
+          },
+          "docs": "Retrieves a Google IDP integration by ID."
+        },
+        {
+          "info": {
+            "name": "Update Google IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/google-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Google IDP integration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Google Workspace IDP integration."
+        },
+        {
+          "info": {
+            "name": "Delete Google IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/google-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Google IDP integration."
+              }
+            ]
+          },
+          "docs": "Deletes a Google IDP integration by ID."
+        },
+        {
+          "info": {
+            "name": "Sync Google IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/google-idp/:id/sync",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Google IDP integration."
+              }
+            ]
+          },
+          "docs": "Triggers a manual synchronization for a Google IDP integration."
+        },
+        {
+          "info": {
+            "name": "Get Google Integration Sync Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/google-idp/:id/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Google IDP integration."
+              }
+            ]
+          },
+          "docs": "Retrieves synchronization logs for a Google IDP integration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IDP Azure Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Azure IDP Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/azure-idp"
+          },
+          "docs": "Retrieves all Azure AD IDP integrations for the authenticated account"
+        },
+        {
+          "info": {
+            "name": "Create Azure IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/azure-idp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Azure AD IDP integration"
+        },
+        {
+          "info": {
+            "name": "Get Azure IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/azure-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Azure IDP integration."
+              }
+            ]
+          },
+          "docs": "Retrieves an Azure IDP integration by ID."
+        },
+        {
+          "info": {
+            "name": "Update Azure IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/azure-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Azure IDP integration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Azure AD IDP integration."
+        },
+        {
+          "info": {
+            "name": "Delete Azure IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/azure-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Azure IDP integration."
+              }
+            ]
+          },
+          "docs": "Deletes an Azure IDP integration by ID."
+        },
+        {
+          "info": {
+            "name": "Sync Azure IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/azure-idp/:id/sync",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Azure IDP integration."
+              }
+            ]
+          },
+          "docs": "Triggers a manual synchronization for an Azure IDP integration."
+        },
+        {
+          "info": {
+            "name": "Get Azure Integration Sync Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/azure-idp/:id/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Azure IDP integration."
+              }
+            ]
+          },
+          "docs": "Retrieves synchronization logs for an Azure IDP integration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IDP Okta SCIM Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Okta SCIM IDP Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/okta-scim-idp"
+          },
+          "docs": "Retrieves all Okta SCIM IDP integrations for the authenticated account"
+        },
+        {
+          "info": {
+            "name": "Create Okta SCIM IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/okta-scim-idp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Okta SCIM IDP integration"
+        },
+        {
+          "info": {
+            "name": "Get Okta SCIM IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/okta-scim-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Okta SCIM IDP integration."
+              }
+            ]
+          },
+          "docs": "Retrieves an Okta SCIM IDP integration by ID."
+        },
+        {
+          "info": {
+            "name": "Update Okta SCIM IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/okta-scim-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Okta SCIM IDP integration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Okta SCIM IDP integration."
+        },
+        {
+          "info": {
+            "name": "Delete Okta SCIM IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/okta-scim-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Okta SCIM IDP integration."
+              }
+            ]
+          },
+          "docs": "Deletes an Okta SCIM IDP integration by ID."
+        },
+        {
+          "info": {
+            "name": "Regenerate Okta SCIM Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/okta-scim-idp/:id/token",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Okta SCIM IDP integration."
+              }
+            ]
+          },
+          "docs": "Regenerates the SCIM API token for an Okta SCIM IDP integration."
+        },
+        {
+          "info": {
+            "name": "Get Okta SCIM Integration Sync Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/okta-scim-idp/:id/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Okta SCIM IDP integration."
+              }
+            ]
+          },
+          "docs": "Retrieves synchronization logs for an Okta SCIM IDP integration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "IDP SCIM Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All SCIM IDP Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/scim-idp"
+          },
+          "docs": "Retrieves all SCIM IDP integrations for the authenticated account"
+        },
+        {
+          "info": {
+            "name": "Create SCIM IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/scim-idp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new SCIM integration"
+        },
+        {
+          "info": {
+            "name": "Get SCIM IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/scim-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the SCIM IDP integration."
+              }
+            ]
+          },
+          "docs": "Retrieves an SCIM IDP integration by ID."
+        },
+        {
+          "info": {
+            "name": "Update SCIM IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/scim-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the SCIM IDP integration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing SCIM IDP Integration."
+        },
+        {
+          "info": {
+            "name": "Delete SCIM IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/scim-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the SCIM IDP integration."
+              }
+            ]
+          },
+          "docs": "Deletes an SCIM IDP integration by ID."
+        },
+        {
+          "info": {
+            "name": "Regenerate SCIM Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/scim-idp/:id/token",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the SCIM IDP integration."
+              }
+            ]
+          },
+          "docs": "Regenerates the SCIM API token for an SCIM IDP integration."
+        },
+        {
+          "info": {
+            "name": "Get SCIM Integration Sync Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/scim-idp/:id/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the SCIM IDP integration."
+              }
+            ]
+          },
+          "docs": "Retrieves synchronization logs for a SCIM IDP integration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "EDR Huntress Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get EDR Huntress Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/edr/huntress"
+          },
+          "docs": "Retrieves a specific EDR Huntress integration by its ID."
+        },
+        {
+          "info": {
+            "name": "Create EDR Huntress Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/edr/huntress",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new EDR Huntress integration"
+        },
+        {
+          "info": {
+            "name": "Update EDR Huntress Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/edr/huntress",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing EDR Huntress Integration."
+        },
+        {
+          "info": {
+            "name": "Delete EDR Huntress Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/edr/huntress"
+          },
+          "docs": "Deletes an EDR Huntress Integration by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "EDR FleetDM Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get EDR FleetDM Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/edr/fleetdm"
+          },
+          "docs": "Retrieves a specific EDR FleetDM integration by its ID."
+        },
+        {
+          "info": {
+            "name": "Create EDR FleetDM Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/edr/fleetdm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new EDR FleetDM integration"
+        },
+        {
+          "info": {
+            "name": "Update EDR FleetDM Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/edr/fleetdm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing EDR FleetDM Integration."
+        },
+        {
+          "info": {
+            "name": "Delete EDR FleetDM Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/edr/fleetdm"
+          },
+          "docs": "Deletes an EDR FleetDM Integration by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "EDR Peers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bypass compliance for a non-compliant peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/peers/:peer-id/edr/bypass",
+            "params": [
+              {
+                "name": "peer-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the peer"
+              }
+            ]
+          },
+          "docs": "Allows an admin to bypass EDR compliance checks for a specific peer.\nThe peer will remain bypassed until the admin revokes it OR the device becomes\nnaturally compliant in the EDR system.\n"
+        },
+        {
+          "info": {
+            "name": "Revoke compliance bypass for a peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/peers/:peer-id/edr/bypass",
+            "params": [
+              {
+                "name": "peer-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the peer"
+              }
+            ]
+          },
+          "docs": "Removes the compliance bypass, subjecting the peer to normal EDR validation."
+        },
+        {
+          "info": {
+            "name": "List all bypassed peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers/edr/bypassed"
+          },
+          "docs": "Returns all peers that have compliance bypassed by an admin."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Event Streaming Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Event Streaming Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/event-streaming"
+          },
+          "docs": "Retrieves all event streaming integrations for the authenticated account."
+        },
+        {
+          "info": {
+            "name": "Create Event Streaming Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/event-streaming",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new event streaming integration for the authenticated account.\nThe request body should conform to `CreateIntegrationRequest`.\nNote: Based on the provided Go code, the `enabled` field from the request is part of the `CreateIntegrationRequest` struct,\nbut the backend `manager.CreateIntegration` function signature shown does not directly use this `enabled` field.\nThe actual behavior for `enabled` during creation should be confirmed (e.g., it might have a server-side default or be handled "
+        },
+        {
+          "info": {
+            "name": "Get Event Streaming Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/event-streaming/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique numeric identifier of the event streaming integration."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific event streaming integration by its ID."
+        },
+        {
+          "info": {
+            "name": "Update Event Streaming Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/event-streaming/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique numeric identifier of the event streaming integration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing event streaming integration. The request body structure is `CreateIntegrationRequest`.\nHowever, for updates:\n- The `platform` field, if provided in the body, is ignored by the backend manager function, as the platform of an existing integration is typically immutable.\n- The `enabled` and `config` fields from the request body are used to update the integration.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Event Streaming Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/event-streaming/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique numeric identifier of the event streaming integration."
+              }
+            ]
+          },
+          "docs": "Deletes an event streaming integration by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available proxy clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/reverse-proxies/clusters",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of available proxy clusters with their connection status"
+        },
+        {
+          "info": {
+            "name": "List all Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/reverse-proxies/services",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all reverse proxy services"
+        },
+        {
+          "info": {
+            "name": "Create a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/reverse-proxies/services",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new reverse proxy service"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/reverse-proxies/services/:serviceId",
+            "params": [
+              {
+                "name": "serviceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a service"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a specific reverse proxy service"
+        },
+        {
+          "info": {
+            "name": "Update a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/reverse-proxies/services/:serviceId",
+            "params": [
+              {
+                "name": "serviceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a service"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing service"
+        },
+        {
+          "info": {
+            "name": "Delete a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/reverse-proxies/services/:serviceId",
+            "params": [
+              {
+                "name": "serviceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a service"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing service"
+        },
+        {
+          "info": {
+            "name": "Retrieve Service Domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/reverse-proxies/domains",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about domains that can be used for service endpoints."
+        },
+        {
+          "info": {
+            "name": "Create a Custom domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/reverse-proxies/domains",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new Custom domain for use with service endpoints, this will trigger an initial validation check"
+        },
+        {
+          "info": {
+            "name": "Delete a Custom domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/reverse-proxies/domains/:domainId",
+            "params": [
+              {
+                "name": "domainId",
+                "value": "",
+                "type": "path",
+                "description": "The custom domain ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing service custom domain"
+        },
+        {
+          "info": {
+            "name": "Validate a custom domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/reverse-proxies/domains/:domainId/validate",
+            "params": [
+              {
+                "name": "domainId",
+                "value": "",
+                "type": "path",
+                "description": "The custom domain ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Trigger domain ownership validation for a custom domain"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Notification Event Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/notifications/types"
+          },
+          "docs": "Returns a map of all supported activity event type codes to their\nhuman-readable descriptions. Use these codes when configuring\n`event_types` on notification channels.\n"
+        },
+        {
+          "info": {
+            "name": "List Notification Channels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/notifications/channels"
+          },
+          "docs": "Retrieves all notification channels configured for the authenticated account."
+        },
+        {
+          "info": {
+            "name": "Create Notification Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/notifications/channels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new notification channel for the authenticated account.\nSupported channel types are `email` and `webhook`.\n"
+        },
+        {
+          "info": {
+            "name": "Get Notification Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/notifications/channels/:channelId",
+            "params": [
+              {
+                "name": "channelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the notification channel."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific notification channel by its ID."
+        },
+        {
+          "info": {
+            "name": "Update Notification Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/notifications/channels/:channelId",
+            "params": [
+              {
+                "name": "channelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the notification channel."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing notification channel."
+        },
+        {
+          "info": {
+            "name": "Delete Notification Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/notifications/channels/:channelId",
+            "params": [
+              {
+                "name": "channelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the notification channel."
+              }
+            ]
+          },
+          "docs": "Deletes a notification channel by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
