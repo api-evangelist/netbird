@@ -55,7 +55,7 @@ common:
     url: https://netbird.io/blog/
   - type: Integrations
     url: https://netbird.io/integrations
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://docs.netbird.io/llms.txt
 integrations:
   - name: Become a Partner
