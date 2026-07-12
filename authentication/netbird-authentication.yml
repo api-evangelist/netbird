@@ -1,0 +1,23 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/netbird-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/netbird-openapi.yml
+- name: TokenAuth
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".
+  sources:
+  - openapi/netbird-openapi.yml

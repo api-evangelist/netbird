@@ -41,6 +41,10 @@ apis:
       - type: OpenAPI
         url: https://raw.githubusercontent.com/api-evangelist/netbird/refs/heads/main/openapi/netbird-openapi.yml
 common:
+  - type: DomainSecurity
+    url: security/netbird-domain-security.yml
+  - type: Authentication
+    url: authentication/netbird-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/netbirdio
   - type: Website
