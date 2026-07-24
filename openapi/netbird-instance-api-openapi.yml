@@ -1,0 +1,204 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts Instance API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Instance
+  description: Instance setup and status endpoints for initial configuration.
+paths:
+  /api/instance:
+    get:
+      summary: Get Instance Status
+      description: Returns the instance status including whether initial setup is required. This endpoint does not require authentication.
+      tags:
+      - Instance
+      security: []
+      responses:
+        '200':
+          description: Instance status information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceStatus'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/instance/version:
+    get:
+      summary: Get Version Info
+      description: Returns version information for NetBird components including the current management server version and latest available versions from GitHub.
+      tags:
+      - Instance
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      responses:
+        '200':
+          description: Version information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceVersionInfo'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/setup:
+    post:
+      summary: Setup Instance
+      description: 'Creates the initial admin user for the instance. This endpoint does not require authentication but only works when setup is required (no accounts exist and embedded IDP is enabled).
+
+
+        When the management server is started with `NB_SETUP_PAT_ENABLED=true` and the request includes `create_pat: true`, the endpoint also provisions the NetBird account for the new owner user and returns the plain text Personal Access Token in `personal_access_token`. The optional `pat_expire_in` value applies only when `create_pat` is true and defaults to 1 day when omitted. If a post-user step fails, setup-created resources are rolled back when safe; if account cleanup fails, the owner user is left in place to avoid leaving an account without its admin user.
+
+        '
+      tags:
+      - Instance
+      security: []
+      requestBody:
+        description: Initial admin user details
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetupRequest'
+      responses:
+        '200':
+          description: Setup completed successfully
+          headers:
+            Cache-Control:
+              description: Always set to no-store because the response may contain a one-time plain text Personal Access Token.
+              schema:
+                type: string
+                example: no-store
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetupResponse'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '412':
+          description: Setup already completed
+          content: {}
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  responses:
+    bad_request:
+      description: Bad Request
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+  schemas:
+    SetupResponse:
+      type: object
+      description: Response after successful instance setup
+      properties:
+        user_id:
+          description: The ID of the created user
+          type: string
+          example: abc123def456
+        email:
+          description: Email address of the created user
+          type: string
+          example: admin@example.com
+        personal_access_token:
+          description: Plain text Personal Access Token created during setup. Present only when create_pat was requested and the NB_SETUP_PAT_ENABLED feature was enabled on the server.
+          type: string
+          format: password
+          readOnly: true
+          example: nbp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      required:
+      - user_id
+      - email
+    InstanceStatus:
+      type: object
+      description: Instance status information
+      properties:
+        setup_required:
+          description: Indicates whether the instance requires initial setup
+          type: boolean
+          example: true
+      required:
+      - setup_required
+    SetupRequest:
+      type: object
+      description: Request to set up the initial admin user
+      properties:
+        email:
+          description: Email address for the admin user
+          type: string
+          example: admin@example.com
+        password:
+          description: Password for the admin user (minimum 8 characters)
+          type: string
+          format: password
+          minLength: 8
+          example: securepassword123
+        name:
+          description: Display name for the admin user (defaults to email if not provided)
+          type: string
+          example: Admin User
+        create_pat:
+          description: If true and the server has setup-time PAT issuance enabled (NB_SETUP_PAT_ENABLED=true), create a Personal Access Token for the new owner user and return it in the response. Ignored when the server feature is disabled.
+          type: boolean
+          example: true
+        pat_expire_in:
+          description: Expiration of the Personal Access Token in days. Applies only when create_pat is true and the server feature is enabled. Defaults to 1 day when omitted.
+          type: integer
+          minimum: 1
+          maximum: 365
+          default: 1
+          example: 30
+      required:
+      - email
+      - password
+      - name
+    InstanceVersionInfo:
+      type: object
+      description: Version information for NetBird components
+      properties:
+        management_current_version:
+          description: The current running version of the management server
+          type: string
+          example: 0.35.0
+        dashboard_available_version:
+          description: The latest available version of the dashboard (from GitHub releases)
+          type: string
+          example: 2.10.0
+        management_available_version:
+          description: The latest available version of the management server (from GitHub releases)
+          type: string
+          example: 0.35.0
+        management_update_available:
+          description: Indicates if a newer management version is available
+          type: boolean
+          example: true
+      required:
+      - management_current_version
+      - management_update_available
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

@@ -1,0 +1,243 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts Tokens API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Tokens
+  description: Interact with and view information about tokens.
+paths:
+  /api/users/{userId}/tokens:
+    get:
+      summary: List all Tokens
+      description: Returns a list of all tokens for a user
+      tags:
+      - Tokens
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a user
+      responses:
+        '200':
+          description: A JSON Array of PersonalAccessTokens
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonalAccessToken'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    post:
+      summary: Create a Token
+      description: Create a new token for a user
+      tags:
+      - Tokens
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a user
+      requestBody:
+        description: PersonalAccessToken create parameters
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonalAccessTokenRequest'
+      responses:
+        '200':
+          description: The token in plain text
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalAccessTokenGenerated'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/users/{userId}/tokens/{tokenId}:
+    get:
+      summary: Retrieve a Token
+      description: Returns a specific token for a user
+      tags:
+      - Tokens
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a user
+      - in: path
+        name: tokenId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a token
+      responses:
+        '200':
+          description: A PersonalAccessTokens Object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalAccessToken'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    delete:
+      summary: Delete a Token
+      description: Delete a token for a user
+      tags:
+      - Tokens
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a user
+      - in: path
+        name: tokenId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a token
+      responses:
+        '200':
+          description: Delete status code
+          content: {}
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  responses:
+    bad_request:
+      description: Bad Request
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+  schemas:
+    PersonalAccessToken:
+      type: object
+      properties:
+        id:
+          description: ID of a token
+          type: string
+          example: ch8i54g6lnn4g9hqv7n0
+        name:
+          description: Name of the token
+          type: string
+          example: My first token
+        expiration_date:
+          description: Date the token expires
+          type: string
+          format: date-time
+          example: '2023-05-05T14:38:28.977616Z'
+        created_by:
+          description: User ID of the user who created the token
+          type: string
+          example: google-oauth2|277474792786460067937
+        created_at:
+          description: Date the token was created
+          type: string
+          format: date-time
+          example: '2023-05-02T14:48:20.465209Z'
+        last_used:
+          description: Date the token was last used
+          type: string
+          format: date-time
+          example: '2023-05-04T12:45:25.9723616Z'
+      required:
+      - id
+      - name
+      - expiration_date
+      - created_by
+      - created_at
+    PersonalAccessTokenGenerated:
+      type: object
+      properties:
+        plain_token:
+          description: Plain text representation of the generated token
+          type: string
+          example: 2023-05-02 14:48:20.465209+00:00
+        personal_access_token:
+          $ref: '#/components/schemas/PersonalAccessToken'
+      required:
+      - plain_token
+      - personal_access_token
+    PersonalAccessTokenRequest:
+      type: object
+      properties:
+        name:
+          description: Name of the token
+          type: string
+          example: My first token
+        expires_in:
+          description: Expiration in days
+          type: integer
+          minimum: 1
+          maximum: 365
+          example: 30
+      required:
+      - name
+      - expires_in
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

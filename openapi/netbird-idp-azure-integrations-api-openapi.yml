@@ -1,0 +1,485 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts IDP Azure Integrations API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: IDP Azure Integrations
+  description: Manage Azure AD identity provider integrations for user and group sync.
+  x-cloud-only: true
+paths:
+  /api/integrations/azure-idp:
+    post:
+      tags:
+      - IDP Azure Integrations
+      summary: Create Azure IDP Integration
+      description: Creates a new Azure AD IDP integration
+      operationId: createAzureIntegration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAzureIntegrationRequest'
+      responses:
+        '200':
+          description: Integration created successfully. Returns the created integration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureIntegration'
+        '400':
+          description: Bad Request (e.g., invalid JSON, missing required fields, validation error).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized (e.g., missing or invalid authentication token).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      tags:
+      - IDP Azure Integrations
+      summary: Get All Azure IDP Integrations
+      description: Retrieves all Azure AD IDP integrations for the authenticated account
+      operationId: getAllAzureIntegrations
+      responses:
+        '200':
+          description: A list of Azure IDP integrations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AzureIntegration'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/integrations/azure-idp/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: The unique identifier of the Azure IDP integration.
+      schema:
+        type: integer
+        format: int64
+        example: 1
+    get:
+      tags:
+      - IDP Azure Integrations
+      summary: Get Azure IDP Integration
+      description: Retrieves an Azure IDP integration by ID.
+      operationId: getAzureIntegration
+      responses:
+        '200':
+          description: Successfully retrieved the integration details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureIntegration'
+        '400':
+          description: Bad Request (e.g., invalid integration ID format).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found (e.g., integration with the given ID does not exist).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+      - IDP Azure Integrations
+      summary: Update Azure IDP Integration
+      description: Updates an existing Azure AD IDP integration.
+      operationId: updateAzureIntegration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAzureIntegrationRequest'
+      responses:
+        '200':
+          description: Integration updated successfully. Returns the updated integration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureIntegration'
+        '400':
+          description: Bad Request (e.g., invalid JSON, validation error, invalid ID).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - IDP Azure Integrations
+      summary: Delete Azure IDP Integration
+      description: Deletes an Azure IDP integration by ID.
+      operationId: deleteAzureIntegration
+      responses:
+        '200':
+          description: Integration deleted successfully. Returns an empty object.
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {}
+        '400':
+          description: Bad Request (e.g., invalid integration ID format).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/integrations/azure-idp/{id}/sync:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: The unique identifier of the Azure IDP integration.
+      schema:
+        type: integer
+        format: int64
+        example: 1
+    post:
+      tags:
+      - IDP Azure Integrations
+      summary: Sync Azure IDP Integration
+      description: Triggers a manual synchronization for an Azure IDP integration.
+      operationId: syncAzureIntegration
+      responses:
+        '200':
+          description: Sync triggered successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncResult'
+        '400':
+          description: Bad Request (e.g., invalid integration ID format).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/integrations/azure-idp/{id}/logs:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: The unique identifier of the Azure IDP integration.
+      schema:
+        type: integer
+        format: int64
+        example: 1
+    get:
+      tags:
+      - IDP Azure Integrations
+      summary: Get Azure Integration Sync Logs
+      description: Retrieves synchronization logs for an Azure IDP integration.
+      operationId: getAzureIntegrationLogs
+      responses:
+        '200':
+          description: Successfully retrieved the integration sync logs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IdpIntegrationSyncLog'
+        '400':
+          description: Bad Request (e.g., invalid integration ID format).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    CreateAzureIntegrationRequest:
+      allOf:
+      - $ref: '#/components/schemas/IntegrationSyncFilters'
+      - type: object
+        description: Request payload for creating an Azure AD IDP integration
+        required:
+        - client_secret
+        - client_id
+        - tenant_id
+        - host
+        properties:
+          client_secret:
+            type: string
+            description: Base64-encoded Azure AD client secret
+            example: c2VjcmV0...
+          client_id:
+            type: string
+            description: Azure AD application (client) ID
+            example: 12345678-1234-1234-1234-123456789012
+          tenant_id:
+            type: string
+            description: Azure AD tenant ID
+            example: 87654321-4321-4321-4321-210987654321
+          sync_interval:
+            type: integer
+            description: Sync interval in seconds (minimum 300). Defaults to 300 if not specified.
+            minimum: 300
+            example: 300
+          host:
+            type: string
+            description: Azure host domain for the Graph API
+            enum:
+            - microsoft.com
+            - microsoft.us
+            example: microsoft.com
+    AzureIntegration:
+      allOf:
+      - $ref: '#/components/schemas/IntegrationEnabled'
+      - $ref: '#/components/schemas/IntegrationSyncFilters'
+      - type: object
+        description: Represents an Azure AD IDP integration
+        required:
+        - id
+        - client_id
+        - tenant_id
+        - sync_interval
+        - enabled
+        - group_prefixes
+        - user_group_prefixes
+        - host
+        - last_synced_at
+        properties:
+          id:
+            type: integer
+            format: int64
+            description: The unique identifier for the integration
+            example: 1
+          client_id:
+            type: string
+            description: Azure AD application (client) ID
+            example: 12345678-1234-1234-1234-123456789012
+          tenant_id:
+            type: string
+            description: Azure AD tenant ID
+            example: 87654321-4321-4321-4321-210987654321
+          sync_interval:
+            type: integer
+            description: Sync interval in seconds
+            example: 300
+          host:
+            type: string
+            description: Azure host domain for the Graph API
+            example: microsoft.com
+          last_synced_at:
+            type: string
+            format: date-time
+            description: Timestamp of the last synchronization
+            example: '2023-05-15T10:30:00Z'
+    UpdateAzureIntegrationRequest:
+      allOf:
+      - $ref: '#/components/schemas/IntegrationEnabled'
+      - $ref: '#/components/schemas/IntegrationSyncFilters'
+      - type: object
+        description: Request payload for updating an Azure AD IDP integration. All fields are optional.
+        properties:
+          client_secret:
+            type: string
+            description: Base64-encoded Azure AD client secret
+          client_id:
+            type: string
+            description: Azure AD application (client) ID
+          tenant_id:
+            type: string
+            description: Azure AD tenant ID
+          sync_interval:
+            type: integer
+            description: Sync interval in seconds (minimum 300)
+            minimum: 300
+    IntegrationEnabled:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether the integration is enabled
+          example: true
+    IntegrationSyncFilters:
+      type: object
+      properties:
+        group_prefixes:
+          type: array
+          description: List of start_with string patterns for groups to sync
+          items:
+            type: string
+          example:
+          - Engineering
+          - Sales
+        user_group_prefixes:
+          type: array
+          description: List of start_with string patterns for groups which users to sync
+          items:
+            type: string
+          example:
+          - Users
+        connector_id:
+          type: string
+          description: DEX connector ID for embedded IDP setups
+    IdpIntegrationSyncLog:
+      type: object
+      description: Represents a synchronization log entry for an integration
+      required:
+      - id
+      - level
+      - timestamp
+      - message
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The unique identifier for the sync log
+          example: 123
+        level:
+          type: string
+          description: The log level
+          example: info
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of when the log was created
+          example: '2023-05-15T10:30:00Z'
+        message:
+          type: string
+          description: Log message
+          example: Successfully synchronized users and groups
+    SyncResult:
+      type: object
+      description: Response for a manual sync trigger
+      properties:
+        result:
+          type: string
+          example: ok
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

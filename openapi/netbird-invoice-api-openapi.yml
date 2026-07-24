@@ -1,0 +1,157 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts Invoice API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Invoice
+  description: Manage and retrieve account invoices.
+  x-cloud-only: true
+paths:
+  /api/integrations/billing/invoices:
+    get:
+      summary: Get account's paid invoices
+      tags:
+      - Invoice
+      responses:
+        '200':
+          description: The account's paid invoices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InvoiceResponse'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/integrations/billing/invoices/{id}/pdf:
+    get:
+      summary: Get account invoice URL to Stripe.
+      tags:
+      - Invoice
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the invoice
+      responses:
+        '200':
+          description: The invoice URL to Stripe
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoicePDFResponse'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/integrations/billing/invoices/{id}/csv:
+    get:
+      summary: Get account invoice CSV.
+      tags:
+      - Invoice
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the invoice
+      responses:
+        '200':
+          description: The invoice CSV
+          headers:
+            Content-Disposition:
+              schema:
+                type: string
+              example: attachment; filename=in_1MtHbELkdIwHu7ixl4OzzPMv.csv
+          content:
+            text/csv:
+              schema:
+                type: string
+              example: 'description,qty,unit_price,amount
+
+                line item 2, 5, 1.00, 5.00
+
+                line item 1, 10, 0.50, 5.00
+
+                '
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  responses:
+    bad_request:
+      description: Bad Request
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+  schemas:
+    InvoiceResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Stripe invoice id
+          example: in_1MtHbELkdIwHu7ixl4OzzPMv
+        type:
+          type: string
+          description: The invoice type
+          enum:
+          - account
+          - tenants
+        period_start:
+          type: string
+          format: date-time
+          description: The start date of the invoice period.
+          example: '2021-08-01T12:00:00Z'
+        period_end:
+          type: string
+          format: date-time
+          description: The end date of the invoice period.
+          example: '2021-08-31T12:00:00Z'
+      required:
+      - id
+      - type
+      - period_start
+      - period_end
+    InvoicePDFResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          description: URL to redirect the user to invoice.
+          example: https://invoice.stripe.com/i/acct_1M2DaBKina4I2KUb/test_YWNjdF8xTTJEdVBLaW5hM0kyS1ViLF1SeFpQdEJZd3lUOGNEajNqeWdrdXY2RFM4aHcyCnpsLDEzMjg3GTgyNQ02000JoIHc1X?s=db
+      required:
+      - url
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

@@ -1,0 +1,382 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts EDR Intune Integrations API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: EDR Intune Integrations
+  description: Manage Microsoft Intune EDR integrations.
+  x-cloud-only: true
+paths:
+  /api/integrations/edr/intune:
+    post:
+      tags:
+      - EDR Intune Integrations
+      summary: Create EDR Intune Integration
+      description: 'Creates a new EDR Intune integration for the authenticated account.
+
+        '
+      operationId: createEDRIntegration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EDRIntuneRequest'
+      responses:
+        '200':
+          description: Integration created successfully. Returns the created integration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EDRIntuneResponse'
+        '400':
+          description: Bad Request (e.g., invalid JSON, missing required fields, validation error).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized (e.g., missing or invalid authentication token).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      tags:
+      - EDR Intune Integrations
+      summary: Get EDR Intune Integration
+      description: Retrieves a specific EDR Intune integration by its ID.
+      operationId: getEDRIntegration
+      responses:
+        '200':
+          description: Successfully retrieved the integration details. Config keys are masked.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EDRIntuneResponse'
+        '400':
+          description: Bad Request (e.g., invalid integration ID format).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found (e.g., integration with the given ID does not exist).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+      - EDR Intune Integrations
+      summary: Update EDR Intune Integration
+      description: 'Updates an existing EDR Intune Integration. The request body structure is `EDRIntuneRequest`.
+
+        '
+      operationId: updateEDRIntegration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EDRIntuneRequest'
+      responses:
+        '200':
+          description: Integration updated successfully. Returns the updated integration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EDRIntuneResponse'
+        '400':
+          description: Bad Request (e.g., invalid JSON, validation error, invalid ID).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - EDR Intune Integrations
+      summary: Delete EDR Intune Integration
+      description: Deletes an EDR Intune Integration by its ID.
+      operationId: deleteIntegration
+      responses:
+        '200':
+          description: Integration deleted successfully. Returns an empty object.
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {}
+        '400':
+          description: Bad Request (e.g., invalid integration ID format).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    Group:
+      allOf:
+      - $ref: '#/components/schemas/GroupMinimum'
+      - type: object
+        properties:
+          peers:
+            description: List of peers object
+            type: array
+            items:
+              $ref: '#/components/schemas/PeerMinimum'
+          resources:
+            type: array
+            items:
+              $ref: '#/components/schemas/Resource'
+        required:
+        - peers
+        - resources
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
+    Resource:
+      type: object
+      properties:
+        id:
+          description: ID of the resource
+          type: string
+          example: chacdk86lnnboviihd7g
+        type:
+          description: Type of the resource
+          $ref: '#/components/schemas/ResourceType'
+      required:
+      - id
+      - type
+    ResourceType:
+      allOf:
+      - $ref: '#/components/schemas/NetworkResourceType'
+      - type: string
+        enum:
+        - peer
+        example: peer
+    GroupMinimum:
+      type: object
+      properties:
+        id:
+          description: Group ID
+          type: string
+          example: ch8i4ug6lnn4g9hqv7m0
+        name:
+          description: Group Name identifier
+          type: string
+          example: devs
+        peers_count:
+          description: Count of peers associated to the group
+          type: integer
+          example: 2
+        resources_count:
+          description: Count of resources associated to the group
+          type: integer
+          example: 5
+        issued:
+          description: How the group was issued (api, integration, jwt)
+          type: string
+          enum:
+          - api
+          - integration
+          - jwt
+          example: api
+      required:
+      - id
+      - name
+      - peers_count
+      - resources_count
+    EDRIntuneResponse:
+      type: object
+      description: Represents a Intune EDR integration configuration
+      required:
+      - id
+      - account_id
+      - created_by
+      - last_synced_at
+      - created_at
+      - updated_at
+      - client_id
+      - tenant_id
+      - groups
+      - last_synced_interval
+      - enabled
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The unique numeric identifier for the integration.
+          example: 123
+          minimum: 0
+        account_id:
+          type: string
+          description: The identifier of the account this integration belongs to.
+          example: acc_abcdef123456
+        last_synced_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the integration was last synced.
+          example: '2023-05-15T10:30:00Z'
+        created_by:
+          type: string
+          description: The user id that created the integration
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the integration was created.
+          example: '2023-05-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the integration was last updated.
+          example: '2023-05-16T11:45:00Z'
+        client_id:
+          type: string
+          description: The Azure application client id
+          example: acc_abcdef123456
+        tenant_id:
+          type: string
+          description: The Azure tenant id
+          example: acc_abcdef123456
+        groups:
+          type: array
+          description: List of groups
+          items:
+            $ref: '#/components/schemas/Group'
+        last_synced_interval:
+          type: integer
+          description: The devices last sync requirement interval in hours.
+        enabled:
+          type: boolean
+          description: Indicates whether the integration is enabled
+    PeerMinimum:
+      type: object
+      properties:
+        id:
+          description: Peer ID
+          type: string
+          example: chacbco6lnnbn6cg5s90
+        name:
+          description: Peer's hostname
+          type: string
+          example: stage-host-1
+      required:
+      - id
+      - name
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
+    EDRIntuneRequest:
+      type: object
+      description: Request payload for creating or updating a EDR Intune integration.
+      required:
+      - client_id
+      - tenant_id
+      - secret
+      - groups
+      - last_synced_interval
+      properties:
+        client_id:
+          type: string
+          description: The Azure application client id
+        tenant_id:
+          type: string
+          description: The Azure tenant id
+        secret:
+          type: string
+          description: The Azure application client secret
+        groups:
+          type: array
+          description: The Groups this integrations applies to
+          items:
+            type: string
+        last_synced_interval:
+          type: integer
+          description: The devices last sync requirement interval in hours. Minimum value is 24 hours.
+          minimum: 24
+        enabled:
+          type: boolean
+          description: Indicates whether the integration is enabled
+          default: true
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

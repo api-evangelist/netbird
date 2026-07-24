@@ -1,0 +1,91 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts AWS Marketplace API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: AWS Marketplace
+  description: Manage AWS Marketplace subscriptions.
+  x-cloud-only: true
+paths:
+  /api/integrations/billing/aws/marketplace/activate:
+    post:
+      summary: Activate AWS Marketplace subscription.
+      tags:
+      - AWS Marketplace
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                plan_tier:
+                  type: string
+                  description: The plan tier to activate the subscription for.
+                  example: business
+              required:
+              - plan_tier
+      responses:
+        '200':
+          description: AWS subscription successfully activated
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/integrations/billing/aws/marketplace/enrich:
+    post:
+      summary: Enrich AWS Marketplace subscription with Account ID.
+      tags:
+      - AWS Marketplace
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                aws_user_id:
+                  type: string
+                  description: The AWS user ID.
+                  example: eRF345hgdgFyu
+              required:
+              - aws_user_id
+      responses:
+        '200':
+          description: AWS subscription successfully enriched with Account ID.
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  responses:
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

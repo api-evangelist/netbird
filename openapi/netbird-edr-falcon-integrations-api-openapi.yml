@@ -1,0 +1,366 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts EDR Falcon Integrations API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: EDR Falcon Integrations
+  description: Manage CrowdStrike Falcon EDR integrations.
+  x-cloud-only: true
+paths:
+  /api/integrations/edr/falcon:
+    post:
+      tags:
+      - EDR Falcon Integrations
+      summary: Create EDR Falcon Integration
+      description: Creates a new EDR Falcon integration
+      operationId: createFalconEDRIntegration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EDRFalconRequest'
+      responses:
+        '200':
+          description: Integration created successfully. Returns the created integration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EDRFalconResponse'
+        '400':
+          description: Bad Request (e.g., invalid JSON, missing required fields, validation error).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized (e.g., missing or invalid authentication token).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      tags:
+      - EDR Falcon Integrations
+      summary: Get EDR Falcon Integration
+      description: Retrieves a specific EDR Falcon integration by its ID.
+      responses:
+        '200':
+          description: Successfully retrieved the integration details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EDRFalconResponse'
+        '400':
+          description: Bad Request (e.g., invalid integration ID format).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found (e.g., integration with the given ID does not exist).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+      - EDR Falcon Integrations
+      summary: Update EDR Falcon Integration
+      description: Updates an existing EDR Falcon Integration.
+      operationId: updateFalconEDRIntegration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EDRFalconRequest'
+      responses:
+        '200':
+          description: Integration updated successfully. Returns the updated integration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EDRFalconResponse'
+        '400':
+          description: Bad Request (e.g., invalid JSON, validation error, invalid ID).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - EDR Falcon Integrations
+      summary: Delete EDR Falcon Integration
+      description: Deletes an existing EDR Falcon Integration by its ID.
+      responses:
+        '202':
+          description: Integration deleted successfully. Typically returns no content.
+        '400':
+          description: Bad Request (e.g., invalid integration ID format).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    Group:
+      allOf:
+      - $ref: '#/components/schemas/GroupMinimum'
+      - type: object
+        properties:
+          peers:
+            description: List of peers object
+            type: array
+            items:
+              $ref: '#/components/schemas/PeerMinimum'
+          resources:
+            type: array
+            items:
+              $ref: '#/components/schemas/Resource'
+        required:
+        - peers
+        - resources
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
+    EDRFalconResponse:
+      type: object
+      description: Represents a Falcon EDR integration
+      required:
+      - id
+      - account_id
+      - last_synced_at
+      - created_by
+      - created_at
+      - updated_at
+      - cloud_id
+      - groups
+      - zta_score_threshold
+      - enabled
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The unique numeric identifier for the integration.
+          example: 123
+        account_id:
+          type: string
+          description: The identifier of the account this integration belongs to.
+          example: ch8i4ug6lnn4g9hqv7l0
+        last_synced_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the integration was last synced.
+          example: '2023-05-15T10:30:00Z'
+        created_by:
+          type: string
+          description: The user id that created the integration
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the integration was created.
+          example: '2023-05-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the integration was last updated.
+          example: '2023-05-16T11:45:00Z'
+        cloud_id:
+          type: string
+          description: CrowdStrike cloud identifier
+        groups:
+          type: array
+          description: List of groups
+          items:
+            $ref: '#/components/schemas/Group'
+        zta_score_threshold:
+          type: integer
+          description: The minimum Zero Trust Assessment score required for agent approval (0-100)
+        enabled:
+          type: boolean
+          description: Indicates whether the integration is enabled
+    EDRFalconRequest:
+      type: object
+      description: Request payload for creating or updating a EDR Falcon integration
+      properties:
+        client_id:
+          type: string
+          description: CrowdStrike API client ID
+        secret:
+          type: string
+          description: CrowdStrike API client secret
+        cloud_id:
+          type: string
+          description: CrowdStrike cloud identifier (e.g., "us-1", "us-2", "eu-1")
+        groups:
+          type: array
+          description: The Groups this integration applies to
+          items:
+            type: string
+        zta_score_threshold:
+          type: integer
+          description: The minimum Zero Trust Assessment score required for agent approval (0-100)
+          minimum: 0
+          maximum: 100
+          example: 75
+        enabled:
+          type: boolean
+          description: Indicates whether the integration is enabled
+          default: true
+      required:
+      - client_id
+      - secret
+      - cloud_id
+      - groups
+      - zta_score_threshold
+    Resource:
+      type: object
+      properties:
+        id:
+          description: ID of the resource
+          type: string
+          example: chacdk86lnnboviihd7g
+        type:
+          description: Type of the resource
+          $ref: '#/components/schemas/ResourceType'
+      required:
+      - id
+      - type
+    ResourceType:
+      allOf:
+      - $ref: '#/components/schemas/NetworkResourceType'
+      - type: string
+        enum:
+        - peer
+        example: peer
+    PeerMinimum:
+      type: object
+      properties:
+        id:
+          description: Peer ID
+          type: string
+          example: chacbco6lnnbn6cg5s90
+        name:
+          description: Peer's hostname
+          type: string
+          example: stage-host-1
+      required:
+      - id
+      - name
+    GroupMinimum:
+      type: object
+      properties:
+        id:
+          description: Group ID
+          type: string
+          example: ch8i4ug6lnn4g9hqv7m0
+        name:
+          description: Group Name identifier
+          type: string
+          example: devs
+        peers_count:
+          description: Count of peers associated to the group
+          type: integer
+          example: 2
+        resources_count:
+          description: Count of resources associated to the group
+          type: integer
+          example: 5
+        issued:
+          description: How the group was issued (api, integration, jwt)
+          type: string
+          enum:
+          - api
+          - integration
+          - jwt
+          example: api
+      required:
+      - id
+      - name
+      - peers_count
+      - resources_count
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

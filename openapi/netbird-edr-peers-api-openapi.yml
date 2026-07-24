@@ -1,0 +1,158 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts EDR Peers API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: EDR Peers
+  description: Manage EDR compliance bypass for peers.
+  x-cloud-only: true
+paths:
+  /api/peers/{peer-id}/edr/bypass:
+    parameters:
+    - name: peer-id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The unique identifier of the peer
+    post:
+      tags:
+      - EDR Peers
+      summary: Bypass compliance for a non-compliant peer
+      description: 'Allows an admin to bypass EDR compliance checks for a specific peer.
+
+        The peer will remain bypassed until the admin revokes it OR the device becomes
+
+        naturally compliant in the EDR system.
+
+        '
+      operationId: bypassCompliance
+      responses:
+        '200':
+          description: Peer compliance bypassed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BypassResponse'
+        '400':
+          description: Bad Request (peer not in non-compliant state)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - EDR Peers
+      summary: Revoke compliance bypass for a peer
+      description: Removes the compliance bypass, subjecting the peer to normal EDR validation.
+      operationId: revokeBypass
+      responses:
+        '200':
+          description: Compliance bypass revoked successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/peers/edr/bypassed:
+    get:
+      tags:
+      - EDR Peers
+      summary: List all bypassed peers
+      description: Returns all peers that have compliance bypassed by an admin.
+      operationId: listBypassedPeers
+      responses:
+        '200':
+          description: List of bypassed peers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BypassResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    BypassResponse:
+      type: object
+      description: Response for bypassed peer operations.
+      required:
+      - peer_id
+      properties:
+        peer_id:
+          type: string
+          description: The ID of the bypassed peer.
+          example: chacbco6lnnbn6cg5s91
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

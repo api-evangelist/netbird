@@ -1,0 +1,79 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts Usage API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Usage
+  description: Retrieve current usage statistics for the account.
+  x-cloud-only: true
+paths:
+  /api/integrations/billing/usage:
+    get:
+      summary: Get current usage
+      tags:
+      - Usage
+      responses:
+        '200':
+          description: Current usage data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageStats'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  responses:
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+  schemas:
+    UsageStats:
+      type: object
+      properties:
+        active_users:
+          type: integer
+          format: int64
+          description: Number of active users.
+          example: 15
+        total_users:
+          type: integer
+          format: int64
+          description: Total number of users.
+          example: 20
+        active_peers:
+          type: integer
+          format: int64
+          description: Number of active peers.
+          example: 10
+        total_peers:
+          type: integer
+          format: int64
+          description: Total number of peers.
+          example: 25
+      required:
+      - active_users
+      - total_users
+      - active_peers
+      - total_peers
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

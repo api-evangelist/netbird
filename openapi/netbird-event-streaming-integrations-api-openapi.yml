@@ -1,0 +1,323 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts Event Streaming Integrations API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Event Streaming Integrations
+  description: Manage event streaming integrations.
+  x-cloud-only: true
+paths:
+  /api/event-streaming:
+    post:
+      tags:
+      - Event Streaming Integrations
+      summary: Create Event Streaming Integration
+      description: 'Creates a new event streaming integration for the authenticated account.
+
+        The request body should conform to `CreateIntegrationRequest`.
+
+        Note: Based on the provided Go code, the `enabled` field from the request is part of the `CreateIntegrationRequest` struct,
+
+        but the backend `manager.CreateIntegration` function signature shown does not directly use this `enabled` field.
+
+        The actual behavior for `enabled` during creation should be confirmed (e.g., it might have a server-side default or be handled by other logic).
+
+        '
+      operationId: createIntegration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIntegrationRequest'
+      responses:
+        '200':
+          description: Integration created successfully. Returns the created integration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationResponse'
+        '400':
+          description: Bad Request (e.g., invalid JSON, missing required fields, validation error).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized (e.g., missing or invalid authentication token).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      tags:
+      - Event Streaming Integrations
+      summary: List Event Streaming Integrations
+      description: Retrieves all event streaming integrations for the authenticated account.
+      operationId: getAllIntegrations
+      responses:
+        '200':
+          description: A list of event streaming integrations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IntegrationResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/event-streaming/{id}:
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: The unique numeric identifier of the event streaming integration.
+      schema:
+        type: integer
+        example: 123
+    get:
+      tags:
+      - Event Streaming Integrations
+      summary: Get Event Streaming Integration
+      description: Retrieves a specific event streaming integration by its ID.
+      operationId: getIntegration
+      responses:
+        '200':
+          description: Successfully retrieved the integration details. Config keys are masked.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationResponse'
+        '400':
+          description: Bad Request (e.g., invalid integration ID format).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found (e.g., integration with the given ID does not exist).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+      - Event Streaming Integrations
+      summary: Update Event Streaming Integration
+      description: 'Updates an existing event streaming integration. The request body structure is `CreateIntegrationRequest`.
+
+        However, for updates:
+
+        - The `platform` field, if provided in the body, is ignored by the backend manager function, as the platform of an existing integration is typically immutable.
+
+        - The `enabled` and `config` fields from the request body are used to update the integration.
+
+        '
+      operationId: updateIntegration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIntegrationRequest'
+      responses:
+        '200':
+          description: Integration updated successfully. Returns the updated integration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationResponse'
+        '400':
+          description: Bad Request (e.g., invalid JSON, validation error, invalid ID).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+      - Event Streaming Integrations
+      summary: Delete Event Streaming Integration
+      description: Deletes an event streaming integration by its ID.
+      operationId: deleteIntegration
+      responses:
+        '200':
+          description: Integration deleted successfully. Returns an empty object.
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {}
+        '400':
+          description: Bad Request (e.g., invalid integration ID format).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    IntegrationResponse:
+      type: object
+      description: Represents an event streaming integration.
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The unique numeric identifier for the integration.
+          example: 123
+          minimum: 0
+        account_id:
+          type: string
+          description: The identifier of the account this integration belongs to.
+          example: acc_abcdef123456
+        enabled:
+          type: boolean
+          description: Whether the integration is currently active.
+          example: true
+        platform:
+          type: string
+          description: The event streaming platform.
+          enum:
+          - datadog
+          - s3
+          - firehose
+          - generic_http
+          example: datadog
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the integration was created.
+          example: '2023-05-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the integration was last updated.
+          example: '2023-05-16T11:45:00Z'
+        config:
+          type: object
+          additionalProperties:
+            type: string
+          description: Configuration for the integration. Sensitive keys (like API keys, secret keys) are masked with '****' in responses, as indicated by the GetIntegration handler logic.
+          example:
+            api_key: '****'
+            site: datadoghq.com
+            region: us-east-1
+    CreateIntegrationRequest:
+      type: object
+      description: Request payload for creating a new event streaming integration. Also used as the structure for the PUT request body, but not all fields are applicable for updates (see PUT operation description).
+      required:
+      - platform
+      - config
+      - enabled
+      properties:
+        platform:
+          type: string
+          description: The event streaming platform to integrate with (e.g., "datadog", "s3", "firehose"). This field is used for creation. For updates (PUT), this field, if sent, is ignored by the backend.
+          enum:
+          - datadog
+          - s3
+          - firehose
+          - generic_http
+          example: s3
+        config:
+          type: object
+          additionalProperties:
+            type: string
+          description: Platform-specific configuration as key-value pairs. For creation, all necessary credentials and settings must be provided. For updates, provide the fields to change or the entire new configuration.
+          example:
+            bucket_name: my-event-logs
+            region: us-east-1
+            access_key_id: AKIA...
+            secret_access_key: YOUR_SECRET_KEY
+        enabled:
+          type: boolean
+          description: Specifies whether the integration is enabled. During creation (POST), this value is sent by the client, but the provided backend manager function `CreateIntegration` does not appear to use it directly, so its effect on creation should be verified. During updates (PUT), this field is used to enable or disable the integration.
+          example: true
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

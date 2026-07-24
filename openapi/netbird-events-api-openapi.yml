@@ -1,0 +1,812 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts Events API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Events
+  description: View information about the account and network events.
+paths:
+  /api/events/audit:
+    get:
+      summary: List all Audit Events
+      description: Returns a list of all audit events
+      tags:
+      - Events
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      responses:
+        '200':
+          description: A JSON Array of Events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/events/network-traffic:
+    get:
+      summary: List all Traffic Events
+      description: Returns a list of all network traffic events
+      tags:
+      - Events
+      x-cloud-only: true
+      x-experimental: true
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: page_size
+        in: query
+        description: Number of items per page
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 50000
+          default: 1000
+      - name: user_id
+        in: query
+        description: Filter by user ID
+        required: false
+        schema:
+          type: string
+      - name: reporter_id
+        in: query
+        description: Filter by reporter ID
+        required: false
+        schema:
+          type: string
+      - name: protocol
+        in: query
+        description: Filter by protocol
+        required: false
+        schema:
+          type: integer
+      - name: type
+        in: query
+        description: Filter by event type
+        required: false
+        schema:
+          type: string
+          enum:
+          - TYPE_UNKNOWN
+          - TYPE_START
+          - TYPE_END
+          - TYPE_DROP
+      - name: connection_type
+        in: query
+        description: Filter by connection type
+        required: false
+        schema:
+          type: string
+          enum:
+          - P2P
+          - ROUTED
+      - name: direction
+        in: query
+        description: Filter by direction
+        required: false
+        schema:
+          type: string
+          enum:
+          - INGRESS
+          - EGRESS
+          - DIRECTION_UNKNOWN
+      - name: search
+        in: query
+        description: Case-insensitive partial match on user email, source/destination names, and source/destination addresses
+        required: false
+        schema:
+          type: string
+      - name: start_date
+        in: query
+        description: Start date for filtering events (ISO 8601 format, e.g., 2024-01-01T00:00:00Z).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: end_date
+        in: query
+        description: End date for filtering events (ISO 8601 format, e.g., 2024-01-31T23:59:59Z).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: List of network traffic events
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkTrafficEventsResponse'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/events/proxy:
+    get:
+      summary: List all Reverse Proxy Access Logs
+      description: Returns a paginated list of all reverse proxy access log entries
+      tags:
+      - Events
+      parameters:
+      - in: query
+        name: page
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+        description: Page number for pagination (1-indexed)
+      - in: query
+        name: page_size
+        schema:
+          type: integer
+          default: 50
+          minimum: 1
+          maximum: 100
+        description: Number of items per page (max 100)
+      - in: query
+        name: sort_by
+        schema:
+          type: string
+          enum:
+          - timestamp
+          - url
+          - host
+          - path
+          - method
+          - status_code
+          - duration
+          - source_ip
+          - user_id
+          - auth_method
+          - reason
+          default: timestamp
+        description: Field to sort by (url sorts by host then path)
+      - in: query
+        name: sort_order
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+        description: Sort order (ascending or descending)
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: General search across request ID, host, path, source IP, user email, and user name
+      - in: query
+        name: source_ip
+        schema:
+          type: string
+        description: Filter by source IP address
+      - in: query
+        name: host
+        schema:
+          type: string
+        description: Filter by host header
+      - in: query
+        name: path
+        schema:
+          type: string
+        description: Filter by request path (supports partial matching)
+      - in: query
+        name: user_id
+        schema:
+          type: string
+        description: Filter by authenticated user ID
+      - in: query
+        name: user_email
+        schema:
+          type: string
+        description: Filter by user email (partial matching)
+      - in: query
+        name: user_name
+        schema:
+          type: string
+        description: Filter by user name (partial matching)
+      - in: query
+        name: method
+        schema:
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - PATCH
+          - DELETE
+          - HEAD
+          - OPTIONS
+        description: Filter by HTTP method
+      - in: query
+        name: status
+        schema:
+          type: string
+          enum:
+          - success
+          - failed
+        description: Filter by status (success = 2xx/3xx, failed = 1xx/4xx/5xx)
+      - in: query
+        name: status_code
+        schema:
+          type: integer
+          minimum: 100
+          maximum: 599
+        description: Filter by HTTP status code
+      - in: query
+        name: start_date
+        schema:
+          type: string
+          format: date-time
+        description: Filter by timestamp >= start_date (RFC3339 format)
+      - in: query
+        name: end_date
+        schema:
+          type: string
+          format: date-time
+        description: Filter by timestamp <= end_date (RFC3339 format)
+      responses:
+        '200':
+          description: Paginated list of reverse proxy access logs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProxyAccessLogsResponse'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  schemas:
+    NetworkTrafficEndpoint:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of this endpoint (e.g., peer ID or resource ID).
+          example: ch8i4ug6lnn4g9hqv7m0
+        type:
+          type: string
+          description: Type of the endpoint object (e.g., UNKNOWN, PEER, HOST_RESOURCE).
+          example: PEER
+        name:
+          type: string
+          description: Name is the name of the endpoint object (e.g., a peer name).
+          example: My Peer
+        geo_location:
+          $ref: '#/components/schemas/NetworkTrafficLocation'
+        os:
+          type: string
+          nullable: true
+          description: Operating system of the peer, if applicable.
+          example: Linux
+        address:
+          type: string
+          description: IP address (and possibly port) in string form.
+          example: 100.64.0.10:51820
+        dns_label:
+          type: string
+          nullable: true
+          description: DNS label/name if available.
+          example: '*.mydomain.com'
+      required:
+      - id
+      - type
+      - name
+      - geo_location
+      - os
+      - address
+      - dns_label
+    NetworkTrafficEvent:
+      type: object
+      properties:
+        flow_id:
+          type: string
+          description: FlowID is the ID of the connection flow. Not unique because it can be the same for multiple events (e.g., start and end of the connection).
+          example: 61092452-b17c-4b14-b7cf-a2158c549826
+        reporter_id:
+          type: string
+          description: ID of the reporter of the event (e.g., the peer that reported the event).
+          example: ch8i4ug6lnn4g9hqv7m0
+        source:
+          $ref: '#/components/schemas/NetworkTrafficEndpoint'
+        destination:
+          $ref: '#/components/schemas/NetworkTrafficEndpoint'
+        user:
+          $ref: '#/components/schemas/NetworkTrafficUser'
+        policy:
+          $ref: '#/components/schemas/NetworkTrafficPolicy'
+        icmp:
+          $ref: '#/components/schemas/NetworkTrafficICMP'
+        protocol:
+          type: integer
+          description: Protocol is the protocol of the traffic (e.g. 1 = ICMP, 6 = TCP, 17 = UDP, etc.).
+          example: 6
+        direction:
+          type: string
+          description: Direction of the traffic (e.g. DIRECTION_UNKNOWN, INGRESS, EGRESS).
+          example: INGRESS
+        rx_bytes:
+          type: integer
+          description: Number of bytes received.
+          example: 1234
+        rx_packets:
+          type: integer
+          description: Number of packets received.
+          example: 5
+        tx_bytes:
+          type: integer
+          description: Number of bytes transmitted.
+          example: 1234
+        tx_packets:
+          type: integer
+          description: Number of packets transmitted.
+          example: 5
+        events:
+          type: array
+          description: List of events that are correlated to this flow (e.g., start, end).
+          items:
+            $ref: '#/components/schemas/NetworkTrafficSubEvent'
+      required:
+      - id
+      - flow_id
+      - reporter_id
+      - receive_timestamp
+      - source
+      - destination
+      - user
+      - policy
+      - icmp
+      - protocol
+      - direction
+      - rx_bytes
+      - rx_packets
+      - tx_bytes
+      - tx_packets
+      - events
+    NetworkTrafficSubEvent:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the event (e.g., TYPE_UNKNOWN, TYPE_START, TYPE_END, TYPE_DROP).
+          example: TYPE_START
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the event as sent by the peer.
+          example: 2025-03-20 16:23:58.125397+00:00
+      required:
+      - type
+      - timestamp
+    NetworkTrafficUser:
+      type: object
+      properties:
+        id:
+          type: string
+          description: UserID is the ID of the user that initiated the event (can be empty as not every event is user-initiated).
+          example: google-oauth2|123456789012345678901
+        email:
+          type: string
+          description: Email of the user who initiated the event (if any).
+          example: alice@netbird.io
+        name:
+          type: string
+          description: Name of the user who initiated the event (if any).
+          example: Alice Smith
+      required:
+      - id
+      - email
+      - name
+    NetworkTrafficPolicy:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the policy that allowed this event.
+          example: ch8i4ug6lnn4g9hqv7m0
+        name:
+          type: string
+          description: Name of the policy that allowed this event.
+          example: All to All
+      required:
+      - id
+      - name
+    NetworkTrafficEventsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of network traffic events
+          items:
+            $ref: '#/components/schemas/NetworkTrafficEvent'
+        page:
+          type: integer
+          description: Current page number
+        page_size:
+          type: integer
+          description: Number of items per page
+        total_records:
+          type: integer
+          description: Total number of event records available
+        total_pages:
+          type: integer
+          description: Total number of pages available
+      required:
+      - data
+      - page
+      - page_size
+      - total_records
+      - total_pages
+    ProxyAccessLog:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the access log entry
+          example: ch8i4ug6lnn4g9hqv7m0
+        service_id:
+          type: string
+          description: ID of the service that handled the request
+          example: ch8i4ug6lnn4g9hqv7m0
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp when the request was made
+          example: '2024-01-31T15:30:00Z'
+        method:
+          type: string
+          description: HTTP method of the request
+          example: GET
+        host:
+          type: string
+          description: Host header of the request
+          example: example.com
+        path:
+          type: string
+          description: Path of the request
+          example: /api/users
+        duration_ms:
+          type: integer
+          description: Duration of the request in milliseconds
+          example: 150
+        status_code:
+          type: integer
+          description: HTTP status code returned
+          example: 200
+        source_ip:
+          type: string
+          description: Source IP address of the request
+          example: 192.168.1.100
+        reason:
+          type: string
+          description: Reason for the request result (e.g., authentication failure)
+          example: Authentication failed
+        user_id:
+          type: string
+          description: ID of the authenticated user, if applicable
+          example: user-123
+        auth_method_used:
+          type: string
+          description: Authentication method used (e.g., password, pin, oidc)
+          example: oidc
+        country_code:
+          type: string
+          description: Country code from geolocation
+          example: US
+        city_name:
+          type: string
+          description: City name from geolocation
+          example: San Francisco
+        subdivision_code:
+          type: string
+          description: First-level administrative subdivision ISO code (e.g. state/province)
+          example: CA
+        bytes_upload:
+          type: integer
+          format: int64
+          description: Bytes uploaded (request body size)
+          example: 1024
+        bytes_download:
+          type: integer
+          format: int64
+          description: Bytes downloaded (response body size)
+          example: 8192
+        protocol:
+          type: string
+          description: 'Protocol type: http, tcp, or udp'
+          example: http
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Extra context about the request (e.g. crowdsec_verdict)
+      required:
+      - id
+      - service_id
+      - timestamp
+      - method
+      - host
+      - path
+      - duration_ms
+      - status_code
+      - bytes_upload
+      - bytes_download
+    NetworkTrafficLocation:
+      type: object
+      properties:
+        city_name:
+          type: string
+          description: Name of the city (if known).
+          example: Berlin
+        country_code:
+          type: string
+          description: ISO country code (if known).
+          example: DE
+      required:
+      - city_name
+      - country_code
+    ProxyAccessLogsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of proxy access log entries
+          items:
+            $ref: '#/components/schemas/ProxyAccessLog'
+        page:
+          type: integer
+          description: Current page number
+          example: 1
+        page_size:
+          type: integer
+          description: Number of items per page
+          example: 50
+        total_records:
+          type: integer
+          description: Total number of log records available
+          example: 523
+        total_pages:
+          type: integer
+          description: Total number of pages available
+          example: 11
+      required:
+      - data
+      - page
+      - page_size
+      - total_records
+      - total_pages
+    NetworkTrafficICMP:
+      type: object
+      properties:
+        type:
+          type: integer
+          description: ICMP type (if applicable).
+          example: 8
+        code:
+          type: integer
+          description: ICMP code (if applicable).
+          example: 0
+      required:
+      - type
+      - code
+    Event:
+      type: object
+      properties:
+        id:
+          description: Event unique identifier
+          type: string
+          example: 10
+        timestamp:
+          description: The date and time when the event occurred
+          type: string
+          format: date-time
+          example: '2023-05-05T10:04:37.473542Z'
+        activity:
+          description: The activity that occurred during the event
+          type: string
+          example: Route created
+        activity_code:
+          description: The string code of the activity that occurred during the event
+          type: string
+          enum:
+          - peer.user.add
+          - peer.setupkey.add
+          - user.join
+          - user.invite
+          - account.create
+          - account.delete
+          - user.peer.delete
+          - rule.add
+          - rule.update
+          - rule.delete
+          - policy.add
+          - policy.update
+          - policy.delete
+          - setupkey.add
+          - setupkey.update
+          - setupkey.revoke
+          - setupkey.overuse
+          - setupkey.delete
+          - group.add
+          - group.update
+          - group.delete
+          - peer.group.add
+          - peer.group.delete
+          - user.group.add
+          - user.group.delete
+          - user.role.update
+          - setupkey.group.add
+          - setupkey.group.delete
+          - dns.setting.disabled.management.group.add
+          - dns.setting.disabled.management.group.delete
+          - route.add
+          - route.delete
+          - route.update
+          - peer.ssh.enable
+          - peer.ssh.disable
+          - peer.rename
+          - peer.login.expiration.enable
+          - peer.login.expiration.disable
+          - nameserver.group.add
+          - nameserver.group.delete
+          - nameserver.group.update
+          - account.setting.peer.login.expiration.update
+          - account.setting.peer.login.expiration.enable
+          - account.setting.peer.login.expiration.disable
+          - personal.access.token.create
+          - personal.access.token.delete
+          - service.user.create
+          - service.user.delete
+          - user.block
+          - user.unblock
+          - user.delete
+          - user.peer.login
+          - peer.login.expire
+          - dashboard.login
+          - integration.create
+          - integration.update
+          - integration.delete
+          - account.setting.peer.approval.enable
+          - account.setting.peer.approval.disable
+          - peer.approve
+          - peer.approval.revoke
+          - transferred.owner.role
+          - posture.check.create
+          - posture.check.update
+          - posture.check.delete
+          - peer.inactivity.expiration.enable
+          - peer.inactivity.expiration.disable
+          - account.peer.inactivity.expiration.enable
+          - account.peer.inactivity.expiration.disable
+          - account.peer.inactivity.expiration.update
+          - account.setting.group.propagation.enable
+          - account.setting.group.propagation.disable
+          - account.setting.routing.peer.dns.resolution.enable
+          - account.setting.routing.peer.dns.resolution.disable
+          - network.create
+          - network.update
+          - network.delete
+          - network.resource.create
+          - network.resource.update
+          - network.resource.delete
+          - network.router.create
+          - network.router.update
+          - network.router.delete
+          - resource.group.add
+          - resource.group.delete
+          - account.dns.domain.update
+          - account.setting.lazy.connection.enable
+          - account.setting.lazy.connection.disable
+          - account.network.range.update
+          - peer.ip.update
+          - user.approve
+          - user.reject
+          - user.create
+          - account.settings.auto.version.update
+          - identityprovider.create
+          - identityprovider.update
+          - identityprovider.delete
+          - dns.zone.create
+          - dns.zone.update
+          - dns.zone.delete
+          - dns.zone.record.create
+          - dns.zone.record.update
+          - dns.zone.record.delete
+          - peer.job.create
+          - user.password.change
+          - user.invite.link.create
+          - user.invite.link.accept
+          - user.invite.link.regenerate
+          - user.invite.link.delete
+          - service.create
+          - service.update
+          - service.delete
+          example: route.add
+        initiator_id:
+          description: The ID of the initiator of the event. E.g., an ID of a user that triggered the event.
+          type: string
+          example: google-oauth2|123456789012345678901
+        initiator_name:
+          description: The name of the initiator of the event.
+          type: string
+          example: John Doe
+        initiator_email:
+          description: The e-mail address of the initiator of the event. E.g., an e-mail of a user that triggered the event.
+          type: string
+          example: demo@netbird.io
+        target_id:
+          description: The ID of the target of the event. E.g., an ID of the peer that a user removed.
+          type: string
+          example: chad9d86lnnc59g18ou0
+        meta:
+          description: The metadata of the event
+          type: object
+          additionalProperties:
+            type: string
+          example:
+            name: my route
+            network_range: 10.64.0.0/24
+            peer_id: chacbco6lnnbn6cg5s91
+      required:
+      - id
+      - timestamp
+      - activity
+      - activity_code
+      - initiator_id
+      - initiator_name
+      - initiator_email
+      - target_id
+      - meta
+  responses:
+    bad_request:
+      description: Bad Request
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

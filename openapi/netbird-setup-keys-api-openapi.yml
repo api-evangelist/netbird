@@ -1,0 +1,348 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts Setup Keys API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Setup Keys
+  description: Interact with and view information about setup keys.
+paths:
+  /api/setup-keys:
+    get:
+      summary: List all Setup Keys
+      description: Returns a list of all Setup Keys
+      tags:
+      - Setup Keys
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      responses:
+        '200':
+          description: A JSON Array of Setup keys
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SetupKey'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    post:
+      summary: Create a Setup Key
+      description: Creates a setup key
+      tags:
+      - Setup Keys
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      requestBody:
+        description: New Setup Key request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSetupKeyRequest'
+      responses:
+        '200':
+          description: A Setup Keys Object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetupKeyClear'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/setup-keys/{keyId}:
+    get:
+      summary: Retrieve a Setup Key
+      description: Get information about a setup key
+      tags:
+      - Setup Keys
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: keyId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a setup key
+      responses:
+        '200':
+          description: A Setup Key object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetupKey'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    put:
+      summary: Update a Setup Key
+      description: Update information about a setup key
+      tags:
+      - Setup Keys
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: keyId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a setup key
+      requestBody:
+        description: update to Setup Key
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetupKeyRequest'
+      responses:
+        '200':
+          description: A Setup Key object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SetupKey'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    delete:
+      summary: Delete a Setup Key
+      description: Delete a Setup Key
+      tags:
+      - Setup Keys
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: keyId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a setup key
+      responses:
+        '200':
+          description: Delete status code
+          content: {}
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  schemas:
+    SetupKeyClear:
+      allOf:
+      - $ref: '#/components/schemas/SetupKeyBase'
+      - type: object
+        properties:
+          key:
+            description: Setup Key as plain text
+            type: string
+            example: A616097E-FCF0-48FA-9354-CA4A61142761
+        required:
+        - key
+    SetupKeyBase:
+      type: object
+      properties:
+        id:
+          description: Setup Key ID
+          type: string
+          example: 2531583362
+        name:
+          description: Setup key name identifier
+          type: string
+          example: Default key
+        expires:
+          description: Setup Key expiration date
+          type: string
+          format: date-time
+          example: '2023-06-01T14:47:22.291057Z'
+        type:
+          description: Setup key type, one-off for single time usage and reusable
+          type: string
+          example: reusable
+        valid:
+          description: Setup key validity status
+          type: boolean
+          example: true
+        revoked:
+          description: Setup key revocation status
+          type: boolean
+          example: false
+        used_times:
+          description: Usage count of setup key
+          type: integer
+          example: 2
+        last_used:
+          description: Setup key last usage date
+          type: string
+          format: date-time
+          example: '2023-05-05T09:00:35.477782Z'
+        state:
+          description: Setup key status, "valid", "overused","expired" or "revoked"
+          type: string
+          example: valid
+        auto_groups:
+          description: List of group IDs to auto-assign to peers registered with this key
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        updated_at:
+          description: Setup key last update date
+          type: string
+          format: date-time
+          example: '2023-05-05T09:00:35.477782Z'
+        usage_limit:
+          description: A number of times this key can be used. The value of 0 indicates the unlimited usage.
+          type: integer
+          example: 0
+        ephemeral:
+          description: Indicate that the peer will be ephemeral or not
+          type: boolean
+          example: true
+        allow_extra_dns_labels:
+          description: Allow extra DNS labels to be added to the peer
+          type: boolean
+          example: true
+      required:
+      - id
+      - key
+      - name
+      - expires
+      - type
+      - valid
+      - revoked
+      - used_times
+      - last_used
+      - state
+      - auto_groups
+      - updated_at
+      - usage_limit
+      - ephemeral
+      - allow_extra_dns_labels
+    SetupKey:
+      allOf:
+      - $ref: '#/components/schemas/SetupKeyBase'
+      - type: object
+        properties:
+          key:
+            description: Setup Key as secret
+            type: string
+            example: A6160****
+        required:
+        - key
+    SetupKeyRequest:
+      type: object
+      properties:
+        revoked:
+          description: Setup key revocation status
+          type: boolean
+          example: false
+        auto_groups:
+          description: List of group IDs to auto-assign to peers registered with this key
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+      required:
+      - revoked
+      - auto_groups
+    CreateSetupKeyRequest:
+      type: object
+      properties:
+        name:
+          description: Setup Key name
+          type: string
+          example: Default key
+        type:
+          description: Setup key type, one-off for single time usage and reusable
+          type: string
+          example: reusable
+        expires_in:
+          description: Expiration time in seconds
+          type: integer
+          minimum: 86400
+          maximum: 31536000
+          example: 86400
+        auto_groups:
+          description: List of group IDs to auto-assign to peers registered with this key
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        usage_limit:
+          description: A number of times this key can be used. The value of 0 indicates the unlimited usage.
+          type: integer
+          example: 0
+        ephemeral:
+          description: Indicate that the peer will be ephemeral or not
+          type: boolean
+          example: true
+        allow_extra_dns_labels:
+          description: Allow extra DNS labels to be added to the peer
+          type: boolean
+          example: true
+      required:
+      - name
+      - type
+      - expires_in
+      - auto_groups
+      - usage_limit
+  responses:
+    bad_request:
+      description: Bad Request
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

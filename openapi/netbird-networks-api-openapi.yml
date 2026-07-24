@@ -1,0 +1,765 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts Networks API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Networks
+paths:
+  /api/networks:
+    get:
+      summary: List all Networks
+      description: Returns a list of all networks
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      responses:
+        '200':
+          description: A JSON Array of Networks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Network'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    post:
+      summary: Create a Network
+      description: Creates a Network
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      requestBody:
+        description: New Network request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkRequest'
+      responses:
+        '200':
+          description: A Network Object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Network'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/networks/{networkId}:
+    get:
+      summary: Retrieve a Network
+      description: Get information about a Network
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a network
+      responses:
+        '200':
+          description: A Network object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Network'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    put:
+      summary: Update a Network
+      description: Update/Replace a Network
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a network
+      requestBody:
+        description: Update Network request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkRequest'
+      responses:
+        '200':
+          description: A Network object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Network'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    delete:
+      summary: Delete a Network
+      description: Delete a network
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a network
+      responses:
+        '200':
+          description: Delete status code
+          content: {}
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/networks/{networkId}/resources:
+    get:
+      summary: List all Network Resources
+      description: Returns a list of all resources in a network
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a network
+      responses:
+        '200':
+          description: A JSON Array of Resources
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NetworkResource'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    post:
+      summary: Create a Network Resource
+      description: Creates a Network Resource
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a network
+      requestBody:
+        description: New Network Resource request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkResourceRequest'
+      responses:
+        '200':
+          description: A Network Resource Object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkResource'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/networks/{networkId}/resources/{resourceId}:
+    get:
+      summary: Retrieve a Network Resource
+      description: Get information about a Network Resource
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a network
+      - in: path
+        name: resourceId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a network resource
+      responses:
+        '200':
+          description: A Network Resource object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkResource'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    put:
+      summary: Update a Network Resource
+      description: Update a Network Resource
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a network
+      - in: path
+        name: resourceId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a resource
+      requestBody:
+        description: Update Network Resource request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkResourceRequest'
+      responses:
+        '200':
+          description: A Network Resource object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkResource'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    delete:
+      summary: Delete a Network Resource
+      description: Delete a network resource
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+          description: The unique identifier of a network
+      - in: path
+        name: resourceId
+        required: true
+        schema:
+          type: string
+          description: The unique identifier of a network resource
+      responses:
+        '200':
+          description: Delete status code
+          content: {}
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/networks/{networkId}/routers:
+    get:
+      summary: List all Network Routers
+      description: Returns a list of all routers in a network
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a network
+      responses:
+        '200':
+          description: A JSON Array of Routers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NetworkRouter'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    post:
+      summary: Create a Network Router
+      description: Creates a Network Router
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a network
+      requestBody:
+        description: New Network Router request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkRouterRequest'
+      responses:
+        '200':
+          description: A Router Object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkRouter'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/networks/{networkId}/routers/{routerId}:
+    get:
+      summary: Retrieve a Network Router
+      description: Get information about a Network Router
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a network
+      - in: path
+        name: routerId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a router
+      responses:
+        '200':
+          description: A Router object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkRouter'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    put:
+      summary: Update a Network Router
+      description: Update a Network Router
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a network
+      - in: path
+        name: routerId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a router
+      requestBody:
+        description: Update Network Router request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NetworkRouterRequest'
+      responses:
+        '200':
+          description: A Router object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkRouter'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    delete:
+      summary: Delete a Network Router
+      description: Delete a network router
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: networkId
+        required: true
+        schema:
+          type: string
+          description: The unique identifier of a network
+      - in: path
+        name: routerId
+        required: true
+        schema:
+          type: string
+          description: The unique identifier of a router
+      responses:
+        '200':
+          description: Delete status code
+          content: {}
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/networks/routers:
+    get:
+      summary: List all Network Routers
+      description: Returns a list of all routers in a network
+      tags:
+      - Networks
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      responses:
+        '200':
+          description: A JSON Array of Routers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NetworkRouter'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  schemas:
+    Network:
+      allOf:
+      - type: object
+        properties:
+          id:
+            description: Network ID
+            type: string
+            example: chacdk86lnnboviihd7g
+          routers:
+            description: List of router IDs associated with the network
+            type: array
+            items:
+              type: string
+              example: ch8i4ug6lnn4g9hqv7m0
+          routing_peers_count:
+            description: Count of routing peers associated with the network
+            type: integer
+            example: 2
+          resources:
+            description: List of network resource IDs associated with the network
+            type: array
+            items:
+              type: string
+              example: ch8i4ug6lnn4g9hqv7m1
+          policies:
+            description: List of policy IDs associated with the network
+            type: array
+            items:
+              type: string
+              example: ch8i4ug6lnn4g9hqv7m2
+        required:
+        - id
+        - routers
+        - resources
+        - routing_peers_count
+        - policies
+      - $ref: '#/components/schemas/NetworkRequest'
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
+    NetworkResourceRequest:
+      allOf:
+      - $ref: '#/components/schemas/NetworkResourceMinimum'
+      - type: object
+        properties:
+          groups:
+            description: Group IDs containing the resource
+            type: array
+            items:
+              type: string
+              example: chacdk86lnnboviihd70
+        required:
+        - groups
+        - address
+    NetworkResource:
+      allOf:
+      - type: object
+        properties:
+          id:
+            description: Network Resource ID
+            type: string
+            example: chacdk86lnnboviihd7g
+          type:
+            $ref: '#/components/schemas/NetworkResourceType'
+          groups:
+            description: Groups that the resource belongs to
+            type: array
+            items:
+              $ref: '#/components/schemas/GroupMinimum'
+        required:
+        - id
+        - type
+        - groups
+      - $ref: '#/components/schemas/NetworkResourceMinimum'
+    NetworkRouterRequest:
+      type: object
+      properties:
+        peer:
+          description: Peer Identifier associated with route. This property can not be set together with `peer_groups`
+          type: string
+          example: chacbco6lnnbn6cg5s91
+        peer_groups:
+          description: Peers Group Identifier associated with route. This property can not be set together with `peer`
+          type: array
+          items:
+            type: string
+            example: chacbco6lnnbn6cg5s91
+        metric:
+          description: Route metric number. Lowest number has higher priority
+          type: integer
+          maximum: 9999
+          minimum: 1
+          example: 9999
+        masquerade:
+          description: Indicate if peer should masquerade traffic to this route's prefix
+          type: boolean
+          example: true
+        enabled:
+          description: Network router status
+          type: boolean
+          example: true
+      required:
+      - metric
+      - masquerade
+      - enabled
+    GroupMinimum:
+      type: object
+      properties:
+        id:
+          description: Group ID
+          type: string
+          example: ch8i4ug6lnn4g9hqv7m0
+        name:
+          description: Group Name identifier
+          type: string
+          example: devs
+        peers_count:
+          description: Count of peers associated to the group
+          type: integer
+          example: 2
+        resources_count:
+          description: Count of resources associated to the group
+          type: integer
+          example: 5
+        issued:
+          description: How the group was issued (api, integration, jwt)
+          type: string
+          enum:
+          - api
+          - integration
+          - jwt
+          example: api
+      required:
+      - id
+      - name
+      - peers_count
+      - resources_count
+    NetworkRouter:
+      allOf:
+      - type: object
+        properties:
+          id:
+            description: Network Router Id
+            type: string
+            example: chacdk86lnnboviihd7g
+        required:
+        - id
+      - $ref: '#/components/schemas/NetworkRouterRequest'
+    NetworkRequest:
+      type: object
+      properties:
+        name:
+          description: Network name
+          type: string
+          example: Remote Network 1
+        description:
+          description: Network description
+          type: string
+          example: A remote network that needs to be accessed
+      required:
+      - name
+    NetworkResourceMinimum:
+      type: object
+      properties:
+        name:
+          description: Network resource name
+          type: string
+          example: Remote Resource 1
+        description:
+          description: Network resource description
+          type: string
+          example: A remote resource inside network 1
+        address:
+          description: Network resource address (either a direct host like 1.1.1.1 or 1.1.1.1/32, or a subnet like 192.168.178.0/24, or domains like example.com and *.example.com)
+          type: string
+          example: 1.1.1.1
+        enabled:
+          description: Network resource status
+          type: boolean
+          example: true
+      required:
+      - name
+      - address
+      - enabled
+  responses:
+    bad_request:
+      description: Bad Request
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

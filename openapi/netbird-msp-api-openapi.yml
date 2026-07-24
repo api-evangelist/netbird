@@ -1,0 +1,399 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts MSP API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: MSP
+  description: MSP portal for Tenant management.
+  x-cloud-only: true
+paths:
+  /api/integrations/msp/tenants:
+    get:
+      summary: Get MSP tenants
+      tags:
+      - MSP
+      responses:
+        '200':
+          description: Get MSP tenants response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTenantsResponse'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '403':
+          $ref: '#/components/responses/requires_authentication'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    post:
+      summary: Create MSP tenant
+      tags:
+      - MSP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenantRequest'
+      responses:
+        '200':
+          description: Create MSP tenant Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantResponse'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '403':
+          $ref: '#/components/responses/requires_authentication'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/integrations/msp/tenants/{id}:
+    put:
+      summary: Update MSP tenant
+      tags:
+      - MSP
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a tenant account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTenantRequest'
+      responses:
+        '200':
+          description: Update MSP tenant Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantResponse'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '403':
+          $ref: '#/components/responses/requires_authentication'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/integrations/msp/tenants/{id}/unlink:
+    post:
+      summary: Unlink a tenant
+      tags:
+      - MSP
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a tenant account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                owner:
+                  type: string
+                  description: The new owners user ID.
+                  example: google-oauth2|123456789012345678901
+              required:
+              - owner
+      responses:
+        '200':
+          description: Successfully unlinked the tenant
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '403':
+          $ref: '#/components/responses/requires_authentication'
+        '404':
+          description: The tenant was not found
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/integrations/msp/tenants/{id}/dns:
+    post:
+      summary: Verify a tenant domain DNS challenge
+      tags:
+      - MSP
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a tenant account
+      responses:
+        '200':
+          description: Successfully verified the DNS challenge
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '403':
+          $ref: '#/components/responses/requires_authentication'
+        '404':
+          description: The tenant was not found
+        '500':
+          $ref: '#/components/responses/internal_error'
+        '501':
+          description: DNS Challenge Failed Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DNSChallengeResponse'
+  /api/integrations/msp/tenants/{id}/subscription:
+    post:
+      summary: Create subscription for Tenant
+      tags:
+      - MSP
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a tenant account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                priceID:
+                  type: string
+                  description: The Price ID to change the subscription to.
+                  example: price_1HhxOpBzq4JbCqRmJxkpzL2V
+              required:
+              - priceID
+      responses:
+        '200':
+          description: Successfully created subscription for Tenant
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '403':
+          $ref: '#/components/responses/requires_authentication'
+        '404':
+          description: The tenant was not found
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/integrations/msp/tenants/{id}/invite:
+    post:
+      summary: Invite existing account as a Tenant to the MSP account
+      tags:
+      - MSP
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of an existing tenant account
+      responses:
+        '200':
+          description: Successfully invited existing Tenant to the MSP account
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantResponse'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '403':
+          $ref: '#/components/responses/requires_authentication'
+        '404':
+          description: The tenant was not found
+        '500':
+          $ref: '#/components/responses/internal_error'
+    put:
+      summary: Response by the invited Tenant account owner
+      tags:
+      - MSP
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of an existing tenant account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: string
+                  description: Accept or decline the invitation.
+                  enum:
+                  - accept
+                  - decline
+              required:
+              - value
+      responses:
+        '200':
+          description: Successful response
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '403':
+          $ref: '#/components/responses/requires_authentication'
+        '404':
+          description: The tenant was not found
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  schemas:
+    DNSChallengeResponse:
+      type: object
+      properties:
+        dns_challenge:
+          type: string
+          description: The DNS challenge to set in a TXT record
+          example: YXNkYSBkYXNhc2Rhc2RhIGFzZGFzZDJhc2QyNDUxNQ
+      required:
+      - dns_challenge
+    UpdateTenantRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name for the MSP tenant
+          example: My new tenant
+        groups:
+          description: MSP users Groups that can access the Tenant and Roles to assume
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantGroupResponse'
+      required:
+      - name
+      - groups
+    GetTenantsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TenantResponse'
+    TenantGroupResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Group ID
+          example: ch8i4ug6lnn4g9hqv7m0
+        role:
+          type: string
+          description: The Role name
+          example: admin
+      required:
+      - id
+      - role
+    TenantResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The updated MSP tenant account ID
+          example: ch8i4ug6lnn4g9hqv7m0
+        name:
+          type: string
+          description: The name for the MSP tenant
+          example: My new tenant
+        domain:
+          type: string
+          description: The tenant account domain
+          example: tenant.com
+        groups:
+          description: MSP users Groups that can access the Tenant and Roles to assume
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantGroupResponse'
+        activated_at:
+          type: string
+          format: date-time
+          description: The date and time when the tenant was activated.
+          example: '2021-08-01T12:00:00Z'
+        dns_challenge:
+          type: string
+          description: The DNS challenge to set in a TXT record
+          example: YXNkYSBkYXNhc2Rhc2RhIGFzZGFzZDJhc2QyNDUxNQ
+        created_at:
+          type: string
+          format: date-time
+          description: The date and time when the tenant was created.
+          example: '2021-08-01T12:00:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: The date and time when the tenant was last updated.
+          example: '2021-08-01T12:00:00Z'
+        invited_at:
+          type: string
+          format: date-time
+          description: The date and time when the existing tenant was invited.
+          example: '2021-08-01T12:00:00Z'
+        status:
+          type: string
+          description: The status of the tenant
+          enum:
+          - existing
+          - invited
+          - pending
+          - active
+          example: active
+      required:
+      - id
+      - name
+      - domain
+      - groups
+      - created_at
+      - updated_at
+      - status
+      - dns_challenge
+    CreateTenantRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name for the MSP tenant
+          example: My new tenant
+        domain:
+          type: string
+          description: The name for the MSP tenant
+          example: tenant.com
+        groups:
+          description: MSP users Groups that can access the Tenant and Roles to assume
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantGroupResponse'
+      required:
+      - name
+      - domain
+      - groups
+  responses:
+    bad_request:
+      description: Bad Request
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

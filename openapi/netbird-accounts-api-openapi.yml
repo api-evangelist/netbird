@@ -1,0 +1,317 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Accounts
+  description: View information about the accounts.
+paths:
+  /api/accounts:
+    get:
+      summary: List all Accounts
+      description: Returns a list of accounts of a user. Always returns a list of one account.
+      tags:
+      - Accounts
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      responses:
+        '200':
+          description: A JSON array of accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/accounts/{accountId}:
+    delete:
+      summary: Delete an Account
+      description: Deletes an account and all its resources. Only account owners can delete accounts.
+      tags:
+      - Accounts
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of an account
+      responses:
+        '200':
+          description: Delete account status code
+          content: {}
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    put:
+      summary: Update an Account
+      description: Update information about an account
+      tags:
+      - Accounts
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: accountId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of an account
+      requestBody:
+        description: update an account
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountRequest'
+      responses:
+        '200':
+          description: An Account object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  responses:
+    bad_request:
+      description: Bad Request
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+  schemas:
+    AccountExtraSettings:
+      type: object
+      properties:
+        peer_approval_enabled:
+          description: (Cloud only) Enables or disables peer approval globally. If enabled, all peers added will be in pending state until approved by an admin.
+          type: boolean
+          example: true
+        user_approval_required:
+          description: Enables manual approval for new users joining via domain matching. When enabled, users are blocked with pending approval status until explicitly approved by an admin.
+          type: boolean
+          example: false
+        network_traffic_logs_enabled:
+          description: Enables or disables network traffic logging. If enabled, all network traffic events from peers will be stored.
+          type: boolean
+          example: true
+        network_traffic_logs_groups:
+          description: Limits traffic logging to these groups. If unset all peers are enabled.
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        network_traffic_packet_counter_enabled:
+          description: Enables or disables network traffic packet counter. If enabled, network packets and their size will be counted and reported. (This can have an slight impact on performance)
+          type: boolean
+          example: true
+      required:
+      - peer_approval_enabled
+      - user_approval_required
+      - network_traffic_logs_enabled
+      - network_traffic_logs_groups
+      - network_traffic_packet_counter_enabled
+    AccountOnboarding:
+      type: object
+      properties:
+        signup_form_pending:
+          description: Indicates whether the account signup form is pending
+          type: boolean
+          example: true
+        onboarding_flow_pending:
+          description: Indicates whether the account onboarding flow is pending
+          type: boolean
+          example: false
+      required:
+      - signup_form_pending
+      - onboarding_flow_pending
+    AccountRequest:
+      type: object
+      properties:
+        settings:
+          $ref: '#/components/schemas/AccountSettings'
+        onboarding:
+          $ref: '#/components/schemas/AccountOnboarding'
+      required:
+      - settings
+    Account:
+      type: object
+      properties:
+        id:
+          description: Account ID
+          type: string
+          example: ch8i4ug6lnn4g9hqv7l0
+        settings:
+          $ref: '#/components/schemas/AccountSettings'
+        domain:
+          description: Account domain
+          type: string
+          example: netbird.io
+        domain_category:
+          description: Account domain category
+          type: string
+          example: private
+        created_at:
+          description: Account creation date (UTC)
+          type: string
+          format: date-time
+          example: '2023-05-05T09:00:35.477782Z'
+        created_by:
+          description: Account creator
+          type: string
+          example: google-oauth2|277474792786460067937
+        onboarding:
+          $ref: '#/components/schemas/AccountOnboarding'
+      required:
+      - id
+      - settings
+      - domain
+      - domain_category
+      - created_at
+      - created_by
+      - onboarding
+    AccountSettings:
+      type: object
+      properties:
+        peer_login_expiration_enabled:
+          description: Enables or disables peer login expiration globally. After peer's login has expired the user has to log in (authenticate). Applies only to peers that were added by a user (interactive SSO login).
+          type: boolean
+          example: true
+        peer_login_expiration:
+          description: Period of time after which peer login expires (seconds).
+          type: integer
+          example: 43200
+        peer_inactivity_expiration_enabled:
+          description: Enables or disables peer inactivity expiration globally. After peer's session has expired the user has to log in (authenticate). Applies only to peers that were added by a user (interactive SSO login).
+          type: boolean
+          example: true
+        peer_inactivity_expiration:
+          description: Period of time of inactivity after which peer session expires (seconds).
+          type: integer
+          example: 43200
+        regular_users_view_blocked:
+          description: Allows blocking regular users from viewing parts of the system.
+          type: boolean
+          example: true
+        groups_propagation_enabled:
+          description: Allows propagate the new user auto groups to peers that belongs to the user
+          type: boolean
+          example: true
+        jwt_groups_enabled:
+          description: Allows extract groups from JWT claim and add it to account groups.
+          type: boolean
+          example: true
+        jwt_groups_claim_name:
+          description: Name of the claim from which we extract groups names to add it to account groups.
+          type: string
+          example: roles
+        jwt_allow_groups:
+          description: List of groups to which users are allowed access
+          type: array
+          items:
+            type: string
+            example: Administrators
+        routing_peer_dns_resolution_enabled:
+          description: Enables or disables DNS resolution on the routing peers
+          type: boolean
+          example: true
+        dns_domain:
+          description: Allows to define a custom dns domain for the account
+          type: string
+          example: my-organization.org
+        network_range:
+          description: Allows to define a custom network range for the account in CIDR format
+          type: string
+          format: cidr
+          example: 100.64.0.0/16
+        peer_expose_enabled:
+          description: Enables or disables peer expose. If enabled, peers can expose local services through the reverse proxy using the CLI.
+          type: boolean
+          example: false
+        peer_expose_groups:
+          description: Limits which peer groups are allowed to expose services. If empty, all peers are allowed when peer expose is enabled.
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        extra:
+          $ref: '#/components/schemas/AccountExtraSettings'
+        lazy_connection_enabled:
+          x-experimental: true
+          description: Enables or disables experimental lazy connection
+          type: boolean
+          example: true
+        auto_update_version:
+          description: Set Clients auto-update version. "latest", "disabled", or a specific version (e.g "0.50.1")
+          type: string
+          example: 0.51.2
+        auto_update_always:
+          description: When true, updates are installed automatically in the background. When false, updates require user interaction from the UI.
+          type: boolean
+          example: false
+        embedded_idp_enabled:
+          description: Indicates whether the embedded identity provider (Dex) is enabled for this account. This is a read-only field.
+          type: boolean
+          readOnly: true
+          example: false
+        local_auth_disabled:
+          description: Indicates whether local (email/password) authentication is disabled. When true, users can only authenticate via external identity providers. This is a read-only field.
+          type: boolean
+          readOnly: true
+          example: false
+      required:
+      - peer_login_expiration_enabled
+      - peer_login_expiration
+      - peer_inactivity_expiration_enabled
+      - peer_inactivity_expiration
+      - regular_users_view_blocked
+      - peer_expose_enabled
+      - peer_expose_groups
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

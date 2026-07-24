@@ -1,0 +1,283 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts Routes API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Routes
+  description: Interact with and view information about routes.
+paths:
+  /api/routes:
+    get:
+      summary: List all Routes
+      description: Returns a list of all routes
+      tags:
+      - Routes
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      responses:
+        '200':
+          description: A JSON Array of Routes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Route'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    post:
+      summary: Create a Route
+      description: Creates a Route
+      tags:
+      - Routes
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      requestBody:
+        description: New Routes request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteRequest'
+      responses:
+        '200':
+          description: A Route Object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/routes/{routeId}:
+    get:
+      summary: Retrieve a Route
+      description: Get information about a Routes
+      tags:
+      - Routes
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: routeId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a route
+      responses:
+        '200':
+          description: A Route object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    put:
+      summary: Update a Route
+      description: Update/Replace a Route
+      tags:
+      - Routes
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: routeId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a route
+      requestBody:
+        description: Update Route request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RouteRequest'
+      responses:
+        '200':
+          description: A Route object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    delete:
+      summary: Delete a Route
+      description: Delete a route
+      tags:
+      - Routes
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: routeId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a route
+      responses:
+        '200':
+          description: Delete status code
+          content: {}
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  responses:
+    bad_request:
+      description: Bad Request
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+  schemas:
+    RouteRequest:
+      type: object
+      properties:
+        description:
+          description: Route description
+          type: string
+          example: My first route
+        network_id:
+          description: Route network identifier, to group HA routes
+          type: string
+          maxLength: 40
+          minLength: 1
+          example: Route 1
+        enabled:
+          description: Route status
+          type: boolean
+          example: true
+        peer:
+          description: Peer Identifier associated with route. This property can not be set together with `peer_groups`
+          type: string
+          example: chacbco6lnnbn6cg5s91
+        peer_groups:
+          description: Peers Group Identifier associated with route. This property can not be set together with `peer`
+          type: array
+          items:
+            type: string
+            example: chacbco6lnnbn6cg5s91
+        network:
+          description: Network range in CIDR format, Conflicts with domains
+          type: string
+          example: 10.64.0.0/24
+        domains:
+          description: Domain list to be dynamically resolved. Max of 32 domains can be added per route configuration. Conflicts with network
+          type: array
+          items:
+            type: string
+            minLength: 1
+            maxLength: 32
+            example: example.com
+        metric:
+          description: Route metric number. Lowest number has higher priority
+          type: integer
+          maximum: 9999
+          minimum: 1
+          example: 9999
+        masquerade:
+          description: Indicate if peer should masquerade traffic to this route's prefix
+          type: boolean
+          example: true
+        groups:
+          description: Group IDs containing routing peers
+          type: array
+          items:
+            type: string
+            example: chacdk86lnnboviihd70
+        keep_route:
+          description: Indicate if the route should be kept after a domain doesn't resolve that IP anymore
+          type: boolean
+          example: true
+        access_control_groups:
+          description: Access control group identifier associated with route.
+          type: array
+          items:
+            type: string
+            example: chacbco6lnnbn6cg5s91
+        skip_auto_apply:
+          description: Indicate if this exit node route (0.0.0.0/0) should skip auto-application for client routing
+          type: boolean
+          example: false
+      required:
+      - id
+      - description
+      - network_id
+      - enabled
+      - metric
+      - masquerade
+      - groups
+      - keep_route
+    Route:
+      allOf:
+      - type: object
+        properties:
+          id:
+            description: Route Id
+            type: string
+            example: chacdk86lnnboviihd7g
+          network_type:
+            description: Network type indicating if it is a domain route or a IPv4/IPv6 route
+            type: string
+            example: IPv4
+        required:
+        - id
+        - network_type
+      - $ref: '#/components/schemas/RouteRequest'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

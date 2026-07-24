@@ -1,0 +1,139 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts Subscription API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Subscription
+  description: Manage and view information about account subscriptions.
+  x-cloud-only: true
+paths:
+  /api/integrations/billing/subscription:
+    get:
+      summary: Get current subscription
+      tags:
+      - Subscription
+      responses:
+        '200':
+          description: Subscription details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '404':
+          description: No subscription found
+        '500':
+          $ref: '#/components/responses/internal_error'
+    put:
+      summary: Change subscription
+      tags:
+      - Subscription
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                priceID:
+                  type: string
+                  description: The Price ID to change the subscription to.
+                  example: price_1HhxOpBzq4JbCqRmJxkpzL2V
+                plan_tier:
+                  type: string
+                  description: The plan tier to change the subscription to.
+                  example: business
+      responses:
+        '200':
+          description: Subscription successfully changed
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  responses:
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
+  schemas:
+    Subscription:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Indicates whether the subscription is active or not.
+          example: true
+        plan_tier:
+          type: string
+          description: The tier of the plan for the subscription.
+          example: basic
+        price_id:
+          type: string
+          description: Unique identifier for the price of the subscription.
+          example: price_1HhxOpBzq4JbCqRmJxkpzL2V
+        remaining_trial:
+          type: integer
+          description: The remaining time for the trial period, in seconds.
+          example: 3600
+        features:
+          type: array
+          description: List of features included in the subscription.
+          items:
+            type: string
+          example:
+          - free
+          - idp-sync
+          - audit-logs
+        currency:
+          type: string
+          description: Currency code of the subscription.
+          example: USD
+        price:
+          type: integer
+          description: Price amount in minor units (e.g., cents).
+          example: 1000
+        provider:
+          type: string
+          description: The provider of the subscription.
+          example:
+          - stripe
+          - aws
+        updated_at:
+          type: string
+          format: date-time
+          description: The date and time when the subscription was last updated.
+          example: '2021-08-01T12:00:00Z'
+      required:
+      - active
+      - plan_tier
+      - price_id
+      - updated_at
+      - currency
+      - price
+      - provider
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

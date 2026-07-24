@@ -1,0 +1,864 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts Users API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Users
+  description: Interact with and view information about users.
+paths:
+  /api/users:
+    get:
+      summary: List all Users
+      description: Returns a list of all users
+      tags:
+      - Users
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: query
+        name: service_user
+        schema:
+          type: boolean
+        description: Filters users and returns either regular users or service users
+      responses:
+        '200':
+          description: A JSON array of Users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    post:
+      summary: Create a User
+      description: Creates a new service user or sends an invite to a regular user
+      tags:
+      - Users
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      requestBody:
+        description: User invite information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreateRequest'
+      responses:
+        '200':
+          description: A User object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/users/{userId}:
+    put:
+      summary: Update a User
+      description: Update information about a User
+      tags:
+      - Users
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a user
+      requestBody:
+        description: User update
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+      responses:
+        '200':
+          description: A User object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    delete:
+      summary: Delete a User
+      description: This method removes a user from accessing the system. For this leaves the IDP user intact unless the `--user-delete-from-idp` is passed to management startup.
+      tags:
+      - Users
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a user
+      responses:
+        '200':
+          description: Delete status code
+          content: {}
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/users/{userId}/invite:
+    post:
+      summary: Resend user invitation
+      description: Resend user invitation
+      tags:
+      - Users
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a user
+      responses:
+        '200':
+          description: Invite status code
+          content: {}
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/users/{userId}/approve:
+    post:
+      summary: Approve user
+      description: Approve a user that is pending approval
+      tags:
+      - Users
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a user
+      responses:
+        '200':
+          description: Returns the approved user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/users/{userId}/reject:
+    delete:
+      summary: Reject user
+      description: Reject a user that is pending approval by removing them from the account
+      tags:
+      - Users
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a user
+      responses:
+        '200':
+          description: User rejected successfully
+          content: {}
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/users/{userId}/password:
+    put:
+      summary: Change user password
+      description: Change the password for a user. Only available when embedded IdP is enabled. Users can only change their own password.
+      tags:
+      - Users
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a user
+      requestBody:
+        description: Password change request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordChangeRequest'
+      responses:
+        '200':
+          description: Password changed successfully
+          content: {}
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '412':
+          description: Precondition failed - embedded IdP is not enabled
+          content: {}
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/users/current:
+    get:
+      summary: Retrieve current user
+      description: Get information about the current user
+      tags:
+      - Users
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      responses:
+        '200':
+          description: A User object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/users/invites:
+    get:
+      summary: List user invites
+      description: Lists all pending invites for the account. Only available when embedded IdP is enabled.
+      tags:
+      - Users
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      responses:
+        '200':
+          description: List of invites
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserInvite'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '412':
+          description: Precondition failed - embedded IdP is not enabled
+          content: {}
+        '500':
+          $ref: '#/components/responses/internal_error'
+    post:
+      summary: Create a user invite
+      description: Creates an invite link for a new user. Only available when embedded IdP is enabled. The user is not created until they accept the invite.
+      tags:
+      - Users
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      requestBody:
+        description: User invite information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInviteCreateRequest'
+      responses:
+        '200':
+          description: Invite created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInvite'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '409':
+          description: User or invite already exists
+          content: {}
+        '412':
+          description: Precondition failed - embedded IdP is not enabled
+          content: {}
+        '422':
+          $ref: '#/components/responses/validation_failed'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/users/invites/{inviteId}:
+    delete:
+      summary: Delete a user invite
+      description: Deletes a pending invite. Only available when embedded IdP is enabled.
+      tags:
+      - Users
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: inviteId
+        required: true
+        schema:
+          type: string
+        description: The ID of the invite to delete
+      responses:
+        '200':
+          description: Invite deleted successfully
+          content: {}
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          description: Invite not found
+          content: {}
+        '412':
+          description: Precondition failed - embedded IdP is not enabled
+          content: {}
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/users/invites/{inviteId}/regenerate:
+    post:
+      summary: Regenerate a user invite
+      description: Regenerates an invite link for an existing invite. Invalidates the previous token and creates a new one.
+      tags:
+      - Users
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: inviteId
+        required: true
+        schema:
+          type: string
+        description: The ID of the invite to regenerate
+      requestBody:
+        description: Regenerate options
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInviteRegenerateRequest'
+      responses:
+        '200':
+          description: Invite regenerated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInviteRegenerateResponse'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          description: Invite not found
+          content: {}
+        '412':
+          description: Precondition failed - embedded IdP is not enabled
+          content: {}
+        '422':
+          $ref: '#/components/responses/validation_failed'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/users/invites/{token}:
+    get:
+      summary: Get invite information
+      description: Retrieves public information about an invite. This endpoint is unauthenticated and protected by the token itself.
+      tags:
+      - Users
+      security: []
+      parameters:
+      - in: path
+        name: token
+        required: true
+        schema:
+          type: string
+        description: The invite token
+      responses:
+        '200':
+          description: Invite information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInviteInfo'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '404':
+          description: Invite not found or invalid token
+          content: {}
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/users/invites/{token}/accept:
+    post:
+      summary: Accept an invite
+      description: Accepts an invite and creates the user with the provided password. This endpoint is unauthenticated and protected by the token itself.
+      tags:
+      - Users
+      security: []
+      parameters:
+      - in: path
+        name: token
+        required: true
+        schema:
+          type: string
+        description: The invite token
+      requestBody:
+        description: Password to set for the new user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserInviteAcceptRequest'
+      responses:
+        '200':
+          description: Invite accepted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInviteAcceptResponse'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '404':
+          description: Invite not found or invalid token
+          content: {}
+        '412':
+          description: Precondition failed - embedded IdP is not enabled or invite expired
+          content: {}
+        '422':
+          $ref: '#/components/responses/validation_failed'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  schemas:
+    UserInviteAcceptResponse:
+      type: object
+      description: Response after accepting an invite
+      properties:
+        success:
+          description: Whether the invite was accepted successfully
+          type: boolean
+          example: true
+      required:
+      - success
+    UserInviteInfo:
+      type: object
+      description: Public information about an invite
+      properties:
+        email:
+          description: User's email address
+          type: string
+          example: user@example.com
+        name:
+          description: User's full name
+          type: string
+          example: John Doe
+        expires_at:
+          description: Invite expiration time
+          type: string
+          format: date-time
+          example: '2024-01-25T10:00:00Z'
+        valid:
+          description: Whether the invite is still valid (not expired)
+          type: boolean
+          example: true
+        invited_by:
+          description: Name of the user who sent the invite
+          type: string
+          example: Admin User
+      required:
+      - email
+      - name
+      - expires_at
+      - valid
+      - invited_by
+    UserInviteRegenerateResponse:
+      type: object
+      description: Response after regenerating an invite
+      properties:
+        invite_token:
+          description: The new invite token
+          type: string
+          example: nbi_Xk5Lz9mP2vQwRtYu1aN3bC4dE5fGh0ABC123
+        invite_expires_at:
+          description: New invite expiration time
+          type: string
+          format: date-time
+          example: '2024-01-28T10:00:00Z'
+      required:
+      - invite_token
+      - invite_expires_at
+    UserInviteAcceptRequest:
+      type: object
+      description: Request to accept an invite and set password
+      properties:
+        password:
+          description: The password the user wants to set. Must be at least 8 characters long and contain at least one uppercase letter, one digit, and one special character (any character that is not a letter or digit, including spaces).
+          type: string
+          format: password
+          minLength: 8
+          pattern: ^(?=.*[0-9])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$
+          example: SecurePass123!
+      required:
+      - password
+    UserInviteCreateRequest:
+      type: object
+      description: Request to create a user invite link
+      properties:
+        email:
+          description: User's email address
+          type: string
+          example: user@example.com
+        name:
+          description: User's full name
+          type: string
+          example: John Doe
+        role:
+          description: User's NetBird account role
+          type: string
+          example: user
+        auto_groups:
+          description: Group IDs to auto-assign to peers registered by this user
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        expires_in:
+          description: Invite expiration time in seconds (default 72 hours)
+          type: integer
+          example: 259200
+      required:
+      - email
+      - name
+      - role
+      - auto_groups
+    UserCreateRequest:
+      type: object
+      properties:
+        email:
+          description: User's Email to send invite to
+          type: string
+          example: demo@netbird.io
+        name:
+          description: User's full name
+          type: string
+          example: Tom Schulz
+        role:
+          description: User's NetBird account role
+          type: string
+          example: admin
+        auto_groups:
+          description: Group IDs to auto-assign to peers registered by this user
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        is_service_user:
+          description: Is true if this user is a service user
+          type: boolean
+          example: false
+      required:
+      - role
+      - auto_groups
+      - is_service_user
+    UserInvite:
+      type: object
+      description: A user invite
+      properties:
+        id:
+          description: Invite ID
+          type: string
+          example: d5p7eedra0h0lt6f59hg
+        email:
+          description: User's email address
+          type: string
+          example: user@example.com
+        name:
+          description: User's full name
+          type: string
+          example: John Doe
+        role:
+          description: User's NetBird account role
+          type: string
+          example: user
+        auto_groups:
+          description: Group IDs to auto-assign to peers registered by this user
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        expires_at:
+          description: Invite expiration time
+          type: string
+          format: date-time
+          example: '2024-01-25T10:00:00Z'
+        created_at:
+          description: Invite creation time
+          type: string
+          format: date-time
+          example: '2024-01-22T10:00:00Z'
+        expired:
+          description: Whether the invite has expired
+          type: boolean
+          example: false
+        invite_token:
+          description: The invite link to be shared with the user. Only returned when the invite is created or regenerated.
+          type: string
+          example: nbi_Xk5Lz9mP2vQwRtYu1aN3bC4dE5fGh0ABC123
+      required:
+      - id
+      - email
+      - name
+      - role
+      - auto_groups
+      - expires_at
+      - created_at
+      - expired
+    UserPermissions:
+      type: object
+      properties:
+        is_restricted:
+          type: boolean
+          description: Indicates whether this User's Peers view is restricted
+        modules:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties:
+              type: boolean
+            propertyNames:
+              type: string
+              description: The operation type
+          propertyNames:
+            type: string
+            description: The module name
+          example:
+            networks:
+              read: true
+              create: false
+              update: false
+              delete: false
+            peers:
+              read: false
+              create: false
+              update: false
+              delete: false
+      required:
+      - modules
+      - is_restricted
+    PasswordChangeRequest:
+      type: object
+      properties:
+        old_password:
+          description: The current password
+          type: string
+          example: currentPassword123
+        new_password:
+          description: The new password to set
+          type: string
+          example: newSecurePassword456
+      required:
+      - old_password
+      - new_password
+    UserInviteRegenerateRequest:
+      type: object
+      description: Request to regenerate an invite link
+      properties:
+        expires_in:
+          description: Invite expiration time in seconds (default 72 hours)
+          type: integer
+          example: 259200
+    UserRequest:
+      type: object
+      properties:
+        role:
+          description: User's NetBird account role
+          type: string
+          example: admin
+        auto_groups:
+          description: Group IDs to auto-assign to peers registered by this user
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        is_blocked:
+          description: If set to true then user is blocked and can't use the system
+          type: boolean
+          example: false
+      required:
+      - role
+      - auto_groups
+      - is_blocked
+    User:
+      type: object
+      properties:
+        id:
+          description: User ID
+          type: string
+          example: google-oauth2|277474792786460067937
+        email:
+          description: User's email address
+          type: string
+          example: demo@netbird.io
+        password:
+          description: User's password. Only present when user is created (create user endpoint is called) and only when IdP supports user creation with password.
+          type: string
+          example: super_secure_password
+        name:
+          description: User's name from idp provider
+          type: string
+          example: Tom Schulz
+        role:
+          description: User's NetBird account role
+          type: string
+          example: admin
+        status:
+          description: User's status
+          type: string
+          enum:
+          - active
+          - invited
+          - blocked
+          example: active
+        last_login:
+          description: Last time this user performed a login to the dashboard
+          type: string
+          format: date-time
+          example: '2023-05-05T09:00:35.477782Z'
+        auto_groups:
+          description: Group IDs to auto-assign to peers registered by this user
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        is_current:
+          description: Is true if authenticated user is the same as this user
+          type: boolean
+          readOnly: true
+          example: true
+        is_service_user:
+          description: Is true if this user is a service user
+          type: boolean
+          readOnly: true
+          example: false
+        is_blocked:
+          description: Is true if this user is blocked. Blocked users can't use the system
+          type: boolean
+          example: false
+        pending_approval:
+          description: Is true if this user requires approval before being activated. Only applicable for users joining via domain matching when user_approval_required is enabled.
+          type: boolean
+          example: false
+        issued:
+          description: How user was issued by API or Integration
+          type: string
+          example: api
+        idp_id:
+          description: Identity provider ID (connector ID) that the user authenticated with. Only populated for users with Dex-encoded user IDs.
+          type: string
+          example: okta-abc123
+        permissions:
+          $ref: '#/components/schemas/UserPermissions'
+      required:
+      - id
+      - email
+      - name
+      - role
+      - auto_groups
+      - status
+      - is_blocked
+      - pending_approval
+  responses:
+    bad_request:
+      description: Bad Request
+      content: {}
+    validation_failed:
+      description: Validation failed
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

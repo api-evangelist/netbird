@@ -1,0 +1,111 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts Plans API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Plans
+  description: Retrieve available plans and products.
+  x-cloud-only: true
+paths:
+  /api/integrations/billing/plans:
+    get:
+      summary: Get available plans
+      tags:
+      - Plans
+      responses:
+        '200':
+          description: List of available plans
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  responses:
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+  schemas:
+    Price:
+      type: object
+      properties:
+        price_id:
+          type: string
+          description: Unique identifier for the price.
+          example: price_H2KmRb4u1tP0sR7s
+        currency:
+          type: string
+          description: Currency code for this price.
+          example: USD
+        price:
+          type: integer
+          description: Price amount in minor units (e.g., cents).
+          example: 1000
+        unit:
+          type: string
+          description: Unit of measurement for this price (e.g., per user).
+          example: user
+      required:
+      - price_id
+      - currency
+      - price
+      - unit
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the product.
+          example: Basic Plan
+        description:
+          type: string
+          description: Detailed description of the product.
+          example: This is the basic plan with limited features.
+        features:
+          type: array
+          description: List of features provided by the product.
+          items:
+            type: string
+          example:
+          - 5 free users
+          - Basic support
+        prices:
+          type: array
+          description: List of prices for the product in different currencies
+          items:
+            $ref: '#/components/schemas/Price'
+        free:
+          type: boolean
+          description: Indicates whether the product is free or not.
+          example: false
+      required:
+      - name
+      - description
+      - features
+      - prices
+      - free
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

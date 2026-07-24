@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts Portal API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Portal
+  description: Access customer portal for subscription management.
+  x-cloud-only: true
+paths:
+  /api/integrations/billing/portal:
+    get:
+      summary: Get customer portal URL
+      tags:
+      - Portal
+      parameters:
+      - in: query
+        name: baseURL
+        schema:
+          type: string
+        required: true
+        description: The base URL for the redirect after accessing the portal.
+        example: https://app.netbird.io/plans
+      responses:
+        '200':
+          description: Customer portal URL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PortalResponse'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  responses:
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
+  schemas:
+    PortalResponse:
+      type: object
+      properties:
+        session_id:
+          type: string
+          description: The unique identifier for the customer portal session.
+          example: cps_test_123456789
+        url:
+          type: string
+          description: URL to redirect the user to the customer portal.
+          example: https://billing.stripe.com/session/a1b2c3d4e5f6g7h8i9j0k
+      required:
+      - session_id
+      - url
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

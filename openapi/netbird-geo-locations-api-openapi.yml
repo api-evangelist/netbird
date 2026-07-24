@@ -1,0 +1,128 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts Geo Locations API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Geo Locations
+paths:
+  /api/locations/countries:
+    get:
+      summary: List all country codes
+      description: Get list of all country in 2-letter ISO 3166-1 alpha-2 codes
+      tags:
+      - Geo Locations
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      responses:
+        '200':
+          description: List of country codes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  example: DE
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/locations/countries/{country}/cities:
+    get:
+      summary: List all city names by country
+      description: Get a list of all English city names for a given country code
+      tags:
+      - Geo Locations
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: country
+        required: true
+        schema:
+          $ref: '#/components/schemas/Country'
+      responses:
+        '200':
+          description: List of city names
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  responses:
+    bad_request:
+      description: Bad Request
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+  schemas:
+    Country:
+      description: Describe country geographical location information
+      type: object
+      properties:
+        country_name:
+          description: Commonly used English name of the country
+          type: string
+          example: Germany
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+      required:
+      - country_name
+      - country_code
+    City:
+      description: Describe city geographical location information
+      type: object
+      properties:
+        geoname_id:
+          description: Integer ID of the record in GeoNames database
+          type: integer
+          example: 2950158
+        city_name:
+          description: Commonly used English name of the city
+          type: string
+          example: Berlin
+      required:
+      - geoname_id
+      - city_name
+    CountryCode:
+      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
+      type: string
+      example: DE
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".

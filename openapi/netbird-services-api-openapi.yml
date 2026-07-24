@@ -1,0 +1,798 @@
+openapi: 3.1.0
+info:
+  title: NetBird REST Accounts Services API
+  description: API to manipulate groups, rules, policies and retrieve information about peers and users
+  version: 0.0.1
+servers:
+- url: https://api.netbird.io
+  description: Default server
+security:
+- BearerAuth: []
+- TokenAuth: []
+tags:
+- name: Services
+  description: Interact with and view information about reverse proxy services.
+paths:
+  /api/reverse-proxies/clusters:
+    get:
+      summary: List available proxy clusters
+      description: Returns a list of available proxy clusters with their connection status
+      tags:
+      - Services
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      responses:
+        '200':
+          description: A JSON Array of proxy clusters
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProxyCluster'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/reverse-proxies/services:
+    get:
+      summary: List all Services
+      description: Returns a list of all reverse proxy services
+      tags:
+      - Services
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      responses:
+        '200':
+          description: A JSON Array of services
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Service'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    post:
+      summary: Create a Service
+      description: Creates a new reverse proxy service
+      tags:
+      - Services
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      requestBody:
+        description: New service request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceRequest'
+      responses:
+        '200':
+          description: Service created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '409':
+          $ref: '#/components/responses/conflict'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/reverse-proxies/services/{serviceId}:
+    get:
+      summary: Retrieve a Service
+      description: Get information about a specific reverse proxy service
+      tags:
+      - Services
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: serviceId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a service
+      responses:
+        '200':
+          description: A service object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/not_found'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    put:
+      summary: Update a Service
+      description: Update an existing service
+      tags:
+      - Services
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: serviceId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a service
+      requestBody:
+        description: Service update request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceRequest'
+      responses:
+        '200':
+          description: Service updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/not_found'
+        '409':
+          $ref: '#/components/responses/conflict'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    delete:
+      summary: Delete a Service
+      description: Delete an existing service
+      tags:
+      - Services
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: serviceId
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of a service
+      responses:
+        '200':
+          description: Service deleted
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/not_found'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/reverse-proxies/domains:
+    get:
+      summary: Retrieve Service Domains
+      description: Get information about domains that can be used for service endpoints.
+      tags:
+      - Services
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      responses:
+        '200':
+          description: A JSON Array of ReverseProxyDomains
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReverseProxyDomain'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/not_found'
+        '500':
+          $ref: '#/components/responses/internal_error'
+    post:
+      summary: Create a Custom domain
+      description: Create a new Custom domain for use with service endpoints, this will trigger an initial validation check
+      tags:
+      - Services
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      requestBody:
+        description: Custom domain creation request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReverseProxyDomainRequest'
+      responses:
+        '200':
+          description: Service created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/not_found'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/reverse-proxies/domains/{domainId}:
+    delete:
+      summary: Delete a Custom domain
+      description: Delete an existing service custom domain
+      tags:
+      - Services
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        description: The custom domain ID
+      responses:
+        '204':
+          description: Service custom domain deleted
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/not_found'
+        '500':
+          $ref: '#/components/responses/internal_error'
+  /api/reverse-proxies/domains/{domainId}/validate:
+    get:
+      summary: Validate a custom domain
+      description: Trigger domain ownership validation for a custom domain
+      tags:
+      - Services
+      security:
+      - BearerAuth: []
+      - TokenAuth: []
+      parameters:
+      - in: path
+        name: domainId
+        required: true
+        schema:
+          type: string
+        description: The custom domain ID
+      responses:
+        '202':
+          description: Reverse proxy custom domain validation triggered
+        '400':
+          $ref: '#/components/responses/bad_request'
+        '401':
+          $ref: '#/components/responses/requires_authentication'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/not_found'
+        '500':
+          $ref: '#/components/responses/internal_error'
+components:
+  schemas:
+    HeaderAuthConfig:
+      type: object
+      description: Static header-value authentication. The proxy checks that the named header matches the configured value.
+      properties:
+        enabled:
+          type: boolean
+          description: Whether header auth is enabled
+          example: true
+        header:
+          type: string
+          description: HTTP header name to check (e.g. "Authorization", "X-API-Key")
+          example: X-API-Key
+        value:
+          type: string
+          description: Expected header value. For Basic auth use "Basic base64(user:pass)". For Bearer use "Bearer token". Cleared in responses.
+          example: my-secret-api-key
+      required:
+      - enabled
+      - header
+      - value
+    AccessRestrictions:
+      type: object
+      description: Connection-level access restrictions based on IP address or geography. Applies to both HTTP and L4 services.
+      properties:
+        allowed_cidrs:
+          type: array
+          items:
+            type: string
+            format: cidr
+            example: 192.168.1.0/24
+          description: CIDR allowlist. If non-empty, only IPs matching these CIDRs are allowed.
+        blocked_cidrs:
+          type: array
+          items:
+            type: string
+            format: cidr
+            example: 10.0.0.0/8
+          description: CIDR blocklist. Connections from these CIDRs are rejected. Evaluated after allowed_cidrs.
+        allowed_countries:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-zA-Z]{2}$
+            example: US
+          description: ISO 3166-1 alpha-2 country codes to allow. If non-empty, only these countries are permitted.
+        blocked_countries:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-zA-Z]{2}$
+            example: DE
+          description: ISO 3166-1 alpha-2 country codes to block.
+        crowdsec_mode:
+          type: string
+          enum:
+          - 'off'
+          - enforce
+          - observe
+          default: 'off'
+          description: CrowdSec IP reputation mode. Only available when the proxy cluster supports CrowdSec.
+    PINAuthConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether PIN auth is enabled
+          example: false
+        pin:
+          type: string
+          description: PIN value
+          example: '1234'
+      required:
+      - enabled
+      - pin
+    Service:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Service ID
+          example: cs8i4ug6lnn4g9hqv7mg
+        name:
+          type: string
+          description: Service name
+          example: myapp.example.netbird.app
+        domain:
+          type: string
+          description: Domain for the service
+          example: myapp.example.netbird.app
+        mode:
+          type: string
+          description: Service mode. "http" for L7 reverse proxy, "tcp"/"udp"/"tls" for L4 passthrough.
+          enum:
+          - http
+          - tcp
+          - udp
+          - tls
+          default: http
+          example: http
+        listen_port:
+          type: integer
+          minimum: 0
+          maximum: 65535
+          description: Port the proxy listens on (L4/TLS only)
+          example: 8443
+        port_auto_assigned:
+          type: boolean
+          description: Whether the listen port was auto-assigned
+          readOnly: true
+          example: false
+        proxy_cluster:
+          type: string
+          description: The proxy cluster handling this service (derived from domain)
+          example: eu.proxy.netbird.io
+        targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceTarget'
+          description: List of target backends for this service
+        enabled:
+          type: boolean
+          description: Whether the service is enabled
+          example: true
+        terminated:
+          type: boolean
+          description: Whether the service has been terminated. Terminated services cannot be updated. Services that violate the Terms of Service will be terminated.
+          readOnly: true
+          example: false
+        pass_host_header:
+          type: boolean
+          description: When true, the original client Host header is passed through to the backend instead of being rewritten to the backend's address
+          example: false
+        rewrite_redirects:
+          type: boolean
+          description: When true, Location headers in backend responses are rewritten to replace the backend address with the public-facing domain
+          example: false
+        auth:
+          $ref: '#/components/schemas/ServiceAuthConfig'
+        access_restrictions:
+          $ref: '#/components/schemas/AccessRestrictions'
+        meta:
+          $ref: '#/components/schemas/ServiceMeta'
+      required:
+      - id
+      - name
+      - domain
+      - targets
+      - enabled
+      - auth
+      - meta
+    ServiceTarget:
+      type: object
+      properties:
+        target_id:
+          type: string
+          description: Target ID
+          example: cs8i4ug6lnn4g9hqv7mg
+        target_type:
+          type: string
+          description: Target type
+          enum:
+          - peer
+          - host
+          - domain
+          - subnet
+          example: subnet
+        path:
+          type: string
+          description: URL path prefix for this target (HTTP only)
+          example: /
+        protocol:
+          type: string
+          description: Protocol to use when connecting to the backend
+          enum:
+          - http
+          - https
+          - tcp
+          - udp
+          example: http
+        host:
+          type: string
+          description: Backend ip or domain for this target
+          example: 10.10.0.1
+        port:
+          type: integer
+          minimum: 1
+          maximum: 65535
+          description: Backend port for this target
+          example: 8080
+        enabled:
+          type: boolean
+          description: Whether this target is enabled
+          example: true
+        options:
+          $ref: '#/components/schemas/ServiceTargetOptions'
+      required:
+      - target_id
+      - target_type
+      - protocol
+      - port
+      - enabled
+    ReverseProxyDomain:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Domain ID
+          example: ds8i4ug6lnn4g9hqv7mg
+        domain:
+          type: string
+          description: Domain name
+          example: example.netbird.app
+        validated:
+          type: boolean
+          description: Whether the domain has been validated
+          example: true
+        type:
+          $ref: '#/components/schemas/ReverseProxyDomainType'
+        target_cluster:
+          type: string
+          description: The proxy cluster this domain is validated against (only for custom domains)
+          example: eu.proxy.netbird.io
+        supports_custom_ports:
+          type: boolean
+          description: Whether the cluster supports binding arbitrary TCP/UDP ports
+          example: true
+        require_subdomain:
+          type: boolean
+          description: Whether a subdomain label is required in front of this domain. When true, the domain cannot be used bare.
+          example: false
+        supports_crowdsec:
+          type: boolean
+          description: Whether the proxy cluster has CrowdSec configured
+          example: false
+      required:
+      - id
+      - domain
+      - validated
+      - type
+    ServiceTargetOptions:
+      type: object
+      properties:
+        skip_tls_verify:
+          type: boolean
+          description: Skip TLS certificate verification for this backend
+          example: false
+        request_timeout:
+          type: string
+          description: Per-target response timeout as a Go duration string (e.g. "30s", "2m")
+          example: 30s
+        path_rewrite:
+          type: string
+          description: Controls how the request path is rewritten before forwarding to the backend. Default strips the matched prefix. "preserve" keeps the full original request path.
+          enum:
+          - preserve
+          example: preserve
+        custom_headers:
+          type: object
+          description: Extra headers sent to the backend. Hop-by-hop and proxy-managed headers (Host, Connection, Transfer-Encoding, etc.) are rejected.
+          propertyNames:
+            type: string
+            pattern: ^[!#$%&'*+.^_`|~0-9A-Za-z-]+$
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n]*$
+          example:
+            X-Custom-Header: value
+        proxy_protocol:
+          type: boolean
+          description: Send PROXY Protocol v2 header to this backend (TCP/TLS only)
+          example: false
+        session_idle_timeout:
+          type: string
+          description: Idle timeout before a UDP session is reaped, as a Go duration string (e.g. "30s", "2m").
+          example: 2m
+    PasswordAuthConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether password auth is enabled
+          example: true
+        password:
+          type: string
+          description: Auth password
+          example: s3cret
+      required:
+      - enabled
+      - password
+    ServiceRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Service name
+          example: myapp.example.netbird.app
+        domain:
+          type: string
+          description: Domain for the service
+          example: myapp.example.netbird.app
+        mode:
+          type: string
+          description: Service mode. "http" for L7 reverse proxy, "tcp"/"udp"/"tls" for L4 passthrough.
+          enum:
+          - http
+          - tcp
+          - udp
+          - tls
+          default: http
+          example: http
+        listen_port:
+          type: integer
+          minimum: 0
+          maximum: 65535
+          description: Port the proxy listens on (L4/TLS only). Set to 0 for auto-assignment.
+          example: 5432
+        targets:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceTarget'
+          description: List of target backends for this service
+        enabled:
+          type: boolean
+          description: Whether the service is enabled
+          default: true
+          example: true
+        pass_host_header:
+          type: boolean
+          description: When true, the original client Host header is passed through to the backend instead of being rewritten to the backend's address
+          example: false
+        rewrite_redirects:
+          type: boolean
+          description: When true, Location headers in backend responses are rewritten to replace the backend address with the public-facing domain
+          example: false
+        auth:
+          $ref: '#/components/schemas/ServiceAuthConfig'
+        access_restrictions:
+          $ref: '#/components/schemas/AccessRestrictions'
+      required:
+      - name
+      - domain
+      - enabled
+    ProxyCluster:
+      type: object
+      description: A proxy cluster represents a group of proxy nodes serving the same address
+      properties:
+        address:
+          type: string
+          description: Cluster address used for CNAME targets
+          example: eu.proxy.netbird.io
+        connected_proxies:
+          type: integer
+          description: Number of proxy nodes connected in this cluster
+          example: 3
+      required:
+      - address
+      - connected_proxies
+    ServiceMeta:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the service was created
+          example: '2024-02-03T10:30:00Z'
+        certificate_issued_at:
+          type: string
+          format: date-time
+          description: Timestamp when the certificate was issued (empty if not yet issued)
+          example: '2024-02-03T10:35:00Z'
+        status:
+          type: string
+          enum:
+          - pending
+          - active
+          - tunnel_not_created
+          - certificate_pending
+          - certificate_failed
+          - error
+          description: Current status of the service
+          example: active
+      required:
+      - created_at
+      - status
+    ServiceAuthConfig:
+      type: object
+      properties:
+        password_auth:
+          $ref: '#/components/schemas/PasswordAuthConfig'
+        pin_auth:
+          $ref: '#/components/schemas/PINAuthConfig'
+        bearer_auth:
+          $ref: '#/components/schemas/BearerAuthConfig'
+        link_auth:
+          $ref: '#/components/schemas/LinkAuthConfig'
+        header_auths:
+          type: array
+          items:
+            $ref: '#/components/schemas/HeaderAuthConfig'
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
+    ReverseProxyDomainRequest:
+      type: object
+      properties:
+        domain:
+          type: string
+          description: Domain name
+          example: myapp.example.com
+        target_cluster:
+          type: string
+          description: The proxy cluster this domain should be validated against
+          example: eu.proxy.netbird.io
+      required:
+      - domain
+      - target_cluster
+    LinkAuthConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether link auth is enabled
+          example: false
+      required:
+      - enabled
+    ReverseProxyDomainType:
+      type: string
+      description: Type of Reverse Proxy Domain
+      enum:
+      - free
+      - custom
+      example: free
+    BearerAuthConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether bearer auth is enabled
+          example: true
+        distribution_groups:
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7mg
+          description: List of group IDs that can use bearer auth
+      required:
+      - enabled
+  responses:
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
+    conflict:
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    not_found:
+      description: Resource not found
+      content: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    TokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Enter the token with the `Token` prefix, e.g. "Token nbp_F3f0d.....".
