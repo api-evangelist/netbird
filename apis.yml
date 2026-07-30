@@ -5,9 +5,22 @@ description: >-
   organization or home. We designed NetBird to be simple and fast, requiring near-zero configuration effort and leaving
   behind the hassle of opening ports, complex firewall rules, VPN gateways, etc.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/netbird.png
 tags:
   - Networking
   - VPN
@@ -20,26 +33,474 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/netbird/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: netbird:netbird
-    name: NetBird
-    description: >-
-      NetBird is an Open-Source Zero Trust Networking platform that allows you to create secure private networks for
-      your organization or home. We designed NetBird to be simple and fast, requiring near-zero configuration effort and
-      leaving behind the hassle of opening ports, complex firewall rules, VPN gateways, etc.
-    humanURL: https://docs.netbird.io/
-    baseURL: https://api.netbird.io
-    tags:
-      - Networking
-      - VPN
-      - Zero Trust
-      - Open Source
-      - WireGuard
-      - Security
-    properties:
-      - type: Documentation
-        url: https://docs.netbird.io/
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/netbird/refs/heads/main/openapi/netbird-openapi.yml
+- aid: netbird:netbird-accounts-api
+  name: NetBird Accounts API
+  description: View information about the accounts.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-aws-marketplace-api
+  name: NetBird AWS Marketplace API
+  description: Manage AWS Marketplace subscriptions.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - AWS Marketplace
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-aws-marketplace-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-checkout-api
+  name: NetBird Checkout API
+  description: Manage checkout sessions for plan subscriptions.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Checkout
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-checkout-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-dns-api
+  name: NetBird DNS API
+  description: Interact with and view information about DNS configuration.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - DNS
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-dns-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-dns-zones-api
+  name: NetBird DNS Zones API
+  description: Interact with and view information about custom DNS zones.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - DNS Zones
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-dns-zones-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-edr-falcon-integrations-api
+  name: NetBird EDR Falcon Integrations API
+  description: Manage CrowdStrike Falcon EDR integrations.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - EDR Falcon Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-edr-falcon-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-edr-fleetdm-integrations-api
+  name: NetBird EDR FleetDM Integrations API
+  description: Manage FleetDM EDR integrations.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - EDR FleetDM Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-edr-fleetdm-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-edr-huntress-integrations-api
+  name: NetBird EDR Huntress Integrations API
+  description: Manage Huntress EDR integrations.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - EDR Huntress Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-edr-huntress-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-edr-intune-integrations-api
+  name: NetBird EDR Intune Integrations API
+  description: Manage Microsoft Intune EDR integrations.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - EDR Intune Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-edr-intune-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-edr-peers-api
+  name: NetBird EDR Peers API
+  description: Manage EDR compliance bypass for peers.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - EDR Peers
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-edr-peers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-edr-sentinelone-integrations-api
+  name: NetBird EDR SentinelOne Integrations API
+  description: Manage SentinelOne EDR integrations.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - EDR SentinelOne Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-edr-sentinelone-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-event-streaming-integrations-api
+  name: NetBird Event Streaming Integrations API
+  description: Manage event streaming integrations.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Event Streaming Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-event-streaming-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-events-api
+  name: NetBird Events API
+  description: View information about the account and network events.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-geo-locations-api
+  name: NetBird Geo Locations API
+  description: The Geo Locations API from NetBird — 2 operation(s) for geo locations.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Geo Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-geo-locations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-groups-api
+  name: NetBird Groups API
+  description: Interact with and view information about groups.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-identity-providers-api
+  name: NetBird Identity Providers API
+  description: Interact with and view information about identity providers.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Identity Providers
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-identity-providers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-idp-azure-integrations-api
+  name: NetBird IDP Azure Integrations API
+  description: Manage Azure AD identity provider integrations for user and group sync.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - IDP Azure Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-idp-azure-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-idp-google-integrations-api
+  name: NetBird IDP Google Integrations API
+  description: Manage Google Workspace identity provider integrations for user and group sync.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - IDP Google Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-idp-google-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-idp-okta-scim-integrations-api
+  name: NetBird IDP Okta SCIM Integrations API
+  description: Manage Okta SCIM identity provider integrations for user and group sync.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - IDP Okta SCIM Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-idp-okta-scim-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-idp-scim-integrations-api
+  name: NetBird IDP SCIM Integrations API
+  description: Manage generic SCIM identity provider integrations for user and group sync.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - IDP SCIM Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-idp-scim-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-ingress-ports-api
+  name: NetBird Ingress Ports API
+  description: Interact with and view information about the ingress peers and ports.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Ingress Ports
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-ingress-ports-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-instance-api
+  name: NetBird Instance API
+  description: Instance setup and status endpoints for initial configuration.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Instance
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-instance-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-invoice-api
+  name: NetBird Invoice API
+  description: Manage and retrieve account invoices.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Invoice
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-invoice-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-jobs-api
+  name: NetBird Jobs API
+  description: Interact with and view information about remote jobs.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-msp-api
+  name: NetBird MSP API
+  description: MSP portal for Tenant management.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - MSP
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-msp-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-networks-api
+  name: NetBird Networks API
+  description: The Networks API from NetBird — 7 operation(s) for networks.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Networks
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-networks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-notifications-api
+  name: NetBird Notifications API
+  description: Manage notification channels for account event alerts.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-peers-api
+  name: NetBird Peers API
+  description: Interact with and view information about peers.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Peers
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-peers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-plans-api
+  name: NetBird Plans API
+  description: Retrieve available plans and products.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-plans-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-policies-api
+  name: NetBird Policies API
+  description: Interact with and view information about policies.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-policies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-portal-api
+  name: NetBird Portal API
+  description: Access customer portal for subscription management.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Portal
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-portal-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-posture-checks-api
+  name: NetBird Posture Checks API
+  description: Interact with and view information about posture checks.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Posture Checks
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-posture-checks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-routes-api
+  name: NetBird Routes API
+  description: Interact with and view information about routes.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Routes
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-routes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-services-api
+  name: NetBird Services API
+  description: Interact with and view information about reverse proxy services.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Services
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-services-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-setup-keys-api
+  name: NetBird Setup Keys API
+  description: Interact with and view information about setup keys.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Setup Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-setup-keys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-subscription-api
+  name: NetBird Subscription API
+  description: Manage and view information about account subscriptions.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Subscription
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-subscription-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-tokens-api
+  name: NetBird Tokens API
+  description: Interact with and view information about tokens.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-usage-api
+  name: NetBird Usage API
+  description: Retrieve current usage statistics for the account.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Usage
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-usage-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
+- aid: netbird:netbird-users-api
+  name: NetBird Users API
+  description: Interact with and view information about users.
+  humanURL: https://docs.netbird.io/
+  baseURL: https://api.netbird.io
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/netbird-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.netbird.io/
 common:
   - type: AgenticAccess
     url: agentic-access/netbird-agentic-access.yml
