@@ -2,13 +2,6 @@
   "repo": "netbird",
   "feeds": [
     {
-      "source": "https://netbird.io/blog/atom.xml",
-      "feed_url": "https://netbird.io/blog/atom.xml",
-      "title": "",
-      "saved": 0,
-      "method": "feed"
-    },
-    {
       "source": "https://github.com/netbirdio/netbird",
       "feed_url": "https://github.com/netbirdio/netbird",
       "title": "",
@@ -17,5 +10,5 @@
     }
   ],
   "post_count": 8,
-  "fetched": "2026-07-11T11:50:51Z"
+  "fetched": "2026-08-01T15:49:00Z"
 }
