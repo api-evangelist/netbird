@@ -1,0 +1,936 @@
+{
+  "item": [
+    {
+      "id": "5588a845-6f08-4ee6-8a3d-49d55676f8cc",
+      "name": "Accounts",
+      "description": {
+        "content": "View information about the accounts.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "23637e8d-41d5-4d89-9e18-7836ff3ebbf5",
+          "name": "List all Accounts",
+          "request": {
+            "name": "List all Accounts",
+            "description": {
+              "content": "Returns a list of accounts of a user. Always returns a list of one account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c6fbcd20-4124-4b6b-8c97-cfc6525945a5",
+              "name": "A JSON array of accounts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"ch8i4ug6lnn4g9hqv7l0\",\n    \"settings\": {\n      \"peer_login_expiration_enabled\": true,\n      \"peer_login_expiration\": 43200,\n      \"peer_inactivity_expiration_enabled\": true,\n      \"peer_inactivity_expiration\": 43200,\n      \"regular_users_view_blocked\": true,\n      \"peer_expose_enabled\": false,\n      \"peer_expose_groups\": [\n        \"ch8i4ug6lnn4g9hqv7m0\",\n        \"ch8i4ug6lnn4g9hqv7m0\"\n      ],\n      \"groups_propagation_enabled\": true,\n      \"jwt_groups_enabled\": true,\n      \"jwt_groups_claim_name\": \"roles\",\n      \"jwt_allow_groups\": [\n        \"Administrators\",\n        \"Administrators\"\n      ],\n      \"routing_peer_dns_resolution_enabled\": true,\n      \"dns_domain\": \"my-organization.org\",\n      \"network_range\": \"100.64.0.0/16\",\n      \"extra\": {\n        \"peer_approval_enabled\": true,\n        \"user_approval_required\": false,\n        \"network_traffic_logs_enabled\": true,\n        \"network_traffic_logs_groups\": [\n          \"ch8i4ug6lnn4g9hqv7m0\",\n          \"ch8i4ug6lnn4g9hqv7m0\"\n        ],\n        \"network_traffic_packet_counter_enabled\": true\n      },\n      \"lazy_connection_enabled\": true,\n      \"auto_update_version\": \"0.51.2\",\n      \"auto_update_always\": false,\n      \"embedded_idp_enabled\": false,\n      \"local_auth_disabled\": false\n    },\n    \"domain\": \"netbird.io\",\n    \"domain_category\": \"private\",\n    \"created_at\": \"2023-05-05T09:00:35.477782Z\",\n    \"created_by\": \"google-oauth2|277474792786460067937\",\n    \"onboarding\": {\n      \"signup_form_pending\": true,\n      \"onboarding_flow_pending\": false\n    }\n  },\n  {\n    \"id\": \"ch8i4ug6lnn4g9hqv7l0\",\n    \"settings\": {\n      \"peer_login_expiration_enabled\": true,\n      \"peer_login_expiration\": 43200,\n      \"peer_inactivity_expiration_enabled\": true,\n      \"peer_inactivity_expiration\": 43200,\n      \"regular_users_view_blocked\": true,\n      \"peer_expose_enabled\": false,\n      \"peer_expose_groups\": [\n        \"ch8i4ug6lnn4g9hqv7m0\",\n        \"ch8i4ug6lnn4g9hqv7m0\"\n      ],\n      \"groups_propagation_enabled\": true,\n      \"jwt_groups_enabled\": true,\n      \"jwt_groups_claim_name\": \"roles\",\n      \"jwt_allow_groups\": [\n        \"Administrators\",\n        \"Administrators\"\n      ],\n      \"routing_peer_dns_resolution_enabled\": true,\n      \"dns_domain\": \"my-organization.org\",\n      \"network_range\": \"100.64.0.0/16\",\n      \"extra\": {\n        \"peer_approval_enabled\": true,\n        \"user_approval_required\": false,\n        \"network_traffic_logs_enabled\": true,\n        \"network_traffic_logs_groups\": [\n          \"ch8i4ug6lnn4g9hqv7m0\",\n          \"ch8i4ug6lnn4g9hqv7m0\"\n        ],\n        \"network_traffic_packet_counter_enabled\": true\n      },\n      \"lazy_connection_enabled\": true,\n      \"auto_update_version\": \"0.51.2\",\n      \"auto_update_always\": false,\n      \"embedded_idp_enabled\": false,\n      \"local_auth_disabled\": false\n    },\n    \"domain\": \"netbird.io\",\n    \"domain_category\": \"private\",\n    \"created_at\": \"2023-05-05T09:00:35.477782Z\",\n    \"created_by\": \"google-oauth2|277474792786460067937\",\n    \"onboarding\": {\n      \"signup_form_pending\": true,\n      \"onboarding_flow_pending\": false\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5580e10-224e-489b-9c64-928d37149e3c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1d1cc56a-80f8-4e92-a75e-37579a789d70",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "58fa609a-d456-4802-affc-3583f9cf6583",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "73248e83-2da6-4e41-9e0d-581ce7216814",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8630313-8826-4b1f-b7a5-a7fac4bf486c",
+          "name": "Delete an Account",
+          "request": {
+            "name": "Delete an Account",
+            "description": {
+              "content": "Deletes an account and all its resources. Only account owners can delete accounts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "accounts",
+                ":accountId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The unique identifier of an account"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f761c4c5-6797-4fe1-baa4-4b650b93ace8",
+              "name": "Delete account status code",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of an account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "136a9210-3e0c-4a44-af9b-ea23a471d4ec",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of an account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "94682bfc-69b9-406f-915c-599c18164c99",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of an account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3f5e2ee5-83f4-46a5-831f-b63a70f7aa97",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of an account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1b69ce39-da75-4f20-9515-e403dd029301",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of an account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17f3dbc3-d1a8-44a2-850b-efa369c5ff19",
+          "name": "Update an Account",
+          "request": {
+            "name": "Update an Account",
+            "description": {
+              "content": "Update information about an account",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "accounts",
+                ":accountId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "accountId",
+                  "description": "(Required) The unique identifier of an account"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"settings\": {\n    \"peer_login_expiration_enabled\": \"<boolean>\",\n    \"peer_login_expiration\": \"<integer>\",\n    \"peer_inactivity_expiration_enabled\": \"<boolean>\",\n    \"peer_inactivity_expiration\": \"<integer>\",\n    \"regular_users_view_blocked\": \"<boolean>\",\n    \"peer_expose_enabled\": \"<boolean>\",\n    \"peer_expose_groups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"groups_propagation_enabled\": \"<boolean>\",\n    \"jwt_groups_enabled\": \"<boolean>\",\n    \"jwt_groups_claim_name\": \"<string>\",\n    \"jwt_allow_groups\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"routing_peer_dns_resolution_enabled\": \"<boolean>\",\n    \"dns_domain\": \"<string>\",\n    \"network_range\": \"<cidr>\",\n    \"extra\": {\n      \"peer_approval_enabled\": \"<boolean>\",\n      \"user_approval_required\": \"<boolean>\",\n      \"network_traffic_logs_enabled\": \"<boolean>\",\n      \"network_traffic_logs_groups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"network_traffic_packet_counter_enabled\": \"<boolean>\"\n    },\n    \"lazy_connection_enabled\": \"<boolean>\",\n    \"auto_update_version\": \"<string>\",\n    \"auto_update_always\": \"<boolean>\"\n  },\n  \"onboarding\": {\n    \"signup_form_pending\": \"<boolean>\",\n    \"onboarding_flow_pending\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7b36baeb-5100-4c66-abbb-1740ce025ebc",
+              "name": "An Account object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of an account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"settings\": {\n    \"peer_login_expiration_enabled\": true,\n    \"peer_login_expiration\": 43200,\n    \"peer_inactivity_expiration_enabled\": true,\n    \"peer_inactivity_expiration\": 43200,\n    \"regular_users_view_blocked\": true,\n    \"peer_expose_enabled\": false,\n    \"peer_expose_groups\": [\n      \"ch8i4ug6lnn4g9hqv7m0\",\n      \"ch8i4ug6lnn4g9hqv7m0\"\n    ],\n    \"groups_propagation_enabled\": true,\n    \"jwt_groups_enabled\": true,\n    \"jwt_groups_claim_name\": \"roles\",\n    \"jwt_allow_groups\": [\n      \"Administrators\",\n      \"Administrators\"\n    ],\n    \"routing_peer_dns_resolution_enabled\": true,\n    \"dns_domain\": \"my-organization.org\",\n    \"network_range\": \"100.64.0.0/16\",\n    \"extra\": {\n      \"peer_approval_enabled\": true,\n      \"user_approval_required\": false,\n      \"network_traffic_logs_enabled\": true,\n      \"network_traffic_logs_groups\": [\n        \"ch8i4ug6lnn4g9hqv7m0\",\n        \"ch8i4ug6lnn4g9hqv7m0\"\n      ],\n      \"network_traffic_packet_counter_enabled\": true\n    },\n    \"lazy_connection_enabled\": true,\n    \"auto_update_version\": \"0.51.2\",\n    \"auto_update_always\": false\n  },\n  \"onboarding\": {\n    \"signup_form_pending\": true,\n    \"onboarding_flow_pending\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ch8i4ug6lnn4g9hqv7l0\",\n  \"settings\": {\n    \"peer_login_expiration_enabled\": true,\n    \"peer_login_expiration\": 43200,\n    \"peer_inactivity_expiration_enabled\": true,\n    \"peer_inactivity_expiration\": 43200,\n    \"regular_users_view_blocked\": true,\n    \"peer_expose_enabled\": false,\n    \"peer_expose_groups\": [\n      \"ch8i4ug6lnn4g9hqv7m0\",\n      \"ch8i4ug6lnn4g9hqv7m0\"\n    ],\n    \"groups_propagation_enabled\": true,\n    \"jwt_groups_enabled\": true,\n    \"jwt_groups_claim_name\": \"roles\",\n    \"jwt_allow_groups\": [\n      \"Administrators\",\n      \"Administrators\"\n    ],\n    \"routing_peer_dns_resolution_enabled\": true,\n    \"dns_domain\": \"my-organization.org\",\n    \"network_range\": \"100.64.0.0/16\",\n    \"extra\": {\n      \"peer_approval_enabled\": true,\n      \"user_approval_required\": false,\n      \"network_traffic_logs_enabled\": true,\n      \"network_traffic_logs_groups\": [\n        \"ch8i4ug6lnn4g9hqv7m0\",\n        \"ch8i4ug6lnn4g9hqv7m0\"\n      ],\n      \"network_traffic_packet_counter_enabled\": true\n    },\n    \"lazy_connection_enabled\": true,\n    \"auto_update_version\": \"0.51.2\",\n    \"auto_update_always\": false,\n    \"embedded_idp_enabled\": false,\n    \"local_auth_disabled\": false\n  },\n  \"domain\": \"netbird.io\",\n  \"domain_category\": \"private\",\n  \"created_at\": \"2023-05-05T09:00:35.477782Z\",\n  \"created_by\": \"google-oauth2|277474792786460067937\",\n  \"onboarding\": {\n    \"signup_form_pending\": true,\n    \"onboarding_flow_pending\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48aad930-18db-47ed-9e4b-bfa1ba15f1e6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of an account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"settings\": {\n    \"peer_login_expiration_enabled\": true,\n    \"peer_login_expiration\": 43200,\n    \"peer_inactivity_expiration_enabled\": true,\n    \"peer_inactivity_expiration\": 43200,\n    \"regular_users_view_blocked\": true,\n    \"peer_expose_enabled\": false,\n    \"peer_expose_groups\": [\n      \"ch8i4ug6lnn4g9hqv7m0\",\n      \"ch8i4ug6lnn4g9hqv7m0\"\n    ],\n    \"groups_propagation_enabled\": true,\n    \"jwt_groups_enabled\": true,\n    \"jwt_groups_claim_name\": \"roles\",\n    \"jwt_allow_groups\": [\n      \"Administrators\",\n      \"Administrators\"\n    ],\n    \"routing_peer_dns_resolution_enabled\": true,\n    \"dns_domain\": \"my-organization.org\",\n    \"network_range\": \"100.64.0.0/16\",\n    \"extra\": {\n      \"peer_approval_enabled\": true,\n      \"user_approval_required\": false,\n      \"network_traffic_logs_enabled\": true,\n      \"network_traffic_logs_groups\": [\n        \"ch8i4ug6lnn4g9hqv7m0\",\n        \"ch8i4ug6lnn4g9hqv7m0\"\n      ],\n      \"network_traffic_packet_counter_enabled\": true\n    },\n    \"lazy_connection_enabled\": true,\n    \"auto_update_version\": \"0.51.2\",\n    \"auto_update_always\": false\n  },\n  \"onboarding\": {\n    \"signup_form_pending\": true,\n    \"onboarding_flow_pending\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "06862806-7954-4401-ae07-33f893101b7c",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of an account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"settings\": {\n    \"peer_login_expiration_enabled\": true,\n    \"peer_login_expiration\": 43200,\n    \"peer_inactivity_expiration_enabled\": true,\n    \"peer_inactivity_expiration\": 43200,\n    \"regular_users_view_blocked\": true,\n    \"peer_expose_enabled\": false,\n    \"peer_expose_groups\": [\n      \"ch8i4ug6lnn4g9hqv7m0\",\n      \"ch8i4ug6lnn4g9hqv7m0\"\n    ],\n    \"groups_propagation_enabled\": true,\n    \"jwt_groups_enabled\": true,\n    \"jwt_groups_claim_name\": \"roles\",\n    \"jwt_allow_groups\": [\n      \"Administrators\",\n      \"Administrators\"\n    ],\n    \"routing_peer_dns_resolution_enabled\": true,\n    \"dns_domain\": \"my-organization.org\",\n    \"network_range\": \"100.64.0.0/16\",\n    \"extra\": {\n      \"peer_approval_enabled\": true,\n      \"user_approval_required\": false,\n      \"network_traffic_logs_enabled\": true,\n      \"network_traffic_logs_groups\": [\n        \"ch8i4ug6lnn4g9hqv7m0\",\n        \"ch8i4ug6lnn4g9hqv7m0\"\n      ],\n      \"network_traffic_packet_counter_enabled\": true\n    },\n    \"lazy_connection_enabled\": true,\n    \"auto_update_version\": \"0.51.2\",\n    \"auto_update_always\": false\n  },\n  \"onboarding\": {\n    \"signup_form_pending\": true,\n    \"onboarding_flow_pending\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "797bed08-0bba-48ed-8df6-6da44398c237",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of an account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"settings\": {\n    \"peer_login_expiration_enabled\": true,\n    \"peer_login_expiration\": 43200,\n    \"peer_inactivity_expiration_enabled\": true,\n    \"peer_inactivity_expiration\": 43200,\n    \"regular_users_view_blocked\": true,\n    \"peer_expose_enabled\": false,\n    \"peer_expose_groups\": [\n      \"ch8i4ug6lnn4g9hqv7m0\",\n      \"ch8i4ug6lnn4g9hqv7m0\"\n    ],\n    \"groups_propagation_enabled\": true,\n    \"jwt_groups_enabled\": true,\n    \"jwt_groups_claim_name\": \"roles\",\n    \"jwt_allow_groups\": [\n      \"Administrators\",\n      \"Administrators\"\n    ],\n    \"routing_peer_dns_resolution_enabled\": true,\n    \"dns_domain\": \"my-organization.org\",\n    \"network_range\": \"100.64.0.0/16\",\n    \"extra\": {\n      \"peer_approval_enabled\": true,\n      \"user_approval_required\": false,\n      \"network_traffic_logs_enabled\": true,\n      \"network_traffic_logs_groups\": [\n        \"ch8i4ug6lnn4g9hqv7m0\",\n        \"ch8i4ug6lnn4g9hqv7m0\"\n      ],\n      \"network_traffic_packet_counter_enabled\": true\n    },\n    \"lazy_connection_enabled\": true,\n    \"auto_update_version\": \"0.51.2\",\n    \"auto_update_always\": false\n  },\n  \"onboarding\": {\n    \"signup_form_pending\": true,\n    \"onboarding_flow_pending\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "25c167ca-da89-4389-99e0-699c16dc7666",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "accounts",
+                    ":accountId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "accountId",
+                      "description": "(Required) The unique identifier of an account"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"settings\": {\n    \"peer_login_expiration_enabled\": true,\n    \"peer_login_expiration\": 43200,\n    \"peer_inactivity_expiration_enabled\": true,\n    \"peer_inactivity_expiration\": 43200,\n    \"regular_users_view_blocked\": true,\n    \"peer_expose_enabled\": false,\n    \"peer_expose_groups\": [\n      \"ch8i4ug6lnn4g9hqv7m0\",\n      \"ch8i4ug6lnn4g9hqv7m0\"\n    ],\n    \"groups_propagation_enabled\": true,\n    \"jwt_groups_enabled\": true,\n    \"jwt_groups_claim_name\": \"roles\",\n    \"jwt_allow_groups\": [\n      \"Administrators\",\n      \"Administrators\"\n    ],\n    \"routing_peer_dns_resolution_enabled\": true,\n    \"dns_domain\": \"my-organization.org\",\n    \"network_range\": \"100.64.0.0/16\",\n    \"extra\": {\n      \"peer_approval_enabled\": true,\n      \"user_approval_required\": false,\n      \"network_traffic_logs_enabled\": true,\n      \"network_traffic_logs_groups\": [\n        \"ch8i4ug6lnn4g9hqv7m0\",\n        \"ch8i4ug6lnn4g9hqv7m0\"\n      ],\n      \"network_traffic_packet_counter_enabled\": true\n    },\n    \"lazy_connection_enabled\": true,\n    \"auto_update_version\": \"0.51.2\",\n    \"auto_update_always\": false\n  },\n  \"onboarding\": {\n    \"signup_form_pending\": true,\n    \"onboarding_flow_pending\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.netbird.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1ac543f1-eee9-4c67-8c72-a4c0311b7bb0",
+    "name": "NetBird REST Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to manipulate groups, rules, policies and retrieve information about peers and users",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,180 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts MSP API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MSP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get MSP tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants"
+          },
+          "docs": "Get MSP tenants"
+        },
+        {
+          "info": {
+            "name": "Create MSP tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create MSP tenant"
+        },
+        {
+          "info": {
+            "name": "Update MSP tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a tenant account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update MSP tenant"
+        },
+        {
+          "info": {
+            "name": "Unlink a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants/:id/unlink",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a tenant account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unlink a tenant"
+        },
+        {
+          "info": {
+            "name": "Verify a tenant domain DNS challenge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants/:id/dns",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a tenant account"
+              }
+            ]
+          },
+          "docs": "Verify a tenant domain DNS challenge"
+        },
+        {
+          "info": {
+            "name": "Create subscription for Tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants/:id/subscription",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a tenant account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create subscription for Tenant"
+        },
+        {
+          "info": {
+            "name": "Invite existing account as a Tenant to the MSP account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants/:id/invite",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an existing tenant account"
+              }
+            ]
+          },
+          "docs": "Invite existing account as a Tenant to the MSP account"
+        },
+        {
+          "info": {
+            "name": "Response by the invited Tenant account owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/msp/tenants/:id/invite",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an existing tenant account"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Response by the invited Tenant account owner"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

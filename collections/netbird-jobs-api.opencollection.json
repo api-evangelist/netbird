@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts Jobs API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers/:peerId/jobs",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve all jobs for a given peer"
+        },
+        {
+          "info": {
+            "name": "Create Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/peers/:peerId/jobs",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new job for a given peer"
+        },
+        {
+          "info": {
+            "name": "Get Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers/:peerId/jobs/:jobId",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              },
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a job"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve details of a specific job"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

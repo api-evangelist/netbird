@@ -1,0 +1,424 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts Networks API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Networks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Networks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/networks",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all networks"
+        },
+        {
+          "info": {
+            "name": "Create a Network",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/networks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a Network"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Network",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/networks/:networkId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a Network"
+        },
+        {
+          "info": {
+            "name": "Update a Network",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/networks/:networkId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update/Replace a Network"
+        },
+        {
+          "info": {
+            "name": "Delete a Network",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/networks/:networkId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a network"
+        },
+        {
+          "info": {
+            "name": "List all Network Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/networks/:networkId/resources",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all resources in a network"
+        },
+        {
+          "info": {
+            "name": "Create a Network Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/networks/:networkId/resources",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a Network Resource"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Network Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/networks/:networkId/resources/:resourceId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network resource"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a Network Resource"
+        },
+        {
+          "info": {
+            "name": "Update a Network Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/networks/:networkId/resources/:resourceId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a resource"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a Network Resource"
+        },
+        {
+          "info": {
+            "name": "Delete a Network Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/networks/:networkId/resources/:resourceId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resourceId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a network resource"
+        },
+        {
+          "info": {
+            "name": "List all Network Routers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/networks/:networkId/routers",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all routers in a network"
+        },
+        {
+          "info": {
+            "name": "Create a Network Router",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/networks/:networkId/routers",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a Network Router"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Network Router",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/networks/:networkId/routers/:routerId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              },
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a router"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a Network Router"
+        },
+        {
+          "info": {
+            "name": "Update a Network Router",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/networks/:networkId/routers/:routerId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a network"
+              },
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a router"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a Network Router"
+        },
+        {
+          "info": {
+            "name": "Delete a Network Router",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/networks/:networkId/routers/:routerId",
+            "params": [
+              {
+                "name": "networkId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "routerId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a network router"
+        },
+        {
+          "info": {
+            "name": "List all Network Routers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/networks/routers",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all routers in a network"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts Posture Checks API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Posture Checks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Posture Checks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/posture-checks",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all posture checks"
+        },
+        {
+          "info": {
+            "name": "Create a Posture Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/posture-checks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a posture check"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Posture Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/posture-checks/:postureCheckId",
+            "params": [
+              {
+                "name": "postureCheckId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a posture check"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a posture check"
+        },
+        {
+          "info": {
+            "name": "Update a Posture Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/posture-checks/:postureCheckId",
+            "params": [
+              {
+                "name": "postureCheckId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a posture check"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update/Replace a posture check"
+        },
+        {
+          "info": {
+            "name": "Delete a Posture Check",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/posture-checks/:postureCheckId",
+            "params": [
+              {
+                "name": "postureCheckId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a posture check"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a posture check"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

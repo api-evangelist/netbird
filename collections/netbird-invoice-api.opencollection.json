@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts Invoice API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoice",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get account's paid invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/billing/invoices"
+          },
+          "docs": "Get account's paid invoices"
+        },
+        {
+          "info": {
+            "name": "Get account invoice URL to Stripe.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/billing/invoices/:id/pdf",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the invoice"
+              }
+            ]
+          },
+          "docs": "Get account invoice URL to Stripe."
+        },
+        {
+          "info": {
+            "name": "Get account invoice CSV.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/billing/invoices/:id/csv",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the invoice"
+              }
+            ]
+          },
+          "docs": "Get account invoice CSV."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

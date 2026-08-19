@@ -1,0 +1,1347 @@
+{
+  "item": [
+    {
+      "id": "e0484d67-2a67-4666-8bbd-770030d129ad",
+      "name": "Policies",
+      "description": {
+        "content": "Interact with and view information about policies.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0a8a84f5-4f24-40e6-935f-53df7ad87c7c",
+          "name": "List all Policies",
+          "request": {
+            "name": "List all Policies",
+            "description": {
+              "content": "Returns a list of all policies",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "88b435c4-c658-464b-b481-e5e88f4fd98b",
+              "name": "A JSON Array of Policies",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"enabled\": true,\n    \"name\": \"ch8i4ug6lnn4g9hqv7mg\",\n    \"rules\": [\n      {\n        \"name\": \"Default\",\n        \"enabled\": true,\n        \"bidirectional\": true,\n        \"protocol\": \"tcp\",\n        \"action\": \"accept\",\n        \"description\": \"This is a default rule that allows connections between all the resources\",\n        \"ports\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"port_ranges\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"authorized_groups\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n        \"sources\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"sourceResource\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"destinations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"destinationResource\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"name\": \"Default\",\n        \"enabled\": true,\n        \"bidirectional\": true,\n        \"protocol\": \"tcp\",\n        \"action\": \"accept\",\n        \"description\": \"This is a default rule that allows connections between all the resources\",\n        \"ports\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"port_ranges\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"authorized_groups\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n        \"sources\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"sourceResource\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"destinations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"destinationResource\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ],\n    \"source_posture_checks\": [\n      \"chacdk86lnnboviihd70\",\n      \"chacdk86lnnboviihd70\"\n    ],\n    \"description\": \"This is a default policy that allows connections between all the resources\",\n    \"id\": \"ch8i4ug6lnn4g9hqv7mg\"\n  },\n  {\n    \"enabled\": true,\n    \"name\": \"ch8i4ug6lnn4g9hqv7mg\",\n    \"rules\": [\n      {\n        \"name\": \"Default\",\n        \"enabled\": true,\n        \"bidirectional\": true,\n        \"protocol\": \"tcp\",\n        \"action\": \"accept\",\n        \"description\": \"This is a default rule that allows connections between all the resources\",\n        \"ports\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"port_ranges\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"authorized_groups\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n        \"sources\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"sourceResource\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"destinations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"destinationResource\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"name\": \"Default\",\n        \"enabled\": true,\n        \"bidirectional\": true,\n        \"protocol\": \"tcp\",\n        \"action\": \"accept\",\n        \"description\": \"This is a default rule that allows connections between all the resources\",\n        \"ports\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"port_ranges\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"authorized_groups\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n        \"sources\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"sourceResource\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"destinations\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"destinationResource\": {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ],\n    \"source_posture_checks\": [\n      \"chacdk86lnnboviihd70\",\n      \"chacdk86lnnboviihd70\"\n    ],\n    \"description\": \"This is a default policy that allows connections between all the resources\",\n    \"id\": \"ch8i4ug6lnn4g9hqv7mg\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cc98f31-e21c-4cb2-b0e9-78c5b45e9532",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "129a3cb7-fede-4e2e-8cea-4957e65969f1",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fe6bb9c3-b48c-4a66-afbf-db1507e8b9da",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "38c17602-8cef-4dc9-bbc3-f952bb67b0da",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d80a3abe-0646-4050-9738-6fe639a0ddbf",
+          "name": "Create a Policy",
+          "request": {
+            "name": "Create a Policy",
+            "description": {
+              "content": "Creates a policy",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"rules\": [\n    {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"bidirectional\": \"<boolean>\",\n      \"protocol\": \"<string>\",\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"ports\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"key_1\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"key_2\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"id\": \"<string>\",\n      \"sources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"<string>\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"<string>\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"bidirectional\": \"<boolean>\",\n      \"protocol\": \"<string>\",\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"ports\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"id\": \"<string>\",\n      \"sources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"<string>\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"<string>\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"source_posture_checks\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7fbf4102-35b0-4cff-9047-b6a11cda9b99",
+              "name": "A Policy Object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"name\": \"ch8i4ug6lnn4g9hqv7mg\",\n  \"rules\": [\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ],\n        \"key_1\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        \"ch8i4ug6lnn4g9hqv797\",\n        \"ch8i4ug6lnn4g9hqv797\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"ch8i4ug6lnn4g9h7v7m0\",\n        \"ch8i4ug6lnn4g9h7v7m0\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ],\n        \"key_1\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        \"ch8i4ug6lnn4g9hqv797\",\n        \"ch8i4ug6lnn4g9hqv797\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"ch8i4ug6lnn4g9h7v7m0\",\n        \"ch8i4ug6lnn4g9h7v7m0\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"description\": \"This is a default policy that allows connections between all the resources\",\n  \"source_posture_checks\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"enabled\": true,\n  \"name\": \"ch8i4ug6lnn4g9hqv7mg\",\n  \"rules\": [\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ],\n        \"key_1\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        },\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        }\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        },\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        }\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        },\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        }\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        },\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        }\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"source_posture_checks\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"description\": \"This is a default policy that allows connections between all the resources\",\n  \"id\": \"ch8i4ug6lnn4g9hqv7mg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f87d122e-03c4-403a-9aea-c1d6450b58ba",
+          "name": "Retrieve a Policy",
+          "request": {
+            "name": "Retrieve a Policy",
+            "description": {
+              "content": "Get information about a Policies",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "policies",
+                ":policyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyId",
+                  "description": "(Required) The unique identifier of a policy"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4c1902b8-5384-40a5-8685-56205f461ea8",
+              "name": "A Policy object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The unique identifier of a policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"enabled\": true,\n  \"name\": \"ch8i4ug6lnn4g9hqv7mg\",\n  \"rules\": [\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ],\n        \"key_1\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        },\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        }\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        },\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        }\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        },\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        }\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        },\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        }\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"source_posture_checks\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"description\": \"This is a default policy that allows connections between all the resources\",\n  \"id\": \"ch8i4ug6lnn4g9hqv7mg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "839306c1-a187-4b7e-8d85-b2e5d91a68c6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The unique identifier of a policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9d68c3ae-5d33-4d16-8cbb-f4fc8706ade0",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The unique identifier of a policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fe02f2bc-820f-45fc-9de4-54e30e77c85b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The unique identifier of a policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a6374eed-5498-47db-aafc-8e13fb988911",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The unique identifier of a policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4498c28c-1afa-49d8-9790-1b44c5091dd9",
+          "name": "Update a Policy",
+          "request": {
+            "name": "Update a Policy",
+            "description": {
+              "content": "Update/Replace a Policy",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "policies",
+                ":policyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyId",
+                  "description": "(Required) The unique identifier of a policy"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"rules\": [\n    {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"bidirectional\": \"<boolean>\",\n      \"protocol\": \"<string>\",\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"ports\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"key_1\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"key_2\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"id\": \"<string>\",\n      \"sources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"<string>\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"<string>\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"enabled\": \"<boolean>\",\n      \"bidirectional\": \"<boolean>\",\n      \"protocol\": \"<string>\",\n      \"action\": \"<string>\",\n      \"description\": \"<string>\",\n      \"ports\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"id\": \"<string>\",\n      \"sources\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"<string>\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"<string>\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"source_posture_checks\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ecedb6e9-1596-4be4-bcca-4ca99fbcca4d",
+              "name": "A Policy object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The unique identifier of a policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"name\": \"ch8i4ug6lnn4g9hqv7mg\",\n  \"rules\": [\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ],\n        \"key_1\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        \"ch8i4ug6lnn4g9hqv797\",\n        \"ch8i4ug6lnn4g9hqv797\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"ch8i4ug6lnn4g9h7v7m0\",\n        \"ch8i4ug6lnn4g9h7v7m0\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ],\n        \"key_1\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        \"ch8i4ug6lnn4g9hqv797\",\n        \"ch8i4ug6lnn4g9hqv797\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"ch8i4ug6lnn4g9h7v7m0\",\n        \"ch8i4ug6lnn4g9h7v7m0\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"description\": \"This is a default policy that allows connections between all the resources\",\n  \"source_posture_checks\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"enabled\": true,\n  \"name\": \"ch8i4ug6lnn4g9hqv7mg\",\n  \"rules\": [\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ],\n        \"key_1\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        },\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        }\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        },\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        }\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        },\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        }\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        },\n        {\n          \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n          \"name\": \"devs\",\n          \"peers_count\": 2,\n          \"resources_count\": 5,\n          \"issued\": \"api\"\n        }\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"source_posture_checks\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"description\": \"This is a default policy that allows connections between all the resources\",\n  \"id\": \"ch8i4ug6lnn4g9hqv7mg\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f82ed946-c0ce-4dcf-9b2f-ca1fd9458d6d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The unique identifier of a policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"name\": \"ch8i4ug6lnn4g9hqv7mg\",\n  \"rules\": [\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ],\n        \"key_1\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        \"ch8i4ug6lnn4g9hqv797\",\n        \"ch8i4ug6lnn4g9hqv797\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"ch8i4ug6lnn4g9h7v7m0\",\n        \"ch8i4ug6lnn4g9h7v7m0\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ],\n        \"key_1\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        \"ch8i4ug6lnn4g9hqv797\",\n        \"ch8i4ug6lnn4g9hqv797\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"ch8i4ug6lnn4g9h7v7m0\",\n        \"ch8i4ug6lnn4g9h7v7m0\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"description\": \"This is a default policy that allows connections between all the resources\",\n  \"source_posture_checks\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1d6287e5-001f-42e6-bcc3-c1de49bea486",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The unique identifier of a policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"name\": \"ch8i4ug6lnn4g9hqv7mg\",\n  \"rules\": [\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ],\n        \"key_1\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        \"ch8i4ug6lnn4g9hqv797\",\n        \"ch8i4ug6lnn4g9hqv797\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"ch8i4ug6lnn4g9h7v7m0\",\n        \"ch8i4ug6lnn4g9h7v7m0\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ],\n        \"key_1\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        \"ch8i4ug6lnn4g9hqv797\",\n        \"ch8i4ug6lnn4g9hqv797\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"ch8i4ug6lnn4g9h7v7m0\",\n        \"ch8i4ug6lnn4g9h7v7m0\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"description\": \"This is a default policy that allows connections between all the resources\",\n  \"source_posture_checks\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "41aa0b55-e263-4874-b57f-cb8a1491d0ad",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The unique identifier of a policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"name\": \"ch8i4ug6lnn4g9hqv7mg\",\n  \"rules\": [\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ],\n        \"key_1\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        \"ch8i4ug6lnn4g9hqv797\",\n        \"ch8i4ug6lnn4g9hqv797\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"ch8i4ug6lnn4g9h7v7m0\",\n        \"ch8i4ug6lnn4g9h7v7m0\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ],\n        \"key_1\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        \"ch8i4ug6lnn4g9hqv797\",\n        \"ch8i4ug6lnn4g9hqv797\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"ch8i4ug6lnn4g9h7v7m0\",\n        \"ch8i4ug6lnn4g9h7v7m0\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"description\": \"This is a default policy that allows connections between all the resources\",\n  \"source_posture_checks\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1eab16f9-eb32-40ef-ba00-39dae8a89533",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The unique identifier of a policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"name\": \"ch8i4ug6lnn4g9hqv7mg\",\n  \"rules\": [\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ],\n        \"key_1\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        \"ch8i4ug6lnn4g9hqv797\",\n        \"ch8i4ug6lnn4g9hqv797\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"ch8i4ug6lnn4g9h7v7m0\",\n        \"ch8i4ug6lnn4g9h7v7m0\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    {\n      \"name\": \"Default\",\n      \"enabled\": true,\n      \"bidirectional\": true,\n      \"protocol\": \"tcp\",\n      \"action\": \"accept\",\n      \"description\": \"This is a default rule that allows connections between all the resources\",\n      \"ports\": [\n        \"80\",\n        \"80\"\n      ],\n      \"port_ranges\": [\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"start\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"end\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"authorized_groups\": {\n        \"key_0\": [\n          \"group1\",\n          \"group1\"\n        ],\n        \"key_1\": [\n          \"group1\",\n          \"group1\"\n        ]\n      },\n      \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n      \"sources\": [\n        \"ch8i4ug6lnn4g9hqv797\",\n        \"ch8i4ug6lnn4g9hqv797\"\n      ],\n      \"sourceResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"destinations\": [\n        \"ch8i4ug6lnn4g9h7v7m0\",\n        \"ch8i4ug6lnn4g9h7v7m0\"\n      ],\n      \"destinationResource\": {\n        \"id\": \"chacdk86lnnboviihd7g\",\n        \"type\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  ],\n  \"description\": \"This is a default policy that allows connections between all the resources\",\n  \"source_posture_checks\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98eaef97-8366-42ed-960e-64277b0cec4d",
+          "name": "Delete a Policy",
+          "request": {
+            "name": "Delete a Policy",
+            "description": {
+              "content": "Delete a policy",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "policies",
+                ":policyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyId",
+                  "description": "(Required) The unique identifier of a policy"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "23087314-3952-4057-bbf9-3c364f833124",
+              "name": "Delete status code",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The unique identifier of a policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "32d934ae-c9f7-4e5e-acc8-71e4f9c285bb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The unique identifier of a policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "94a132c8-db16-41a3-ba9a-7cd2ae6adcec",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The unique identifier of a policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e30bc65-a9fa-4771-807e-d73d98c42e77",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The unique identifier of a policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c5128367-35ef-454a-8028-8601e145f414",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The unique identifier of a policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.netbird.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "50010d18-617e-4a90-9754-7fe83075ab45",
+    "name": "NetBird REST Accounts Policies API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to manipulate groups, rules, policies and retrieve information about peers and users",
+      "type": "text/plain"
+    }
+  }
+}

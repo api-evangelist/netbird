@@ -1,0 +1,2130 @@
+{
+  "item": [
+    {
+      "id": "c99afe7f-1aa6-4fac-8861-9058b98d72bc",
+      "name": "DNS",
+      "description": {
+        "content": "Interact with and view information about DNS configuration.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4421fc09-5b12-47e3-82f8-ee0f77c92d43",
+          "name": "List all Nameserver Groups",
+          "request": {
+            "name": "List all Nameserver Groups",
+            "description": {
+              "content": "Returns a list of all Nameserver Groups",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "dns",
+                "nameservers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b69f59f6-2408-4e59-9e28-f41ed7f0715f",
+              "name": "A JSON Array of Nameserver Groups",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"description\": \"Google DNS servers\",\n    \"domains\": [\n      \"example.com\",\n      \"example.com\"\n    ],\n    \"enabled\": true,\n    \"groups\": [\n      \"ch8i4ug6lnn4g9hqv7m0\",\n      \"ch8i4ug6lnn4g9hqv7m0\"\n    ],\n    \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n    \"name\": \"Google DNS\",\n    \"nameservers\": [\n      {\n        \"ip\": \"8.8.8.8\",\n        \"ns_type\": \"udp\",\n        \"port\": 53\n      },\n      {\n        \"ip\": \"8.8.8.8\",\n        \"ns_type\": \"udp\",\n        \"port\": 53\n      }\n    ],\n    \"primary\": true,\n    \"search_domains_enabled\": true\n  },\n  {\n    \"description\": \"Google DNS servers\",\n    \"domains\": [\n      \"example.com\",\n      \"example.com\"\n    ],\n    \"enabled\": true,\n    \"groups\": [\n      \"ch8i4ug6lnn4g9hqv7m0\",\n      \"ch8i4ug6lnn4g9hqv7m0\"\n    ],\n    \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n    \"name\": \"Google DNS\",\n    \"nameservers\": [\n      {\n        \"ip\": \"8.8.8.8\",\n        \"ns_type\": \"udp\",\n        \"port\": 53\n      },\n      {\n        \"ip\": \"8.8.8.8\",\n        \"ns_type\": \"udp\",\n        \"port\": 53\n      }\n    ],\n    \"primary\": true,\n    \"search_domains_enabled\": true\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2adf58be-f968-4af5-a435-32c07855f6e6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f0be0652-a045-4d6d-8747-b0f2460944c8",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "25150a9b-daf7-4b05-a49a-97262fe5a74b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0684cd17-1aaf-4320-bd38-0ce6e6cbbfa2",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1fd3dd6-5cb0-4989-b5e1-a881c25802fb",
+          "name": "Create a Nameserver Group",
+          "request": {
+            "name": "Create a Nameserver Group",
+            "description": {
+              "content": "Creates a Nameserver Group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "dns",
+                "nameservers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"nameservers\": [\n    {\n      \"ip\": \"<string>\",\n      \"ns_type\": \"<string>\",\n      \"port\": \"<integer>\"\n    },\n    {\n      \"ip\": \"<string>\",\n      \"ns_type\": \"<string>\",\n      \"port\": \"<integer>\"\n    }\n  ],\n  \"enabled\": \"<boolean>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"primary\": \"<boolean>\",\n  \"domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"search_domains_enabled\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "47df85d4-331b-4c2f-87a8-77780c449554",
+              "name": "A Nameserver Groups Object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Google DNS\",\n  \"description\": \"Google DNS servers\",\n  \"nameservers\": [\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    },\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    }\n  ],\n  \"enabled\": true,\n  \"groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ],\n  \"primary\": true,\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"search_domains_enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"Google DNS servers\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"enabled\": true,\n  \"groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ],\n  \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n  \"name\": \"Google DNS\",\n  \"nameservers\": [\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    },\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    }\n  ],\n  \"primary\": true,\n  \"search_domains_enabled\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5777484d-f1f7-40ee-b188-8cd645704f89",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Google DNS\",\n  \"description\": \"Google DNS servers\",\n  \"nameservers\": [\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    },\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    }\n  ],\n  \"enabled\": true,\n  \"groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ],\n  \"primary\": true,\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"search_domains_enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1f181424-a5c0-4277-afe5-552dced95e7c",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Google DNS\",\n  \"description\": \"Google DNS servers\",\n  \"nameservers\": [\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    },\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    }\n  ],\n  \"enabled\": true,\n  \"groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ],\n  \"primary\": true,\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"search_domains_enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e5834646-baf4-4a83-bcfd-13277677c3f0",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Google DNS\",\n  \"description\": \"Google DNS servers\",\n  \"nameservers\": [\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    },\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    }\n  ],\n  \"enabled\": true,\n  \"groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ],\n  \"primary\": true,\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"search_domains_enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "26199876-53a5-4685-a680-5877bbfd0b43",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Google DNS\",\n  \"description\": \"Google DNS servers\",\n  \"nameservers\": [\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    },\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    }\n  ],\n  \"enabled\": true,\n  \"groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ],\n  \"primary\": true,\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"search_domains_enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "513109d3-c19f-4364-b6da-22999fc8eef3",
+          "name": "Retrieve a Nameserver Group",
+          "request": {
+            "name": "Retrieve a Nameserver Group",
+            "description": {
+              "content": "Get information about a Nameserver Groups",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "dns",
+                "nameservers",
+                ":nsgroupId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nsgroupId",
+                  "description": "(Required) The unique identifier of a Nameserver Group"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "83769761-761c-45a7-ade9-b7e64702f5ed",
+              "name": "A Nameserver Group object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers",
+                    ":nsgroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsgroupId",
+                      "description": "(Required) The unique identifier of a Nameserver Group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"Google DNS servers\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"enabled\": true,\n  \"groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ],\n  \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n  \"name\": \"Google DNS\",\n  \"nameservers\": [\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    },\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    }\n  ],\n  \"primary\": true,\n  \"search_domains_enabled\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "895a8b09-f777-4195-9502-297661965750",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers",
+                    ":nsgroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsgroupId",
+                      "description": "(Required) The unique identifier of a Nameserver Group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "91a84c00-b9e7-4b45-a0e5-bb80c9ec5b4c",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers",
+                    ":nsgroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsgroupId",
+                      "description": "(Required) The unique identifier of a Nameserver Group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "08b90a15-dab0-4bb3-b0a2-aacfeb6475b1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers",
+                    ":nsgroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsgroupId",
+                      "description": "(Required) The unique identifier of a Nameserver Group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "27ee5b53-16c8-4235-b095-2170be286172",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers",
+                    ":nsgroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsgroupId",
+                      "description": "(Required) The unique identifier of a Nameserver Group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "997e2267-5a46-42ef-a03f-72c8b63777be",
+          "name": "Update a Nameserver Group",
+          "request": {
+            "name": "Update a Nameserver Group",
+            "description": {
+              "content": "Update/Replace a Nameserver Group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "dns",
+                "nameservers",
+                ":nsgroupId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nsgroupId",
+                  "description": "(Required) The unique identifier of a Nameserver Group"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"nameservers\": [\n    {\n      \"ip\": \"<string>\",\n      \"ns_type\": \"<string>\",\n      \"port\": \"<integer>\"\n    },\n    {\n      \"ip\": \"<string>\",\n      \"ns_type\": \"<string>\",\n      \"port\": \"<integer>\"\n    }\n  ],\n  \"enabled\": \"<boolean>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"primary\": \"<boolean>\",\n  \"domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"search_domains_enabled\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e14de437-1878-4a4f-b6a6-ee0793391b80",
+              "name": "A Nameserver Group object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers",
+                    ":nsgroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsgroupId",
+                      "description": "(Required) The unique identifier of a Nameserver Group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Google DNS\",\n  \"description\": \"Google DNS servers\",\n  \"nameservers\": [\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    },\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    }\n  ],\n  \"enabled\": true,\n  \"groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ],\n  \"primary\": true,\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"search_domains_enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"Google DNS servers\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"enabled\": true,\n  \"groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ],\n  \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n  \"name\": \"Google DNS\",\n  \"nameservers\": [\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    },\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    }\n  ],\n  \"primary\": true,\n  \"search_domains_enabled\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "775bbb24-6d20-4c02-b17e-cff661cd6687",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers",
+                    ":nsgroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsgroupId",
+                      "description": "(Required) The unique identifier of a Nameserver Group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Google DNS\",\n  \"description\": \"Google DNS servers\",\n  \"nameservers\": [\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    },\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    }\n  ],\n  \"enabled\": true,\n  \"groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ],\n  \"primary\": true,\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"search_domains_enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3dd6cca2-7200-4c5d-9573-c8b5f8773732",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers",
+                    ":nsgroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsgroupId",
+                      "description": "(Required) The unique identifier of a Nameserver Group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Google DNS\",\n  \"description\": \"Google DNS servers\",\n  \"nameservers\": [\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    },\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    }\n  ],\n  \"enabled\": true,\n  \"groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ],\n  \"primary\": true,\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"search_domains_enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "efb61004-bf77-4560-96d5-428e5619b1a9",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers",
+                    ":nsgroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsgroupId",
+                      "description": "(Required) The unique identifier of a Nameserver Group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Google DNS\",\n  \"description\": \"Google DNS servers\",\n  \"nameservers\": [\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    },\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    }\n  ],\n  \"enabled\": true,\n  \"groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ],\n  \"primary\": true,\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"search_domains_enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "68a682d8-01a3-41ca-944f-e7cdc59b8245",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers",
+                    ":nsgroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsgroupId",
+                      "description": "(Required) The unique identifier of a Nameserver Group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Google DNS\",\n  \"description\": \"Google DNS servers\",\n  \"nameservers\": [\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    },\n    {\n      \"ip\": \"8.8.8.8\",\n      \"ns_type\": \"udp\",\n      \"port\": 53\n    }\n  ],\n  \"enabled\": true,\n  \"groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ],\n  \"primary\": true,\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"search_domains_enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70110472-7d75-470d-bd3d-b7f8258f80f8",
+          "name": "Delete a Nameserver Group",
+          "request": {
+            "name": "Delete a Nameserver Group",
+            "description": {
+              "content": "Delete a Nameserver Group",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "dns",
+                "nameservers",
+                ":nsgroupId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nsgroupId",
+                  "description": "(Required) The unique identifier of a Nameserver Group"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a4a9bfc6-bc2d-4f7f-8b49-c9f4443545ea",
+              "name": "Delete status code",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers",
+                    ":nsgroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsgroupId",
+                      "description": "(Required) The unique identifier of a Nameserver Group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "21df8b11-7d44-4c91-96c0-bad3050fb082",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers",
+                    ":nsgroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsgroupId",
+                      "description": "(Required) The unique identifier of a Nameserver Group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9f28d25d-7bdd-4b94-934e-391c5e996a07",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers",
+                    ":nsgroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsgroupId",
+                      "description": "(Required) The unique identifier of a Nameserver Group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9d627c69-279a-423c-8f7c-015a290c1f6a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers",
+                    ":nsgroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsgroupId",
+                      "description": "(Required) The unique identifier of a Nameserver Group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5d453feb-70e4-48d1-8535-f295e961f34d",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "nameservers",
+                    ":nsgroupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nsgroupId",
+                      "description": "(Required) The unique identifier of a Nameserver Group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2c52650-59f8-41f0-9735-008b8a7b573c",
+          "name": "Retrieve DNS settings",
+          "request": {
+            "name": "Retrieve DNS settings",
+            "description": {
+              "content": "Returns a DNS settings object",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "dns",
+                "settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "769f2864-2ffa-463e-ac34-91b312c44995",
+              "name": "A JSON Object of DNS Setting",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4046749c-28d7-41d7-acba-69bb6e4ce673",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "af65c6f3-9e47-4ebd-ac50-83d1046cdb0b",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7d726a2f-3fa5-4020-af10-97b95f1c0210",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e3470f55-2d2d-47d1-a787-d1c07cbf0078",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad389e26-ed3c-4638-9e8f-53ee2422a520",
+          "name": "Update DNS Settings",
+          "request": {
+            "name": "Update DNS Settings",
+            "description": {
+              "content": "Updates a DNS settings object",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "dns",
+                "settings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"disabled_management_groups\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e9f0520a-6f01-4fe2-9ee1-2a5d26481c70",
+              "name": "A JSON Object of DNS Setting",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"disabled_management_groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"disabled_management_groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f4e86f1-6037-4117-b610-05d3e0a49dc4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"disabled_management_groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "df5d02a1-6f74-4751-b46e-2abc84196e70",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"disabled_management_groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "705c5732-eff6-4813-a56f-0d071ddd312b",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"disabled_management_groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2a0b2297-0349-4442-9673-fee1a55c689a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "dns",
+                    "settings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"disabled_management_groups\": [\n    \"ch8i4ug6lnn4g9hqv7m0\",\n    \"ch8i4ug6lnn4g9hqv7m0\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.netbird.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bec7376d-6101-4c45-b1b4-6491a5f5a081",
+    "name": "NetBird REST Accounts DNS API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to manipulate groups, rules, policies and retrieve information about peers and users",
+      "type": "text/plain"
+    }
+  }
+}

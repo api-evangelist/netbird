@@ -1,0 +1,1165 @@
+{
+  "item": [
+    {
+      "id": "71364303-b398-4bda-a7de-0ebe1c8475fb",
+      "name": "EDR FleetDM Integrations",
+      "description": {
+        "content": "Manage FleetDM EDR integrations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "46c5359e-5099-4765-8676-8d51eb455aee",
+          "name": "Create EDR FleetDM Integration",
+          "request": {
+            "name": "Create EDR FleetDM Integration",
+            "description": {
+              "content": "Creates a new EDR FleetDM integration",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "integrations",
+                "edr",
+                "fleetdm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"api_url\": \"<string>\",\n  \"api_token\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_synced_interval\": \"<integer>\",\n  \"match_attributes\": {\n    \"disk_encryption_enabled\": \"<boolean>\",\n    \"failing_policies_count_max\": \"<integer>\",\n    \"vulnerable_software_count_max\": \"<integer>\",\n    \"status_online\": \"<boolean>\",\n    \"required_policies\": [\n      \"<integer>\",\n      \"<integer>\"\n    ]\n  },\n  \"enabled\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "efd1c03a-8c47-4e41-bd31-b861b9fa78da",
+              "name": "Integration created successfully. Returns the created integration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_url\": \"<string>\",\n  \"api_token\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_synced_interval\": \"<integer>\",\n  \"match_attributes\": {\n    \"disk_encryption_enabled\": true,\n    \"failing_policies_count_max\": 0,\n    \"vulnerable_software_count_max\": 0,\n    \"status_online\": false,\n    \"required_policies\": [\n      1,\n      5,\n      12\n    ]\n  },\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 123,\n  \"account_id\": \"ch8i4ug6lnn4g9hqv7l0\",\n  \"api_url\": \"string\",\n  \"created_by\": \"string\",\n  \"last_synced_at\": \"2023-05-15T10:30:00Z\",\n  \"created_at\": \"2023-05-15T10:30:00Z\",\n  \"updated_at\": \"2023-05-16T11:45:00Z\",\n  \"groups\": [\n    {\n      \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n      \"name\": \"devs\",\n      \"peers\": [\n        {\n          \"id\": \"chacbco6lnnbn6cg5s90\",\n          \"name\": \"stage-host-1\"\n        },\n        {\n          \"id\": \"chacbco6lnnbn6cg5s90\",\n          \"name\": \"stage-host-1\"\n        }\n      ],\n      \"peers_count\": 2,\n      \"resources\": [\n        {\n          \"id\": \"chacdk86lnnboviihd7g\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"id\": \"chacdk86lnnboviihd7g\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"resources_count\": 5,\n      \"issued\": \"api\"\n    },\n    {\n      \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n      \"name\": \"devs\",\n      \"peers\": [\n        {\n          \"id\": \"chacbco6lnnbn6cg5s90\",\n          \"name\": \"stage-host-1\"\n        },\n        {\n          \"id\": \"chacbco6lnnbn6cg5s90\",\n          \"name\": \"stage-host-1\"\n        }\n      ],\n      \"peers_count\": 2,\n      \"resources\": [\n        {\n          \"id\": \"chacdk86lnnboviihd7g\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"id\": \"chacdk86lnnboviihd7g\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"resources_count\": 5,\n      \"issued\": \"api\"\n    }\n  ],\n  \"last_synced_interval\": 2935,\n  \"match_attributes\": {\n    \"disk_encryption_enabled\": false,\n    \"failing_policies_count_max\": 0,\n    \"vulnerable_software_count_max\": 0,\n    \"status_online\": true,\n    \"required_policies\": [\n      1,\n      5,\n      12\n    ]\n  },\n  \"enabled\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4259cd05-b058-4d1e-9b8c-789da2a7346e",
+              "name": "Bad Request (e.g., invalid JSON, missing required fields, validation error).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_url\": \"<string>\",\n  \"api_token\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_synced_interval\": \"<integer>\",\n  \"match_attributes\": {\n    \"disk_encryption_enabled\": true,\n    \"failing_policies_count_max\": 0,\n    \"vulnerable_software_count_max\": 0,\n    \"status_online\": false,\n    \"required_policies\": [\n      1,\n      5,\n      12\n    ]\n  },\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2aad980-d4f8-4a4b-9d1e-ed5eaa8c946a",
+              "name": "Unauthorized (e.g., missing or invalid authentication token).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_url\": \"<string>\",\n  \"api_token\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_synced_interval\": \"<integer>\",\n  \"match_attributes\": {\n    \"disk_encryption_enabled\": true,\n    \"failing_policies_count_max\": 0,\n    \"vulnerable_software_count_max\": 0,\n    \"status_online\": false,\n    \"required_policies\": [\n      1,\n      5,\n      12\n    ]\n  },\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a0f6f8f-89f5-4de2-a365-46dc146cced2",
+              "name": "Internal Server Error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_url\": \"<string>\",\n  \"api_token\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_synced_interval\": \"<integer>\",\n  \"match_attributes\": {\n    \"disk_encryption_enabled\": true,\n    \"failing_policies_count_max\": 0,\n    \"vulnerable_software_count_max\": 0,\n    \"status_online\": false,\n    \"required_policies\": [\n      1,\n      5,\n      12\n    ]\n  },\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18a87c9a-a98d-455e-aa8b-6560659f82d2",
+          "name": "Get EDR FleetDM Integration",
+          "request": {
+            "name": "Get EDR FleetDM Integration",
+            "description": {
+              "content": "Retrieves a specific EDR FleetDM integration by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "integrations",
+                "edr",
+                "fleetdm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7ea059f1-5cf4-4f17-915c-5fcbf5914938",
+              "name": "Successfully retrieved the integration details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 123,\n  \"account_id\": \"ch8i4ug6lnn4g9hqv7l0\",\n  \"api_url\": \"string\",\n  \"created_by\": \"string\",\n  \"last_synced_at\": \"2023-05-15T10:30:00Z\",\n  \"created_at\": \"2023-05-15T10:30:00Z\",\n  \"updated_at\": \"2023-05-16T11:45:00Z\",\n  \"groups\": [\n    {\n      \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n      \"name\": \"devs\",\n      \"peers\": [\n        {\n          \"id\": \"chacbco6lnnbn6cg5s90\",\n          \"name\": \"stage-host-1\"\n        },\n        {\n          \"id\": \"chacbco6lnnbn6cg5s90\",\n          \"name\": \"stage-host-1\"\n        }\n      ],\n      \"peers_count\": 2,\n      \"resources\": [\n        {\n          \"id\": \"chacdk86lnnboviihd7g\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"id\": \"chacdk86lnnboviihd7g\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"resources_count\": 5,\n      \"issued\": \"api\"\n    },\n    {\n      \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n      \"name\": \"devs\",\n      \"peers\": [\n        {\n          \"id\": \"chacbco6lnnbn6cg5s90\",\n          \"name\": \"stage-host-1\"\n        },\n        {\n          \"id\": \"chacbco6lnnbn6cg5s90\",\n          \"name\": \"stage-host-1\"\n        }\n      ],\n      \"peers_count\": 2,\n      \"resources\": [\n        {\n          \"id\": \"chacdk86lnnboviihd7g\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"id\": \"chacdk86lnnboviihd7g\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"resources_count\": 5,\n      \"issued\": \"api\"\n    }\n  ],\n  \"last_synced_interval\": 2935,\n  \"match_attributes\": {\n    \"disk_encryption_enabled\": false,\n    \"failing_policies_count_max\": 0,\n    \"vulnerable_software_count_max\": 0,\n    \"status_online\": true,\n    \"required_policies\": [\n      1,\n      5,\n      12\n    ]\n  },\n  \"enabled\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cc6951d-ae4a-4ca1-b2db-5f209fbbf9e2",
+              "name": "Bad Request (e.g., invalid integration ID format).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0df71373-5397-4bd9-9fb8-a4c30ba51326",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e247d99-a86c-4e33-8e58-7e93debb0973",
+              "name": "Not Found (e.g., integration with the given ID does not exist).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d85bbcae-0f29-45c8-ab87-42fe9c5bf6f2",
+              "name": "Internal Server Error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc468c3d-e2f6-4f13-bbfc-9d119c47ac9e",
+          "name": "Update EDR FleetDM Integration",
+          "request": {
+            "name": "Update EDR FleetDM Integration",
+            "description": {
+              "content": "Updates an existing EDR FleetDM Integration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "integrations",
+                "edr",
+                "fleetdm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"api_url\": \"<string>\",\n  \"api_token\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_synced_interval\": \"<integer>\",\n  \"match_attributes\": {\n    \"disk_encryption_enabled\": \"<boolean>\",\n    \"failing_policies_count_max\": \"<integer>\",\n    \"vulnerable_software_count_max\": \"<integer>\",\n    \"status_online\": \"<boolean>\",\n    \"required_policies\": [\n      \"<integer>\",\n      \"<integer>\"\n    ]\n  },\n  \"enabled\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "973d91c0-ad44-4e8c-b77e-5a48dd4b1c05",
+              "name": "Integration updated successfully. Returns the updated integration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_url\": \"<string>\",\n  \"api_token\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_synced_interval\": \"<integer>\",\n  \"match_attributes\": {\n    \"disk_encryption_enabled\": true,\n    \"failing_policies_count_max\": 0,\n    \"vulnerable_software_count_max\": 0,\n    \"status_online\": false,\n    \"required_policies\": [\n      1,\n      5,\n      12\n    ]\n  },\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": 123,\n  \"account_id\": \"ch8i4ug6lnn4g9hqv7l0\",\n  \"api_url\": \"string\",\n  \"created_by\": \"string\",\n  \"last_synced_at\": \"2023-05-15T10:30:00Z\",\n  \"created_at\": \"2023-05-15T10:30:00Z\",\n  \"updated_at\": \"2023-05-16T11:45:00Z\",\n  \"groups\": [\n    {\n      \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n      \"name\": \"devs\",\n      \"peers\": [\n        {\n          \"id\": \"chacbco6lnnbn6cg5s90\",\n          \"name\": \"stage-host-1\"\n        },\n        {\n          \"id\": \"chacbco6lnnbn6cg5s90\",\n          \"name\": \"stage-host-1\"\n        }\n      ],\n      \"peers_count\": 2,\n      \"resources\": [\n        {\n          \"id\": \"chacdk86lnnboviihd7g\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"id\": \"chacdk86lnnboviihd7g\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"resources_count\": 5,\n      \"issued\": \"api\"\n    },\n    {\n      \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n      \"name\": \"devs\",\n      \"peers\": [\n        {\n          \"id\": \"chacbco6lnnbn6cg5s90\",\n          \"name\": \"stage-host-1\"\n        },\n        {\n          \"id\": \"chacbco6lnnbn6cg5s90\",\n          \"name\": \"stage-host-1\"\n        }\n      ],\n      \"peers_count\": 2,\n      \"resources\": [\n        {\n          \"id\": \"chacdk86lnnboviihd7g\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"id\": \"chacdk86lnnboviihd7g\",\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"resources_count\": 5,\n      \"issued\": \"api\"\n    }\n  ],\n  \"last_synced_interval\": 2935,\n  \"match_attributes\": {\n    \"disk_encryption_enabled\": false,\n    \"failing_policies_count_max\": 0,\n    \"vulnerable_software_count_max\": 0,\n    \"status_online\": true,\n    \"required_policies\": [\n      1,\n      5,\n      12\n    ]\n  },\n  \"enabled\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b50f5cb3-c73c-4ec1-931b-08c9009b34df",
+              "name": "Bad Request (e.g., invalid JSON, validation error, invalid ID).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_url\": \"<string>\",\n  \"api_token\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_synced_interval\": \"<integer>\",\n  \"match_attributes\": {\n    \"disk_encryption_enabled\": true,\n    \"failing_policies_count_max\": 0,\n    \"vulnerable_software_count_max\": 0,\n    \"status_online\": false,\n    \"required_policies\": [\n      1,\n      5,\n      12\n    ]\n  },\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "332aa8a2-5d5e-4601-a576-b8f456a58bdc",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_url\": \"<string>\",\n  \"api_token\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_synced_interval\": \"<integer>\",\n  \"match_attributes\": {\n    \"disk_encryption_enabled\": true,\n    \"failing_policies_count_max\": 0,\n    \"vulnerable_software_count_max\": 0,\n    \"status_online\": false,\n    \"required_policies\": [\n      1,\n      5,\n      12\n    ]\n  },\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac535cc3-c606-4c2b-b903-013603c46f52",
+              "name": "Not Found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_url\": \"<string>\",\n  \"api_token\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_synced_interval\": \"<integer>\",\n  \"match_attributes\": {\n    \"disk_encryption_enabled\": true,\n    \"failing_policies_count_max\": 0,\n    \"vulnerable_software_count_max\": 0,\n    \"status_online\": false,\n    \"required_policies\": [\n      1,\n      5,\n      12\n    ]\n  },\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6d95800-e758-4826-bc03-2441fc9f6d3f",
+              "name": "Internal Server Error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"api_url\": \"<string>\",\n  \"api_token\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"last_synced_interval\": \"<integer>\",\n  \"match_attributes\": {\n    \"disk_encryption_enabled\": true,\n    \"failing_policies_count_max\": 0,\n    \"vulnerable_software_count_max\": 0,\n    \"status_online\": false,\n    \"required_policies\": [\n      1,\n      5,\n      12\n    ]\n  },\n  \"enabled\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "088c21f1-29ef-4db6-b085-602d00701d36",
+          "name": "Delete EDR FleetDM Integration",
+          "request": {
+            "name": "Delete EDR FleetDM Integration",
+            "description": {
+              "content": "Deletes an EDR FleetDM Integration by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "integrations",
+                "edr",
+                "fleetdm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "43513e16-cc3f-41f7-89b6-320dd259e8af",
+              "name": "Integration deleted successfully. Returns an empty object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "923b70e5-18c5-4326-983d-ea8012fb6331",
+              "name": "Bad Request (e.g., invalid integration ID format).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe26e74a-1348-4f35-82e6-9b49def6806f",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb6361f9-a663-41ac-b498-c3bcfb4a2f86",
+              "name": "Not Found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfdcf72b-0cb5-40f6-b857-f489738598f8",
+              "name": "Internal Server Error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "edr",
+                    "fleetdm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.netbird.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b0ff936b-1a60-4274-aee7-cf28310bef9f",
+    "name": "NetBird REST Accounts EDR FleetDM Integrations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to manipulate groups, rules, policies and retrieve information about peers and users",
+      "type": "text/plain"
+    }
+  }
+}

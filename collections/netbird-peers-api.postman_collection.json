@@ -1,0 +1,1965 @@
+{
+  "item": [
+    {
+      "id": "9dd8ac2c-fa85-4e1b-81e3-3f67da19e6d1",
+      "name": "Peers",
+      "description": {
+        "content": "Interact with and view information about peers.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e526a94e-d087-416f-aad2-051dee163b0b",
+          "name": "List all Peers",
+          "request": {
+            "name": "List all Peers",
+            "description": {
+              "content": "Returns a list of all peers",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "peers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter peers by name"
+                },
+                {
+                  "disabled": false,
+                  "key": "ip",
+                  "value": "<string>",
+                  "description": "Filter peers by IP address"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b9885963-a810-4089-8513-782f7174a81f",
+              "name": "A JSON Array of Peers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ip",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"accessible_peers_count\": 5,\n    \"approval_required\": true,\n    \"city_name\": \"Berlin\",\n    \"connected\": true,\n    \"connection_ip\": \"35.64.0.1\",\n    \"country_code\": \"DE\",\n    \"created_at\": \"2023-05-05T09:00:35.477782Z\",\n    \"dns_label\": \"stage-host-1.netbird.cloud\",\n    \"ephemeral\": false,\n    \"extra_dns_labels\": [\n      \"stage-host-1\",\n      \"stage-host-1\"\n    ],\n    \"geoname_id\": 2643743,\n    \"groups\": [\n      {\n        \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n        \"name\": \"devs\",\n        \"peers_count\": 2,\n        \"resources_count\": 5,\n        \"issued\": \"api\"\n      },\n      {\n        \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n        \"name\": \"devs\",\n        \"peers_count\": 2,\n        \"resources_count\": 5,\n        \"issued\": \"api\"\n      }\n    ],\n    \"hostname\": \"stage-host-1\",\n    \"id\": \"chacbco6lnnbn6cg5s90\",\n    \"inactivity_expiration_enabled\": false,\n    \"ip\": \"10.64.0.1\",\n    \"kernel_version\": \"23.2.0\",\n    \"last_login\": \"2023-05-05T09:00:35.477782Z\",\n    \"last_seen\": \"2023-05-05T10:05:26.420578Z\",\n    \"login_expiration_enabled\": false,\n    \"login_expired\": false,\n    \"name\": \"stage-host-1\",\n    \"os\": \"Darwin 13.2.1\",\n    \"serial_number\": \"C02XJ0J0JGH7\",\n    \"ssh_enabled\": true,\n    \"ui_version\": \"0.14.0\",\n    \"user_id\": \"google-oauth2|277474792786460067937\",\n    \"version\": \"0.14.0\",\n    \"disapproval_reason\": \"string\",\n    \"local_flags\": {\n      \"rosenpass_enabled\": true,\n      \"rosenpass_permissive\": false,\n      \"server_ssh_allowed\": true,\n      \"disable_client_routes\": false,\n      \"disable_server_routes\": false,\n      \"disable_dns\": false,\n      \"disable_firewall\": false,\n      \"block_lan_access\": false,\n      \"block_inbound\": false,\n      \"lazy_connection_enabled\": false\n    }\n  },\n  {\n    \"accessible_peers_count\": 5,\n    \"approval_required\": true,\n    \"city_name\": \"Berlin\",\n    \"connected\": true,\n    \"connection_ip\": \"35.64.0.1\",\n    \"country_code\": \"DE\",\n    \"created_at\": \"2023-05-05T09:00:35.477782Z\",\n    \"dns_label\": \"stage-host-1.netbird.cloud\",\n    \"ephemeral\": false,\n    \"extra_dns_labels\": [\n      \"stage-host-1\",\n      \"stage-host-1\"\n    ],\n    \"geoname_id\": 2643743,\n    \"groups\": [\n      {\n        \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n        \"name\": \"devs\",\n        \"peers_count\": 2,\n        \"resources_count\": 5,\n        \"issued\": \"api\"\n      },\n      {\n        \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n        \"name\": \"devs\",\n        \"peers_count\": 2,\n        \"resources_count\": 5,\n        \"issued\": \"api\"\n      }\n    ],\n    \"hostname\": \"stage-host-1\",\n    \"id\": \"chacbco6lnnbn6cg5s90\",\n    \"inactivity_expiration_enabled\": false,\n    \"ip\": \"10.64.0.1\",\n    \"kernel_version\": \"23.2.0\",\n    \"last_login\": \"2023-05-05T09:00:35.477782Z\",\n    \"last_seen\": \"2023-05-05T10:05:26.420578Z\",\n    \"login_expiration_enabled\": false,\n    \"login_expired\": false,\n    \"name\": \"stage-host-1\",\n    \"os\": \"Darwin 13.2.1\",\n    \"serial_number\": \"C02XJ0J0JGH7\",\n    \"ssh_enabled\": true,\n    \"ui_version\": \"0.14.0\",\n    \"user_id\": \"google-oauth2|277474792786460067937\",\n    \"version\": \"0.14.0\",\n    \"disapproval_reason\": \"string\",\n    \"local_flags\": {\n      \"rosenpass_enabled\": true,\n      \"rosenpass_permissive\": false,\n      \"server_ssh_allowed\": true,\n      \"disable_client_routes\": false,\n      \"disable_server_routes\": false,\n      \"disable_dns\": false,\n      \"disable_firewall\": false,\n      \"block_lan_access\": false,\n      \"block_inbound\": false,\n      \"lazy_connection_enabled\": false\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13ecc45d-0fd9-475f-a58f-37ac605b8855",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ip",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1475d549-3abd-4c39-b8ae-07f52ffb74d2",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ip",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "50ebb45c-70bf-421f-af1b-60f93c84350c",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ip",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ed4e1571-feec-4b82-9e5f-b2f2999771e8",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ip",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9c54a46-0f37-46ea-b76a-3b21c0f519fb",
+          "name": "Retrieve a Peer",
+          "request": {
+            "name": "Retrieve a Peer",
+            "description": {
+              "content": "Get information about a peer",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "peers",
+                ":peerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "peerId",
+                  "description": "(Required) The unique identifier of a peer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f087c442-8f0b-4264-bb4f-18169e77830e",
+              "name": "A Peer object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"approval_required\": true,\n  \"city_name\": \"Berlin\",\n  \"connected\": true,\n  \"connection_ip\": \"35.64.0.1\",\n  \"country_code\": \"DE\",\n  \"created_at\": \"2023-05-05T09:00:35.477782Z\",\n  \"dns_label\": \"stage-host-1.netbird.cloud\",\n  \"ephemeral\": false,\n  \"extra_dns_labels\": [\n    \"stage-host-1\",\n    \"stage-host-1\"\n  ],\n  \"geoname_id\": 2643743,\n  \"groups\": [\n    {\n      \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n      \"name\": \"devs\",\n      \"peers_count\": 2,\n      \"resources_count\": 5,\n      \"issued\": \"api\"\n    },\n    {\n      \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n      \"name\": \"devs\",\n      \"peers_count\": 2,\n      \"resources_count\": 5,\n      \"issued\": \"api\"\n    }\n  ],\n  \"hostname\": \"stage-host-1\",\n  \"id\": \"chacbco6lnnbn6cg5s90\",\n  \"inactivity_expiration_enabled\": false,\n  \"ip\": \"10.64.0.1\",\n  \"kernel_version\": \"23.2.0\",\n  \"last_login\": \"2023-05-05T09:00:35.477782Z\",\n  \"last_seen\": \"2023-05-05T10:05:26.420578Z\",\n  \"login_expiration_enabled\": false,\n  \"login_expired\": false,\n  \"name\": \"stage-host-1\",\n  \"os\": \"Darwin 13.2.1\",\n  \"serial_number\": \"C02XJ0J0JGH7\",\n  \"ssh_enabled\": true,\n  \"ui_version\": \"0.14.0\",\n  \"user_id\": \"google-oauth2|277474792786460067937\",\n  \"version\": \"0.14.0\",\n  \"disapproval_reason\": \"string\",\n  \"local_flags\": {\n    \"rosenpass_enabled\": true,\n    \"rosenpass_permissive\": false,\n    \"server_ssh_allowed\": true,\n    \"disable_client_routes\": false,\n    \"disable_server_routes\": false,\n    \"disable_dns\": false,\n    \"disable_firewall\": false,\n    \"block_lan_access\": false,\n    \"block_inbound\": false,\n    \"lazy_connection_enabled\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a7a641e-8f9d-4e1b-b2f5-09a63b5aa913",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1106872f-377b-4865-8114-6a1626c6eff5",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "18d05284-20a2-48e9-b9df-ba63f7d54c14",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5c1757ad-2fa1-4860-b556-41a33620b3f9",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93303b0e-87f0-4be2-b4ab-bc3c82241969",
+          "name": "Update a Peer",
+          "request": {
+            "name": "Update a Peer",
+            "description": {
+              "content": "Update information about a peer",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "peers",
+                ":peerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "peerId",
+                  "description": "(Required) The unique identifier of a peer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"ssh_enabled\": \"<boolean>\",\n  \"login_expiration_enabled\": \"<boolean>\",\n  \"inactivity_expiration_enabled\": \"<boolean>\",\n  \"approval_required\": \"<boolean>\",\n  \"ip\": \"<ipv4>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "597b3fce-b875-4f5f-8088-e322ad5233bb",
+              "name": "A Peer object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"stage-host-1\",\n  \"ssh_enabled\": true,\n  \"login_expiration_enabled\": false,\n  \"inactivity_expiration_enabled\": false,\n  \"approval_required\": true,\n  \"ip\": \"100.64.0.15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"approval_required\": true,\n  \"city_name\": \"Berlin\",\n  \"connected\": true,\n  \"connection_ip\": \"35.64.0.1\",\n  \"country_code\": \"DE\",\n  \"created_at\": \"2023-05-05T09:00:35.477782Z\",\n  \"dns_label\": \"stage-host-1.netbird.cloud\",\n  \"ephemeral\": false,\n  \"extra_dns_labels\": [\n    \"stage-host-1\",\n    \"stage-host-1\"\n  ],\n  \"geoname_id\": 2643743,\n  \"groups\": [\n    {\n      \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n      \"name\": \"devs\",\n      \"peers_count\": 2,\n      \"resources_count\": 5,\n      \"issued\": \"api\"\n    },\n    {\n      \"id\": \"ch8i4ug6lnn4g9hqv7m0\",\n      \"name\": \"devs\",\n      \"peers_count\": 2,\n      \"resources_count\": 5,\n      \"issued\": \"api\"\n    }\n  ],\n  \"hostname\": \"stage-host-1\",\n  \"id\": \"chacbco6lnnbn6cg5s90\",\n  \"inactivity_expiration_enabled\": false,\n  \"ip\": \"10.64.0.1\",\n  \"kernel_version\": \"23.2.0\",\n  \"last_login\": \"2023-05-05T09:00:35.477782Z\",\n  \"last_seen\": \"2023-05-05T10:05:26.420578Z\",\n  \"login_expiration_enabled\": false,\n  \"login_expired\": false,\n  \"name\": \"stage-host-1\",\n  \"os\": \"Darwin 13.2.1\",\n  \"serial_number\": \"C02XJ0J0JGH7\",\n  \"ssh_enabled\": true,\n  \"ui_version\": \"0.14.0\",\n  \"user_id\": \"google-oauth2|277474792786460067937\",\n  \"version\": \"0.14.0\",\n  \"disapproval_reason\": \"string\",\n  \"local_flags\": {\n    \"rosenpass_enabled\": true,\n    \"rosenpass_permissive\": false,\n    \"server_ssh_allowed\": true,\n    \"disable_client_routes\": false,\n    \"disable_server_routes\": false,\n    \"disable_dns\": false,\n    \"disable_firewall\": false,\n    \"block_lan_access\": false,\n    \"block_inbound\": false,\n    \"lazy_connection_enabled\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3d30677-0432-45e7-b89b-a89aec886475",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"stage-host-1\",\n  \"ssh_enabled\": true,\n  \"login_expiration_enabled\": false,\n  \"inactivity_expiration_enabled\": false,\n  \"approval_required\": true,\n  \"ip\": \"100.64.0.15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8f68eae6-7eb1-4c08-9fd3-7c3a1ad08c06",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"stage-host-1\",\n  \"ssh_enabled\": true,\n  \"login_expiration_enabled\": false,\n  \"inactivity_expiration_enabled\": false,\n  \"approval_required\": true,\n  \"ip\": \"100.64.0.15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6fbc162c-2288-46c3-93da-f36b46a35786",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"stage-host-1\",\n  \"ssh_enabled\": true,\n  \"login_expiration_enabled\": false,\n  \"inactivity_expiration_enabled\": false,\n  \"approval_required\": true,\n  \"ip\": \"100.64.0.15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a00205d2-bf6b-47d6-b2ef-0f0b54fbc2c1",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"stage-host-1\",\n  \"ssh_enabled\": true,\n  \"login_expiration_enabled\": false,\n  \"inactivity_expiration_enabled\": false,\n  \"approval_required\": true,\n  \"ip\": \"100.64.0.15\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "304a24e7-2ff0-438a-8035-15111675f671",
+          "name": "Delete a Peer",
+          "request": {
+            "name": "Delete a Peer",
+            "description": {
+              "content": "Delete a peer",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "peers",
+                ":peerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "peerId",
+                  "description": "(Required) The unique identifier of a peer"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "332ee3bb-5c7b-45d8-80b4-6bba44f824a2",
+              "name": "Delete status code",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6ab14d90-3442-4b6e-812b-a2c431389a05",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b3204eca-19b2-4eb0-8d8d-e4ab9afec2bc",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e01f3e55-7151-4466-831f-c0d9fef252da",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "20cf4ca4-64b2-4bd3-9fb3-c5b84e8924e7",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f99ffd4-ce9b-4699-b65d-abd934c6b433",
+          "name": "List accessible Peers",
+          "request": {
+            "name": "List accessible Peers",
+            "description": {
+              "content": "Returns a list of peers that the specified peer can connect to within the network.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "peers",
+                ":peerId",
+                "accessible-peers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "peerId",
+                  "description": "(Required) The unique identifier of a peer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "677b2495-7f1e-4377-87aa-04f770be5cad",
+              "name": "A JSON Array of Accessible Peers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId",
+                    "accessible-peers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"city_name\": \"Berlin\",\n    \"connected\": true,\n    \"country_code\": \"DE\",\n    \"dns_label\": \"stage-host-1.netbird.cloud\",\n    \"geoname_id\": 2643743,\n    \"id\": \"chacbco6lnnbn6cg5s90\",\n    \"ip\": \"10.64.0.1\",\n    \"last_seen\": \"2023-05-05T10:05:26.420578Z\",\n    \"name\": \"stage-host-1\",\n    \"os\": \"linux\",\n    \"user_id\": \"google-oauth2|277474792786460067937\"\n  },\n  {\n    \"city_name\": \"Berlin\",\n    \"connected\": true,\n    \"country_code\": \"DE\",\n    \"dns_label\": \"stage-host-1.netbird.cloud\",\n    \"geoname_id\": 2643743,\n    \"id\": \"chacbco6lnnbn6cg5s90\",\n    \"ip\": \"10.64.0.1\",\n    \"last_seen\": \"2023-05-05T10:05:26.420578Z\",\n    \"name\": \"stage-host-1\",\n    \"os\": \"linux\",\n    \"user_id\": \"google-oauth2|277474792786460067937\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f52203e-c131-4efa-9974-2738efddc29a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId",
+                    "accessible-peers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "562a017e-402c-484b-a5f2-e07473de94f7",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId",
+                    "accessible-peers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "983df176-40c9-46df-b82c-ba80affd1741",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId",
+                    "accessible-peers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4b4b7179-180d-4c01-aaf3-00eaa134d7ae",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId",
+                    "accessible-peers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a2e43793-b89a-4a8c-a4c2-01bf52624711",
+          "name": "Create a Temporary Access Peer",
+          "request": {
+            "name": "Create a Temporary Access Peer",
+            "description": {
+              "content": "Creates a temporary access peer that can be used to access this peer and this peer only. The temporary access peer and its access policies will be automatically deleted after it disconnects.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "peers",
+                ":peerId",
+                "temporary-access"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "peerId",
+                  "description": "(Required) The unique identifier of a peer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"wg_pub_key\": \"<string>\",\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a871a952-75db-4937-81e0-2efe6e79adcb",
+              "name": "Temporary Access Peer response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId",
+                    "temporary-access"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"temp-host-1\",\n  \"wg_pub_key\": \"n0r3pL4c3h0ld3rK3y==\",\n  \"rules\": [\n    \"tcp/80\",\n    \"tcp/80\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"temp-host-1\",\n  \"id\": \"chacbco6lnnbn6cg5s90\",\n  \"rules\": [\n    \"tcp/80\",\n    \"tcp/80\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a1e7c83-bbcc-45f8-843a-77d35151eb00",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId",
+                    "temporary-access"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"temp-host-1\",\n  \"wg_pub_key\": \"n0r3pL4c3h0ld3rK3y==\",\n  \"rules\": [\n    \"tcp/80\",\n    \"tcp/80\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f78214ab-a162-4774-b301-331e8bdcd290",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId",
+                    "temporary-access"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"temp-host-1\",\n  \"wg_pub_key\": \"n0r3pL4c3h0ld3rK3y==\",\n  \"rules\": [\n    \"tcp/80\",\n    \"tcp/80\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8490e444-9e8a-4832-89c4-64637faeadce",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId",
+                    "temporary-access"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"temp-host-1\",\n  \"wg_pub_key\": \"n0r3pL4c3h0ld3rK3y==\",\n  \"rules\": [\n    \"tcp/80\",\n    \"tcp/80\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "460732e9-6e32-4de2-a219-135675933683",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "peers",
+                    ":peerId",
+                    "temporary-access"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "peerId",
+                      "description": "(Required) The unique identifier of a peer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"temp-host-1\",\n  \"wg_pub_key\": \"n0r3pL4c3h0ld3rK3y==\",\n  \"rules\": [\n    \"tcp/80\",\n    \"tcp/80\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.netbird.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d8ed501a-6c5b-4c39-813f-33a8d66a1e95",
+    "name": "NetBird REST Accounts Peers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to manipulate groups, rules, policies and retrieve information about peers and users",
+      "type": "text/plain"
+    }
+  }
+}

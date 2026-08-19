@@ -1,0 +1,278 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts Ingress Ports API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ingress Ports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Port Allocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers/:peerId/ingress/ports",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filters ingress port allocations by name"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all ingress port allocations for a peer"
+        },
+        {
+          "info": {
+            "name": "Create a Port Allocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/peers/:peerId/ingress/ports",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new ingress port allocation for a peer"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Port Allocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers/:peerId/ingress/ports/:allocationId",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              },
+              {
+                "name": "allocationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an ingress port allocation"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about an ingress port allocation"
+        },
+        {
+          "info": {
+            "name": "Update a Port Allocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/peers/:peerId/ingress/ports/:allocationId",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              },
+              {
+                "name": "allocationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an ingress port allocation"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update information about an ingress port allocation"
+        },
+        {
+          "info": {
+            "name": "Delete a Port Allocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/peers/:peerId/ingress/ports/:allocationId",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              },
+              {
+                "name": "allocationId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an ingress port allocation"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an ingress port allocation"
+        },
+        {
+          "info": {
+            "name": "List all Ingress Peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/ingress/peers",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all ingress peers"
+        },
+        {
+          "info": {
+            "name": "Create a Ingress Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/ingress/peers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new ingress peer"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Ingress Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/ingress/peers/:ingressPeerId",
+            "params": [
+              {
+                "name": "ingressPeerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an ingress peer"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about an ingress peer"
+        },
+        {
+          "info": {
+            "name": "Update a Ingress Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/ingress/peers/:ingressPeerId",
+            "params": [
+              {
+                "name": "ingressPeerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an ingress peer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update information about an ingress peer"
+        },
+        {
+          "info": {
+            "name": "Delete a Ingress Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/ingress/peers/:ingressPeerId",
+            "params": [
+              {
+                "name": "ingressPeerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of an ingress peer"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an ingress peer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

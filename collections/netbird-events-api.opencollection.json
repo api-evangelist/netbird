@@ -1,0 +1,227 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts Events API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Audit Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/events/audit",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all audit events"
+        },
+        {
+          "info": {
+            "name": "List all Traffic Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/events/network-traffic",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user ID"
+              },
+              {
+                "name": "reporter_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by reporter ID"
+              },
+              {
+                "name": "protocol",
+                "value": "",
+                "type": "query",
+                "description": "Filter by protocol"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by event type"
+              },
+              {
+                "name": "connection_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by connection type"
+              },
+              {
+                "name": "direction",
+                "value": "",
+                "type": "query",
+                "description": "Filter by direction"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Case-insensitive partial match on user email, source/destination names, and source/destination addresses"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Start date for filtering events (ISO 8601 format, e.g., 2024-01-01T00:00:00Z)."
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "End date for filtering events (ISO 8601 format, e.g., 2024-01-31T23:59:59Z)."
+              }
+            ]
+          },
+          "docs": "Returns a list of all network traffic events"
+        },
+        {
+          "info": {
+            "name": "List all Reverse Proxy Access Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/events/proxy",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (1-indexed)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page (max 100)"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by (url sorts by host then path)"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order (ascending or descending)"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "General search across request ID, host, path, source IP, user email, and user name"
+              },
+              {
+                "name": "source_ip",
+                "value": "",
+                "type": "query",
+                "description": "Filter by source IP address"
+              },
+              {
+                "name": "host",
+                "value": "",
+                "type": "query",
+                "description": "Filter by host header"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Filter by request path (supports partial matching)"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by authenticated user ID"
+              },
+              {
+                "name": "user_email",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user email (partial matching)"
+              },
+              {
+                "name": "user_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user name (partial matching)"
+              },
+              {
+                "name": "method",
+                "value": "",
+                "type": "query",
+                "description": "Filter by HTTP method"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status (success = 2xx/3xx, failed = 1xx/4xx/5xx)"
+              },
+              {
+                "name": "status_code",
+                "value": "",
+                "type": "query",
+                "description": "Filter by HTTP status code"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp >= start_date (RFC3339 format)"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter by timestamp <= end_date (RFC3339 format)"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all reverse proxy access log entries"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

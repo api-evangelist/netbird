@@ -1,0 +1,1539 @@
+{
+  "item": [
+    {
+      "id": "42582972-74d2-4cc4-864f-bf1dd43064f9",
+      "name": "Routes",
+      "description": {
+        "content": "Interact with and view information about routes.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "062044b6-171d-4e15-9554-9d3aa0810474",
+          "name": "List all Routes",
+          "request": {
+            "name": "List all Routes",
+            "description": {
+              "content": "Returns a list of all routes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "routes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1ebaaa81-7315-409f-b85f-0e31a2b82251",
+              "name": "A JSON Array of Routes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"description\": \"My first route\",\n    \"enabled\": true,\n    \"groups\": [\n      \"chacdk86lnnboviihd70\",\n      \"chacdk86lnnboviihd70\"\n    ],\n    \"id\": \"chacdk86lnnboviihd7g\",\n    \"keep_route\": true,\n    \"masquerade\": true,\n    \"metric\": 9999,\n    \"network_id\": \"Route 1\",\n    \"network_type\": \"IPv4\",\n    \"peer\": \"chacbco6lnnbn6cg5s91\",\n    \"peer_groups\": [\n      \"chacbco6lnnbn6cg5s91\",\n      \"chacbco6lnnbn6cg5s91\"\n    ],\n    \"network\": \"10.64.0.0/24\",\n    \"domains\": [\n      \"example.com\",\n      \"example.com\"\n    ],\n    \"access_control_groups\": [\n      \"chacbco6lnnbn6cg5s91\",\n      \"chacbco6lnnbn6cg5s91\"\n    ],\n    \"skip_auto_apply\": false\n  },\n  {\n    \"description\": \"My first route\",\n    \"enabled\": true,\n    \"groups\": [\n      \"chacdk86lnnboviihd70\",\n      \"chacdk86lnnboviihd70\"\n    ],\n    \"id\": \"chacdk86lnnboviihd7g\",\n    \"keep_route\": true,\n    \"masquerade\": true,\n    \"metric\": 9999,\n    \"network_id\": \"Route 1\",\n    \"network_type\": \"IPv4\",\n    \"peer\": \"chacbco6lnnbn6cg5s91\",\n    \"peer_groups\": [\n      \"chacbco6lnnbn6cg5s91\",\n      \"chacbco6lnnbn6cg5s91\"\n    ],\n    \"network\": \"10.64.0.0/24\",\n    \"domains\": [\n      \"example.com\",\n      \"example.com\"\n    ],\n    \"access_control_groups\": [\n      \"chacbco6lnnbn6cg5s91\",\n      \"chacbco6lnnbn6cg5s91\"\n    ],\n    \"skip_auto_apply\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18fc13ae-3658-4d2a-8a8b-757654b0f66e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "60fe67b0-b71f-4401-b6e4-99a3f4ba22ba",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b39c98a7-6cf3-46c7-967c-7637ff186f56",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d53ac562-b112-44e7-ba21-e6bb89394b80",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "221dac0a-ff2b-443c-acaa-84250279f6da",
+          "name": "Create a Route",
+          "request": {
+            "name": "Create a Route",
+            "description": {
+              "content": "Creates a Route",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "routes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"network_id\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"metric\": \"<integer>\",\n  \"masquerade\": \"<boolean>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keep_route\": \"<boolean>\",\n  \"peer\": \"<string>\",\n  \"peer_groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"network\": \"<string>\",\n  \"domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"access_control_groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"skip_auto_apply\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "44c0610f-bd9a-4eb9-b168-6f0d945aba44",
+              "name": "A Route Object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"My first route\",\n  \"network_id\": \"Route 1\",\n  \"enabled\": true,\n  \"metric\": 9999,\n  \"masquerade\": true,\n  \"groups\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"keep_route\": true,\n  \"peer\": \"chacbco6lnnbn6cg5s91\",\n  \"peer_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"network\": \"10.64.0.0/24\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"access_control_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"skip_auto_apply\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"My first route\",\n  \"enabled\": true,\n  \"groups\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"id\": \"chacdk86lnnboviihd7g\",\n  \"keep_route\": true,\n  \"masquerade\": true,\n  \"metric\": 9999,\n  \"network_id\": \"Route 1\",\n  \"network_type\": \"IPv4\",\n  \"peer\": \"chacbco6lnnbn6cg5s91\",\n  \"peer_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"network\": \"10.64.0.0/24\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"access_control_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"skip_auto_apply\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b942e897-a894-4d77-bd30-e1a0de63021e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"My first route\",\n  \"network_id\": \"Route 1\",\n  \"enabled\": true,\n  \"metric\": 9999,\n  \"masquerade\": true,\n  \"groups\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"keep_route\": true,\n  \"peer\": \"chacbco6lnnbn6cg5s91\",\n  \"peer_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"network\": \"10.64.0.0/24\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"access_control_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"skip_auto_apply\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3882715d-3537-4d9e-84da-c79df5641083",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"My first route\",\n  \"network_id\": \"Route 1\",\n  \"enabled\": true,\n  \"metric\": 9999,\n  \"masquerade\": true,\n  \"groups\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"keep_route\": true,\n  \"peer\": \"chacbco6lnnbn6cg5s91\",\n  \"peer_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"network\": \"10.64.0.0/24\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"access_control_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"skip_auto_apply\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "549230ce-a7d0-492b-b370-1e32f5a8ccac",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"My first route\",\n  \"network_id\": \"Route 1\",\n  \"enabled\": true,\n  \"metric\": 9999,\n  \"masquerade\": true,\n  \"groups\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"keep_route\": true,\n  \"peer\": \"chacbco6lnnbn6cg5s91\",\n  \"peer_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"network\": \"10.64.0.0/24\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"access_control_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"skip_auto_apply\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1a8795cd-be91-4ba6-afa7-02534283b39b",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"My first route\",\n  \"network_id\": \"Route 1\",\n  \"enabled\": true,\n  \"metric\": 9999,\n  \"masquerade\": true,\n  \"groups\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"keep_route\": true,\n  \"peer\": \"chacbco6lnnbn6cg5s91\",\n  \"peer_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"network\": \"10.64.0.0/24\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"access_control_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"skip_auto_apply\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dcf0b762-4649-42c1-a109-a4ccfc26d17b",
+          "name": "Retrieve a Route",
+          "request": {
+            "name": "Retrieve a Route",
+            "description": {
+              "content": "Get information about a Routes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "routes",
+                ":routeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "routeId",
+                  "description": "(Required) The unique identifier of a route"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "33b40b24-297e-4f94-941e-631d28f8b688",
+              "name": "A Route object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) The unique identifier of a route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"My first route\",\n  \"enabled\": true,\n  \"groups\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"id\": \"chacdk86lnnboviihd7g\",\n  \"keep_route\": true,\n  \"masquerade\": true,\n  \"metric\": 9999,\n  \"network_id\": \"Route 1\",\n  \"network_type\": \"IPv4\",\n  \"peer\": \"chacbco6lnnbn6cg5s91\",\n  \"peer_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"network\": \"10.64.0.0/24\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"access_control_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"skip_auto_apply\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfccdddf-a383-448d-8dda-70c14b33506d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) The unique identifier of a route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1ba2e738-54be-4b28-8336-6e8fea205a3e",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) The unique identifier of a route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e2bae4f3-36ad-4bfd-aff8-ec2b99b59b37",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) The unique identifier of a route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c2d7ee53-e131-4d57-9288-5164ef223306",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) The unique identifier of a route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb3275a1-3960-4b1a-bf7c-a3665b0a4b29",
+          "name": "Update a Route",
+          "request": {
+            "name": "Update a Route",
+            "description": {
+              "content": "Update/Replace a Route",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "routes",
+                ":routeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "routeId",
+                  "description": "(Required) The unique identifier of a route"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"network_id\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"metric\": \"<integer>\",\n  \"masquerade\": \"<boolean>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"keep_route\": \"<boolean>\",\n  \"peer\": \"<string>\",\n  \"peer_groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"network\": \"<string>\",\n  \"domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"access_control_groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"skip_auto_apply\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a2cd2335-1438-435d-a321-2f8b6a19139b",
+              "name": "A Route object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) The unique identifier of a route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"My first route\",\n  \"network_id\": \"Route 1\",\n  \"enabled\": true,\n  \"metric\": 9999,\n  \"masquerade\": true,\n  \"groups\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"keep_route\": true,\n  \"peer\": \"chacbco6lnnbn6cg5s91\",\n  \"peer_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"network\": \"10.64.0.0/24\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"access_control_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"skip_auto_apply\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"My first route\",\n  \"enabled\": true,\n  \"groups\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"id\": \"chacdk86lnnboviihd7g\",\n  \"keep_route\": true,\n  \"masquerade\": true,\n  \"metric\": 9999,\n  \"network_id\": \"Route 1\",\n  \"network_type\": \"IPv4\",\n  \"peer\": \"chacbco6lnnbn6cg5s91\",\n  \"peer_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"network\": \"10.64.0.0/24\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"access_control_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"skip_auto_apply\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73243d1e-d607-4b1f-9417-27916309f9ea",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) The unique identifier of a route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"My first route\",\n  \"network_id\": \"Route 1\",\n  \"enabled\": true,\n  \"metric\": 9999,\n  \"masquerade\": true,\n  \"groups\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"keep_route\": true,\n  \"peer\": \"chacbco6lnnbn6cg5s91\",\n  \"peer_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"network\": \"10.64.0.0/24\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"access_control_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"skip_auto_apply\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2766e637-37ea-4fe5-a820-d94671c600d1",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) The unique identifier of a route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"My first route\",\n  \"network_id\": \"Route 1\",\n  \"enabled\": true,\n  \"metric\": 9999,\n  \"masquerade\": true,\n  \"groups\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"keep_route\": true,\n  \"peer\": \"chacbco6lnnbn6cg5s91\",\n  \"peer_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"network\": \"10.64.0.0/24\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"access_control_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"skip_auto_apply\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c708272-c071-40da-8de1-b1ed6bbe00f6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) The unique identifier of a route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"My first route\",\n  \"network_id\": \"Route 1\",\n  \"enabled\": true,\n  \"metric\": 9999,\n  \"masquerade\": true,\n  \"groups\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"keep_route\": true,\n  \"peer\": \"chacbco6lnnbn6cg5s91\",\n  \"peer_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"network\": \"10.64.0.0/24\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"access_control_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"skip_auto_apply\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9fd82987-2b98-4be5-9334-461a10b72816",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) The unique identifier of a route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"My first route\",\n  \"network_id\": \"Route 1\",\n  \"enabled\": true,\n  \"metric\": 9999,\n  \"masquerade\": true,\n  \"groups\": [\n    \"chacdk86lnnboviihd70\",\n    \"chacdk86lnnboviihd70\"\n  ],\n  \"keep_route\": true,\n  \"peer\": \"chacbco6lnnbn6cg5s91\",\n  \"peer_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"network\": \"10.64.0.0/24\",\n  \"domains\": [\n    \"example.com\",\n    \"example.com\"\n  ],\n  \"access_control_groups\": [\n    \"chacbco6lnnbn6cg5s91\",\n    \"chacbco6lnnbn6cg5s91\"\n  ],\n  \"skip_auto_apply\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8969016-bb2a-4e8b-85b9-adf4294d8a5e",
+          "name": "Delete a Route",
+          "request": {
+            "name": "Delete a Route",
+            "description": {
+              "content": "Delete a route",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "routes",
+                ":routeId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "routeId",
+                  "description": "(Required) The unique identifier of a route"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "07399a31-9628-4fdb-93d9-6a28d710dc37",
+              "name": "Delete status code",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) The unique identifier of a route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4a5edf7c-aa34-486c-a89b-52103e5eb929",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) The unique identifier of a route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5a4d41df-25aa-48e4-85a6-d0d885934d1c",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) The unique identifier of a route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7b5b545e-a1d0-43aa-a0a4-0193a561b3bb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) The unique identifier of a route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3696fa1b-a62f-470e-92a3-baca29334987",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "routes",
+                    ":routeId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "routeId",
+                      "description": "(Required) The unique identifier of a route"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.netbird.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b906ca9c-adbb-4907-a49f-ffb22ed18a97",
+    "name": "NetBird REST Accounts Routes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to manipulate groups, rules, policies and retrieve information about peers and users",
+      "type": "text/plain"
+    }
+  }
+}

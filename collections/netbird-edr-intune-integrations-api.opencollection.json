@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts EDR Intune Integrations API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EDR Intune Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get EDR Intune Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/edr/intune"
+          },
+          "docs": "Retrieves a specific EDR Intune integration by its ID."
+        },
+        {
+          "info": {
+            "name": "Create EDR Intune Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/edr/intune",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new EDR Intune integration for the authenticated account.\n"
+        },
+        {
+          "info": {
+            "name": "Update EDR Intune Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/edr/intune",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing EDR Intune Integration. The request body structure is `EDRIntuneRequest`.\n"
+        },
+        {
+          "info": {
+            "name": "Delete EDR Intune Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/edr/intune"
+          },
+          "docs": "Deletes an EDR Intune Integration by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

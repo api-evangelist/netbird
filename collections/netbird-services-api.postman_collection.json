@@ -1,0 +1,3368 @@
+{
+  "item": [
+    {
+      "id": "3ee88652-a8eb-466c-8766-fde95fe11277",
+      "name": "Services",
+      "description": {
+        "content": "Interact with and view information about reverse proxy services.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5fdbb084-4645-48da-bc00-c3576a2673a3",
+          "name": "List available proxy clusters",
+          "request": {
+            "name": "List available proxy clusters",
+            "description": {
+              "content": "Returns a list of available proxy clusters with their connection status",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reverse-proxies",
+                "clusters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5af032e9-88ba-4497-8f19-23f6b89137c1",
+              "name": "A JSON Array of proxy clusters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"address\": \"eu.proxy.netbird.io\",\n    \"connected_proxies\": 3\n  },\n  {\n    \"address\": \"eu.proxy.netbird.io\",\n    \"connected_proxies\": 3\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18b4643e-c575-4a70-8301-e9492bf28f8b",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "665878ce-22e2-45d8-a2e3-a7e62753f0d2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "79fc7b06-a46c-4da0-a946-f30176752cb5",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47ac2497-6c2f-43ff-9591-db7b9240d2eb",
+          "name": "List all Services",
+          "request": {
+            "name": "List all Services",
+            "description": {
+              "content": "Returns a list of all reverse proxy services",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reverse-proxies",
+                "services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "28b3ddb8-ec59-44f1-bfd4-34cb18a01762",
+              "name": "A JSON Array of services",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"cs8i4ug6lnn4g9hqv7mg\",\n    \"name\": \"myapp.example.netbird.app\",\n    \"domain\": \"myapp.example.netbird.app\",\n    \"targets\": [\n      {\n        \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n        \"target_type\": \"subnet\",\n        \"protocol\": \"http\",\n        \"port\": 8080,\n        \"enabled\": true,\n        \"path\": \"/\",\n        \"host\": \"10.10.0.1\",\n        \"options\": {\n          \"skip_tls_verify\": false,\n          \"request_timeout\": \"30s\",\n          \"path_rewrite\": \"preserve\",\n          \"custom_headers\": {\n            \"X-Custom-Header\": \"value\"\n          },\n          \"proxy_protocol\": false,\n          \"session_idle_timeout\": \"2m\"\n        }\n      },\n      {\n        \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n        \"target_type\": \"subnet\",\n        \"protocol\": \"http\",\n        \"port\": 8080,\n        \"enabled\": true,\n        \"path\": \"/\",\n        \"host\": \"10.10.0.1\",\n        \"options\": {\n          \"skip_tls_verify\": false,\n          \"request_timeout\": \"30s\",\n          \"path_rewrite\": \"preserve\",\n          \"custom_headers\": {\n            \"X-Custom-Header\": \"value\"\n          },\n          \"proxy_protocol\": false,\n          \"session_idle_timeout\": \"2m\"\n        }\n      }\n    ],\n    \"enabled\": true,\n    \"auth\": {\n      \"password_auth\": {\n        \"enabled\": true,\n        \"password\": \"s3cret\"\n      },\n      \"pin_auth\": {\n        \"enabled\": false,\n        \"pin\": \"1234\"\n      },\n      \"bearer_auth\": {\n        \"enabled\": true,\n        \"distribution_groups\": [\n          \"ch8i4ug6lnn4g9hqv7mg\",\n          \"ch8i4ug6lnn4g9hqv7mg\"\n        ]\n      },\n      \"link_auth\": {\n        \"enabled\": false\n      },\n      \"header_auths\": [\n        {\n          \"enabled\": true,\n          \"header\": \"X-API-Key\",\n          \"value\": \"my-secret-api-key\"\n        },\n        {\n          \"enabled\": true,\n          \"header\": \"X-API-Key\",\n          \"value\": \"my-secret-api-key\"\n        }\n      ]\n    },\n    \"meta\": {\n      \"created_at\": \"2024-02-03T10:30:00Z\",\n      \"status\": \"active\",\n      \"certificate_issued_at\": \"2024-02-03T10:35:00Z\"\n    },\n    \"mode\": \"http\",\n    \"listen_port\": 8443,\n    \"port_auto_assigned\": false,\n    \"proxy_cluster\": \"eu.proxy.netbird.io\",\n    \"terminated\": false,\n    \"pass_host_header\": false,\n    \"rewrite_redirects\": false,\n    \"access_restrictions\": {\n      \"allowed_cidrs\": [\n        \"192.168.1.0/24\",\n        \"192.168.1.0/24\"\n      ],\n      \"blocked_cidrs\": [\n        \"10.0.0.0/8\",\n        \"10.0.0.0/8\"\n      ],\n      \"allowed_countries\": [\n        \"US\",\n        \"US\"\n      ],\n      \"blocked_countries\": [\n        \"DE\",\n        \"DE\"\n      ],\n      \"crowdsec_mode\": \"off\"\n    }\n  },\n  {\n    \"id\": \"cs8i4ug6lnn4g9hqv7mg\",\n    \"name\": \"myapp.example.netbird.app\",\n    \"domain\": \"myapp.example.netbird.app\",\n    \"targets\": [\n      {\n        \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n        \"target_type\": \"subnet\",\n        \"protocol\": \"http\",\n        \"port\": 8080,\n        \"enabled\": true,\n        \"path\": \"/\",\n        \"host\": \"10.10.0.1\",\n        \"options\": {\n          \"skip_tls_verify\": false,\n          \"request_timeout\": \"30s\",\n          \"path_rewrite\": \"preserve\",\n          \"custom_headers\": {\n            \"X-Custom-Header\": \"value\"\n          },\n          \"proxy_protocol\": false,\n          \"session_idle_timeout\": \"2m\"\n        }\n      },\n      {\n        \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n        \"target_type\": \"subnet\",\n        \"protocol\": \"http\",\n        \"port\": 8080,\n        \"enabled\": true,\n        \"path\": \"/\",\n        \"host\": \"10.10.0.1\",\n        \"options\": {\n          \"skip_tls_verify\": false,\n          \"request_timeout\": \"30s\",\n          \"path_rewrite\": \"preserve\",\n          \"custom_headers\": {\n            \"X-Custom-Header\": \"value\"\n          },\n          \"proxy_protocol\": false,\n          \"session_idle_timeout\": \"2m\"\n        }\n      }\n    ],\n    \"enabled\": true,\n    \"auth\": {\n      \"password_auth\": {\n        \"enabled\": true,\n        \"password\": \"s3cret\"\n      },\n      \"pin_auth\": {\n        \"enabled\": false,\n        \"pin\": \"1234\"\n      },\n      \"bearer_auth\": {\n        \"enabled\": true,\n        \"distribution_groups\": [\n          \"ch8i4ug6lnn4g9hqv7mg\",\n          \"ch8i4ug6lnn4g9hqv7mg\"\n        ]\n      },\n      \"link_auth\": {\n        \"enabled\": false\n      },\n      \"header_auths\": [\n        {\n          \"enabled\": true,\n          \"header\": \"X-API-Key\",\n          \"value\": \"my-secret-api-key\"\n        },\n        {\n          \"enabled\": true,\n          \"header\": \"X-API-Key\",\n          \"value\": \"my-secret-api-key\"\n        }\n      ]\n    },\n    \"meta\": {\n      \"created_at\": \"2024-02-03T10:30:00Z\",\n      \"status\": \"active\",\n      \"certificate_issued_at\": \"2024-02-03T10:35:00Z\"\n    },\n    \"mode\": \"http\",\n    \"listen_port\": 8443,\n    \"port_auto_assigned\": false,\n    \"proxy_cluster\": \"eu.proxy.netbird.io\",\n    \"terminated\": false,\n    \"pass_host_header\": false,\n    \"rewrite_redirects\": false,\n    \"access_restrictions\": {\n      \"allowed_cidrs\": [\n        \"192.168.1.0/24\",\n        \"192.168.1.0/24\"\n      ],\n      \"blocked_cidrs\": [\n        \"10.0.0.0/8\",\n        \"10.0.0.0/8\"\n      ],\n      \"allowed_countries\": [\n        \"US\",\n        \"US\"\n      ],\n      \"blocked_countries\": [\n        \"DE\",\n        \"DE\"\n      ],\n      \"crowdsec_mode\": \"off\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d5278c6-559c-4630-aad9-21cccac512d8",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b828c19e-8f60-4780-a4ef-7f4fd8de6d69",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1d809f5c-4640-4e4f-a9ad-ee5ee0dc12f1",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41b92b56-00e9-43fe-bfca-1bbc6d190427",
+          "name": "Create a Service",
+          "request": {
+            "name": "Create a Service",
+            "description": {
+              "content": "Creates a new reverse proxy service",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reverse-proxies",
+                "services"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"enabled\": true,\n  \"mode\": \"http\",\n  \"listen_port\": \"<integer>\",\n  \"targets\": [\n    {\n      \"target_id\": \"<string>\",\n      \"target_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"enabled\": \"<boolean>\",\n      \"path\": \"<string>\",\n      \"host\": \"<string>\",\n      \"options\": {\n        \"skip_tls_verify\": \"<boolean>\",\n        \"request_timeout\": \"<string>\",\n        \"path_rewrite\": \"<string>\",\n        \"custom_headers\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\",\n          \"key_3\": \"<string>\"\n        },\n        \"proxy_protocol\": \"<boolean>\",\n        \"session_idle_timeout\": \"<string>\"\n      }\n    },\n    {\n      \"target_id\": \"<string>\",\n      \"target_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"enabled\": \"<boolean>\",\n      \"path\": \"<string>\",\n      \"host\": \"<string>\",\n      \"options\": {\n        \"skip_tls_verify\": \"<boolean>\",\n        \"request_timeout\": \"<string>\",\n        \"path_rewrite\": \"<string>\",\n        \"custom_headers\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"proxy_protocol\": \"<boolean>\",\n        \"session_idle_timeout\": \"<string>\"\n      }\n    }\n  ],\n  \"pass_host_header\": \"<boolean>\",\n  \"rewrite_redirects\": \"<boolean>\",\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": \"<boolean>\",\n      \"password\": \"<string>\"\n    },\n    \"pin_auth\": {\n      \"enabled\": \"<boolean>\",\n      \"pin\": \"<string>\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": \"<boolean>\",\n      \"distribution_groups\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": \"<boolean>\",\n        \"header\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"enabled\": \"<boolean>\",\n        \"header\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"<cidr>\",\n      \"<cidr>\"\n    ],\n    \"blocked_cidrs\": [\n      \"<cidr>\",\n      \"<cidr>\"\n    ],\n    \"allowed_countries\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"blocked_countries\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f4d58493-2d60-4ce6-b72f-957504c4a713",
+              "name": "Service created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"enabled\": true,\n  \"mode\": \"http\",\n  \"listen_port\": 5432,\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"cs8i4ug6lnn4g9hqv7mg\",\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"enabled\": true,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"meta\": {\n    \"created_at\": \"2024-02-03T10:30:00Z\",\n    \"status\": \"active\",\n    \"certificate_issued_at\": \"2024-02-03T10:35:00Z\"\n  },\n  \"mode\": \"http\",\n  \"listen_port\": 8443,\n  \"port_auto_assigned\": false,\n  \"proxy_cluster\": \"eu.proxy.netbird.io\",\n  \"terminated\": false,\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23343304-5f22-47a6-862c-69c789e31459",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"enabled\": true,\n  \"mode\": \"http\",\n  \"listen_port\": 5432,\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e1cf958-7cad-4422-9e7e-79d897f884bd",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"enabled\": true,\n  \"mode\": \"http\",\n  \"listen_port\": 5432,\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "db03a262-8b49-4b78-9fac-9f085eeb01fd",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"enabled\": true,\n  \"mode\": \"http\",\n  \"listen_port\": 5432,\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "51f6c3cb-9e57-4432-aa99-7ea65c2873f7",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"enabled\": true,\n  \"mode\": \"http\",\n  \"listen_port\": 5432,\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "549abdb0-e836-4885-a4ca-0dbad45d1c89",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"enabled\": true,\n  \"mode\": \"http\",\n  \"listen_port\": 5432,\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8bb351c-9672-4581-976b-c74f24eab256",
+          "name": "Retrieve a Service",
+          "request": {
+            "name": "Retrieve a Service",
+            "description": {
+              "content": "Get information about a specific reverse proxy service",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reverse-proxies",
+                "services",
+                ":serviceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "serviceId",
+                  "description": "(Required) The unique identifier of a service"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4eccc371-3ce1-40fe-9264-5a61ddb02c31",
+              "name": "A service object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"cs8i4ug6lnn4g9hqv7mg\",\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"enabled\": true,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"meta\": {\n    \"created_at\": \"2024-02-03T10:30:00Z\",\n    \"status\": \"active\",\n    \"certificate_issued_at\": \"2024-02-03T10:35:00Z\"\n  },\n  \"mode\": \"http\",\n  \"listen_port\": 8443,\n  \"port_auto_assigned\": false,\n  \"proxy_cluster\": \"eu.proxy.netbird.io\",\n  \"terminated\": false,\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "792d51e5-d220-47c1-b378-6eb096f5522a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "40b5cb92-1d27-4e25-a177-608b99cf402d",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eb28d2c6-08c9-4087-a1e9-81a28d79d6cd",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd271128-1692-4778-8011-e8b6cf2e2c66",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3f94f79b-4826-4ffa-9111-2a163d3be158",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0af184d6-cf3f-469a-ba4f-83c201acfffe",
+          "name": "Update a Service",
+          "request": {
+            "name": "Update a Service",
+            "description": {
+              "content": "Update an existing service",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reverse-proxies",
+                "services",
+                ":serviceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "serviceId",
+                  "description": "(Required) The unique identifier of a service"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"enabled\": true,\n  \"mode\": \"http\",\n  \"listen_port\": \"<integer>\",\n  \"targets\": [\n    {\n      \"target_id\": \"<string>\",\n      \"target_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"enabled\": \"<boolean>\",\n      \"path\": \"<string>\",\n      \"host\": \"<string>\",\n      \"options\": {\n        \"skip_tls_verify\": \"<boolean>\",\n        \"request_timeout\": \"<string>\",\n        \"path_rewrite\": \"<string>\",\n        \"custom_headers\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\",\n          \"key_3\": \"<string>\"\n        },\n        \"proxy_protocol\": \"<boolean>\",\n        \"session_idle_timeout\": \"<string>\"\n      }\n    },\n    {\n      \"target_id\": \"<string>\",\n      \"target_type\": \"<string>\",\n      \"protocol\": \"<string>\",\n      \"port\": \"<integer>\",\n      \"enabled\": \"<boolean>\",\n      \"path\": \"<string>\",\n      \"host\": \"<string>\",\n      \"options\": {\n        \"skip_tls_verify\": \"<boolean>\",\n        \"request_timeout\": \"<string>\",\n        \"path_rewrite\": \"<string>\",\n        \"custom_headers\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"proxy_protocol\": \"<boolean>\",\n        \"session_idle_timeout\": \"<string>\"\n      }\n    }\n  ],\n  \"pass_host_header\": \"<boolean>\",\n  \"rewrite_redirects\": \"<boolean>\",\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": \"<boolean>\",\n      \"password\": \"<string>\"\n    },\n    \"pin_auth\": {\n      \"enabled\": \"<boolean>\",\n      \"pin\": \"<string>\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": \"<boolean>\",\n      \"distribution_groups\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": \"<boolean>\",\n        \"header\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"enabled\": \"<boolean>\",\n        \"header\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  },\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"<cidr>\",\n      \"<cidr>\"\n    ],\n    \"blocked_cidrs\": [\n      \"<cidr>\",\n      \"<cidr>\"\n    ],\n    \"allowed_countries\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"blocked_countries\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "596aaf9d-6bc8-4ba3-8268-6caf74a79247",
+              "name": "Service updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"enabled\": true,\n  \"mode\": \"http\",\n  \"listen_port\": 5432,\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"cs8i4ug6lnn4g9hqv7mg\",\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"enabled\": true,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"meta\": {\n    \"created_at\": \"2024-02-03T10:30:00Z\",\n    \"status\": \"active\",\n    \"certificate_issued_at\": \"2024-02-03T10:35:00Z\"\n  },\n  \"mode\": \"http\",\n  \"listen_port\": 8443,\n  \"port_auto_assigned\": false,\n  \"proxy_cluster\": \"eu.proxy.netbird.io\",\n  \"terminated\": false,\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51951a8f-f3b1-40bc-a5c5-b6460b64eb48",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"enabled\": true,\n  \"mode\": \"http\",\n  \"listen_port\": 5432,\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d9b08e16-92ae-4516-a417-542fd46c0dda",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"enabled\": true,\n  \"mode\": \"http\",\n  \"listen_port\": 5432,\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b271de68-4cdf-421b-8c46-4eabfe8659ec",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"enabled\": true,\n  \"mode\": \"http\",\n  \"listen_port\": 5432,\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eb69459a-7e02-4fe9-a671-098b28d226a8",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"enabled\": true,\n  \"mode\": \"http\",\n  \"listen_port\": 5432,\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "753cebb7-6f1a-428c-8870-60beb89f97e1",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"enabled\": true,\n  \"mode\": \"http\",\n  \"listen_port\": 5432,\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"couldn't parse JSON request\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33e80250-2838-4a56-a402-cf0f4e78826c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"enabled\": true,\n  \"mode\": \"http\",\n  \"listen_port\": 5432,\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab8238b6-d8de-4828-89ae-23fef03eb1b4",
+          "name": "Delete a Service",
+          "request": {
+            "name": "Delete a Service",
+            "description": {
+              "content": "Delete an existing service",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reverse-proxies",
+                "services",
+                ":serviceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "serviceId",
+                  "description": "(Required) The unique identifier of a service"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "80f26834-04cc-45a6-a9a7-90dfd4e064ff",
+              "name": "Service deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "09469143-8317-40dc-ba1f-46951004b5de",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "845ec319-33bb-489a-9681-763183ffe322",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9325ad2b-f4cf-4a55-8c79-3c1a5451cb94",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a67be04b-bab2-403e-843c-05665ae89aad",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "43597802-a75f-446e-9f4a-d8c69f7d176f",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "services",
+                    ":serviceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceId",
+                      "description": "(Required) The unique identifier of a service"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c514b434-01b0-4fcb-8814-94b316ba946b",
+          "name": "Retrieve Service Domains",
+          "request": {
+            "name": "Retrieve Service Domains",
+            "description": {
+              "content": "Get information about domains that can be used for service endpoints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reverse-proxies",
+                "domains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "91dfff87-98e4-4331-9915-44383488cc7d",
+              "name": "A JSON Array of ReverseProxyDomains",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"ds8i4ug6lnn4g9hqv7mg\",\n    \"domain\": \"example.netbird.app\",\n    \"validated\": true,\n    \"type\": \"free\",\n    \"target_cluster\": \"eu.proxy.netbird.io\",\n    \"supports_custom_ports\": true,\n    \"require_subdomain\": false,\n    \"supports_crowdsec\": false\n  },\n  {\n    \"id\": \"ds8i4ug6lnn4g9hqv7mg\",\n    \"domain\": \"example.netbird.app\",\n    \"validated\": true,\n    \"type\": \"free\",\n    \"target_cluster\": \"eu.proxy.netbird.io\",\n    \"supports_custom_ports\": true,\n    \"require_subdomain\": false,\n    \"supports_crowdsec\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39a232ec-df5b-4cc9-b7fb-54669ab2db16",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "065136e0-703b-4320-b8ce-d17c3a1ae814",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a33da87a-f95b-4595-a2af-b3313bc93c6a",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ec5e8598-6e46-4ad9-aaff-867b340243ee",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1c2bee8d-ee7a-40aa-a601-8c955a641444",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b4623b8-3481-4772-97f1-a2401d82ba0a",
+          "name": "Create a Custom domain",
+          "request": {
+            "name": "Create a Custom domain",
+            "description": {
+              "content": "Create a new Custom domain for use with service endpoints, this will trigger an initial validation check",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reverse-proxies",
+                "domains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"domain\": \"<string>\",\n  \"target_cluster\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3211eae0-401c-4dab-92d6-951ccef8d52b",
+              "name": "Service created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain\": \"myapp.example.com\",\n  \"target_cluster\": \"eu.proxy.netbird.io\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"cs8i4ug6lnn4g9hqv7mg\",\n  \"name\": \"myapp.example.netbird.app\",\n  \"domain\": \"myapp.example.netbird.app\",\n  \"targets\": [\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    },\n    {\n      \"target_id\": \"cs8i4ug6lnn4g9hqv7mg\",\n      \"target_type\": \"subnet\",\n      \"protocol\": \"http\",\n      \"port\": 8080,\n      \"enabled\": true,\n      \"path\": \"/\",\n      \"host\": \"10.10.0.1\",\n      \"options\": {\n        \"skip_tls_verify\": false,\n        \"request_timeout\": \"30s\",\n        \"path_rewrite\": \"preserve\",\n        \"custom_headers\": {\n          \"X-Custom-Header\": \"value\"\n        },\n        \"proxy_protocol\": false,\n        \"session_idle_timeout\": \"2m\"\n      }\n    }\n  ],\n  \"enabled\": true,\n  \"auth\": {\n    \"password_auth\": {\n      \"enabled\": true,\n      \"password\": \"s3cret\"\n    },\n    \"pin_auth\": {\n      \"enabled\": false,\n      \"pin\": \"1234\"\n    },\n    \"bearer_auth\": {\n      \"enabled\": true,\n      \"distribution_groups\": [\n        \"ch8i4ug6lnn4g9hqv7mg\",\n        \"ch8i4ug6lnn4g9hqv7mg\"\n      ]\n    },\n    \"link_auth\": {\n      \"enabled\": false\n    },\n    \"header_auths\": [\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      },\n      {\n        \"enabled\": true,\n        \"header\": \"X-API-Key\",\n        \"value\": \"my-secret-api-key\"\n      }\n    ]\n  },\n  \"meta\": {\n    \"created_at\": \"2024-02-03T10:30:00Z\",\n    \"status\": \"active\",\n    \"certificate_issued_at\": \"2024-02-03T10:35:00Z\"\n  },\n  \"mode\": \"http\",\n  \"listen_port\": 8443,\n  \"port_auto_assigned\": false,\n  \"proxy_cluster\": \"eu.proxy.netbird.io\",\n  \"terminated\": false,\n  \"pass_host_header\": false,\n  \"rewrite_redirects\": false,\n  \"access_restrictions\": {\n    \"allowed_cidrs\": [\n      \"192.168.1.0/24\",\n      \"192.168.1.0/24\"\n    ],\n    \"blocked_cidrs\": [\n      \"10.0.0.0/8\",\n      \"10.0.0.0/8\"\n    ],\n    \"allowed_countries\": [\n      \"US\",\n      \"US\"\n    ],\n    \"blocked_countries\": [\n      \"DE\",\n      \"DE\"\n    ],\n    \"crowdsec_mode\": \"off\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e3aa21c6-4a96-4757-ba2a-2fd7619a1673",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain\": \"myapp.example.com\",\n  \"target_cluster\": \"eu.proxy.netbird.io\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "238cd706-254e-45f5-8f77-559f949a6e49",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain\": \"myapp.example.com\",\n  \"target_cluster\": \"eu.proxy.netbird.io\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8337e311-5e9a-446a-9d74-5df101ca13e6",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain\": \"myapp.example.com\",\n  \"target_cluster\": \"eu.proxy.netbird.io\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "562dab7b-73b1-4e58-9683-e9cfa5a444cd",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain\": \"myapp.example.com\",\n  \"target_cluster\": \"eu.proxy.netbird.io\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "453ea366-9bd0-4d67-a1d9-799dc3748f63",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain\": \"myapp.example.com\",\n  \"target_cluster\": \"eu.proxy.netbird.io\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "33557478-f5de-4d17-81fa-8eea45187465",
+          "name": "Delete a Custom domain",
+          "request": {
+            "name": "Delete a Custom domain",
+            "description": {
+              "content": "Delete an existing service custom domain",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reverse-proxies",
+                "domains",
+                ":domainId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domainId",
+                  "description": "(Required) The custom domain ID"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c8c966ea-ced9-4391-ab38-c622767a4c3b",
+              "name": "Service custom domain deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains",
+                    ":domainId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domainId",
+                      "description": "(Required) The custom domain ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0524e3e6-f52c-4bb4-87f5-45521adeb75b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains",
+                    ":domainId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domainId",
+                      "description": "(Required) The custom domain ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7778aa70-0fe3-4881-a57b-f9dc1dbc226b",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains",
+                    ":domainId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domainId",
+                      "description": "(Required) The custom domain ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "919dafd0-a27f-45b4-ba05-dc5df97a48a4",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains",
+                    ":domainId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domainId",
+                      "description": "(Required) The custom domain ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f141b979-7697-4ced-9a99-046644d6a25b",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains",
+                    ":domainId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domainId",
+                      "description": "(Required) The custom domain ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a8c6e53e-dd14-4905-ae09-711fb6a68458",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains",
+                    ":domainId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domainId",
+                      "description": "(Required) The custom domain ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7642bfa2-48ca-45d0-bafa-0af2461bf2fd",
+          "name": "Validate a custom domain",
+          "request": {
+            "name": "Validate a custom domain",
+            "description": {
+              "content": "Trigger domain ownership validation for a custom domain",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "reverse-proxies",
+                "domains",
+                ":domainId",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "domainId",
+                  "description": "(Required) The custom domain ID"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "48a6f6fe-d664-4621-b100-9966ddaf53ec",
+              "name": "Reverse proxy custom domain validation triggered",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains",
+                    ":domainId",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domainId",
+                      "description": "(Required) The custom domain ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "de9eb433-d3a1-42ff-b209-7e68f6c39661",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains",
+                    ":domainId",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domainId",
+                      "description": "(Required) The custom domain ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d4b7cd3b-e54b-45b8-886b-21dc60d87258",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains",
+                    ":domainId",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domainId",
+                      "description": "(Required) The custom domain ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cc32679a-93bc-4a9c-8c33-9e94c4f2305d",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains",
+                    ":domainId",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domainId",
+                      "description": "(Required) The custom domain ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "05c332f0-a20b-4e02-b66c-dfb358baeab1",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains",
+                    ":domainId",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domainId",
+                      "description": "(Required) The custom domain ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f42e679d-9dd6-4f00-a8ee-18eff374d1be",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "reverse-proxies",
+                    "domains",
+                    ":domainId",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "domainId",
+                      "description": "(Required) The custom domain ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.netbird.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d0134184-17c6-4400-aa05-cd5a4c5ff8bc",
+    "name": "NetBird REST Accounts Services API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to manipulate groups, rules, policies and retrieve information about peers and users",
+      "type": "text/plain"
+    }
+  }
+}

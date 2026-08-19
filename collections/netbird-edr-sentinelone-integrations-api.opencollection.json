@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts EDR SentinelOne Integrations API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EDR SentinelOne Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get EDR SentinelOne Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/edr/sentinelone"
+          },
+          "docs": "Retrieves a specific EDR SentinelOne integration by its ID."
+        },
+        {
+          "info": {
+            "name": "Create EDR SentinelOne Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/edr/sentinelone",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new EDR SentinelOne integration"
+        },
+        {
+          "info": {
+            "name": "Update EDR SentinelOne Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/edr/sentinelone",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing EDR SentinelOne Integration."
+        },
+        {
+          "info": {
+            "name": "Delete EDR SentinelOne Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/edr/sentinelone"
+          },
+          "docs": "Deletes an EDR SentinelOne Integration by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

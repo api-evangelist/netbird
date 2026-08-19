@@ -1,0 +1,272 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts DNS Zones API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DNS Zones",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all DNS Zones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/dns/zones",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all custom DNS zones"
+        },
+        {
+          "info": {
+            "name": "Create a DNS Zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/dns/zones",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new custom DNS zone"
+        },
+        {
+          "info": {
+            "name": "Retrieve a DNS Zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns information about a specific DNS zone"
+        },
+        {
+          "info": {
+            "name": "Update a DNS Zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a custom DNS zone"
+        },
+        {
+          "info": {
+            "name": "Delete a DNS Zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a custom DNS zone"
+        },
+        {
+          "info": {
+            "name": "List all DNS Records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId/records",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all DNS records in a zone"
+        },
+        {
+          "info": {
+            "name": "Create a DNS Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId/records",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new DNS record in a zone"
+        },
+        {
+          "info": {
+            "name": "Retrieve a DNS Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId/records/:recordId",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              },
+              {
+                "name": "recordId",
+                "value": "chacbco6lnnbn6cg5s92",
+                "type": "path",
+                "description": "The unique identifier of a DNS record"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns information about a specific DNS record"
+        },
+        {
+          "info": {
+            "name": "Update a DNS Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId/records/:recordId",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              },
+              {
+                "name": "recordId",
+                "value": "chacbco6lnnbn6cg5s92",
+                "type": "path",
+                "description": "The unique identifier of a DNS record"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a DNS record in a zone"
+        },
+        {
+          "info": {
+            "name": "Delete a DNS Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/dns/zones/:zoneId/records/:recordId",
+            "params": [
+              {
+                "name": "zoneId",
+                "value": "chacbco6lnnbn6cg5s91",
+                "type": "path",
+                "description": "The unique identifier of a zone"
+              },
+              {
+                "name": "recordId",
+                "value": "chacbco6lnnbn6cg5s92",
+                "type": "path",
+                "description": "The unique identifier of a DNS record"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a DNS record from a zone"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts IDP SCIM Integrations API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IDP SCIM Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All SCIM IDP Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/scim-idp"
+          },
+          "docs": "Retrieves all SCIM IDP integrations for the authenticated account"
+        },
+        {
+          "info": {
+            "name": "Create SCIM IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/scim-idp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new SCIM integration"
+        },
+        {
+          "info": {
+            "name": "Get SCIM IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/scim-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the SCIM IDP integration."
+              }
+            ]
+          },
+          "docs": "Retrieves an SCIM IDP integration by ID."
+        },
+        {
+          "info": {
+            "name": "Update SCIM IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/scim-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the SCIM IDP integration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing SCIM IDP Integration."
+        },
+        {
+          "info": {
+            "name": "Delete SCIM IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/scim-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the SCIM IDP integration."
+              }
+            ]
+          },
+          "docs": "Deletes an SCIM IDP integration by ID."
+        },
+        {
+          "info": {
+            "name": "Regenerate SCIM Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/scim-idp/:id/token",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the SCIM IDP integration."
+              }
+            ]
+          },
+          "docs": "Regenerates the SCIM API token for an SCIM IDP integration."
+        },
+        {
+          "info": {
+            "name": "Get SCIM Integration Sync Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/scim-idp/:id/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the SCIM IDP integration."
+              }
+            ]
+          },
+          "docs": "Retrieves synchronization logs for a SCIM IDP integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts Portal API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Portal",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get customer portal URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/billing/portal",
+            "params": [
+              {
+                "name": "baseURL",
+                "value": "https://app.netbird.io/plans",
+                "type": "query",
+                "description": "The base URL for the redirect after accessing the portal."
+              }
+            ]
+          },
+          "docs": "Get customer portal URL"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

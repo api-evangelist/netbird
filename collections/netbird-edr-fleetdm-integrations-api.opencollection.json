@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts EDR FleetDM Integrations API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EDR FleetDM Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get EDR FleetDM Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/edr/fleetdm"
+          },
+          "docs": "Retrieves a specific EDR FleetDM integration by its ID."
+        },
+        {
+          "info": {
+            "name": "Create EDR FleetDM Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/edr/fleetdm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new EDR FleetDM integration"
+        },
+        {
+          "info": {
+            "name": "Update EDR FleetDM Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/edr/fleetdm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing EDR FleetDM Integration."
+        },
+        {
+          "info": {
+            "name": "Delete EDR FleetDM Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/edr/fleetdm"
+          },
+          "docs": "Deletes an EDR FleetDM Integration by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

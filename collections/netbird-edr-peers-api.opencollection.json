@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts EDR Peers API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EDR Peers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bypass compliance for a non-compliant peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/peers/:peer-id/edr/bypass",
+            "params": [
+              {
+                "name": "peer-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the peer"
+              }
+            ]
+          },
+          "docs": "Allows an admin to bypass EDR compliance checks for a specific peer.\nThe peer will remain bypassed until the admin revokes it OR the device becomes\nnaturally compliant in the EDR system.\n"
+        },
+        {
+          "info": {
+            "name": "Revoke compliance bypass for a peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/peers/:peer-id/edr/bypass",
+            "params": [
+              {
+                "name": "peer-id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the peer"
+              }
+            ]
+          },
+          "docs": "Removes the compliance bypass, subjecting the peer to normal EDR validation."
+        },
+        {
+          "info": {
+            "name": "List all bypassed peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers/edr/bypassed"
+          },
+          "docs": "Returns all peers that have compliance bypassed by an admin."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

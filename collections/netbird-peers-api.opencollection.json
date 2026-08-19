@@ -1,0 +1,176 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts Peers API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Peers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter peers by name"
+              },
+              {
+                "name": "ip",
+                "value": "",
+                "type": "query",
+                "description": "Filter peers by IP address"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all peers"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers/:peerId",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a peer"
+        },
+        {
+          "info": {
+            "name": "Update a Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/peers/:peerId",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update information about a peer"
+        },
+        {
+          "info": {
+            "name": "Delete a Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/peers/:peerId",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a peer"
+        },
+        {
+          "info": {
+            "name": "List accessible Peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/peers/:peerId/accessible-peers",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of peers that the specified peer can connect to within the network."
+        },
+        {
+          "info": {
+            "name": "Create a Temporary Access Peer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/peers/:peerId/temporary-access",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a peer"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a temporary access peer that can be used to access this peer and this peer only. The temporary access peer and its access policies will be automatically deleted after it disconnects."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

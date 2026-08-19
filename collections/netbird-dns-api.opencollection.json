@@ -1,0 +1,165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts DNS API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DNS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Nameserver Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/dns/nameservers",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of all Nameserver Groups"
+        },
+        {
+          "info": {
+            "name": "Create a Nameserver Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/dns/nameservers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a Nameserver Group"
+        },
+        {
+          "info": {
+            "name": "Retrieve a Nameserver Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/dns/nameservers/:nsgroupId",
+            "params": [
+              {
+                "name": "nsgroupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a Nameserver Group"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get information about a Nameserver Groups"
+        },
+        {
+          "info": {
+            "name": "Update a Nameserver Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/dns/nameservers/:nsgroupId",
+            "params": [
+              {
+                "name": "nsgroupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a Nameserver Group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update/Replace a Nameserver Group"
+        },
+        {
+          "info": {
+            "name": "Delete a Nameserver Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/dns/nameservers/:nsgroupId",
+            "params": [
+              {
+                "name": "nsgroupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of a Nameserver Group"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a Nameserver Group"
+        },
+        {
+          "info": {
+            "name": "Retrieve DNS settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/dns/settings",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a DNS settings object"
+        },
+        {
+          "info": {
+            "name": "Update DNS Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/dns/settings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a DNS settings object"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,206 @@
+{
+  "item": [
+    {
+      "id": "57ab99b5-bbb5-4183-b28a-e6a583431b6b",
+      "name": "Plans",
+      "description": {
+        "content": "Retrieve available plans and products.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3a8e3143-f300-4f0d-9018-3e4b886e4137",
+          "name": "Get available plans",
+          "request": {
+            "name": "Get available plans",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "integrations",
+                "billing",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c7e3c91-805b-429c-b2c5-e9b10e03928f",
+              "name": "List of available plans",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "billing",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"Basic Plan\",\n    \"description\": \"This is the basic plan with limited features.\",\n    \"features\": [\n      \"5 free users\",\n      \"Basic support\"\n    ],\n    \"prices\": [\n      {\n        \"price_id\": \"price_H2KmRb4u1tP0sR7s\",\n        \"currency\": \"USD\",\n        \"price\": 1000,\n        \"unit\": \"user\"\n      },\n      {\n        \"price_id\": \"price_H2KmRb4u1tP0sR7s\",\n        \"currency\": \"USD\",\n        \"price\": 1000,\n        \"unit\": \"user\"\n      }\n    ],\n    \"free\": false\n  },\n  {\n    \"name\": \"Basic Plan\",\n    \"description\": \"This is the basic plan with limited features.\",\n    \"features\": [\n      \"5 free users\",\n      \"Basic support\"\n    ],\n    \"prices\": [\n      {\n        \"price_id\": \"price_H2KmRb4u1tP0sR7s\",\n        \"currency\": \"USD\",\n        \"price\": 1000,\n        \"unit\": \"user\"\n      },\n      {\n        \"price_id\": \"price_H2KmRb4u1tP0sR7s\",\n        \"currency\": \"USD\",\n        \"price\": 1000,\n        \"unit\": \"user\"\n      }\n    ],\n    \"free\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de1e8b2e-db5d-424e-b3db-3162b5f9f0bf",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "billing",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "58fae6bf-159e-4c7e-a8cd-917c7a232d5c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "integrations",
+                    "billing",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.netbird.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "75ef42bd-e81e-4add-9616-9f747a4ed144",
+    "name": "NetBird REST Accounts Plans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to manipulate groups, rules, policies and retrieve information about peers and users",
+      "type": "text/plain"
+    }
+  }
+}

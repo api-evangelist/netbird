@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts EDR Falcon Integrations API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EDR Falcon Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get EDR Falcon Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/edr/falcon"
+          },
+          "docs": "Retrieves a specific EDR Falcon integration by its ID."
+        },
+        {
+          "info": {
+            "name": "Create EDR Falcon Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/edr/falcon",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new EDR Falcon integration"
+        },
+        {
+          "info": {
+            "name": "Update EDR Falcon Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/edr/falcon",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing EDR Falcon Integration."
+        },
+        {
+          "info": {
+            "name": "Delete EDR Falcon Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/edr/falcon"
+          },
+          "docs": "Deletes an existing EDR Falcon Integration by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

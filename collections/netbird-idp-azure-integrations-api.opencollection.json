@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts IDP Azure Integrations API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IDP Azure Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Azure IDP Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/azure-idp"
+          },
+          "docs": "Retrieves all Azure AD IDP integrations for the authenticated account"
+        },
+        {
+          "info": {
+            "name": "Create Azure IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/azure-idp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Azure AD IDP integration"
+        },
+        {
+          "info": {
+            "name": "Get Azure IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/azure-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Azure IDP integration."
+              }
+            ]
+          },
+          "docs": "Retrieves an Azure IDP integration by ID."
+        },
+        {
+          "info": {
+            "name": "Update Azure IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/azure-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Azure IDP integration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Azure AD IDP integration."
+        },
+        {
+          "info": {
+            "name": "Delete Azure IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/azure-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Azure IDP integration."
+              }
+            ]
+          },
+          "docs": "Deletes an Azure IDP integration by ID."
+        },
+        {
+          "info": {
+            "name": "Sync Azure IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/azure-idp/:id/sync",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Azure IDP integration."
+              }
+            ]
+          },
+          "docs": "Triggers a manual synchronization for an Azure IDP integration."
+        },
+        {
+          "info": {
+            "name": "Get Azure Integration Sync Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/azure-idp/:id/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Azure IDP integration."
+              }
+            ]
+          },
+          "docs": "Retrieves synchronization logs for an Azure IDP integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

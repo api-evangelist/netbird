@@ -1,0 +1,1347 @@
+{
+  "item": [
+    {
+      "id": "fcd26d75-be29-44df-9701-4cb4977d17e6",
+      "name": "Posture Checks",
+      "description": {
+        "content": "Interact with and view information about posture checks.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5baf3090-0cd2-4663-abfa-7ec873b0ef9f",
+          "name": "List all Posture Checks",
+          "request": {
+            "name": "List all Posture Checks",
+            "description": {
+              "content": "Returns a list of all posture checks",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "posture-checks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e583a711-639e-4bfd-82c7-a0f50a14757c",
+              "name": "A JSON Array of posture checks",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n    \"name\": \"Default\",\n    \"checks\": {\n      \"nb_version_check\": {\n        \"min_version\": \"14.3\"\n      },\n      \"os_version_check\": {\n        \"android\": {\n          \"min_version\": \"13\"\n        },\n        \"ios\": {\n          \"min_version\": \"17.3.1\"\n        },\n        \"darwin\": {\n          \"min_version\": \"14.2.1\"\n        },\n        \"linux\": {\n          \"min_kernel_version\": \"5.3.3\"\n        },\n        \"windows\": {\n          \"min_kernel_version\": \"10.0.1234\"\n        }\n      },\n      \"geo_location_check\": {\n        \"locations\": [\n          {\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"action\": \"allow\"\n      },\n      \"peer_network_range_check\": {\n        \"ranges\": [\n          \"192.168.1.0/24\",\n          \"10.0.0.0/8\",\n          \"1.0.0.0/24\",\n          \"2.2.2.2/32\",\n          \"2001:db8:1234:1a00::/56\"\n        ],\n        \"action\": \"allow\"\n      },\n      \"process_check\": {\n        \"processes\": [\n          {\n            \"linux_path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mac_path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"windows_path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"linux_path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mac_path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"windows_path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    \"description\": \"This checks if the peer is running required NetBird's version\"\n  },\n  {\n    \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n    \"name\": \"Default\",\n    \"checks\": {\n      \"nb_version_check\": {\n        \"min_version\": \"14.3\"\n      },\n      \"os_version_check\": {\n        \"android\": {\n          \"min_version\": \"13\"\n        },\n        \"ios\": {\n          \"min_version\": \"17.3.1\"\n        },\n        \"darwin\": {\n          \"min_version\": \"14.2.1\"\n        },\n        \"linux\": {\n          \"min_kernel_version\": \"5.3.3\"\n        },\n        \"windows\": {\n          \"min_kernel_version\": \"10.0.1234\"\n        }\n      },\n      \"geo_location_check\": {\n        \"locations\": [\n          {\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"country_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"city_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"action\": \"allow\"\n      },\n      \"peer_network_range_check\": {\n        \"ranges\": [\n          \"192.168.1.0/24\",\n          \"10.0.0.0/8\",\n          \"1.0.0.0/24\",\n          \"2.2.2.2/32\",\n          \"2001:db8:1234:1a00::/56\"\n        ],\n        \"action\": \"allow\"\n      },\n      \"process_check\": {\n        \"processes\": [\n          {\n            \"linux_path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mac_path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"windows_path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"linux_path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mac_path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"windows_path\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    \"description\": \"This checks if the peer is running required NetBird's version\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdfc7f57-1c26-4701-a803-191a77d025ab",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "81b2a2a2-c241-44f2-82ba-ecdf4859b2d6",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8bf1d8fa-2cac-41cc-9faf-88a1d36db23e",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "765f59e0-0dbd-474e-84e9-89c7137761dc",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bcbb0e26-b556-41d3-a385-350f1c5043a6",
+          "name": "Create a Posture Check",
+          "request": {
+            "name": "Create a Posture Check",
+            "description": {
+              "content": "Creates a posture check",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "posture-checks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"checks\": {\n    \"nb_version_check\": {\n      \"min_version\": \"<string>\"\n    },\n    \"os_version_check\": {\n      \"android\": {\n        \"min_version\": \"<string>\"\n      },\n      \"darwin\": {\n        \"min_version\": \"<string>\"\n      },\n      \"ios\": {\n        \"min_version\": \"<string>\"\n      },\n      \"linux\": {\n        \"min_kernel_version\": \"<string>\"\n      },\n      \"windows\": {\n        \"min_kernel_version\": \"<string>\"\n      }\n    },\n    \"geo_location_check\": {\n      \"locations\": [\n        {\n          \"country_code\": \"<string>\",\n          \"city_name\": \"<string>\"\n        },\n        {\n          \"country_code\": \"<string>\",\n          \"city_name\": \"<string>\"\n        }\n      ],\n      \"action\": \"<string>\"\n    },\n    \"peer_network_range_check\": {\n      \"ranges\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"action\": \"<string>\"\n    },\n    \"process_check\": {\n      \"processes\": [\n        {\n          \"linux_path\": \"<string>\",\n          \"mac_path\": \"<string>\",\n          \"windows_path\": \"<string>\"\n        },\n        {\n          \"linux_path\": \"<string>\",\n          \"mac_path\": \"<string>\",\n          \"windows_path\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9a2e7312-3da1-43cd-a724-a0bcbdf71ba3",
+              "name": "A posture check Object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Default\",\n  \"description\": \"This checks if the peer is running required NetBird's version\",\n  \"checks\": {\n    \"nb_version_check\": {\n      \"min_version\": \"14.3\"\n    },\n    \"os_version_check\": {\n      \"android\": {\n        \"min_version\": \"13\"\n      },\n      \"ios\": {\n        \"min_version\": \"17.3.1\"\n      },\n      \"darwin\": {\n        \"min_version\": \"14.2.1\"\n      },\n      \"linux\": {\n        \"min_kernel_version\": \"5.3.3\"\n      },\n      \"windows\": {\n        \"min_kernel_version\": \"10.0.1234\"\n      }\n    },\n    \"geo_location_check\": {\n      \"locations\": [\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        },\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        }\n      ],\n      \"action\": \"allow\"\n    },\n    \"peer_network_range_check\": {\n      \"ranges\": [\n        \"192.168.1.0/24\",\n        \"10.0.0.0/8\",\n        \"1.0.0.0/24\",\n        \"2.2.2.2/32\",\n        \"2001:db8:1234:1a00::/56\"\n      ],\n      \"action\": \"allow\"\n    },\n    \"process_check\": {\n      \"processes\": [\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        },\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n  \"name\": \"Default\",\n  \"checks\": {\n    \"nb_version_check\": {\n      \"min_version\": \"14.3\"\n    },\n    \"os_version_check\": {\n      \"android\": {\n        \"min_version\": \"13\"\n      },\n      \"ios\": {\n        \"min_version\": \"17.3.1\"\n      },\n      \"darwin\": {\n        \"min_version\": \"14.2.1\"\n      },\n      \"linux\": {\n        \"min_kernel_version\": \"5.3.3\"\n      },\n      \"windows\": {\n        \"min_kernel_version\": \"10.0.1234\"\n      }\n    },\n    \"geo_location_check\": {\n      \"locations\": [\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        },\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        }\n      ],\n      \"action\": \"allow\"\n    },\n    \"peer_network_range_check\": {\n      \"ranges\": [\n        \"192.168.1.0/24\",\n        \"10.0.0.0/8\",\n        \"1.0.0.0/24\",\n        \"2.2.2.2/32\",\n        \"2001:db8:1234:1a00::/56\"\n      ],\n      \"action\": \"allow\"\n    },\n    \"process_check\": {\n      \"processes\": [\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        },\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        }\n      ]\n    }\n  },\n  \"description\": \"This checks if the peer is running required NetBird's version\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1f5eac6-fea3-4f05-8989-a6ad9fb98ea2",
+          "name": "Retrieve a Posture Check",
+          "request": {
+            "name": "Retrieve a Posture Check",
+            "description": {
+              "content": "Get information about a posture check",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "posture-checks",
+                ":postureCheckId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "postureCheckId",
+                  "description": "(Required) The unique identifier of a posture check"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8468fd03-c414-4ffa-be6c-2481be1987c9",
+              "name": "A posture check object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks",
+                    ":postureCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postureCheckId",
+                      "description": "(Required) The unique identifier of a posture check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n  \"name\": \"Default\",\n  \"checks\": {\n    \"nb_version_check\": {\n      \"min_version\": \"14.3\"\n    },\n    \"os_version_check\": {\n      \"android\": {\n        \"min_version\": \"13\"\n      },\n      \"ios\": {\n        \"min_version\": \"17.3.1\"\n      },\n      \"darwin\": {\n        \"min_version\": \"14.2.1\"\n      },\n      \"linux\": {\n        \"min_kernel_version\": \"5.3.3\"\n      },\n      \"windows\": {\n        \"min_kernel_version\": \"10.0.1234\"\n      }\n    },\n    \"geo_location_check\": {\n      \"locations\": [\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        },\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        }\n      ],\n      \"action\": \"allow\"\n    },\n    \"peer_network_range_check\": {\n      \"ranges\": [\n        \"192.168.1.0/24\",\n        \"10.0.0.0/8\",\n        \"1.0.0.0/24\",\n        \"2.2.2.2/32\",\n        \"2001:db8:1234:1a00::/56\"\n      ],\n      \"action\": \"allow\"\n    },\n    \"process_check\": {\n      \"processes\": [\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        },\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        }\n      ]\n    }\n  },\n  \"description\": \"This checks if the peer is running required NetBird's version\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbb86219-6a52-447b-acc5-42b971613168",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks",
+                    ":postureCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postureCheckId",
+                      "description": "(Required) The unique identifier of a posture check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cd3b6c56-3197-40cc-816b-d05600764486",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks",
+                    ":postureCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postureCheckId",
+                      "description": "(Required) The unique identifier of a posture check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "27edff4b-1e40-471d-b57d-209593b861ed",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks",
+                    ":postureCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postureCheckId",
+                      "description": "(Required) The unique identifier of a posture check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cd3818e8-37f4-426f-9cb8-56493ec70a92",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks",
+                    ":postureCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postureCheckId",
+                      "description": "(Required) The unique identifier of a posture check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abc5f269-381d-422f-9dac-6f419f37089a",
+          "name": "Update a Posture Check",
+          "request": {
+            "name": "Update a Posture Check",
+            "description": {
+              "content": "Update/Replace a posture check",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "posture-checks",
+                ":postureCheckId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "postureCheckId",
+                  "description": "(Required) The unique identifier of a posture check"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"checks\": {\n    \"nb_version_check\": {\n      \"min_version\": \"<string>\"\n    },\n    \"os_version_check\": {\n      \"android\": {\n        \"min_version\": \"<string>\"\n      },\n      \"darwin\": {\n        \"min_version\": \"<string>\"\n      },\n      \"ios\": {\n        \"min_version\": \"<string>\"\n      },\n      \"linux\": {\n        \"min_kernel_version\": \"<string>\"\n      },\n      \"windows\": {\n        \"min_kernel_version\": \"<string>\"\n      }\n    },\n    \"geo_location_check\": {\n      \"locations\": [\n        {\n          \"country_code\": \"<string>\",\n          \"city_name\": \"<string>\"\n        },\n        {\n          \"country_code\": \"<string>\",\n          \"city_name\": \"<string>\"\n        }\n      ],\n      \"action\": \"<string>\"\n    },\n    \"peer_network_range_check\": {\n      \"ranges\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"action\": \"<string>\"\n    },\n    \"process_check\": {\n      \"processes\": [\n        {\n          \"linux_path\": \"<string>\",\n          \"mac_path\": \"<string>\",\n          \"windows_path\": \"<string>\"\n        },\n        {\n          \"linux_path\": \"<string>\",\n          \"mac_path\": \"<string>\",\n          \"windows_path\": \"<string>\"\n        }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f16bb970-0f80-4dab-89a0-ab26eb91a29b",
+              "name": "A posture check object",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks",
+                    ":postureCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postureCheckId",
+                      "description": "(Required) The unique identifier of a posture check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Default\",\n  \"description\": \"This checks if the peer is running required NetBird's version\",\n  \"checks\": {\n    \"nb_version_check\": {\n      \"min_version\": \"14.3\"\n    },\n    \"os_version_check\": {\n      \"android\": {\n        \"min_version\": \"13\"\n      },\n      \"ios\": {\n        \"min_version\": \"17.3.1\"\n      },\n      \"darwin\": {\n        \"min_version\": \"14.2.1\"\n      },\n      \"linux\": {\n        \"min_kernel_version\": \"5.3.3\"\n      },\n      \"windows\": {\n        \"min_kernel_version\": \"10.0.1234\"\n      }\n    },\n    \"geo_location_check\": {\n      \"locations\": [\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        },\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        }\n      ],\n      \"action\": \"allow\"\n    },\n    \"peer_network_range_check\": {\n      \"ranges\": [\n        \"192.168.1.0/24\",\n        \"10.0.0.0/8\",\n        \"1.0.0.0/24\",\n        \"2.2.2.2/32\",\n        \"2001:db8:1234:1a00::/56\"\n      ],\n      \"action\": \"allow\"\n    },\n    \"process_check\": {\n      \"processes\": [\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        },\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"ch8i4ug6lnn4g9hqv7mg\",\n  \"name\": \"Default\",\n  \"checks\": {\n    \"nb_version_check\": {\n      \"min_version\": \"14.3\"\n    },\n    \"os_version_check\": {\n      \"android\": {\n        \"min_version\": \"13\"\n      },\n      \"ios\": {\n        \"min_version\": \"17.3.1\"\n      },\n      \"darwin\": {\n        \"min_version\": \"14.2.1\"\n      },\n      \"linux\": {\n        \"min_kernel_version\": \"5.3.3\"\n      },\n      \"windows\": {\n        \"min_kernel_version\": \"10.0.1234\"\n      }\n    },\n    \"geo_location_check\": {\n      \"locations\": [\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        },\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        }\n      ],\n      \"action\": \"allow\"\n    },\n    \"peer_network_range_check\": {\n      \"ranges\": [\n        \"192.168.1.0/24\",\n        \"10.0.0.0/8\",\n        \"1.0.0.0/24\",\n        \"2.2.2.2/32\",\n        \"2001:db8:1234:1a00::/56\"\n      ],\n      \"action\": \"allow\"\n    },\n    \"process_check\": {\n      \"processes\": [\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        },\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        }\n      ]\n    }\n  },\n  \"description\": \"This checks if the peer is running required NetBird's version\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba06fbbb-1e27-4c9c-8a37-cf56e66e8ae2",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks",
+                    ":postureCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postureCheckId",
+                      "description": "(Required) The unique identifier of a posture check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Default\",\n  \"description\": \"This checks if the peer is running required NetBird's version\",\n  \"checks\": {\n    \"nb_version_check\": {\n      \"min_version\": \"14.3\"\n    },\n    \"os_version_check\": {\n      \"android\": {\n        \"min_version\": \"13\"\n      },\n      \"ios\": {\n        \"min_version\": \"17.3.1\"\n      },\n      \"darwin\": {\n        \"min_version\": \"14.2.1\"\n      },\n      \"linux\": {\n        \"min_kernel_version\": \"5.3.3\"\n      },\n      \"windows\": {\n        \"min_kernel_version\": \"10.0.1234\"\n      }\n    },\n    \"geo_location_check\": {\n      \"locations\": [\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        },\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        }\n      ],\n      \"action\": \"allow\"\n    },\n    \"peer_network_range_check\": {\n      \"ranges\": [\n        \"192.168.1.0/24\",\n        \"10.0.0.0/8\",\n        \"1.0.0.0/24\",\n        \"2.2.2.2/32\",\n        \"2001:db8:1234:1a00::/56\"\n      ],\n      \"action\": \"allow\"\n    },\n    \"process_check\": {\n      \"processes\": [\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        },\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3f9a5a84-340e-451e-ace8-15d4d25d2ed4",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks",
+                    ":postureCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postureCheckId",
+                      "description": "(Required) The unique identifier of a posture check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Default\",\n  \"description\": \"This checks if the peer is running required NetBird's version\",\n  \"checks\": {\n    \"nb_version_check\": {\n      \"min_version\": \"14.3\"\n    },\n    \"os_version_check\": {\n      \"android\": {\n        \"min_version\": \"13\"\n      },\n      \"ios\": {\n        \"min_version\": \"17.3.1\"\n      },\n      \"darwin\": {\n        \"min_version\": \"14.2.1\"\n      },\n      \"linux\": {\n        \"min_kernel_version\": \"5.3.3\"\n      },\n      \"windows\": {\n        \"min_kernel_version\": \"10.0.1234\"\n      }\n    },\n    \"geo_location_check\": {\n      \"locations\": [\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        },\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        }\n      ],\n      \"action\": \"allow\"\n    },\n    \"peer_network_range_check\": {\n      \"ranges\": [\n        \"192.168.1.0/24\",\n        \"10.0.0.0/8\",\n        \"1.0.0.0/24\",\n        \"2.2.2.2/32\",\n        \"2001:db8:1234:1a00::/56\"\n      ],\n      \"action\": \"allow\"\n    },\n    \"process_check\": {\n      \"processes\": [\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        },\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6ce9c49c-295d-4f05-b4b4-ba34624c9257",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks",
+                    ":postureCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postureCheckId",
+                      "description": "(Required) The unique identifier of a posture check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Default\",\n  \"description\": \"This checks if the peer is running required NetBird's version\",\n  \"checks\": {\n    \"nb_version_check\": {\n      \"min_version\": \"14.3\"\n    },\n    \"os_version_check\": {\n      \"android\": {\n        \"min_version\": \"13\"\n      },\n      \"ios\": {\n        \"min_version\": \"17.3.1\"\n      },\n      \"darwin\": {\n        \"min_version\": \"14.2.1\"\n      },\n      \"linux\": {\n        \"min_kernel_version\": \"5.3.3\"\n      },\n      \"windows\": {\n        \"min_kernel_version\": \"10.0.1234\"\n      }\n    },\n    \"geo_location_check\": {\n      \"locations\": [\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        },\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        }\n      ],\n      \"action\": \"allow\"\n    },\n    \"peer_network_range_check\": {\n      \"ranges\": [\n        \"192.168.1.0/24\",\n        \"10.0.0.0/8\",\n        \"1.0.0.0/24\",\n        \"2.2.2.2/32\",\n        \"2001:db8:1234:1a00::/56\"\n      ],\n      \"action\": \"allow\"\n    },\n    \"process_check\": {\n      \"processes\": [\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        },\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6f799b43-84ef-4e5d-acb0-648c275a530b",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks",
+                    ":postureCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postureCheckId",
+                      "description": "(Required) The unique identifier of a posture check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Default\",\n  \"description\": \"This checks if the peer is running required NetBird's version\",\n  \"checks\": {\n    \"nb_version_check\": {\n      \"min_version\": \"14.3\"\n    },\n    \"os_version_check\": {\n      \"android\": {\n        \"min_version\": \"13\"\n      },\n      \"ios\": {\n        \"min_version\": \"17.3.1\"\n      },\n      \"darwin\": {\n        \"min_version\": \"14.2.1\"\n      },\n      \"linux\": {\n        \"min_kernel_version\": \"5.3.3\"\n      },\n      \"windows\": {\n        \"min_kernel_version\": \"10.0.1234\"\n      }\n    },\n    \"geo_location_check\": {\n      \"locations\": [\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        },\n        {\n          \"country_code\": \"DE\",\n          \"city_name\": \"Berlin\"\n        }\n      ],\n      \"action\": \"allow\"\n    },\n    \"peer_network_range_check\": {\n      \"ranges\": [\n        \"192.168.1.0/24\",\n        \"10.0.0.0/8\",\n        \"1.0.0.0/24\",\n        \"2.2.2.2/32\",\n        \"2001:db8:1234:1a00::/56\"\n      ],\n      \"action\": \"allow\"\n    },\n    \"process_check\": {\n      \"processes\": [\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        },\n        {\n          \"linux_path\": \"/usr/local/bin/netbird\",\n          \"mac_path\": \"/Applications/NetBird.app/Contents/MacOS/netbird\",\n          \"windows_path\": \"C:             rogramData etBird\\netbird.exe\"\n        }\n      ]\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2bf43f6e-6e79-42cb-9b48-c380dd140cff",
+          "name": "Delete a Posture Check",
+          "request": {
+            "name": "Delete a Posture Check",
+            "description": {
+              "content": "Delete a posture check",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "posture-checks",
+                ":postureCheckId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "postureCheckId",
+                  "description": "(Required) The unique identifier of a posture check"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f37113bf-87aa-449b-a3d3-b432d448d9a2",
+              "name": "Delete status code",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks",
+                    ":postureCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postureCheckId",
+                      "description": "(Required) The unique identifier of a posture check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "30234744-2ec1-4513-b4f2-87a142585513",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks",
+                    ":postureCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postureCheckId",
+                      "description": "(Required) The unique identifier of a posture check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9dbfd2ec-16ab-410c-9797-185ed2f4332b",
+              "name": "Requires authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks",
+                    ":postureCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postureCheckId",
+                      "description": "(Required) The unique identifier of a posture check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b37be7b6-c2a0-4a4b-8804-6694b2285c64",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks",
+                    ":postureCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postureCheckId",
+                      "description": "(Required) The unique identifier of a posture check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6a097bf8-a395-4d3e-892b-775e98a0e2d3",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "posture-checks",
+                    ":postureCheckId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "postureCheckId",
+                      "description": "(Required) The unique identifier of a posture check"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.netbird.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d727eb38-1c85-44a0-a011-556696838253",
+    "name": "NetBird REST Accounts Posture Checks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API to manipulate groups, rules, policies and retrieve information about peers and users",
+      "type": "text/plain"
+    }
+  }
+}

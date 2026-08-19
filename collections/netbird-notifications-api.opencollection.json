@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts Notifications API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Notification Event Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/notifications/types"
+          },
+          "docs": "Returns a map of all supported activity event type codes to their\nhuman-readable descriptions. Use these codes when configuring\n`event_types` on notification channels.\n"
+        },
+        {
+          "info": {
+            "name": "List Notification Channels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/notifications/channels"
+          },
+          "docs": "Retrieves all notification channels configured for the authenticated account."
+        },
+        {
+          "info": {
+            "name": "Create Notification Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/notifications/channels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new notification channel for the authenticated account.\nSupported channel types are `email` and `webhook`.\n"
+        },
+        {
+          "info": {
+            "name": "Get Notification Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/notifications/channels/:channelId",
+            "params": [
+              {
+                "name": "channelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the notification channel."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific notification channel by its ID."
+        },
+        {
+          "info": {
+            "name": "Update Notification Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/notifications/channels/:channelId",
+            "params": [
+              {
+                "name": "channelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the notification channel."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing notification channel."
+        },
+        {
+          "info": {
+            "name": "Delete Notification Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/notifications/channels/:channelId",
+            "params": [
+              {
+                "name": "channelId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the notification channel."
+              }
+            ]
+          },
+          "docs": "Deletes a notification channel by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

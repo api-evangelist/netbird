@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NetBird REST Accounts IDP Google Integrations API",
+    "version": "0.0.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IDP Google Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Google IDP Integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/google-idp"
+          },
+          "docs": "Retrieves all Google Workspace IDP integrations for the authenticated account"
+        },
+        {
+          "info": {
+            "name": "Create Google IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/google-idp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Google Workspace IDP integration"
+        },
+        {
+          "info": {
+            "name": "Get Google IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/google-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Google IDP integration."
+              }
+            ]
+          },
+          "docs": "Retrieves a Google IDP integration by ID."
+        },
+        {
+          "info": {
+            "name": "Update Google IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.netbird.io/api/integrations/google-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Google IDP integration."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Google Workspace IDP integration."
+        },
+        {
+          "info": {
+            "name": "Delete Google IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.netbird.io/api/integrations/google-idp/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Google IDP integration."
+              }
+            ]
+          },
+          "docs": "Deletes a Google IDP integration by ID."
+        },
+        {
+          "info": {
+            "name": "Sync Google IDP Integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.netbird.io/api/integrations/google-idp/:id/sync",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Google IDP integration."
+              }
+            ]
+          },
+          "docs": "Triggers a manual synchronization for a Google IDP integration."
+        },
+        {
+          "info": {
+            "name": "Get Google Integration Sync Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.netbird.io/api/integrations/google-idp/:id/logs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Google IDP integration."
+              }
+            ]
+          },
+          "docs": "Retrieves synchronization logs for a Google IDP integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
