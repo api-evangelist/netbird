@@ -25,6 +25,13 @@ tags:
   - Networking
   - VPN
   - Zero Trust
+  - Open-Source
+  - WireGuard
+  - Security
+tags_raw:
+  - Networking
+  - VPN
+  - Zero Trust
   - Open Source
   - WireGuard
   - Security
@@ -39,6 +46,8 @@ apis:
   humanURL: https://docs.netbird.io/
   baseURL: https://api.netbird.io
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -183,6 +192,8 @@ apis:
   humanURL: https://docs.netbird.io/
   baseURL: https://api.netbird.io
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -207,6 +218,8 @@ apis:
   humanURL: https://docs.netbird.io/
   baseURL: https://api.netbird.io
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -315,6 +328,8 @@ apis:
   humanURL: https://docs.netbird.io/
   baseURL: https://api.netbird.io
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -351,6 +366,8 @@ apis:
   humanURL: https://docs.netbird.io/
   baseURL: https://api.netbird.io
   tags:
+  - Notification
+  tags_raw:
   - Notifications
   properties:
   - type: OpenAPI
@@ -495,6 +512,8 @@ apis:
   humanURL: https://docs.netbird.io/
   baseURL: https://api.netbird.io
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
