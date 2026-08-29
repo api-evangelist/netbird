@@ -5,6 +5,17 @@ description: >-
   organization or home. We designed NetBird to be simple and fast, requiring near-zero configuration effort and leaving
   behind the hassle of opening ports, complex firewall rules, VPN gateways, etc.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -521,6 +532,9 @@ apis:
   - type: Documentation
     url: https://docs.netbird.io/
 common:
+  - type: CapabilityMap
+    url: capabilities/netbird-capability-edges.yml
+    name: NetBird Business Capability Map
   - type: AgenticAccess
     url: agentic-access/netbird-agentic-access.yml
   - type: DomainSecurity
