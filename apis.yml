@@ -328,6 +328,8 @@ apis:
   humanURL: https://docs.netbird.io/
   baseURL: https://api.netbird.io
   tags:
+  - Invoices
+  tags_raw:
   - Invoice
   properties:
   - type: OpenAPI
