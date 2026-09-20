@@ -535,6 +535,10 @@ apis:
   - type: Documentation
     url: https://docs.netbird.io/
 common:
+  - type: Pricing
+    url: https://netbird.io/pricing
+  - type: Plans
+    url: plans/netbird-plans-pricing.yml
   - type: CapabilityMap
     url: capabilities/netbird-capability-edges.yml
     name: NetBird Business Capability Map
