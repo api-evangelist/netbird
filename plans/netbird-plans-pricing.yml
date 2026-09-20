@@ -10,6 +10,12 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: business-product
 pricing_basis: per-seat
+delivery:
+  delivery: managed+licensed
+  method: page
+  read: '2026-09-20'
+  evidence: deploy within your own infrastructure for full control and flexibility
+  managed_tier: Team
 published: true
 note: Cloud pricing per active user/month; self-hosted tab content not shown in text. Includes a pricing
   calculator example (100 users x € 6 = € 600).
