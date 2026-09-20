@@ -1,0 +1,166 @@
+slug: netbird
+provider: NetBird
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 15
+edges:
+- tag: IDP Okta SCIM Integrations
+  spec_file: netbird-idp-okta-scim-integrations-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.9
+  evidence: POST /api/integrations/okta-scim-idp/{id}/token  regenerateOktaScimToken  Regenerate Okta
+    SCIM Token
+  reason: SCIM-based user provisioning from Okta into the platform is joiner-mover-leaver identity provisioning
+    and federation — Identity & Access Management.
+- tag: IDP SCIM Integrations
+  spec_file: netbird-idp-scim-integrations-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.9
+  evidence: POST /api/integrations/scim-idp  createSCIMIntegration  Create SCIM IDP Integration; GET .../logs  getSCIMIntegrationLogs  Get
+    SCIM Integration Sync Logs
+  reason: Generic SCIM identity-provider provisioning integration governing which users exist and can
+    access the network — Identity & Access Management.
+- tag: IDP Azure Integrations
+  spec_file: netbird-idp-azure-integrations-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.88
+  evidence: POST /api/integrations/azure-idp/{id}/sync  syncAzureIntegration  Sync Azure IDP Integration;
+    schema IdpIntegrationSyncLog
+  reason: Connects and synchronises an external identity provider (Azure) so its users/groups drive network
+    access — identity federation and user lifecycle sync, i.e. Identity & Access Management.
+- tag: IDP Google Integrations
+  spec_file: netbird-idp-google-integrations-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.88
+  evidence: POST /api/integrations/google-idp/{id}/sync  syncGoogleIntegration  Sync Google IDP Integration
+  reason: Identity-provider federation and directory synchronisation for platform users; squarely Identity
+    & Access Management.
+- tag: Identity Providers
+  spec_file: netbird-identity-providers-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.75
+  evidence: POST /api/identity-providers  Create an Identity Provider; schemas IdentityProviderRequest,
+    IdentityProviderType
+  reason: Operations manage the configuration of external identity providers used to authenticate users
+    of the zero-trust network, i.e. identity federation — Identity & Access Management. Not a business-domain
+    noun here; it is genuinely IdP/SSO configuration.
+- tag: EDR Huntress Integrations
+  spec_file: netbird-edr-huntress-integrations-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.72
+  evidence: POST /api/integrations/edr/huntress  createHuntressEDRIntegration  Create EDR Huntress Integration;
+    schema HuntressMatchAttributes
+  reason: Configures an integration with an endpoint detection & response vendor so peer device security
+    posture can be matched and enforced in the zero-trust network. This is enterprise cybersecurity tooling
+    (BC-620); the evidence does not clearly single out threat response versus access control, so no L2
+    is asserted.
+- tag: EDR Intune Integrations
+  spec_file: netbird-edr-intune-integrations-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.72
+  evidence: POST /api/integrations/edr/intune  createEDRIntegration  Create EDR Intune Integration
+  reason: Endpoint posture/EDR provider integration used to gate network access; a cybersecurity management
+    surface. Sub-capability left null as the operations only create/read/update/delete the integration
+    config.
+- tag: EDR SentinelOne Integrations
+  spec_file: netbird-edr-sentinelone-integrations-api-openapi.yml
+  capability_id: BC-620
+  capability_id_l1: BC-620
+  capability_name: Cybersecurity Management
+  confidence: 0.72
+  evidence: POST /api/integrations/edr/sentinelone  createSentinelOneEDRIntegration  Create EDR SentinelOne
+    Integration; schema SentinelOneMatchAttributes
+  reason: Integration with an EDR security vendor to evaluate device security posture for network access;
+    clearly cybersecurity management, but the CRUD-only surface does not pin a specific sub-capability.
+- tag: Invoice
+  spec_file: netbird-invoice-api-openapi.yml
+  capability_id: BC-4250.30
+  capability_id_l1: BC-4250
+  capability_name: Invoicing & Statement Management
+  confidence: 0.72
+  evidence: GET /api/integrations/billing/invoices  Get account's paid invoices; Get account invoice URL
+    to Stripe.
+  reason: Endpoints expose the account's subscription invoices and downloadable invoice documents from
+    the billing integration, which is invoice/statement presentment for the SaaS commercial model. Read-only
+    scope limits confidence.
+- tag: MSP
+  spec_file: netbird-msp-api-openapi.yml
+  capability_id: BC-4230.10
+  capability_id_l1: BC-4230
+  capability_name: Tenant Provisioning & Lifecycle
+  confidence: 0.72
+  evidence: POST /api/integrations/msp/tenants  Create MSP tenant; POST /api/integrations/msp/tenants/{id}/unlink  Unlink
+    a tenant
+  reason: Creation, update, invitation and unlinking of managed tenants under an MSP account is tenant
+    provisioning and lifecycle in a multi-tenant service. Subscription creation per tenant is secondary.
+- tag: Users
+  spec_file: netbird-users-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: POST /api/users Create a User; POST /api/users/{userId}/approve Approve user; PUT /api/users/{userId}/password
+    Change user password; schema UserPermissions
+  reason: Full user account lifecycle — creation, invitation, approval/rejection, password change and
+    permissions — on a zero-trust access platform is identity and access administration, not HR employee
+    records.
+- tag: AWS Marketplace
+  spec_file: netbird-aws-marketplace-api-openapi.yml
+  capability_id: BC-4270.70
+  capability_id_l1: BC-4270
+  capability_name: Software Marketplace Listing Management
+  confidence: 0.7
+  evidence: POST /api/integrations/billing/aws/marketplace/activate — 'Activate AWS Marketplace subscription.'
+  reason: Operations activate and enrich the vendor's AWS Marketplace subscription, i.e. cloud-marketplace
+    listing/subscription fulfilment for the SaaS offering. Some ambiguity with subscription provisioning.
+- tag: Accounts
+  spec_file: netbird-accounts-api-openapi.yml
+  capability_id: BC-4230.10
+  capability_id_l1: BC-4230
+  capability_name: Tenant Provisioning & Lifecycle
+  confidence: 0.7
+  evidence: '''List all Accounts'', ''Delete an Account'', ''Update an Account''; schemas AccountSettings,
+    AccountOnboarding'
+  reason: Accounts here are the tenant containers of the multi-tenant NetBird service, with settings and
+    onboarding — tenant lifecycle/configuration rather than CRM customer data.
+- tag: DNS
+  spec_file: netbird-dns-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: '''Create a Nameserver Group'', ''Update DNS Settings''; schemas NameserverGroup, DNSSettings'
+  reason: Nameserver group and DNS settings configuration for a private network platform is network/IT
+    infrastructure configuration, not telecom carrier network operations.
+- tag: DNS Zones
+  spec_file: netbird-dns-zones-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: '''Create a DNS Zone'', ''Create a DNS Record''; schemas Zone, DNSRecordType'
+  reason: DNS zone and record management within the customer's private overlay network — IT infrastructure
+    (network services) configuration.
