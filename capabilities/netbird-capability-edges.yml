@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 15
+edge_count: 24
 edges:
 - tag: IDP Okta SCIM Integrations
   spec_file: netbird-idp-okta-scim-integrations-api-openapi.yml
@@ -63,6 +63,18 @@ edges:
   reason: Operations manage the configuration of external identity providers used to authenticate users
     of the zero-trust network, i.e. identity federation — Identity & Access Management. Not a business-domain
     noun here; it is genuinely IdP/SSO configuration.
+- tag: Networks
+  spec_file: netbird-networks-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: POST /api/networks Create a Network; GET /api/networks/{networkId}/routers List all Network
+    Routers; schemas NetworkRouter, NetworkResource
+  reason: Operations create and manage private networks, their resources and routers — network infrastructure
+    configuration for a zero-trust networking platform, i.e. IT infrastructure (network) management rather
+    than any industry business capability.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: EDR Huntress Integrations
   spec_file: netbird-edr-huntress-integrations-api-openapi.yml
   capability_id: BC-620
@@ -146,6 +158,17 @@ edges:
     AccountOnboarding'
   reason: Accounts here are the tenant containers of the multi-tenant NetBird service, with settings and
     onboarding — tenant lifecycle/configuration rather than CRM customer data.
+- tag: Checkout
+  spec_file: netbird-checkout-api-openapi.yml
+  capability_id: BC-4250.40
+  capability_id_l1: BC-4250
+  capability_name: Payment Collection & Dunning
+  confidence: 0.7
+  evidence: POST /api/integrations/billing/checkout    Create checkout session; schema CheckoutResponse
+  reason: Creates a billing checkout session for the subscription — payment method capture/collection
+    for the SaaS plan. Thin surface (one op) so moderate confidence; could alternatively be subscription
+    provisioning.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: DNS
   spec_file: netbird-dns-api-openapi.yml
   capability_id: BC-600.50
@@ -164,3 +187,78 @@ edges:
   evidence: '''Create a DNS Zone'', ''Create a DNS Record''; schemas Zone, DNSRecordType'
   reason: DNS zone and record management within the customer's private overlay network — IT infrastructure
     (network services) configuration.
+- tag: EDR Falcon Integrations
+  spec_file: netbird-edr-falcon-integrations-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.7
+  evidence: POST /api/integrations/edr/falcon  createFalconEDRIntegration  Create EDR Falcon Integration
+  reason: Configures an integration with CrowdStrike Falcon endpoint detection and response to gate network
+    access on device security posture — cybersecurity tooling. Sub-capability ambiguous between threat
+    detection/response and access management.
+  recovered_from: sweep-20260829T005356Z-edges.json
+- tag: EDR FleetDM Integrations
+  spec_file: netbird-edr-fleetdm-integrations-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.7
+  evidence: POST /api/integrations/edr/fleetdm  createFleetDMEDRIntegration  Create EDR FleetDM Integration;
+    FleetDMMatchAttributes
+  reason: Endpoint detection/device-posture integration used to enforce security posture on peers; a cybersecurity
+    capability rather than a business-domain one.
+  recovered_from: sweep-20260829T005356Z-edges.json
+- tag: EDR Peers
+  spec_file: netbird-edr-peers-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /api/peers/{peer-id}/edr/bypass  bypassCompliance  Bypass compliance for a non-compliant
+    peer; GET /api/peers/edr/bypassed listBypassedPeers
+  reason: Granting and revoking access exceptions for devices failing endpoint security compliance is
+    access control administration within cybersecurity; not regulatory compliance despite the word 'compliance'.
+  recovered_from: sweep-20260829T005356Z-edges.json
+- tag: Plans
+  spec_file: netbird-plans-api-openapi.yml
+  capability_id: BC-4240.10
+  capability_id_l1: BC-4240
+  capability_name: Plan & Entitlement Design
+  confidence: 0.7
+  evidence: GET /api/integrations/billing/plans Get available plans; schemas Price, Product
+  reason: Exposes the vendor's commercial plans and prices under billing integrations, matching plan/entitlement
+    definition in the SaaS subscription lifecycle. Single read-only operation limits confidence.
+  recovered_from: sweep-20260829T005356Z-edges.json
+- tag: Policies
+  spec_file: netbird-policies-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /api/policies Create a Policy; schemas PolicyRule, RulePortRange, GroupMinimum, ResourceType
+  reason: Policies define which groups may reach which network resources and ports — access control rules
+    in a zero-trust product, best matched to identity and access management. Some ambiguity with security
+    architecture.
+  recovered_from: sweep-20260829T005356Z-edges.json
+- tag: Routes
+  spec_file: netbird-routes-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: POST /api/routes Create a Route; schemas RouteRequest, Route
+  reason: Network routing configuration for the private network overlay — network infrastructure management.
+    Thin schema set but unambiguous in a networking product.
+  recovered_from: sweep-20260829T005356Z-edges.json
+- tag: Services
+  spec_file: netbird-services-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: GET /api/reverse-proxies/clusters List available proxy clusters; POST /api/reverse-proxies/domains
+    Create a Custom domain
+  reason: Manages reverse-proxy services, proxy clusters and custom domains with auth configs — network/infrastructure
+    service configuration, not a commercial 'services' catalogue.
+  recovered_from: sweep-20260829T005356Z-edges.json
