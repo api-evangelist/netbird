@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts EDR Huntress Integrations API
+  title: NetBird REST EDR Huntress Integrations API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -88,6 +88,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: getApiIntegrationsEdrHuntress
+      x-operation-id-source: derived
     put:
       tags:
       - EDR Huntress Integrations
@@ -168,25 +170,71 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: deleteApiIntegrationsEdrHuntress
+      x-operation-id-source: derived
 components:
   schemas:
-    Group:
-      allOf:
-      - $ref: '#/components/schemas/GroupMinimum'
-      - type: object
-        properties:
-          peers:
-            description: List of peers object
-            type: array
-            items:
-              $ref: '#/components/schemas/PeerMinimum'
-          resources:
-            type: array
-            items:
-              $ref: '#/components/schemas/Resource'
-        required:
-        - peers
-        - resources
+    GroupMinimum:
+      type: object
+      properties:
+        id:
+          description: Group ID
+          type: string
+          example: ch8i4ug6lnn4g9hqv7m0
+        name:
+          description: Group Name identifier
+          type: string
+          example: devs
+        peers_count:
+          description: Count of peers associated to the group
+          type: integer
+          example: 2
+        resources_count:
+          description: Count of resources associated to the group
+          type: integer
+          example: 5
+        issued:
+          description: How the group was issued (api, integration, jwt)
+          type: string
+          enum:
+          - api
+          - integration
+          - jwt
+          example: api
+      required:
+      - id
+      - name
+      - peers_count
+      - resources_count
+    HuntressMatchAttributes:
+      type: object
+      description: Attribute conditions to match when approving agents
+      additionalProperties: false
+      properties:
+        defender_policy_status:
+          type: string
+          description: Policy status of Defender AV for Managed Antivirus.
+          example: Compliant
+        defender_status:
+          type: string
+          description: Status of Defender AV Managed Antivirus.
+          example: Healthy
+        defender_substatus:
+          type: string
+          description: Sub-status of Defender AV Managed Antivirus.
+          example: Up to date
+        firewall_status:
+          type: string
+          description: Status of agent firewall. Can be one of Disabled, Enabled, Pending Isolation, Isolated, Pending Release.
+          example: Enabled
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
     EDRHuntressRequest:
       type: object
       description: Request payload for creating or updating a EDR Huntress integration
@@ -218,14 +266,44 @@ components:
       - groups
       - last_synced_interval
       - match_attributes
-    NetworkResourceType:
-      description: Network resource type based of the address
-      type: string
-      enum:
-      - host
-      - subnet
-      - domain
-      example: host
+    PeerMinimum:
+      type: object
+      properties:
+        id:
+          description: Peer ID
+          type: string
+          example: chacbco6lnnbn6cg5s90
+        name:
+          description: Peer's hostname
+          type: string
+          example: stage-host-1
+      required:
+      - id
+      - name
+    Group:
+      allOf:
+      - $ref: '#/components/schemas/GroupMinimum'
+      - type: object
+        properties:
+          peers:
+            description: List of peers object
+            type: array
+            items:
+              $ref: '#/components/schemas/PeerMinimum'
+          resources:
+            type: array
+            items:
+              $ref: '#/components/schemas/Resource'
+        required:
+        - peers
+        - resources
+    ResourceType:
+      allOf:
+      - $ref: '#/components/schemas/NetworkResourceType'
+      - type: string
+        enum:
+        - peer
+        example: peer
     Resource:
       type: object
       properties:
@@ -239,6 +317,14 @@ components:
       required:
       - id
       - type
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
     EDRHuntressResponse:
       type: object
       description: Represents a Huntress EDR integration configuration
@@ -295,88 +381,6 @@ components:
           default: true
         match_attributes:
           $ref: '#/components/schemas/HuntressMatchAttributes'
-    ResourceType:
-      allOf:
-      - $ref: '#/components/schemas/NetworkResourceType'
-      - type: string
-        enum:
-        - peer
-        example: peer
-    HuntressMatchAttributes:
-      type: object
-      description: Attribute conditions to match when approving agents
-      additionalProperties: false
-      properties:
-        defender_policy_status:
-          type: string
-          description: Policy status of Defender AV for Managed Antivirus.
-          example: Compliant
-        defender_status:
-          type: string
-          description: Status of Defender AV Managed Antivirus.
-          example: Healthy
-        defender_substatus:
-          type: string
-          description: Sub-status of Defender AV Managed Antivirus.
-          example: Up to date
-        firewall_status:
-          type: string
-          description: Status of agent firewall. Can be one of Disabled, Enabled, Pending Isolation, Isolated, Pending Release.
-          example: Enabled
-    GroupMinimum:
-      type: object
-      properties:
-        id:
-          description: Group ID
-          type: string
-          example: ch8i4ug6lnn4g9hqv7m0
-        name:
-          description: Group Name identifier
-          type: string
-          example: devs
-        peers_count:
-          description: Count of peers associated to the group
-          type: integer
-          example: 2
-        resources_count:
-          description: Count of resources associated to the group
-          type: integer
-          example: 5
-        issued:
-          description: How the group was issued (api, integration, jwt)
-          type: string
-          enum:
-          - api
-          - integration
-          - jwt
-          example: api
-      required:
-      - id
-      - name
-      - peers_count
-      - resources_count
-    PeerMinimum:
-      type: object
-      properties:
-        id:
-          description: Peer ID
-          type: string
-          example: chacbco6lnnbn6cg5s90
-        name:
-          description: Peer's hostname
-          type: string
-          example: stage-host-1
-      required:
-      - id
-      - name
-    ErrorResponse:
-      type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
-      properties:
-        message:
-          type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
   securitySchemes:
     BearerAuth:
       type: http

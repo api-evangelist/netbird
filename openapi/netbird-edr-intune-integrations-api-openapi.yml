@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts EDR Intune Integrations API
+  title: NetBird REST EDR Intune Integrations API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -19,9 +19,7 @@ paths:
       tags:
       - EDR Intune Integrations
       summary: Create EDR Intune Integration
-      description: 'Creates a new EDR Intune integration for the authenticated account.
-
-        '
+      description: Creates a new EDR Intune integration for the authenticated account.
       operationId: createEDRIntegration
       requestBody:
         required: true
@@ -95,9 +93,7 @@ paths:
       tags:
       - EDR Intune Integrations
       summary: Update EDR Intune Integration
-      description: 'Updates an existing EDR Intune Integration. The request body structure is `EDRIntuneRequest`.
-
-        '
+      description: Updates an existing EDR Intune Integration. The request body structure is `EDRIntuneRequest`.
       operationId: updateEDRIntegration
       requestBody:
         required: true
@@ -176,51 +172,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    Group:
-      allOf:
-      - $ref: '#/components/schemas/GroupMinimum'
-      - type: object
-        properties:
-          peers:
-            description: List of peers object
-            type: array
-            items:
-              $ref: '#/components/schemas/PeerMinimum'
-          resources:
-            type: array
-            items:
-              $ref: '#/components/schemas/Resource'
-        required:
-        - peers
-        - resources
-    NetworkResourceType:
-      description: Network resource type based of the address
-      type: string
-      enum:
-      - host
-      - subnet
-      - domain
-      example: host
-    Resource:
-      type: object
-      properties:
-        id:
-          description: ID of the resource
-          type: string
-          example: chacdk86lnnboviihd7g
-        type:
-          description: Type of the resource
-          $ref: '#/components/schemas/ResourceType'
-      required:
-      - id
-      - type
-    ResourceType:
-      allOf:
-      - $ref: '#/components/schemas/NetworkResourceType'
-      - type: string
-        enum:
-        - peer
-        example: peer
     GroupMinimum:
       type: object
       properties:
@@ -253,6 +204,77 @@ components:
       - name
       - peers_count
       - resources_count
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
+    PeerMinimum:
+      type: object
+      properties:
+        id:
+          description: Peer ID
+          type: string
+          example: chacbco6lnnbn6cg5s90
+        name:
+          description: Peer's hostname
+          type: string
+          example: stage-host-1
+      required:
+      - id
+      - name
+    Group:
+      allOf:
+      - $ref: '#/components/schemas/GroupMinimum'
+      - type: object
+        properties:
+          peers:
+            description: List of peers object
+            type: array
+            items:
+              $ref: '#/components/schemas/PeerMinimum'
+          resources:
+            type: array
+            items:
+              $ref: '#/components/schemas/Resource'
+        required:
+        - peers
+        - resources
+    EDRIntuneRequest:
+      type: object
+      description: Request payload for creating or updating a EDR Intune integration.
+      required:
+      - client_id
+      - tenant_id
+      - secret
+      - groups
+      - last_synced_interval
+      properties:
+        client_id:
+          type: string
+          description: The Azure application client id
+        tenant_id:
+          type: string
+          description: The Azure tenant id
+        secret:
+          type: string
+          description: The Azure application client secret
+        groups:
+          type: array
+          description: The Groups this integrations applies to
+          items:
+            type: string
+        last_synced_interval:
+          type: integer
+          description: The devices last sync requirement interval in hours. Minimum value is 24 hours.
+          minimum: 24
+        enabled:
+          type: boolean
+          description: Indicates whether the integration is enabled
+          default: true
     EDRIntuneResponse:
       type: object
       description: Represents a Intune EDR integration configuration
@@ -316,60 +338,34 @@ components:
         enabled:
           type: boolean
           description: Indicates whether the integration is enabled
-    PeerMinimum:
+    ResourceType:
+      allOf:
+      - $ref: '#/components/schemas/NetworkResourceType'
+      - type: string
+        enum:
+        - peer
+        example: peer
+    Resource:
       type: object
       properties:
         id:
-          description: Peer ID
+          description: ID of the resource
           type: string
-          example: chacbco6lnnbn6cg5s90
-        name:
-          description: Peer's hostname
-          type: string
-          example: stage-host-1
+          example: chacdk86lnnboviihd7g
+        type:
+          description: Type of the resource
+          $ref: '#/components/schemas/ResourceType'
       required:
       - id
-      - name
-    ErrorResponse:
-      type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
-      properties:
-        message:
-          type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
-    EDRIntuneRequest:
-      type: object
-      description: Request payload for creating or updating a EDR Intune integration.
-      required:
-      - client_id
-      - tenant_id
-      - secret
-      - groups
-      - last_synced_interval
-      properties:
-        client_id:
-          type: string
-          description: The Azure application client id
-        tenant_id:
-          type: string
-          description: The Azure tenant id
-        secret:
-          type: string
-          description: The Azure application client secret
-        groups:
-          type: array
-          description: The Groups this integrations applies to
-          items:
-            type: string
-        last_synced_interval:
-          type: integer
-          description: The devices last sync requirement interval in hours. Minimum value is 24 hours.
-          minimum: 24
-        enabled:
-          type: boolean
-          description: Indicates whether the integration is enabled
-          default: true
+      - type
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
   securitySchemes:
     BearerAuth:
       type: http

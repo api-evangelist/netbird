@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts DNS Zones API
+  title: NetBird REST DNS Zones API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -37,6 +37,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiDnsZones
+      x-operation-id-source: derived
     post:
       summary: Create a DNS Zone
       description: Creates a new custom DNS zone
@@ -66,6 +68,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiDnsZones
+      x-operation-id-source: derived
   /api/dns/zones/{zoneId}:
     get:
       summary: Retrieve a DNS Zone
@@ -100,6 +104,8 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiDnsZonesByZoneId
+      x-operation-id-source: derived
     put:
       summary: Update a DNS Zone
       description: Updates a custom DNS zone
@@ -139,6 +145,8 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: putApiDnsZonesByZoneId
+      x-operation-id-source: derived
     delete:
       summary: Delete a DNS Zone
       description: Deletes a custom DNS zone
@@ -168,6 +176,8 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: deleteApiDnsZonesByZoneId
+      x-operation-id-source: derived
   /api/dns/zones/{zoneId}/records:
     get:
       summary: List all DNS Records
@@ -202,6 +212,8 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiDnsZonesByZoneIdRecords
+      x-operation-id-source: derived
     post:
       summary: Create a DNS Record
       description: Creates a new DNS record in a zone
@@ -241,6 +253,8 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiDnsZonesByZoneIdRecords
+      x-operation-id-source: derived
   /api/dns/zones/{zoneId}/records/{recordId}:
     get:
       summary: Retrieve a DNS Record
@@ -282,6 +296,8 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiDnsZonesByZoneIdRecordsByRecordId
+      x-operation-id-source: derived
     put:
       summary: Update a DNS Record
       description: Updates a DNS record in a zone
@@ -328,6 +344,8 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: putApiDnsZonesByZoneIdRecordsByRecordId
+      x-operation-id-source: derived
     delete:
       summary: Delete a DNS Record
       description: Deletes a DNS record from a zone
@@ -364,24 +382,42 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: deleteApiDnsZonesByZoneIdRecordsByRecordId
+      x-operation-id-source: derived
 components:
-  responses:
-    bad_request:
-      description: Bad Request
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
-    not_found:
-      description: Resource not found
-      content: {}
   schemas:
+    ZoneRequest:
+      type: object
+      properties:
+        name:
+          description: Zone name identifier
+          type: string
+          maxLength: 255
+          minLength: 1
+          example: Office Zone
+        domain:
+          description: Zone domain (FQDN)
+          type: string
+          example: example.com
+        enabled:
+          description: Zone status
+          type: boolean
+          default: true
+        enable_search_domain:
+          description: Enable this zone as a search domain
+          type: boolean
+          example: false
+        distribution_groups:
+          description: Group IDs that defines groups of peers that will resolve this zone
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+      required:
+      - name
+      - domain
+      - enable_search_domain
+      - distribution_groups
     Zone:
       allOf:
       - type: object
@@ -400,6 +436,17 @@ components:
         - enabled
         - records
       - $ref: '#/components/schemas/ZoneRequest'
+    DNSRecord:
+      allOf:
+      - type: object
+        properties:
+          id:
+            description: DNS record ID
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        required:
+        - id
+      - $ref: '#/components/schemas/DNSRecordRequest'
     DNSRecordType:
       type: string
       description: DNS record type
@@ -433,49 +480,22 @@ components:
       - type
       - content
       - ttl
-    DNSRecord:
-      allOf:
-      - type: object
-        properties:
-          id:
-            description: DNS record ID
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m0
-        required:
-        - id
-      - $ref: '#/components/schemas/DNSRecordRequest'
-    ZoneRequest:
-      type: object
-      properties:
-        name:
-          description: Zone name identifier
-          type: string
-          maxLength: 255
-          minLength: 1
-          example: Office Zone
-        domain:
-          description: Zone domain (FQDN)
-          type: string
-          example: example.com
-        enabled:
-          description: Zone status
-          type: boolean
-          default: true
-        enable_search_domain:
-          description: Enable this zone as a search domain
-          type: boolean
-          example: false
-        distribution_groups:
-          description: Group IDs that defines groups of peers that will resolve this zone
-          type: array
-          items:
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m0
-      required:
-      - name
-      - domain
-      - enable_search_domain
-      - distribution_groups
+  responses:
+    forbidden:
+      description: Forbidden
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
+    not_found:
+      description: Resource not found
+      content: {}
   securitySchemes:
     BearerAuth:
       type: http

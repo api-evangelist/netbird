@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts Geo Locations API
+  title: NetBird REST Geo Locations API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -39,6 +39,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiLocationsCountries
+      x-operation-id-source: derived
   /api/locations/countries/{country}/cities:
     get:
       summary: List all city names by country
@@ -69,20 +71,9 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiLocationsCountriesByCountryCities
+      x-operation-id-source: derived
 components:
-  responses:
-    bad_request:
-      description: Bad Request
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
   schemas:
     Country:
       description: Describe country geographical location information
@@ -116,6 +107,19 @@ components:
       description: 2-letter ISO 3166-1 alpha-2 code that represents the country
       type: string
       example: DE
+  responses:
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   securitySchemes:
     BearerAuth:
       type: http

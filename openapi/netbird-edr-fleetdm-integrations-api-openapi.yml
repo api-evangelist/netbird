@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts EDR FleetDM Integrations API
+  title: NetBird REST EDR FleetDM Integrations API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -88,6 +88,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: getApiIntegrationsEdrFleetdm
+      x-operation-id-source: derived
     put:
       tags:
       - EDR FleetDM Integrations
@@ -168,83 +170,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: deleteApiIntegrationsEdrFleetdm
+      x-operation-id-source: derived
 components:
   schemas:
-    Group:
-      allOf:
-      - $ref: '#/components/schemas/GroupMinimum'
-      - type: object
-        properties:
-          peers:
-            description: List of peers object
-            type: array
-            items:
-              $ref: '#/components/schemas/PeerMinimum'
-          resources:
-            type: array
-            items:
-              $ref: '#/components/schemas/Resource'
-        required:
-        - peers
-        - resources
-    NetworkResourceType:
-      description: Network resource type based of the address
-      type: string
-      enum:
-      - host
-      - subnet
-      - domain
-      example: host
-    Resource:
-      type: object
-      properties:
-        id:
-          description: ID of the resource
-          type: string
-          example: chacdk86lnnboviihd7g
-        type:
-          description: Type of the resource
-          $ref: '#/components/schemas/ResourceType'
-      required:
-      - id
-      - type
-    ResourceType:
-      allOf:
-      - $ref: '#/components/schemas/NetworkResourceType'
-      - type: string
-        enum:
-        - peer
-        example: peer
-    FleetDMMatchAttributes:
-      type: object
-      description: Attribute conditions to match when approving FleetDM hosts. Most attributes work with FleetDM's free/open-source version. Premium-only attributes are marked accordingly
-      additionalProperties: false
-      properties:
-        disk_encryption_enabled:
-          type: boolean
-          description: Whether disk encryption (FileVault/BitLocker) must be enabled on the host
-        failing_policies_count_max:
-          type: integer
-          description: Maximum number of allowed failing policies. Use 0 to require all policies to pass
-          minimum: 0
-          example: 0
-        vulnerable_software_count_max:
-          type: integer
-          description: Maximum number of allowed vulnerable software on the host
-          minimum: 0
-          example: 0
-        status_online:
-          type: boolean
-          description: Whether the host must be online (recently seen by Fleet)
-        required_policies:
-          type: array
-          description: List of FleetDM policy IDs that must be passing on the host. If any of these policies is failing, the host is non-compliant
-          items:
-            type: integer
-          example:
-          - 1
-          - 5
-          - 12
     GroupMinimum:
       type: object
       properties:
@@ -277,6 +206,14 @@ components:
       - name
       - peers_count
       - resources_count
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
     PeerMinimum:
       type: object
       properties:
@@ -291,6 +228,23 @@ components:
       required:
       - id
       - name
+    Group:
+      allOf:
+      - $ref: '#/components/schemas/GroupMinimum'
+      - type: object
+        properties:
+          peers:
+            description: List of peers object
+            type: array
+            items:
+              $ref: '#/components/schemas/PeerMinimum'
+          resources:
+            type: array
+            items:
+              $ref: '#/components/schemas/Resource'
+        required:
+        - peers
+        - resources
     EDRFleetDMRequest:
       type: object
       description: Request payload for creating or updating a FleetDM EDR integration
@@ -322,14 +276,26 @@ components:
       - groups
       - last_synced_interval
       - match_attributes
-    ErrorResponse:
+    ResourceType:
+      allOf:
+      - $ref: '#/components/schemas/NetworkResourceType'
+      - type: string
+        enum:
+        - peer
+        example: peer
+    Resource:
       type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
       properties:
-        message:
+        id:
+          description: ID of the resource
           type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
+          example: chacdk86lnnboviihd7g
+        type:
+          description: Type of the resource
+          $ref: '#/components/schemas/ResourceType'
+      required:
+      - id
+      - type
     EDRFleetDMResponse:
       type: object
       description: Represents a FleetDM EDR integration configuration
@@ -390,6 +356,44 @@ components:
           default: true
         match_attributes:
           $ref: '#/components/schemas/FleetDMMatchAttributes'
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
+    FleetDMMatchAttributes:
+      type: object
+      description: Attribute conditions to match when approving FleetDM hosts. Most attributes work with FleetDM's free/open-source version. Premium-only attributes are marked accordingly
+      additionalProperties: false
+      properties:
+        disk_encryption_enabled:
+          type: boolean
+          description: Whether disk encryption (FileVault/BitLocker) must be enabled on the host
+        failing_policies_count_max:
+          type: integer
+          description: Maximum number of allowed failing policies. Use 0 to require all policies to pass
+          minimum: 0
+          example: 0
+        vulnerable_software_count_max:
+          type: integer
+          description: Maximum number of allowed vulnerable software on the host
+          minimum: 0
+          example: 0
+        status_online:
+          type: boolean
+          description: Whether the host must be online (recently seen by Fleet)
+        required_policies:
+          type: array
+          description: List of FleetDM policy IDs that must be passing on the host. If any of these policies is failing, the host is non-compliant
+          items:
+            type: integer
+          example:
+          - 1
+          - 5
+          - 12
   securitySchemes:
     BearerAuth:
       type: http

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts IDP Azure Integrations API
+  title: NetBird REST IDP Azure Integrations API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -305,41 +305,48 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    CreateAzureIntegrationRequest:
-      allOf:
-      - $ref: '#/components/schemas/IntegrationSyncFilters'
-      - type: object
-        description: Request payload for creating an Azure AD IDP integration
-        required:
-        - client_secret
-        - client_id
-        - tenant_id
-        - host
-        properties:
-          client_secret:
-            type: string
-            description: Base64-encoded Azure AD client secret
-            example: c2VjcmV0...
-          client_id:
-            type: string
-            description: Azure AD application (client) ID
-            example: 12345678-1234-1234-1234-123456789012
-          tenant_id:
-            type: string
-            description: Azure AD tenant ID
-            example: 87654321-4321-4321-4321-210987654321
-          sync_interval:
-            type: integer
-            description: Sync interval in seconds (minimum 300). Defaults to 300 if not specified.
-            minimum: 300
-            example: 300
-          host:
-            type: string
-            description: Azure host domain for the Graph API
-            enum:
-            - microsoft.com
-            - microsoft.us
-            example: microsoft.com
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
+    IdpIntegrationSyncLog:
+      type: object
+      description: Represents a synchronization log entry for an integration
+      required:
+      - id
+      - level
+      - timestamp
+      - message
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: The unique identifier for the sync log
+          example: 123
+        level:
+          type: string
+          description: The log level
+          example: info
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of when the log was created
+          example: '2023-05-15T10:30:00Z'
+        message:
+          type: string
+          description: Log message
+          example: Successfully synchronized users and groups
+    SyncResult:
+      type: object
+      description: Response for a manual sync trigger
+      properties:
+        result:
+          type: string
+          example: ok
     AzureIntegration:
       allOf:
       - $ref: '#/components/schemas/IntegrationEnabled'
@@ -383,6 +390,27 @@ components:
             format: date-time
             description: Timestamp of the last synchronization
             example: '2023-05-15T10:30:00Z'
+    IntegrationSyncFilters:
+      type: object
+      properties:
+        group_prefixes:
+          type: array
+          description: List of start_with string patterns for groups to sync
+          items:
+            type: string
+          example:
+          - Engineering
+          - Sales
+        user_group_prefixes:
+          type: array
+          description: List of start_with string patterns for groups which users to sync
+          items:
+            type: string
+          example:
+          - Users
+        connector_id:
+          type: string
+          description: DEX connector ID for embedded IDP setups
     UpdateAzureIntegrationRequest:
       allOf:
       - $ref: '#/components/schemas/IntegrationEnabled'
@@ -410,69 +438,41 @@ components:
           type: boolean
           description: Whether the integration is enabled
           example: true
-    IntegrationSyncFilters:
-      type: object
-      properties:
-        group_prefixes:
-          type: array
-          description: List of start_with string patterns for groups to sync
-          items:
+    CreateAzureIntegrationRequest:
+      allOf:
+      - $ref: '#/components/schemas/IntegrationSyncFilters'
+      - type: object
+        description: Request payload for creating an Azure AD IDP integration
+        required:
+        - client_secret
+        - client_id
+        - tenant_id
+        - host
+        properties:
+          client_secret:
             type: string
-          example:
-          - Engineering
-          - Sales
-        user_group_prefixes:
-          type: array
-          description: List of start_with string patterns for groups which users to sync
-          items:
+            description: Base64-encoded Azure AD client secret
+            example: c2VjcmV0...
+          client_id:
             type: string
-          example:
-          - Users
-        connector_id:
-          type: string
-          description: DEX connector ID for embedded IDP setups
-    IdpIntegrationSyncLog:
-      type: object
-      description: Represents a synchronization log entry for an integration
-      required:
-      - id
-      - level
-      - timestamp
-      - message
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: The unique identifier for the sync log
-          example: 123
-        level:
-          type: string
-          description: The log level
-          example: info
-        timestamp:
-          type: string
-          format: date-time
-          description: Timestamp of when the log was created
-          example: '2023-05-15T10:30:00Z'
-        message:
-          type: string
-          description: Log message
-          example: Successfully synchronized users and groups
-    SyncResult:
-      type: object
-      description: Response for a manual sync trigger
-      properties:
-        result:
-          type: string
-          example: ok
-    ErrorResponse:
-      type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
-      properties:
-        message:
-          type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
+            description: Azure AD application (client) ID
+            example: 12345678-1234-1234-1234-123456789012
+          tenant_id:
+            type: string
+            description: Azure AD tenant ID
+            example: 87654321-4321-4321-4321-210987654321
+          sync_interval:
+            type: integer
+            description: Sync interval in seconds (minimum 300). Defaults to 300 if not specified.
+            minimum: 300
+            example: 300
+          host:
+            type: string
+            description: Azure host domain for the Graph API
+            enum:
+            - microsoft.com
+            - microsoft.us
+            example: microsoft.com
   securitySchemes:
     BearerAuth:
       type: http

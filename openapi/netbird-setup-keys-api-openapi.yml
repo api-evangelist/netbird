@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts Setup Keys API
+  title: NetBird REST Setup Keys API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -39,6 +39,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiSetupKeys
+      x-operation-id-source: derived
     post:
       summary: Create a Setup Key
       description: Creates a setup key
@@ -68,6 +70,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiSetupKeys
+      x-operation-id-source: derived
   /api/setup-keys/{keyId}:
     get:
       summary: Retrieve a Setup Key
@@ -99,6 +103,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiSetupKeysByKeyId
+      x-operation-id-source: derived
     put:
       summary: Update a Setup Key
       description: Update information about a setup key
@@ -135,9 +141,10 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: putApiSetupKeysByKeyId
+      x-operation-id-source: derived
     delete:
       summary: Delete a Setup Key
-      description: Delete a Setup Key
       tags:
       - Setup Keys
       security:
@@ -162,6 +169,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: deleteApiSetupKeysByKeyId
+      x-operation-id-source: derived
 components:
   schemas:
     SetupKeyClear:
@@ -175,6 +184,58 @@ components:
             example: A616097E-FCF0-48FA-9354-CA4A61142761
         required:
         - key
+    SetupKey:
+      allOf:
+      - $ref: '#/components/schemas/SetupKeyBase'
+      - type: object
+        properties:
+          key:
+            description: Setup Key as secret
+            type: string
+            example: A6160****
+        required:
+        - key
+    CreateSetupKeyRequest:
+      type: object
+      properties:
+        name:
+          description: Setup Key name
+          type: string
+          example: Default key
+        type:
+          description: Setup key type, one-off for single time usage and reusable
+          type: string
+          example: reusable
+        expires_in:
+          description: Expiration time in seconds
+          type: integer
+          minimum: 86400
+          maximum: 31536000
+          example: 86400
+        auto_groups:
+          description: List of group IDs to auto-assign to peers registered with this key
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        usage_limit:
+          description: A number of times this key can be used. The value of 0 indicates the unlimited usage.
+          type: integer
+          example: 0
+        ephemeral:
+          description: Indicate that the peer will be ephemeral or not
+          type: boolean
+          example: true
+        allow_extra_dns_labels:
+          description: Allow extra DNS labels to be added to the peer
+          type: boolean
+          example: true
+      required:
+      - name
+      - type
+      - expires_in
+      - auto_groups
+      - usage_limit
     SetupKeyBase:
       type: object
       properties:
@@ -255,17 +316,6 @@ components:
       - usage_limit
       - ephemeral
       - allow_extra_dns_labels
-    SetupKey:
-      allOf:
-      - $ref: '#/components/schemas/SetupKeyBase'
-      - type: object
-        properties:
-          key:
-            description: Setup Key as secret
-            type: string
-            example: A6160****
-        required:
-        - key
     SetupKeyRequest:
       type: object
       properties:
@@ -282,59 +332,18 @@ components:
       required:
       - revoked
       - auto_groups
-    CreateSetupKeyRequest:
-      type: object
-      properties:
-        name:
-          description: Setup Key name
-          type: string
-          example: Default key
-        type:
-          description: Setup key type, one-off for single time usage and reusable
-          type: string
-          example: reusable
-        expires_in:
-          description: Expiration time in seconds
-          type: integer
-          minimum: 86400
-          maximum: 31536000
-          example: 86400
-        auto_groups:
-          description: List of group IDs to auto-assign to peers registered with this key
-          type: array
-          items:
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m0
-        usage_limit:
-          description: A number of times this key can be used. The value of 0 indicates the unlimited usage.
-          type: integer
-          example: 0
-        ephemeral:
-          description: Indicate that the peer will be ephemeral or not
-          type: boolean
-          example: true
-        allow_extra_dns_labels:
-          description: Allow extra DNS labels to be added to the peer
-          type: boolean
-          example: true
-      required:
-      - name
-      - type
-      - expires_in
-      - auto_groups
-      - usage_limit
   responses:
-    bad_request:
-      description: Bad Request
-      content: {}
     internal_error:
       description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     requires_authentication:
       description: Requires authentication
       content: {}
-    forbidden:
-      description: Forbidden
+    bad_request:
+      description: Bad Request
       content: {}
   securitySchemes:
     BearerAuth:

@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: NetBird REST Accounts API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
@@ -39,6 +39,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiAccounts
+      x-operation-id-source: derived
   /api/accounts/{accountId}:
     delete:
       summary: Delete an Account
@@ -67,6 +69,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: deleteApiAccountsByAccountId
+      x-operation-id-source: derived
     put:
       summary: Update an Account
       description: Update information about an account
@@ -103,75 +107,10 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: putApiAccountsByAccountId
+      x-operation-id-source: derived
 components:
-  responses:
-    bad_request:
-      description: Bad Request
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
   schemas:
-    AccountExtraSettings:
-      type: object
-      properties:
-        peer_approval_enabled:
-          description: (Cloud only) Enables or disables peer approval globally. If enabled, all peers added will be in pending state until approved by an admin.
-          type: boolean
-          example: true
-        user_approval_required:
-          description: Enables manual approval for new users joining via domain matching. When enabled, users are blocked with pending approval status until explicitly approved by an admin.
-          type: boolean
-          example: false
-        network_traffic_logs_enabled:
-          description: Enables or disables network traffic logging. If enabled, all network traffic events from peers will be stored.
-          type: boolean
-          example: true
-        network_traffic_logs_groups:
-          description: Limits traffic logging to these groups. If unset all peers are enabled.
-          type: array
-          items:
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m0
-        network_traffic_packet_counter_enabled:
-          description: Enables or disables network traffic packet counter. If enabled, network packets and their size will be counted and reported. (This can have an slight impact on performance)
-          type: boolean
-          example: true
-      required:
-      - peer_approval_enabled
-      - user_approval_required
-      - network_traffic_logs_enabled
-      - network_traffic_logs_groups
-      - network_traffic_packet_counter_enabled
-    AccountOnboarding:
-      type: object
-      properties:
-        signup_form_pending:
-          description: Indicates whether the account signup form is pending
-          type: boolean
-          example: true
-        onboarding_flow_pending:
-          description: Indicates whether the account onboarding flow is pending
-          type: boolean
-          example: false
-      required:
-      - signup_form_pending
-      - onboarding_flow_pending
-    AccountRequest:
-      type: object
-      properties:
-        settings:
-          $ref: '#/components/schemas/AccountSettings'
-        onboarding:
-          $ref: '#/components/schemas/AccountOnboarding'
-      required:
-      - settings
     Account:
       type: object
       properties:
@@ -208,6 +147,15 @@ components:
       - created_at
       - created_by
       - onboarding
+    AccountRequest:
+      type: object
+      properties:
+        settings:
+          $ref: '#/components/schemas/AccountSettings'
+        onboarding:
+          $ref: '#/components/schemas/AccountOnboarding'
+      required:
+      - settings
     AccountSettings:
       type: object
       properties:
@@ -305,6 +253,64 @@ components:
       - regular_users_view_blocked
       - peer_expose_enabled
       - peer_expose_groups
+    AccountExtraSettings:
+      type: object
+      properties:
+        peer_approval_enabled:
+          description: (Cloud only) Enables or disables peer approval globally. If enabled, all peers added will be in pending state until approved by an admin.
+          type: boolean
+          example: true
+        user_approval_required:
+          description: Enables manual approval for new users joining via domain matching. When enabled, users are blocked with pending approval status until explicitly approved by an admin.
+          type: boolean
+          example: false
+        network_traffic_logs_enabled:
+          description: Enables or disables network traffic logging. If enabled, all network traffic events from peers will be stored.
+          type: boolean
+          example: true
+        network_traffic_logs_groups:
+          description: Limits traffic logging to these groups. If unset all peers are enabled.
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        network_traffic_packet_counter_enabled:
+          description: Enables or disables network traffic packet counter. If enabled, network packets and their size will be counted and reported. (This can have an slight impact on performance)
+          type: boolean
+          example: true
+      required:
+      - peer_approval_enabled
+      - user_approval_required
+      - network_traffic_logs_enabled
+      - network_traffic_logs_groups
+      - network_traffic_packet_counter_enabled
+    AccountOnboarding:
+      type: object
+      properties:
+        signup_form_pending:
+          description: Indicates whether the account signup form is pending
+          type: boolean
+          example: true
+        onboarding_flow_pending:
+          description: Indicates whether the account onboarding flow is pending
+          type: boolean
+          example: false
+      required:
+      - signup_form_pending
+      - onboarding_flow_pending
+  responses:
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   securitySchemes:
     BearerAuth:
       type: http

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts Services API
+  title: NetBird REST Services API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -37,6 +37,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiReverseProxiesClusters
+      x-operation-id-source: derived
   /api/reverse-proxies/services:
     get:
       summary: List all Services
@@ -61,6 +63,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiReverseProxiesServices
+      x-operation-id-source: derived
     post:
       summary: Create a Service
       description: Creates a new reverse proxy service
@@ -92,6 +96,8 @@ paths:
           $ref: '#/components/responses/conflict'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiReverseProxiesServices
+      x-operation-id-source: derived
   /api/reverse-proxies/services/{serviceId}:
     get:
       summary: Retrieve a Service
@@ -125,6 +131,8 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiReverseProxiesServicesByServiceId
+      x-operation-id-source: derived
     put:
       summary: Update a Service
       description: Update an existing service
@@ -165,6 +173,8 @@ paths:
           $ref: '#/components/responses/conflict'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: putApiReverseProxiesServicesByServiceId
+      x-operation-id-source: derived
     delete:
       summary: Delete a Service
       description: Delete an existing service
@@ -193,6 +203,8 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: deleteApiReverseProxiesServicesByServiceId
+      x-operation-id-source: derived
   /api/reverse-proxies/domains:
     get:
       summary: Retrieve Service Domains
@@ -221,6 +233,8 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiReverseProxiesDomains
+      x-operation-id-source: derived
     post:
       summary: Create a Custom domain
       description: Create a new Custom domain for use with service endpoints, this will trigger an initial validation check
@@ -252,6 +266,8 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiReverseProxiesDomains
+      x-operation-id-source: derived
   /api/reverse-proxies/domains/{domainId}:
     delete:
       summary: Delete a Custom domain
@@ -281,6 +297,8 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: deleteApiReverseProxiesDomainsByDomainId
+      x-operation-id-source: derived
   /api/reverse-proxies/domains/{domainId}/validate:
     get:
       summary: Validate a custom domain
@@ -310,68 +328,10 @@ paths:
           $ref: '#/components/responses/not_found'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiReverseProxiesDomainsByDomainIdValidate
+      x-operation-id-source: derived
 components:
   schemas:
-    HeaderAuthConfig:
-      type: object
-      description: Static header-value authentication. The proxy checks that the named header matches the configured value.
-      properties:
-        enabled:
-          type: boolean
-          description: Whether header auth is enabled
-          example: true
-        header:
-          type: string
-          description: HTTP header name to check (e.g. "Authorization", "X-API-Key")
-          example: X-API-Key
-        value:
-          type: string
-          description: Expected header value. For Basic auth use "Basic base64(user:pass)". For Bearer use "Bearer token". Cleared in responses.
-          example: my-secret-api-key
-      required:
-      - enabled
-      - header
-      - value
-    AccessRestrictions:
-      type: object
-      description: Connection-level access restrictions based on IP address or geography. Applies to both HTTP and L4 services.
-      properties:
-        allowed_cidrs:
-          type: array
-          items:
-            type: string
-            format: cidr
-            example: 192.168.1.0/24
-          description: CIDR allowlist. If non-empty, only IPs matching these CIDRs are allowed.
-        blocked_cidrs:
-          type: array
-          items:
-            type: string
-            format: cidr
-            example: 10.0.0.0/8
-          description: CIDR blocklist. Connections from these CIDRs are rejected. Evaluated after allowed_cidrs.
-        allowed_countries:
-          type: array
-          items:
-            type: string
-            pattern: ^[a-zA-Z]{2}$
-            example: US
-          description: ISO 3166-1 alpha-2 country codes to allow. If non-empty, only these countries are permitted.
-        blocked_countries:
-          type: array
-          items:
-            type: string
-            pattern: ^[a-zA-Z]{2}$
-            example: DE
-          description: ISO 3166-1 alpha-2 country codes to block.
-        crowdsec_mode:
-          type: string
-          enum:
-          - 'off'
-          - enforce
-          - observe
-          default: 'off'
-          description: CrowdSec IP reputation mode. Only available when the proxy cluster supports CrowdSec.
     PINAuthConfig:
       type: object
       properties:
@@ -462,6 +422,221 @@ components:
       - enabled
       - auth
       - meta
+    AccessRestrictions:
+      type: object
+      description: Connection-level access restrictions based on IP address or geography. Applies to both HTTP and L4 services.
+      properties:
+        allowed_cidrs:
+          type: array
+          items:
+            type: string
+            format: cidr
+            example: 192.168.1.0/24
+          description: CIDR allowlist. If non-empty, only IPs matching these CIDRs are allowed.
+        blocked_cidrs:
+          type: array
+          items:
+            type: string
+            format: cidr
+            example: 10.0.0.0/8
+          description: CIDR blocklist. Connections from these CIDRs are rejected. Evaluated after allowed_cidrs.
+        allowed_countries:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-zA-Z]{2}$
+            example: US
+          description: ISO 3166-1 alpha-2 country codes to allow. If non-empty, only these countries are permitted.
+        blocked_countries:
+          type: array
+          items:
+            type: string
+            pattern: ^[a-zA-Z]{2}$
+            example: DE
+          description: ISO 3166-1 alpha-2 country codes to block.
+        crowdsec_mode:
+          type: string
+          enum:
+          - 'off'
+          - enforce
+          - observe
+          default: 'off'
+          description: CrowdSec IP reputation mode. Only available when the proxy cluster supports CrowdSec.
+    ServiceMeta:
+      type: object
+      properties:
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the service was created
+          example: '2024-02-03T10:30:00Z'
+        certificate_issued_at:
+          type: string
+          format: date-time
+          description: Timestamp when the certificate was issued (empty if not yet issued)
+          example: '2024-02-03T10:35:00Z'
+        status:
+          type: string
+          enum:
+          - pending
+          - active
+          - tunnel_not_created
+          - certificate_pending
+          - certificate_failed
+          - error
+          description: Current status of the service
+          example: active
+      required:
+      - created_at
+      - status
+    ProxyCluster:
+      type: object
+      description: A proxy cluster represents a group of proxy nodes serving the same address
+      properties:
+        address:
+          type: string
+          description: Cluster address used for CNAME targets
+          example: eu.proxy.netbird.io
+        connected_proxies:
+          type: integer
+          description: Number of proxy nodes connected in this cluster
+          example: 3
+      required:
+      - address
+      - connected_proxies
+    ServiceAuthConfig:
+      type: object
+      properties:
+        password_auth:
+          $ref: '#/components/schemas/PasswordAuthConfig'
+        pin_auth:
+          $ref: '#/components/schemas/PINAuthConfig'
+        bearer_auth:
+          $ref: '#/components/schemas/BearerAuthConfig'
+        link_auth:
+          $ref: '#/components/schemas/LinkAuthConfig'
+        header_auths:
+          type: array
+          items:
+            $ref: '#/components/schemas/HeaderAuthConfig'
+    LinkAuthConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether link auth is enabled
+          example: false
+      required:
+      - enabled
+    PasswordAuthConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether password auth is enabled
+          example: true
+        password:
+          type: string
+          description: Auth password
+          example: s3cret
+      required:
+      - enabled
+      - password
+    BearerAuthConfig:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether bearer auth is enabled
+          example: true
+        distribution_groups:
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7mg
+          description: List of group IDs that can use bearer auth
+      required:
+      - enabled
+    ReverseProxyDomain:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Domain ID
+          example: ds8i4ug6lnn4g9hqv7mg
+        domain:
+          type: string
+          description: Domain name
+          example: example.netbird.app
+        validated:
+          type: boolean
+          description: Whether the domain has been validated
+          example: true
+        type:
+          $ref: '#/components/schemas/ReverseProxyDomainType'
+        target_cluster:
+          type: string
+          description: The proxy cluster this domain is validated against (only for custom domains)
+          example: eu.proxy.netbird.io
+        supports_custom_ports:
+          type: boolean
+          description: Whether the cluster supports binding arbitrary TCP/UDP ports
+          example: true
+        require_subdomain:
+          type: boolean
+          description: Whether a subdomain label is required in front of this domain. When true, the domain cannot be used bare.
+          example: false
+        supports_crowdsec:
+          type: boolean
+          description: Whether the proxy cluster has CrowdSec configured
+          example: false
+      required:
+      - id
+      - domain
+      - validated
+      - type
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
+    ReverseProxyDomainRequest:
+      type: object
+      properties:
+        domain:
+          type: string
+          description: Domain name
+          example: myapp.example.com
+        target_cluster:
+          type: string
+          description: The proxy cluster this domain should be validated against
+          example: eu.proxy.netbird.io
+      required:
+      - domain
+      - target_cluster
+    HeaderAuthConfig:
+      type: object
+      description: Static header-value authentication. The proxy checks that the named header matches the configured value.
+      properties:
+        enabled:
+          type: boolean
+          description: Whether header auth is enabled
+          example: true
+        header:
+          type: string
+          description: HTTP header name to check (e.g. "Authorization", "X-API-Key")
+          example: X-API-Key
+        value:
+          type: string
+          description: Expected header value. For Basic auth use "Basic base64(user:pass)". For Bearer use "Bearer token". Cleared in responses.
+          example: my-secret-api-key
+      required:
+      - enabled
+      - header
+      - value
     ServiceTarget:
       type: object
       properties:
@@ -513,94 +688,13 @@ components:
       - protocol
       - port
       - enabled
-    ReverseProxyDomain:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Domain ID
-          example: ds8i4ug6lnn4g9hqv7mg
-        domain:
-          type: string
-          description: Domain name
-          example: example.netbird.app
-        validated:
-          type: boolean
-          description: Whether the domain has been validated
-          example: true
-        type:
-          $ref: '#/components/schemas/ReverseProxyDomainType'
-        target_cluster:
-          type: string
-          description: The proxy cluster this domain is validated against (only for custom domains)
-          example: eu.proxy.netbird.io
-        supports_custom_ports:
-          type: boolean
-          description: Whether the cluster supports binding arbitrary TCP/UDP ports
-          example: true
-        require_subdomain:
-          type: boolean
-          description: Whether a subdomain label is required in front of this domain. When true, the domain cannot be used bare.
-          example: false
-        supports_crowdsec:
-          type: boolean
-          description: Whether the proxy cluster has CrowdSec configured
-          example: false
-      required:
-      - id
-      - domain
-      - validated
-      - type
-    ServiceTargetOptions:
-      type: object
-      properties:
-        skip_tls_verify:
-          type: boolean
-          description: Skip TLS certificate verification for this backend
-          example: false
-        request_timeout:
-          type: string
-          description: Per-target response timeout as a Go duration string (e.g. "30s", "2m")
-          example: 30s
-        path_rewrite:
-          type: string
-          description: Controls how the request path is rewritten before forwarding to the backend. Default strips the matched prefix. "preserve" keeps the full original request path.
-          enum:
-          - preserve
-          example: preserve
-        custom_headers:
-          type: object
-          description: Extra headers sent to the backend. Hop-by-hop and proxy-managed headers (Host, Connection, Transfer-Encoding, etc.) are rejected.
-          propertyNames:
-            type: string
-            pattern: ^[!#$%&'*+.^_`|~0-9A-Za-z-]+$
-          additionalProperties:
-            type: string
-            pattern: ^[^\r\n]*$
-          example:
-            X-Custom-Header: value
-        proxy_protocol:
-          type: boolean
-          description: Send PROXY Protocol v2 header to this backend (TCP/TLS only)
-          example: false
-        session_idle_timeout:
-          type: string
-          description: Idle timeout before a UDP session is reaped, as a Go duration string (e.g. "30s", "2m").
-          example: 2m
-    PasswordAuthConfig:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: Whether password auth is enabled
-          example: true
-        password:
-          type: string
-          description: Auth password
-          example: s3cret
-      required:
-      - enabled
-      - password
+    ReverseProxyDomainType:
+      type: string
+      description: Type of Reverse Proxy Domain
+      enum:
+      - free
+      - custom
+      example: free
     ServiceRequest:
       type: object
       properties:
@@ -654,117 +748,49 @@ components:
       - name
       - domain
       - enabled
-    ProxyCluster:
-      type: object
-      description: A proxy cluster represents a group of proxy nodes serving the same address
-      properties:
-        address:
-          type: string
-          description: Cluster address used for CNAME targets
-          example: eu.proxy.netbird.io
-        connected_proxies:
-          type: integer
-          description: Number of proxy nodes connected in this cluster
-          example: 3
-      required:
-      - address
-      - connected_proxies
-    ServiceMeta:
+    ServiceTargetOptions:
       type: object
       properties:
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp when the service was created
-          example: '2024-02-03T10:30:00Z'
-        certificate_issued_at:
-          type: string
-          format: date-time
-          description: Timestamp when the certificate was issued (empty if not yet issued)
-          example: '2024-02-03T10:35:00Z'
-        status:
-          type: string
-          enum:
-          - pending
-          - active
-          - tunnel_not_created
-          - certificate_pending
-          - certificate_failed
-          - error
-          description: Current status of the service
-          example: active
-      required:
-      - created_at
-      - status
-    ServiceAuthConfig:
-      type: object
-      properties:
-        password_auth:
-          $ref: '#/components/schemas/PasswordAuthConfig'
-        pin_auth:
-          $ref: '#/components/schemas/PINAuthConfig'
-        bearer_auth:
-          $ref: '#/components/schemas/BearerAuthConfig'
-        link_auth:
-          $ref: '#/components/schemas/LinkAuthConfig'
-        header_auths:
-          type: array
-          items:
-            $ref: '#/components/schemas/HeaderAuthConfig'
-    ErrorResponse:
-      type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
-      properties:
-        message:
-          type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
-    ReverseProxyDomainRequest:
-      type: object
-      properties:
-        domain:
-          type: string
-          description: Domain name
-          example: myapp.example.com
-        target_cluster:
-          type: string
-          description: The proxy cluster this domain should be validated against
-          example: eu.proxy.netbird.io
-      required:
-      - domain
-      - target_cluster
-    LinkAuthConfig:
-      type: object
-      properties:
-        enabled:
+        skip_tls_verify:
           type: boolean
-          description: Whether link auth is enabled
+          description: Skip TLS certificate verification for this backend
           example: false
-      required:
-      - enabled
-    ReverseProxyDomainType:
-      type: string
-      description: Type of Reverse Proxy Domain
-      enum:
-      - free
-      - custom
-      example: free
-    BearerAuthConfig:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          description: Whether bearer auth is enabled
-          example: true
-        distribution_groups:
-          type: array
-          items:
+        request_timeout:
+          type: string
+          description: Per-target response timeout as a Go duration string (e.g. "30s", "2m")
+          example: 30s
+        path_rewrite:
+          type: string
+          description: Controls how the request path is rewritten before forwarding to the backend. Default strips the matched prefix. "preserve" keeps the full original request path.
+          enum:
+          - preserve
+          example: preserve
+        custom_headers:
+          type: object
+          description: Extra headers sent to the backend. Hop-by-hop and proxy-managed headers (Host, Connection, Transfer-Encoding, etc.) are rejected.
+          propertyNames:
             type: string
-            example: ch8i4ug6lnn4g9hqv7mg
-          description: List of group IDs that can use bearer auth
-      required:
-      - enabled
+            pattern: ^[!#$%&'*+.^_`|~0-9A-Za-z-]+$
+          additionalProperties:
+            type: string
+            pattern: ^[^\r\n]*$
+          example:
+            X-Custom-Header: value
+        proxy_protocol:
+          type: boolean
+          description: Send PROXY Protocol v2 header to this backend (TCP/TLS only)
+          example: false
+        session_idle_timeout:
+          type: string
+          description: Idle timeout before a UDP session is reaped, as a Go duration string (e.g. "30s", "2m").
+          example: 2m
   responses:
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    not_found:
+      description: Resource not found
+      content: {}
     internal_error:
       description: Internal Server Error
       content: {}
@@ -780,12 +806,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    not_found:
-      description: Resource not found
-      content: {}
   securitySchemes:
     BearerAuth:
       type: http

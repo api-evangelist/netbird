@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts DNS API
+  title: NetBird REST DNS API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -39,6 +39,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiDnsNameservers
+      x-operation-id-source: derived
     post:
       summary: Create a Nameserver Group
       description: Creates a Nameserver Group
@@ -68,6 +70,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiDnsNameservers
+      x-operation-id-source: derived
   /api/dns/nameservers/{nsgroupId}:
     get:
       summary: Retrieve a Nameserver Group
@@ -99,6 +103,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiDnsNameserversByNsgroupId
+      x-operation-id-source: derived
     put:
       summary: Update a Nameserver Group
       description: Update/Replace a Nameserver Group
@@ -135,9 +141,10 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: putApiDnsNameserversByNsgroupId
+      x-operation-id-source: derived
     delete:
       summary: Delete a Nameserver Group
-      description: Delete a Nameserver Group
       tags:
       - DNS
       security:
@@ -162,6 +169,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: deleteApiDnsNameserversByNsgroupId
+      x-operation-id-source: derived
   /api/dns/settings:
     get:
       summary: Retrieve DNS settings
@@ -187,6 +196,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiDnsSettings
+      x-operation-id-source: derived
     put:
       summary: Update DNS Settings
       description: Updates a DNS settings object
@@ -216,6 +227,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: putApiDnsSettings
+      x-operation-id-source: derived
 components:
   schemas:
     NameserverGroup:
@@ -229,6 +242,17 @@ components:
         required:
         - id
       - $ref: '#/components/schemas/NameserverGroupRequest'
+    DNSSettings:
+      type: object
+      properties:
+        disabled_management_groups:
+          description: Groups whose DNS management is disabled
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+      required:
+      - disabled_management_groups
     Nameserver:
       type: object
       properties:
@@ -305,29 +329,18 @@ components:
       - primary
       - domains
       - search_domains_enabled
-    DNSSettings:
-      type: object
-      properties:
-        disabled_management_groups:
-          description: Groups whose DNS management is disabled
-          type: array
-          items:
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m0
-      required:
-      - disabled_management_groups
   responses:
-    bad_request:
-      description: Bad Request
-      content: {}
     internal_error:
       description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     requires_authentication:
       description: Requires authentication
       content: {}
-    forbidden:
-      description: Forbidden
+    bad_request:
+      description: Bad Request
       content: {}
   securitySchemes:
     BearerAuth:

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts Usage API
+  title: NetBird REST Usage API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -30,14 +30,9 @@ paths:
           $ref: '#/components/responses/requires_authentication'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiIntegrationsBillingUsage
+      x-operation-id-source: derived
 components:
-  responses:
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    requires_authentication:
-      description: Requires authentication
-      content: {}
   schemas:
     UsageStats:
       type: object
@@ -67,6 +62,13 @@ components:
       - total_users
       - active_peers
       - total_peers
+  responses:
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
   securitySchemes:
     BearerAuth:
       type: http

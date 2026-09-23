@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts Tokens API
+  title: NetBird REST Tokens API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -46,6 +46,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiUsersByUserIdTokens
+      x-operation-id-source: derived
     post:
       summary: Create a Token
       description: Create a new token for a user
@@ -82,6 +84,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiUsersByUserIdTokens
+      x-operation-id-source: derived
   /api/users/{userId}/tokens/{tokenId}:
     get:
       summary: Retrieve a Token
@@ -119,6 +123,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiUsersByUserIdTokensByTokenId
+      x-operation-id-source: derived
     delete:
       summary: Delete a Token
       description: Delete a token for a user
@@ -152,21 +158,26 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: deleteApiUsersByUserIdTokensByTokenId
+      x-operation-id-source: derived
 components:
-  responses:
-    bad_request:
-      description: Bad Request
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
   schemas:
+    PersonalAccessTokenRequest:
+      type: object
+      properties:
+        name:
+          description: Name of the token
+          type: string
+          example: My first token
+        expires_in:
+          description: Expiration in days
+          type: integer
+          minimum: 1
+          maximum: 365
+          example: 30
+      required:
+      - name
+      - expires_in
     PersonalAccessToken:
       type: object
       properties:
@@ -215,22 +226,19 @@ components:
       required:
       - plain_token
       - personal_access_token
-    PersonalAccessTokenRequest:
-      type: object
-      properties:
-        name:
-          description: Name of the token
-          type: string
-          example: My first token
-        expires_in:
-          description: Expiration in days
-          type: integer
-          minimum: 1
-          maximum: 365
-          example: 30
-      required:
-      - name
-      - expires_in
+  responses:
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   securitySchemes:
     BearerAuth:
       type: http

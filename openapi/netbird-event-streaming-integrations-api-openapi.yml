@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts Event Streaming Integrations API
+  title: NetBird REST Event Streaming Integrations API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -27,9 +27,7 @@ paths:
 
         but the backend `manager.CreateIntegration` function signature shown does not directly use this `enabled` field.
 
-        The actual behavior for `enabled` during creation should be confirmed (e.g., it might have a server-side default or be handled by other logic).
-
-        '
+        The actual behavior for `enabled` during creation should be confirmed (e.g., it might have a server-side default or be handled by other logic).'
       operationId: createIntegration
       requestBody:
         required: true
@@ -145,9 +143,7 @@ paths:
 
         - The `platform` field, if provided in the body, is ignored by the backend manager function, as the platform of an existing integration is typically immutable.
 
-        - The `enabled` and `config` fields from the request body are used to update the integration.
-
-        '
+        - The `enabled` and `config` fields from the request body are used to update the integration.'
       operationId: updateIntegration
       requestBody:
         required: true
@@ -272,6 +268,14 @@ components:
             api_key: '****'
             site: datadoghq.com
             region: us-east-1
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
     CreateIntegrationRequest:
       type: object
       description: Request payload for creating a new event streaming integration. Also used as the structure for the PUT request body, but not all fields are applicable for updates (see PUT operation description).
@@ -303,14 +307,6 @@ components:
           type: boolean
           description: Specifies whether the integration is enabled. During creation (POST), this value is sent by the client, but the provided backend manager function `CreateIntegration` does not appear to use it directly, so its effect on creation should be verified. During updates (PUT), this field is used to enable or disable the integration.
           example: true
-    ErrorResponse:
-      type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
-      properties:
-        message:
-          type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
   securitySchemes:
     BearerAuth:
       type: http

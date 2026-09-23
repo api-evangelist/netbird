@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts Events API
+  title: NetBird REST Events API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -39,6 +39,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiEventsAudit
+      x-operation-id-source: derived
   /api/events/network-traffic:
     get:
       summary: List all Traffic Events
@@ -148,6 +150,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiEventsNetworkTraffic
+      x-operation-id-source: derived
   /api/events/proxy:
     get:
       summary: List all Reverse Proxy Access Logs
@@ -285,340 +289,10 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiEventsProxy
+      x-operation-id-source: derived
 components:
   schemas:
-    NetworkTrafficEndpoint:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of this endpoint (e.g., peer ID or resource ID).
-          example: ch8i4ug6lnn4g9hqv7m0
-        type:
-          type: string
-          description: Type of the endpoint object (e.g., UNKNOWN, PEER, HOST_RESOURCE).
-          example: PEER
-        name:
-          type: string
-          description: Name is the name of the endpoint object (e.g., a peer name).
-          example: My Peer
-        geo_location:
-          $ref: '#/components/schemas/NetworkTrafficLocation'
-        os:
-          type: string
-          nullable: true
-          description: Operating system of the peer, if applicable.
-          example: Linux
-        address:
-          type: string
-          description: IP address (and possibly port) in string form.
-          example: 100.64.0.10:51820
-        dns_label:
-          type: string
-          nullable: true
-          description: DNS label/name if available.
-          example: '*.mydomain.com'
-      required:
-      - id
-      - type
-      - name
-      - geo_location
-      - os
-      - address
-      - dns_label
-    NetworkTrafficEvent:
-      type: object
-      properties:
-        flow_id:
-          type: string
-          description: FlowID is the ID of the connection flow. Not unique because it can be the same for multiple events (e.g., start and end of the connection).
-          example: 61092452-b17c-4b14-b7cf-a2158c549826
-        reporter_id:
-          type: string
-          description: ID of the reporter of the event (e.g., the peer that reported the event).
-          example: ch8i4ug6lnn4g9hqv7m0
-        source:
-          $ref: '#/components/schemas/NetworkTrafficEndpoint'
-        destination:
-          $ref: '#/components/schemas/NetworkTrafficEndpoint'
-        user:
-          $ref: '#/components/schemas/NetworkTrafficUser'
-        policy:
-          $ref: '#/components/schemas/NetworkTrafficPolicy'
-        icmp:
-          $ref: '#/components/schemas/NetworkTrafficICMP'
-        protocol:
-          type: integer
-          description: Protocol is the protocol of the traffic (e.g. 1 = ICMP, 6 = TCP, 17 = UDP, etc.).
-          example: 6
-        direction:
-          type: string
-          description: Direction of the traffic (e.g. DIRECTION_UNKNOWN, INGRESS, EGRESS).
-          example: INGRESS
-        rx_bytes:
-          type: integer
-          description: Number of bytes received.
-          example: 1234
-        rx_packets:
-          type: integer
-          description: Number of packets received.
-          example: 5
-        tx_bytes:
-          type: integer
-          description: Number of bytes transmitted.
-          example: 1234
-        tx_packets:
-          type: integer
-          description: Number of packets transmitted.
-          example: 5
-        events:
-          type: array
-          description: List of events that are correlated to this flow (e.g., start, end).
-          items:
-            $ref: '#/components/schemas/NetworkTrafficSubEvent'
-      required:
-      - id
-      - flow_id
-      - reporter_id
-      - receive_timestamp
-      - source
-      - destination
-      - user
-      - policy
-      - icmp
-      - protocol
-      - direction
-      - rx_bytes
-      - rx_packets
-      - tx_bytes
-      - tx_packets
-      - events
-    NetworkTrafficSubEvent:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of the event (e.g., TYPE_UNKNOWN, TYPE_START, TYPE_END, TYPE_DROP).
-          example: TYPE_START
-        timestamp:
-          type: string
-          format: date-time
-          description: Timestamp of the event as sent by the peer.
-          example: 2025-03-20 16:23:58.125397+00:00
-      required:
-      - type
-      - timestamp
-    NetworkTrafficUser:
-      type: object
-      properties:
-        id:
-          type: string
-          description: UserID is the ID of the user that initiated the event (can be empty as not every event is user-initiated).
-          example: google-oauth2|123456789012345678901
-        email:
-          type: string
-          description: Email of the user who initiated the event (if any).
-          example: alice@netbird.io
-        name:
-          type: string
-          description: Name of the user who initiated the event (if any).
-          example: Alice Smith
-      required:
-      - id
-      - email
-      - name
-    NetworkTrafficPolicy:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of the policy that allowed this event.
-          example: ch8i4ug6lnn4g9hqv7m0
-        name:
-          type: string
-          description: Name of the policy that allowed this event.
-          example: All to All
-      required:
-      - id
-      - name
-    NetworkTrafficEventsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          description: List of network traffic events
-          items:
-            $ref: '#/components/schemas/NetworkTrafficEvent'
-        page:
-          type: integer
-          description: Current page number
-        page_size:
-          type: integer
-          description: Number of items per page
-        total_records:
-          type: integer
-          description: Total number of event records available
-        total_pages:
-          type: integer
-          description: Total number of pages available
-      required:
-      - data
-      - page
-      - page_size
-      - total_records
-      - total_pages
-    ProxyAccessLog:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the access log entry
-          example: ch8i4ug6lnn4g9hqv7m0
-        service_id:
-          type: string
-          description: ID of the service that handled the request
-          example: ch8i4ug6lnn4g9hqv7m0
-        timestamp:
-          type: string
-          format: date-time
-          description: Timestamp when the request was made
-          example: '2024-01-31T15:30:00Z'
-        method:
-          type: string
-          description: HTTP method of the request
-          example: GET
-        host:
-          type: string
-          description: Host header of the request
-          example: example.com
-        path:
-          type: string
-          description: Path of the request
-          example: /api/users
-        duration_ms:
-          type: integer
-          description: Duration of the request in milliseconds
-          example: 150
-        status_code:
-          type: integer
-          description: HTTP status code returned
-          example: 200
-        source_ip:
-          type: string
-          description: Source IP address of the request
-          example: 192.168.1.100
-        reason:
-          type: string
-          description: Reason for the request result (e.g., authentication failure)
-          example: Authentication failed
-        user_id:
-          type: string
-          description: ID of the authenticated user, if applicable
-          example: user-123
-        auth_method_used:
-          type: string
-          description: Authentication method used (e.g., password, pin, oidc)
-          example: oidc
-        country_code:
-          type: string
-          description: Country code from geolocation
-          example: US
-        city_name:
-          type: string
-          description: City name from geolocation
-          example: San Francisco
-        subdivision_code:
-          type: string
-          description: First-level administrative subdivision ISO code (e.g. state/province)
-          example: CA
-        bytes_upload:
-          type: integer
-          format: int64
-          description: Bytes uploaded (request body size)
-          example: 1024
-        bytes_download:
-          type: integer
-          format: int64
-          description: Bytes downloaded (response body size)
-          example: 8192
-        protocol:
-          type: string
-          description: 'Protocol type: http, tcp, or udp'
-          example: http
-        metadata:
-          type: object
-          additionalProperties:
-            type: string
-          description: Extra context about the request (e.g. crowdsec_verdict)
-      required:
-      - id
-      - service_id
-      - timestamp
-      - method
-      - host
-      - path
-      - duration_ms
-      - status_code
-      - bytes_upload
-      - bytes_download
-    NetworkTrafficLocation:
-      type: object
-      properties:
-        city_name:
-          type: string
-          description: Name of the city (if known).
-          example: Berlin
-        country_code:
-          type: string
-          description: ISO country code (if known).
-          example: DE
-      required:
-      - city_name
-      - country_code
-    ProxyAccessLogsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          description: List of proxy access log entries
-          items:
-            $ref: '#/components/schemas/ProxyAccessLog'
-        page:
-          type: integer
-          description: Current page number
-          example: 1
-        page_size:
-          type: integer
-          description: Number of items per page
-          example: 50
-        total_records:
-          type: integer
-          description: Total number of log records available
-          example: 523
-        total_pages:
-          type: integer
-          description: Total number of pages available
-          example: 11
-      required:
-      - data
-      - page
-      - page_size
-      - total_records
-      - total_pages
-    NetworkTrafficICMP:
-      type: object
-      properties:
-        type:
-          type: integer
-          description: ICMP type (if applicable).
-          example: 8
-        code:
-          type: integer
-          description: ICMP code (if applicable).
-          example: 0
-      required:
-      - type
-      - code
     Event:
       type: object
       properties:
@@ -787,10 +461,339 @@ components:
       - initiator_email
       - target_id
       - meta
+    ProxyAccessLog:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the access log entry
+          example: ch8i4ug6lnn4g9hqv7m0
+        service_id:
+          type: string
+          description: ID of the service that handled the request
+          example: ch8i4ug6lnn4g9hqv7m0
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp when the request was made
+          example: '2024-01-31T15:30:00Z'
+        method:
+          type: string
+          description: HTTP method of the request
+          example: GET
+        host:
+          type: string
+          description: Host header of the request
+          example: example.com
+        path:
+          type: string
+          description: Path of the request
+          example: /api/users
+        duration_ms:
+          type: integer
+          description: Duration of the request in milliseconds
+          example: 150
+        status_code:
+          type: integer
+          description: HTTP status code returned
+          example: 200
+        source_ip:
+          type: string
+          description: Source IP address of the request
+          example: 192.168.1.100
+        reason:
+          type: string
+          description: Reason for the request result (e.g., authentication failure)
+          example: Authentication failed
+        user_id:
+          type: string
+          description: ID of the authenticated user, if applicable
+          example: user-123
+        auth_method_used:
+          type: string
+          description: Authentication method used (e.g., password, pin, oidc)
+          example: oidc
+        country_code:
+          type: string
+          description: Country code from geolocation
+          example: US
+        city_name:
+          type: string
+          description: City name from geolocation
+          example: San Francisco
+        subdivision_code:
+          type: string
+          description: First-level administrative subdivision ISO code (e.g. state/province)
+          example: CA
+        bytes_upload:
+          type: integer
+          format: int64
+          description: Bytes uploaded (request body size)
+          example: 1024
+        bytes_download:
+          type: integer
+          format: int64
+          description: Bytes downloaded (response body size)
+          example: 8192
+        protocol:
+          type: string
+          description: 'Protocol type: http, tcp, or udp'
+          example: http
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Extra context about the request (e.g. crowdsec_verdict)
+      required:
+      - id
+      - service_id
+      - timestamp
+      - method
+      - host
+      - path
+      - duration_ms
+      - status_code
+      - bytes_upload
+      - bytes_download
+    NetworkTrafficEventsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of network traffic events
+          items:
+            $ref: '#/components/schemas/NetworkTrafficEvent'
+        page:
+          type: integer
+          description: Current page number
+        page_size:
+          type: integer
+          description: Number of items per page
+        total_records:
+          type: integer
+          description: Total number of event records available
+        total_pages:
+          type: integer
+          description: Total number of pages available
+      required:
+      - data
+      - page
+      - page_size
+      - total_records
+      - total_pages
+    NetworkTrafficPolicy:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the policy that allowed this event.
+          example: ch8i4ug6lnn4g9hqv7m0
+        name:
+          type: string
+          description: Name of the policy that allowed this event.
+          example: All to All
+      required:
+      - id
+      - name
+    NetworkTrafficSubEvent:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the event (e.g., TYPE_UNKNOWN, TYPE_START, TYPE_END, TYPE_DROP).
+          example: TYPE_START
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the event as sent by the peer.
+          example: 2025-03-20 16:23:58.125397+00:00
+      required:
+      - type
+      - timestamp
+    ProxyAccessLogsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of proxy access log entries
+          items:
+            $ref: '#/components/schemas/ProxyAccessLog'
+        page:
+          type: integer
+          description: Current page number
+          example: 1
+        page_size:
+          type: integer
+          description: Number of items per page
+          example: 50
+        total_records:
+          type: integer
+          description: Total number of log records available
+          example: 523
+        total_pages:
+          type: integer
+          description: Total number of pages available
+          example: 11
+      required:
+      - data
+      - page
+      - page_size
+      - total_records
+      - total_pages
+    NetworkTrafficEvent:
+      type: object
+      properties:
+        flow_id:
+          type: string
+          description: FlowID is the ID of the connection flow. Not unique because it can be the same for multiple events (e.g., start and end of the connection).
+          example: 61092452-b17c-4b14-b7cf-a2158c549826
+        reporter_id:
+          type: string
+          description: ID of the reporter of the event (e.g., the peer that reported the event).
+          example: ch8i4ug6lnn4g9hqv7m0
+        source:
+          $ref: '#/components/schemas/NetworkTrafficEndpoint'
+        destination:
+          $ref: '#/components/schemas/NetworkTrafficEndpoint'
+        user:
+          $ref: '#/components/schemas/NetworkTrafficUser'
+        policy:
+          $ref: '#/components/schemas/NetworkTrafficPolicy'
+        icmp:
+          $ref: '#/components/schemas/NetworkTrafficICMP'
+        protocol:
+          type: integer
+          description: Protocol is the protocol of the traffic (e.g. 1 = ICMP, 6 = TCP, 17 = UDP, etc.).
+          example: 6
+        direction:
+          type: string
+          description: Direction of the traffic (e.g. DIRECTION_UNKNOWN, INGRESS, EGRESS).
+          example: INGRESS
+        rx_bytes:
+          type: integer
+          description: Number of bytes received.
+          example: 1234
+        rx_packets:
+          type: integer
+          description: Number of packets received.
+          example: 5
+        tx_bytes:
+          type: integer
+          description: Number of bytes transmitted.
+          example: 1234
+        tx_packets:
+          type: integer
+          description: Number of packets transmitted.
+          example: 5
+        events:
+          type: array
+          description: List of events that are correlated to this flow (e.g., start, end).
+          items:
+            $ref: '#/components/schemas/NetworkTrafficSubEvent'
+      required:
+      - id
+      - flow_id
+      - reporter_id
+      - receive_timestamp
+      - source
+      - destination
+      - user
+      - policy
+      - icmp
+      - protocol
+      - direction
+      - rx_bytes
+      - rx_packets
+      - tx_bytes
+      - tx_packets
+      - events
+    NetworkTrafficUser:
+      type: object
+      properties:
+        id:
+          type: string
+          description: UserID is the ID of the user that initiated the event (can be empty as not every event is user-initiated).
+          example: google-oauth2|123456789012345678901
+        email:
+          type: string
+          description: Email of the user who initiated the event (if any).
+          example: alice@netbird.io
+        name:
+          type: string
+          description: Name of the user who initiated the event (if any).
+          example: Alice Smith
+      required:
+      - id
+      - email
+      - name
+    NetworkTrafficLocation:
+      type: object
+      properties:
+        city_name:
+          type: string
+          description: Name of the city (if known).
+          example: Berlin
+        country_code:
+          type: string
+          description: ISO country code (if known).
+          example: DE
+      required:
+      - city_name
+      - country_code
+    NetworkTrafficEndpoint:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of this endpoint (e.g., peer ID or resource ID).
+          example: ch8i4ug6lnn4g9hqv7m0
+        type:
+          type: string
+          description: Type of the endpoint object (e.g., UNKNOWN, PEER, HOST_RESOURCE).
+          example: PEER
+        name:
+          type: string
+          description: Name is the name of the endpoint object (e.g., a peer name).
+          example: My Peer
+        geo_location:
+          $ref: '#/components/schemas/NetworkTrafficLocation'
+        os:
+          type: string
+          nullable: true
+          description: Operating system of the peer, if applicable.
+          example: Linux
+        address:
+          type: string
+          description: IP address (and possibly port) in string form.
+          example: 100.64.0.10:51820
+        dns_label:
+          type: string
+          nullable: true
+          description: DNS label/name if available.
+          example: '*.mydomain.com'
+      required:
+      - id
+      - type
+      - name
+      - geo_location
+      - os
+      - address
+      - dns_label
+    NetworkTrafficICMP:
+      type: object
+      properties:
+        type:
+          type: integer
+          description: ICMP type (if applicable).
+          example: 8
+        code:
+          type: integer
+          description: ICMP code (if applicable).
+          example: 0
+      required:
+      - type
+      - code
   responses:
-    bad_request:
-      description: Bad Request
-      content: {}
     internal_error:
       description: Internal Server Error
       content: {}
@@ -799,6 +802,9 @@ components:
       content: {}
     forbidden:
       description: Forbidden
+      content: {}
+    bad_request:
+      description: Bad Request
       content: {}
   securitySchemes:
     BearerAuth:

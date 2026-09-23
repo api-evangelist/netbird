@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts AWS Marketplace API
+  title: NetBird REST AWS Marketplace API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -16,7 +16,7 @@ tags:
 paths:
   /api/integrations/billing/aws/marketplace/activate:
     post:
-      summary: Activate AWS Marketplace subscription.
+      summary: Activate AWS Marketplace subscription
       tags:
       - AWS Marketplace
       requestBody:
@@ -41,9 +41,11 @@ paths:
           $ref: '#/components/responses/requires_authentication'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiIntegrationsBillingAwsMarketplaceActivate
+      x-operation-id-source: derived
   /api/integrations/billing/aws/marketplace/enrich:
     post:
-      summary: Enrich AWS Marketplace subscription with Account ID.
+      summary: Enrich AWS Marketplace subscription with Account ID
       tags:
       - AWS Marketplace
       requestBody:
@@ -68,6 +70,8 @@ paths:
           $ref: '#/components/responses/requires_authentication'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiIntegrationsBillingAwsMarketplaceEnrich
+      x-operation-id-source: derived
 components:
   responses:
     internal_error:

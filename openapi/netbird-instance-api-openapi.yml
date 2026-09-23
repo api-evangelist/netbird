@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts Instance API
+  title: NetBird REST Instance API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -29,6 +29,8 @@ paths:
                 $ref: '#/components/schemas/InstanceStatus'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiInstance
+      x-operation-id-source: derived
   /api/instance/version:
     get:
       summary: Get Version Info
@@ -51,15 +53,15 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiInstanceVersion
+      x-operation-id-source: derived
   /api/setup:
     post:
       summary: Setup Instance
       description: 'Creates the initial admin user for the instance. This endpoint does not require authentication but only works when setup is required (no accounts exist and embedded IDP is enabled).
 
 
-        When the management server is started with `NB_SETUP_PAT_ENABLED=true` and the request includes `create_pat: true`, the endpoint also provisions the NetBird account for the new owner user and returns the plain text Personal Access Token in `personal_access_token`. The optional `pat_expire_in` value applies only when `create_pat` is true and defaults to 1 day when omitted. If a post-user step fails, setup-created resources are rolled back when safe; if account cleanup fails, the owner user is left in place to avoid leaving an account without its admin user.
-
-        '
+        When the management server is started with `NB_SETUP_PAT_ENABLED=true` and the request includes `create_pat: true`, the endpoint also provisions the NetBird account for the new owner user and returns the plain text Personal Access Token in `personal_access_token`. The optional `pat_expire_in` value applies only when `create_pat` is true and defaults to 1 day when omitted. If a post-user step fails, setup-created resources are rolled back when safe; if account cleanup fails, the owner user is left in place to avoid leaving an account without its admin user.'
       tags:
       - Instance
       security: []
@@ -90,42 +92,10 @@ paths:
           content: {}
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiSetup
+      x-operation-id-source: derived
 components:
-  responses:
-    bad_request:
-      description: Bad Request
-      content: {}
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
   schemas:
-    SetupResponse:
-      type: object
-      description: Response after successful instance setup
-      properties:
-        user_id:
-          description: The ID of the created user
-          type: string
-          example: abc123def456
-        email:
-          description: Email address of the created user
-          type: string
-          example: admin@example.com
-        personal_access_token:
-          description: Plain text Personal Access Token created during setup. Present only when create_pat was requested and the NB_SETUP_PAT_ENABLED feature was enabled on the server.
-          type: string
-          format: password
-          readOnly: true
-          example: nbp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-      required:
-      - user_id
-      - email
     InstanceStatus:
       type: object
       description: Instance status information
@@ -136,6 +106,29 @@ components:
           example: true
       required:
       - setup_required
+    InstanceVersionInfo:
+      type: object
+      description: Version information for NetBird components
+      properties:
+        management_current_version:
+          description: The current running version of the management server
+          type: string
+          example: 0.35.0
+        dashboard_available_version:
+          description: The latest available version of the dashboard (from GitHub releases)
+          type: string
+          example: 2.10.0
+        management_available_version:
+          description: The latest available version of the management server (from GitHub releases)
+          type: string
+          example: 0.35.0
+        management_update_available:
+          description: Indicates if a newer management version is available
+          type: boolean
+          example: true
+      required:
+      - management_current_version
+      - management_update_available
     SetupRequest:
       type: object
       description: Request to set up the initial admin user
@@ -169,29 +162,40 @@ components:
       - email
       - password
       - name
-    InstanceVersionInfo:
+    SetupResponse:
       type: object
-      description: Version information for NetBird components
+      description: Response after successful instance setup
       properties:
-        management_current_version:
-          description: The current running version of the management server
+        user_id:
+          description: The ID of the created user
           type: string
-          example: 0.35.0
-        dashboard_available_version:
-          description: The latest available version of the dashboard (from GitHub releases)
+          example: abc123def456
+        email:
+          description: Email address of the created user
           type: string
-          example: 2.10.0
-        management_available_version:
-          description: The latest available version of the management server (from GitHub releases)
+          example: admin@example.com
+        personal_access_token:
+          description: Plain text Personal Access Token created during setup. Present only when create_pat was requested and the NB_SETUP_PAT_ENABLED feature was enabled on the server.
           type: string
-          example: 0.35.0
-        management_update_available:
-          description: Indicates if a newer management version is available
-          type: boolean
-          example: true
+          format: password
+          readOnly: true
+          example: nbp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       required:
-      - management_current_version
-      - management_update_available
+      - user_id
+      - email
+  responses:
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   securitySchemes:
     BearerAuth:
       type: http

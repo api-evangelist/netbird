@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts Peers API
+  title: NetBird REST Peers API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -50,6 +50,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiPeers
+      x-operation-id-source: derived
   /api/peers/{peerId}:
     get:
       summary: Retrieve a Peer
@@ -81,6 +83,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiPeersByPeerId
+      x-operation-id-source: derived
     put:
       summary: Update a Peer
       description: Update information about a peer
@@ -117,6 +121,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: putApiPeersByPeerId
+      x-operation-id-source: derived
     delete:
       summary: Delete a Peer
       description: Delete a peer
@@ -144,6 +150,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: deleteApiPeersByPeerId
+      x-operation-id-source: derived
   /api/peers/{peerId}/accessible-peers:
     get:
       summary: List accessible Peers
@@ -177,6 +185,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiPeersByPeerIdAccessiblePeers
+      x-operation-id-source: derived
   /api/peers/{peerId}/temporary-access:
     post:
       summary: Create a Temporary Access Peer
@@ -214,21 +224,42 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiPeersByPeerIdTemporaryAccess
+      x-operation-id-source: derived
 components:
-  responses:
-    bad_request:
-      description: Bad Request
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
   schemas:
+    GroupMinimum:
+      type: object
+      properties:
+        id:
+          description: Group ID
+          type: string
+          example: ch8i4ug6lnn4g9hqv7m0
+        name:
+          description: Group Name identifier
+          type: string
+          example: devs
+        peers_count:
+          description: Count of peers associated to the group
+          type: integer
+          example: 2
+        resources_count:
+          description: Count of resources associated to the group
+          type: integer
+          example: 5
+        issued:
+          description: How the group was issued (api, integration, jwt)
+          type: string
+          enum:
+          - api
+          - integration
+          - jwt
+          example: api
+      required:
+      - id
+      - name
+      - peers_count
+      - resources_count
     AccessiblePeer:
       allOf:
       - $ref: '#/components/schemas/PeerMinimum'
@@ -277,88 +308,6 @@ components:
         - geoname_id
         - connected
         - last_seen
-    PeerRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          example: stage-host-1
-        ssh_enabled:
-          type: boolean
-          example: true
-        login_expiration_enabled:
-          type: boolean
-          example: false
-        inactivity_expiration_enabled:
-          type: boolean
-          example: false
-        approval_required:
-          description: (Cloud only) Indicates whether peer needs approval
-          type: boolean
-          example: true
-        ip:
-          description: Peer's IP address
-          type: string
-          format: ipv4
-          example: 100.64.0.15
-      required:
-      - name
-      - ssh_enabled
-      - login_expiration_enabled
-      - inactivity_expiration_enabled
-    PeerTemporaryAccessResponse:
-      type: object
-      properties:
-        name:
-          description: Peer's hostname
-          type: string
-          example: temp-host-1
-        id:
-          description: Peer ID
-          type: string
-          example: chacbco6lnnbn6cg5s90
-        rules:
-          description: List of temporary access rules
-          type: array
-          items:
-            type: string
-            example: tcp/80
-      required:
-      - name
-      - id
-      - rules
-    GroupMinimum:
-      type: object
-      properties:
-        id:
-          description: Group ID
-          type: string
-          example: ch8i4ug6lnn4g9hqv7m0
-        name:
-          description: Group Name identifier
-          type: string
-          example: devs
-        peers_count:
-          description: Count of peers associated to the group
-          type: integer
-          example: 2
-        resources_count:
-          description: Count of resources associated to the group
-          type: integer
-          example: 5
-        issued:
-          description: How the group was issued (api, integration, jwt)
-          type: string
-          enum:
-          - api
-          - integration
-          - jwt
-          example: api
-      required:
-      - id
-      - name
-      - peers_count
-      - resources_count
     PeerMinimum:
       type: object
       properties:
@@ -373,53 +322,6 @@ components:
       required:
       - id
       - name
-    PeerLocalFlags:
-      type: object
-      properties:
-        rosenpass_enabled:
-          description: Indicates whether Rosenpass is enabled on this peer
-          type: boolean
-          example: true
-        rosenpass_permissive:
-          description: Indicates whether Rosenpass is in permissive mode or not
-          type: boolean
-          example: false
-        server_ssh_allowed:
-          description: Indicates whether SSH access this peer is allowed or not
-          type: boolean
-          example: true
-        disable_client_routes:
-          description: Indicates whether client routes are disabled on this peer or not
-          type: boolean
-          example: false
-        disable_server_routes:
-          description: Indicates whether server routes are disabled on this peer or not
-          type: boolean
-          example: false
-        disable_dns:
-          description: Indicates whether DNS management is disabled on this peer or not
-          type: boolean
-          example: false
-        disable_firewall:
-          description: Indicates whether firewall management is disabled on this peer or not
-          type: boolean
-          example: false
-        block_lan_access:
-          description: Indicates whether LAN access is blocked on this peer when used as a routing peer
-          type: boolean
-          example: false
-        block_inbound:
-          description: Indicates whether inbound traffic is blocked on this peer
-          type: boolean
-          example: false
-        lazy_connection_enabled:
-          description: Indicates whether lazy connection is enabled on this peer
-          type: boolean
-          example: false
-    CountryCode:
-      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
-      type: string
-      example: DE
     Peer:
       allOf:
       - $ref: '#/components/schemas/PeerMinimum'
@@ -558,6 +460,56 @@ components:
         - serial_number
         - extra_dns_labels
         - ephemeral
+    CityName:
+      description: Commonly used English name of the city
+      type: string
+      example: Berlin
+    PeerBatch:
+      allOf:
+      - $ref: '#/components/schemas/Peer'
+      - type: object
+        properties:
+          created_at:
+            description: Peer creation date (UTC)
+            type: string
+            format: date-time
+            example: '2023-05-05T09:00:35.477782Z'
+          accessible_peers_count:
+            description: Number of accessible peers
+            type: integer
+            example: 5
+        required:
+        - created_at
+        - accessible_peers_count
+    PeerRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: stage-host-1
+        ssh_enabled:
+          type: boolean
+          example: true
+        login_expiration_enabled:
+          type: boolean
+          example: false
+        inactivity_expiration_enabled:
+          type: boolean
+          example: false
+        approval_required:
+          description: (Cloud only) Indicates whether peer needs approval
+          type: boolean
+          example: true
+        ip:
+          description: Peer's IP address
+          type: string
+          format: ipv4
+          example: 100.64.0.15
+      required:
+      - name
+      - ssh_enabled
+      - login_expiration_enabled
+      - inactivity_expiration_enabled
     PeerTemporaryAccessRequest:
       type: object
       properties:
@@ -579,27 +531,87 @@ components:
       - name
       - wg_pub_key
       - rules
-    PeerBatch:
-      allOf:
-      - $ref: '#/components/schemas/Peer'
-      - type: object
-        properties:
-          created_at:
-            description: Peer creation date (UTC)
-            type: string
-            format: date-time
-            example: '2023-05-05T09:00:35.477782Z'
-          accessible_peers_count:
-            description: Number of accessible peers
-            type: integer
-            example: 5
-        required:
-        - created_at
-        - accessible_peers_count
-    CityName:
-      description: Commonly used English name of the city
+    CountryCode:
+      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
       type: string
-      example: Berlin
+      example: DE
+    PeerLocalFlags:
+      type: object
+      properties:
+        rosenpass_enabled:
+          description: Indicates whether Rosenpass is enabled on this peer
+          type: boolean
+          example: true
+        rosenpass_permissive:
+          description: Indicates whether Rosenpass is in permissive mode or not
+          type: boolean
+          example: false
+        server_ssh_allowed:
+          description: Indicates whether SSH access this peer is allowed or not
+          type: boolean
+          example: true
+        disable_client_routes:
+          description: Indicates whether client routes are disabled on this peer or not
+          type: boolean
+          example: false
+        disable_server_routes:
+          description: Indicates whether server routes are disabled on this peer or not
+          type: boolean
+          example: false
+        disable_dns:
+          description: Indicates whether DNS management is disabled on this peer or not
+          type: boolean
+          example: false
+        disable_firewall:
+          description: Indicates whether firewall management is disabled on this peer or not
+          type: boolean
+          example: false
+        block_lan_access:
+          description: Indicates whether LAN access is blocked on this peer when used as a routing peer
+          type: boolean
+          example: false
+        block_inbound:
+          description: Indicates whether inbound traffic is blocked on this peer
+          type: boolean
+          example: false
+        lazy_connection_enabled:
+          description: Indicates whether lazy connection is enabled on this peer
+          type: boolean
+          example: false
+    PeerTemporaryAccessResponse:
+      type: object
+      properties:
+        name:
+          description: Peer's hostname
+          type: string
+          example: temp-host-1
+        id:
+          description: Peer ID
+          type: string
+          example: chacbco6lnnbn6cg5s90
+        rules:
+          description: List of temporary access rules
+          type: array
+          items:
+            type: string
+            example: tcp/80
+      required:
+      - name
+      - id
+      - rules
+  responses:
+    forbidden:
+      description: Forbidden
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
   securitySchemes:
     BearerAuth:
       type: http

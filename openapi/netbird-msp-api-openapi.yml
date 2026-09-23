@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts MSP API
+  title: NetBird REST MSP API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -32,6 +32,8 @@ paths:
           $ref: '#/components/responses/requires_authentication'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiIntegrationsMspTenants
+      x-operation-id-source: derived
     post:
       summary: Create MSP tenant
       tags:
@@ -55,6 +57,8 @@ paths:
           $ref: '#/components/responses/requires_authentication'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiIntegrationsMspTenants
+      x-operation-id-source: derived
   /api/integrations/msp/tenants/{id}:
     put:
       summary: Update MSP tenant
@@ -86,6 +90,8 @@ paths:
           $ref: '#/components/responses/requires_authentication'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: putApiIntegrationsMspTenantsById
+      x-operation-id-source: derived
   /api/integrations/msp/tenants/{id}/unlink:
     post:
       summary: Unlink a tenant
@@ -122,6 +128,8 @@ paths:
           description: The tenant was not found
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiIntegrationsMspTenantsByIdUnlink
+      x-operation-id-source: derived
   /api/integrations/msp/tenants/{id}/dns:
     post:
       summary: Verify a tenant domain DNS challenge
@@ -151,6 +159,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DNSChallengeResponse'
+      operationId: postApiIntegrationsMspTenantsByIdDns
+      x-operation-id-source: derived
   /api/integrations/msp/tenants/{id}/subscription:
     post:
       summary: Create subscription for Tenant
@@ -187,6 +197,8 @@ paths:
           description: The tenant was not found
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiIntegrationsMspTenantsByIdSubscription
+      x-operation-id-source: derived
   /api/integrations/msp/tenants/{id}/invite:
     post:
       summary: Invite existing account as a Tenant to the MSP account
@@ -214,6 +226,8 @@ paths:
           description: The tenant was not found
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiIntegrationsMspTenantsByIdInvite
+      x-operation-id-source: derived
     put:
       summary: Response by the invited Tenant account owner
       tags:
@@ -251,17 +265,24 @@ paths:
           description: The tenant was not found
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: putApiIntegrationsMspTenantsByIdInvite
+      x-operation-id-source: derived
 components:
   schemas:
-    DNSChallengeResponse:
+    TenantGroupResponse:
       type: object
       properties:
-        dns_challenge:
+        id:
           type: string
-          description: The DNS challenge to set in a TXT record
-          example: YXNkYSBkYXNhc2Rhc2RhIGFzZGFzZDJhc2QyNDUxNQ
+          description: The Group ID
+          example: ch8i4ug6lnn4g9hqv7m0
+        role:
+          type: string
+          description: The Role name
+          example: admin
       required:
-      - dns_challenge
+      - id
+      - role
     UpdateTenantRequest:
       type: object
       properties:
@@ -281,20 +302,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TenantResponse'
-    TenantGroupResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Group ID
-          example: ch8i4ug6lnn4g9hqv7m0
-        role:
-          type: string
-          description: The Role name
-          example: admin
-      required:
-      - id
-      - role
     TenantResponse:
       type: object
       properties:
@@ -377,15 +384,24 @@ components:
       - name
       - domain
       - groups
+    DNSChallengeResponse:
+      type: object
+      properties:
+        dns_challenge:
+          type: string
+          description: The DNS challenge to set in a TXT record
+          example: YXNkYSBkYXNhc2Rhc2RhIGFzZGFzZDJhc2QyNDUxNQ
+      required:
+      - dns_challenge
   responses:
-    bad_request:
-      description: Bad Request
-      content: {}
     internal_error:
       description: Internal Server Error
       content: {}
     requires_authentication:
       description: Requires authentication
+      content: {}
+    bad_request:
+      description: Bad Request
       content: {}
   securitySchemes:
     BearerAuth:

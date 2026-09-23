@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts Ingress Ports API
+  title: NetBird REST Ingress Ports API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -53,6 +53,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiPeersByPeerIdIngressPorts
+      x-operation-id-source: derived
     post:
       x-cloud-only: true
       summary: Create a Port Allocation
@@ -90,6 +92,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiPeersByPeerIdIngressPorts
+      x-operation-id-source: derived
   /api/peers/{peerId}/ingress/ports/{allocationId}:
     get:
       x-cloud-only: true
@@ -128,6 +132,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiPeersByPeerIdIngressPortsByAllocationId
+      x-operation-id-source: derived
     put:
       x-cloud-only: true
       summary: Update a Port Allocation
@@ -171,6 +177,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: putApiPeersByPeerIdIngressPortsByAllocationId
+      x-operation-id-source: derived
     delete:
       x-cloud-only: true
       summary: Delete a Port Allocation
@@ -205,6 +213,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: deleteApiPeersByPeerIdIngressPortsByAllocationId
+      x-operation-id-source: derived
   /api/ingress/peers:
     get:
       x-cloud-only: true
@@ -232,6 +242,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiIngressPeers
+      x-operation-id-source: derived
     post:
       x-cloud-only: true
       summary: Create a Ingress Peer
@@ -262,6 +274,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: postApiIngressPeers
+      x-operation-id-source: derived
   /api/ingress/peers/{ingressPeerId}:
     get:
       x-cloud-only: true
@@ -294,6 +308,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiIngressPeersByIngressPeerId
+      x-operation-id-source: derived
     put:
       x-cloud-only: true
       summary: Update a Ingress Peer
@@ -331,6 +347,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: putApiIngressPeersByIngressPeerId
+      x-operation-id-source: derived
     delete:
       x-cloud-only: true
       summary: Delete a Ingress Peer
@@ -359,41 +377,46 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: deleteApiIngressPeersByIngressPeerId
+      x-operation-id-source: derived
 components:
   schemas:
-    IngressPeerUpdateRequest:
+    IngressPortAllocationRequest:
       type: object
       properties:
-        enabled:
-          description: Defines if an ingress peer is enabled
-          type: boolean
-          example: true
-        fallback:
-          description: Defines if an ingress peer can be used as a fallback if no ingress peer can be found in the region of the forwarded peer
-          type: boolean
-          example: true
-      required:
-      - enabled
-      - fallback
-    IngressPeerCreateRequest:
-      type: object
-      properties:
-        peer_id:
-          description: ID of the peer that is used as an ingress peer
+        name:
+          description: Name of the ingress port allocation
           type: string
-          example: ch8i4ug6lnn4g9hqv7m0
+          example: Ingress Port Allocation 1
         enabled:
-          description: Defines if an ingress peer is enabled
+          description: Indicates if an ingress port allocation is enabled
           type: boolean
           example: true
-        fallback:
-          description: Defines if an ingress peer can be used as a fallback if no ingress peer can be found in the region of the forwarded peer
-          type: boolean
-          example: true
+        port_ranges:
+          description: List of port ranges that are forwarded by the ingress peer
+          type: array
+          items:
+            $ref: '#/components/schemas/IngressPortAllocationRequestPortRange'
+        direct_port:
+          description: Direct port allocation
+          $ref: '#/components/schemas/IngressPortAllocationRequestDirectPort'
       required:
-      - peer_id
+      - name
       - enabled
-      - fallback
+    AvailablePorts:
+      type: object
+      properties:
+        tcp:
+          description: Number of available TCP  ports left on the ingress peer
+          type: integer
+          example: 45765
+        udp:
+          description: Number of available UDP ports left on the ingress peer
+          type: integer
+          example: 50000
+      required:
+      - tcp
+      - udp
     IngressPortAllocationPortMapping:
       type: object
       properties:
@@ -427,20 +450,6 @@ components:
       - ingress_start
       - ingress_end
       - protocol
-    AvailablePorts:
-      type: object
-      properties:
-        tcp:
-          description: Number of available TCP  ports left on the ingress peer
-          type: integer
-          example: 45765
-        udp:
-          description: Number of available UDP ports left on the ingress peer
-          type: integer
-          example: 50000
-      required:
-      - tcp
-      - udp
     IngressPortAllocation:
       type: object
       properties:
@@ -481,6 +490,24 @@ components:
       - enabled
       - ingress_ip
       - port_range_mappings
+    IngressPortAllocationRequestDirectPort:
+      type: object
+      properties:
+        count:
+          description: The number of ports to be forwarded
+          type: integer
+          example: 5
+        protocol:
+          description: The protocol accepted by the port
+          type: string
+          enum:
+          - tcp
+          - udp
+          - tcp/udp
+          example: udp
+      required:
+      - count
+      - protocol
     IngressPortAllocationRequestPortRange:
       type: object
       properties:
@@ -504,6 +531,39 @@ components:
       - start
       - end
       - protocol
+    IngressPeerCreateRequest:
+      type: object
+      properties:
+        peer_id:
+          description: ID of the peer that is used as an ingress peer
+          type: string
+          example: ch8i4ug6lnn4g9hqv7m0
+        enabled:
+          description: Defines if an ingress peer is enabled
+          type: boolean
+          example: true
+        fallback:
+          description: Defines if an ingress peer can be used as a fallback if no ingress peer can be found in the region of the forwarded peer
+          type: boolean
+          example: true
+      required:
+      - peer_id
+      - enabled
+      - fallback
+    IngressPeerUpdateRequest:
+      type: object
+      properties:
+        enabled:
+          description: Defines if an ingress peer is enabled
+          type: boolean
+          example: true
+        fallback:
+          description: Defines if an ingress peer can be used as a fallback if no ingress peer can be found in the region of the forwarded peer
+          type: boolean
+          example: true
+      required:
+      - enabled
+      - fallback
     IngressPeer:
       type: object
       properties:
@@ -546,58 +606,18 @@ components:
       - connected
       - fallback
       - region
-    IngressPortAllocationRequest:
-      type: object
-      properties:
-        name:
-          description: Name of the ingress port allocation
-          type: string
-          example: Ingress Port Allocation 1
-        enabled:
-          description: Indicates if an ingress port allocation is enabled
-          type: boolean
-          example: true
-        port_ranges:
-          description: List of port ranges that are forwarded by the ingress peer
-          type: array
-          items:
-            $ref: '#/components/schemas/IngressPortAllocationRequestPortRange'
-        direct_port:
-          description: Direct port allocation
-          $ref: '#/components/schemas/IngressPortAllocationRequestDirectPort'
-      required:
-      - name
-      - enabled
-    IngressPortAllocationRequestDirectPort:
-      type: object
-      properties:
-        count:
-          description: The number of ports to be forwarded
-          type: integer
-          example: 5
-        protocol:
-          description: The protocol accepted by the port
-          type: string
-          enum:
-          - tcp
-          - udp
-          - tcp/udp
-          example: udp
-      required:
-      - count
-      - protocol
   responses:
-    bad_request:
-      description: Bad Request
-      content: {}
     internal_error:
       description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     requires_authentication:
       description: Requires authentication
       content: {}
-    forbidden:
-      description: Forbidden
+    bad_request:
+      description: Bad Request
       content: {}
   securitySchemes:
     BearerAuth:

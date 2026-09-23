@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: NetBird REST Accounts Policies API
+  title: NetBird REST Policies API
   description: API to manipulate groups, rules, policies and retrieve information about peers and users
   version: 0.0.1
 servers:
@@ -39,6 +39,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiPolicies
+      x-operation-id-source: derived
     post:
       summary: Create a Policy
       description: Creates a policy
@@ -60,6 +62,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Policy'
+      operationId: postApiPolicies
+      x-operation-id-source: derived
   /api/policies/{policyId}:
     get:
       summary: Retrieve a Policy
@@ -91,6 +95,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: getApiPoliciesByPolicyId
+      x-operation-id-source: derived
     put:
       summary: Update a Policy
       description: Update/Replace a Policy
@@ -127,6 +133,8 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: putApiPoliciesByPolicyId
+      x-operation-id-source: derived
     delete:
       summary: Delete a Policy
       description: Delete a policy
@@ -154,9 +162,11 @@ paths:
           $ref: '#/components/responses/forbidden'
         '500':
           $ref: '#/components/responses/internal_error'
+      operationId: deleteApiPoliciesByPolicyId
+      x-operation-id-source: derived
 components:
   schemas:
-    PolicyRule:
+    PolicyRuleUpdate:
       allOf:
       - $ref: '#/components/schemas/PolicyRuleMinimum'
       - type: object
@@ -169,7 +179,8 @@ components:
             description: Policy rule source group IDs
             type: array
             items:
-              $ref: '#/components/schemas/GroupMinimum'
+              type: string
+              example: ch8i4ug6lnn4g9hqv797
           sourceResource:
             description: Policy rule source resource that the rule is applied to
             $ref: '#/components/schemas/Resource'
@@ -177,64 +188,11 @@ components:
             description: Policy rule destination group IDs
             type: array
             items:
-              $ref: '#/components/schemas/GroupMinimum'
+              type: string
+              example: ch8i4ug6lnn4g9h7v7m0
           destinationResource:
             description: Policy rule destination resource that the rule is applied to
             $ref: '#/components/schemas/Resource'
-    NetworkResourceType:
-      description: Network resource type based of the address
-      type: string
-      enum:
-      - host
-      - subnet
-      - domain
-      example: host
-    PolicyCreate:
-      allOf:
-      - $ref: '#/components/schemas/PolicyMinimum'
-      - type: object
-        properties:
-          source_posture_checks:
-            description: Posture checks ID's applied to policy source groups
-            type: array
-            items:
-              type: string
-              example: chacdk86lnnboviihd70
-          rules:
-            description: Policy rule object for policy UI editor
-            type: array
-            items:
-              $ref: '#/components/schemas/PolicyRuleUpdate'
-        required:
-        - rules
-    RulePortRange:
-      description: Policy rule affected ports range
-      type: object
-      properties:
-        start:
-          description: The starting port of the range
-          type: integer
-          example: 80
-        end:
-          description: The ending port of the range
-          type: integer
-          example: 320
-      required:
-      - start
-      - end
-    Resource:
-      type: object
-      properties:
-        id:
-          description: ID of the resource
-          type: string
-          example: chacdk86lnnboviihd7g
-        type:
-          description: Type of the resource
-          $ref: '#/components/schemas/ResourceType'
-      required:
-      - id
-      - type
     Policy:
       allOf:
       - $ref: '#/components/schemas/PolicyMinimum'
@@ -258,13 +216,6 @@ components:
         required:
         - rules
         - source_posture_checks
-    ResourceType:
-      allOf:
-      - $ref: '#/components/schemas/NetworkResourceType'
-      - type: string
-        enum:
-        - peer
-        example: peer
     GroupMinimum:
       type: object
       properties:
@@ -297,7 +248,7 @@ components:
       - name
       - peers_count
       - resources_count
-    PolicyUpdate:
+    PolicyCreate:
       allOf:
       - $ref: '#/components/schemas/PolicyMinimum'
       - type: object
@@ -315,6 +266,41 @@ components:
               $ref: '#/components/schemas/PolicyRuleUpdate'
         required:
         - rules
+    ResourceType:
+      allOf:
+      - $ref: '#/components/schemas/NetworkResourceType'
+      - type: string
+        enum:
+        - peer
+        example: peer
+    RulePortRange:
+      description: Policy rule affected ports range
+      type: object
+      properties:
+        start:
+          description: The starting port of the range
+          type: integer
+          example: 80
+        end:
+          description: The ending port of the range
+          type: integer
+          example: 320
+      required:
+      - start
+      - end
+    Resource:
+      type: object
+      properties:
+        id:
+          description: ID of the resource
+          type: string
+          example: chacdk86lnnboviihd7g
+        type:
+          description: Type of the resource
+          $ref: '#/components/schemas/ResourceType'
+      required:
+      - id
+      - type
     PolicyRuleMinimum:
       type: object
       properties:
@@ -376,6 +362,32 @@ components:
       - bidirectional
       - protocol
       - action
+    PolicyUpdate:
+      allOf:
+      - $ref: '#/components/schemas/PolicyMinimum'
+      - type: object
+        properties:
+          source_posture_checks:
+            description: Posture checks ID's applied to policy source groups
+            type: array
+            items:
+              type: string
+              example: chacdk86lnnboviihd70
+          rules:
+            description: Policy rule object for policy UI editor
+            type: array
+            items:
+              $ref: '#/components/schemas/PolicyRuleUpdate'
+        required:
+        - rules
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
     PolicyMinimum:
       type: object
       properties:
@@ -394,7 +406,7 @@ components:
       required:
       - name
       - enabled
-    PolicyRuleUpdate:
+    PolicyRule:
       allOf:
       - $ref: '#/components/schemas/PolicyRuleMinimum'
       - type: object
@@ -407,8 +419,7 @@ components:
             description: Policy rule source group IDs
             type: array
             items:
-              type: string
-              example: ch8i4ug6lnn4g9hqv797
+              $ref: '#/components/schemas/GroupMinimum'
           sourceResource:
             description: Policy rule source resource that the rule is applied to
             $ref: '#/components/schemas/Resource'
@@ -416,23 +427,22 @@ components:
             description: Policy rule destination group IDs
             type: array
             items:
-              type: string
-              example: ch8i4ug6lnn4g9h7v7m0
+              $ref: '#/components/schemas/GroupMinimum'
           destinationResource:
             description: Policy rule destination resource that the rule is applied to
             $ref: '#/components/schemas/Resource'
   responses:
-    bad_request:
-      description: Bad Request
-      content: {}
     internal_error:
       description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     requires_authentication:
       description: Requires authentication
       content: {}
-    forbidden:
-      description: Forbidden
+    bad_request:
+      description: Bad Request
       content: {}
   securitySchemes:
     BearerAuth:
