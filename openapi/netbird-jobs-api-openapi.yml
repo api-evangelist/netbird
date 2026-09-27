@@ -129,57 +129,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    BundleResult:
-      type: object
-      properties:
-        upload_key:
-          type: string
-          example: upload_key_123
-          nullable: true
-    JobResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        completed_at:
-          type: string
-          format: date-time
-          nullable: true
-        triggered_by:
-          type: string
-        status:
-          type: string
-          enum:
-          - pending
-          - succeeded
-          - failed
-        failed_reason:
-          type: string
-          nullable: true
-        workload:
-          $ref: '#/components/schemas/WorkloadResponse'
-      required:
-      - id
-      - created_at
-      - status
-      - triggered_by
-      - workload
-    BundleWorkloadResponse:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/WorkloadType'
-        parameters:
-          $ref: '#/components/schemas/BundleParameters'
-        result:
-          $ref: '#/components/schemas/BundleResult'
-      required:
-      - type
-      - parameters
-      - result
     BundleParameters:
       type: object
       description: These parameters control what gets included in the bundle and how it is processed.
@@ -216,6 +165,26 @@ components:
         propertyName: type
         mapping:
           bundle: '#/components/schemas/BundleWorkloadRequest'
+    BundleWorkloadResponse:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/WorkloadType'
+        parameters:
+          $ref: '#/components/schemas/BundleParameters'
+        result:
+          $ref: '#/components/schemas/BundleResult'
+      required:
+      - type
+      - parameters
+      - result
+    WorkloadResponse:
+      oneOf:
+      - $ref: '#/components/schemas/BundleWorkloadResponse'
+      discriminator:
+        propertyName: type
+        mapping:
+          bundle: '#/components/schemas/BundleWorkloadResponse'
     BundleWorkloadRequest:
       type: object
       properties:
@@ -226,6 +195,13 @@ components:
       required:
       - type
       - parameters
+    JobRequest:
+      type: object
+      properties:
+        workload:
+          $ref: '#/components/schemas/WorkloadRequest'
+      required:
+      - workload
     WorkloadType:
       type: string
       description: 'Identifies the type of workload the job will execute.
@@ -236,29 +212,53 @@ components:
       enum:
       - bundle
       example: bundle
-    JobRequest:
+    JobResponse:
       type: object
       properties:
+        id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+          nullable: true
+        triggered_by:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - succeeded
+          - failed
+        failed_reason:
+          type: string
+          nullable: true
         workload:
-          $ref: '#/components/schemas/WorkloadRequest'
+          $ref: '#/components/schemas/WorkloadResponse'
       required:
+      - id
+      - created_at
+      - status
+      - triggered_by
       - workload
-    WorkloadResponse:
-      oneOf:
-      - $ref: '#/components/schemas/BundleWorkloadResponse'
-      discriminator:
-        propertyName: type
-        mapping:
-          bundle: '#/components/schemas/BundleWorkloadResponse'
+    BundleResult:
+      type: object
+      properties:
+        upload_key:
+          type: string
+          example: upload_key_123
+          nullable: true
   responses:
     internal_error:
       description: Internal Server Error
       content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
     requires_authentication:
       description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     bad_request:
       description: Bad Request

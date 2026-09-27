@@ -183,7 +183,38 @@ paths:
       operationId: deleteApiGroupsByGroupId
       x-operation-id-source: derived
 components:
+  responses:
+    not_found:
+      description: Resource not found
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   schemas:
+    ResourceType:
+      allOf:
+      - $ref: '#/components/schemas/NetworkResourceType'
+      - type: string
+        enum:
+        - peer
+        example: peer
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
     GroupMinimum:
       type: object
       properties:
@@ -249,6 +280,19 @@ components:
       required:
       - id
       - name
+    Resource:
+      type: object
+      properties:
+        id:
+          description: ID of the resource
+          type: string
+          example: chacdk86lnnboviihd7g
+        type:
+          description: Type of the resource
+          $ref: '#/components/schemas/ResourceType'
+      required:
+      - id
+      - type
     Group:
       allOf:
       - $ref: '#/components/schemas/GroupMinimum'
@@ -266,50 +310,6 @@ components:
         required:
         - peers
         - resources
-    ResourceType:
-      allOf:
-      - $ref: '#/components/schemas/NetworkResourceType'
-      - type: string
-        enum:
-        - peer
-        example: peer
-    Resource:
-      type: object
-      properties:
-        id:
-          description: ID of the resource
-          type: string
-          example: chacdk86lnnboviihd7g
-        type:
-          description: Type of the resource
-          $ref: '#/components/schemas/ResourceType'
-      required:
-      - id
-      - type
-    NetworkResourceType:
-      description: Network resource type based of the address
-      type: string
-      enum:
-      - host
-      - subnet
-      - domain
-      example: host
-  responses:
-    forbidden:
-      description: Forbidden
-      content: {}
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    not_found:
-      description: Resource not found
-      content: {}
-    bad_request:
-      description: Bad Request
-      content: {}
   securitySchemes:
     BearerAuth:
       type: http

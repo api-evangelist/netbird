@@ -169,6 +169,21 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ResourceType:
+      allOf:
+      - $ref: '#/components/schemas/NetworkResourceType'
+      - type: string
+        enum:
+        - peer
+        example: peer
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
     GroupMinimum:
       type: object
       properties:
@@ -201,14 +216,6 @@ components:
       - name
       - peers_count
       - resources_count
-    ErrorResponse:
-      type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
-      properties:
-        message:
-          type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
     PeerMinimum:
       type: object
       properties:
@@ -223,6 +230,61 @@ components:
       required:
       - id
       - name
+    Resource:
+      type: object
+      properties:
+        id:
+          description: ID of the resource
+          type: string
+          example: chacdk86lnnboviihd7g
+        type:
+          description: Type of the resource
+          $ref: '#/components/schemas/ResourceType'
+      required:
+      - id
+      - type
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
+    EDRFalconRequest:
+      type: object
+      description: Request payload for creating or updating a EDR Falcon integration
+      properties:
+        client_id:
+          type: string
+          description: CrowdStrike API client ID
+        secret:
+          type: string
+          description: CrowdStrike API client secret
+        cloud_id:
+          type: string
+          description: CrowdStrike cloud identifier (e.g., "us-1", "us-2", "eu-1")
+        groups:
+          type: array
+          description: The Groups this integration applies to
+          items:
+            type: string
+        zta_score_threshold:
+          type: integer
+          description: The minimum Zero Trust Assessment score required for agent approval (0-100)
+          minimum: 0
+          maximum: 100
+          example: 75
+        enabled:
+          type: boolean
+          description: Indicates whether the integration is enabled
+          default: true
+      required:
+      - client_id
+      - secret
+      - cloud_id
+      - groups
+      - zta_score_threshold
     Group:
       allOf:
       - $ref: '#/components/schemas/GroupMinimum'
@@ -296,68 +358,6 @@ components:
         enabled:
           type: boolean
           description: Indicates whether the integration is enabled
-    EDRFalconRequest:
-      type: object
-      description: Request payload for creating or updating a EDR Falcon integration
-      properties:
-        client_id:
-          type: string
-          description: CrowdStrike API client ID
-        secret:
-          type: string
-          description: CrowdStrike API client secret
-        cloud_id:
-          type: string
-          description: CrowdStrike cloud identifier (e.g., "us-1", "us-2", "eu-1")
-        groups:
-          type: array
-          description: The Groups this integration applies to
-          items:
-            type: string
-        zta_score_threshold:
-          type: integer
-          description: The minimum Zero Trust Assessment score required for agent approval (0-100)
-          minimum: 0
-          maximum: 100
-          example: 75
-        enabled:
-          type: boolean
-          description: Indicates whether the integration is enabled
-          default: true
-      required:
-      - client_id
-      - secret
-      - cloud_id
-      - groups
-      - zta_score_threshold
-    ResourceType:
-      allOf:
-      - $ref: '#/components/schemas/NetworkResourceType'
-      - type: string
-        enum:
-        - peer
-        example: peer
-    Resource:
-      type: object
-      properties:
-        id:
-          description: ID of the resource
-          type: string
-          example: chacdk86lnnboviihd7g
-        type:
-          description: Type of the resource
-          $ref: '#/components/schemas/ResourceType'
-      required:
-      - id
-      - type
-    NetworkResourceType:
-      description: Network resource type based of the address
-      type: string
-      enum:
-      - host
-      - subnet
-      - domain
-      example: host
   securitySchemes:
     BearerAuth:
       type: http

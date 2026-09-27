@@ -283,6 +283,35 @@ components:
       required:
       - id
       - role
+    DNSChallengeResponse:
+      type: object
+      properties:
+        dns_challenge:
+          type: string
+          description: The DNS challenge to set in a TXT record
+          example: YXNkYSBkYXNhc2Rhc2RhIGFzZGFzZDJhc2QyNDUxNQ
+      required:
+      - dns_challenge
+    CreateTenantRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name for the MSP tenant
+          example: My new tenant
+        domain:
+          type: string
+          description: The name for the MSP tenant
+          example: tenant.com
+        groups:
+          description: MSP users Groups that can access the Tenant and Roles to assume
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantGroupResponse'
+      required:
+      - name
+      - domain
+      - groups
     UpdateTenantRequest:
       type: object
       properties:
@@ -298,10 +327,6 @@ components:
       required:
       - name
       - groups
-    GetTenantsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/TenantResponse'
     TenantResponse:
       type: object
       properties:
@@ -364,35 +389,10 @@ components:
       - updated_at
       - status
       - dns_challenge
-    CreateTenantRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name for the MSP tenant
-          example: My new tenant
-        domain:
-          type: string
-          description: The name for the MSP tenant
-          example: tenant.com
-        groups:
-          description: MSP users Groups that can access the Tenant and Roles to assume
-          type: array
-          items:
-            $ref: '#/components/schemas/TenantGroupResponse'
-      required:
-      - name
-      - domain
-      - groups
-    DNSChallengeResponse:
-      type: object
-      properties:
-        dns_challenge:
-          type: string
-          description: The DNS challenge to set in a TXT record
-          example: YXNkYSBkYXNhc2Rhc2RhIGFzZGFzZDJhc2QyNDUxNQ
-      required:
-      - dns_challenge
+    GetTenantsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TenantResponse'
   responses:
     internal_error:
       description: Internal Server Error

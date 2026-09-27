@@ -172,70 +172,20 @@ paths:
       operationId: deleteApiSetupKeysByKeyId
       x-operation-id-source: derived
 components:
+  responses:
+    bad_request:
+      description: Bad Request
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
   schemas:
-    SetupKeyClear:
-      allOf:
-      - $ref: '#/components/schemas/SetupKeyBase'
-      - type: object
-        properties:
-          key:
-            description: Setup Key as plain text
-            type: string
-            example: A616097E-FCF0-48FA-9354-CA4A61142761
-        required:
-        - key
-    SetupKey:
-      allOf:
-      - $ref: '#/components/schemas/SetupKeyBase'
-      - type: object
-        properties:
-          key:
-            description: Setup Key as secret
-            type: string
-            example: A6160****
-        required:
-        - key
-    CreateSetupKeyRequest:
-      type: object
-      properties:
-        name:
-          description: Setup Key name
-          type: string
-          example: Default key
-        type:
-          description: Setup key type, one-off for single time usage and reusable
-          type: string
-          example: reusable
-        expires_in:
-          description: Expiration time in seconds
-          type: integer
-          minimum: 86400
-          maximum: 31536000
-          example: 86400
-        auto_groups:
-          description: List of group IDs to auto-assign to peers registered with this key
-          type: array
-          items:
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m0
-        usage_limit:
-          description: A number of times this key can be used. The value of 0 indicates the unlimited usage.
-          type: integer
-          example: 0
-        ephemeral:
-          description: Indicate that the peer will be ephemeral or not
-          type: boolean
-          example: true
-        allow_extra_dns_labels:
-          description: Allow extra DNS labels to be added to the peer
-          type: boolean
-          example: true
-      required:
-      - name
-      - type
-      - expires_in
-      - auto_groups
-      - usage_limit
     SetupKeyBase:
       type: object
       properties:
@@ -316,6 +266,17 @@ components:
       - usage_limit
       - ephemeral
       - allow_extra_dns_labels
+    SetupKeyClear:
+      allOf:
+      - $ref: '#/components/schemas/SetupKeyBase'
+      - type: object
+        properties:
+          key:
+            description: Setup Key as plain text
+            type: string
+            example: A616097E-FCF0-48FA-9354-CA4A61142761
+        required:
+        - key
     SetupKeyRequest:
       type: object
       properties:
@@ -332,19 +293,58 @@ components:
       required:
       - revoked
       - auto_groups
-  responses:
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    bad_request:
-      description: Bad Request
-      content: {}
+    SetupKey:
+      allOf:
+      - $ref: '#/components/schemas/SetupKeyBase'
+      - type: object
+        properties:
+          key:
+            description: Setup Key as secret
+            type: string
+            example: A6160****
+        required:
+        - key
+    CreateSetupKeyRequest:
+      type: object
+      properties:
+        name:
+          description: Setup Key name
+          type: string
+          example: Default key
+        type:
+          description: Setup key type, one-off for single time usage and reusable
+          type: string
+          example: reusable
+        expires_in:
+          description: Expiration time in seconds
+          type: integer
+          minimum: 86400
+          maximum: 31536000
+          example: 86400
+        auto_groups:
+          description: List of group IDs to auto-assign to peers registered with this key
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        usage_limit:
+          description: A number of times this key can be used. The value of 0 indicates the unlimited usage.
+          type: integer
+          example: 0
+        ephemeral:
+          description: Indicate that the peer will be ephemeral or not
+          type: boolean
+          example: true
+        allow_extra_dns_labels:
+          description: Allow extra DNS labels to be added to the peer
+          type: boolean
+          example: true
+      required:
+      - name
+      - type
+      - expires_in
+      - auto_groups
+      - usage_limit
   securitySchemes:
     BearerAuth:
       type: http

@@ -305,14 +305,45 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
+    IntegrationSyncFilters:
       type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
       properties:
-        message:
+        group_prefixes:
+          type: array
+          description: List of start_with string patterns for groups to sync
+          items:
+            type: string
+          example:
+          - Engineering
+          - Sales
+        user_group_prefixes:
+          type: array
+          description: List of start_with string patterns for groups which users to sync
+          items:
+            type: string
+          example:
+          - Users
+        connector_id:
           type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
+          description: DEX connector ID for embedded IDP setups
+    UpdateOktaScimIntegrationRequest:
+      allOf:
+      - $ref: '#/components/schemas/IntegrationEnabled'
+      - $ref: '#/components/schemas/IntegrationSyncFilters'
+      - type: object
+        description: Request payload for updating an Okta SCIM IDP integration. All fields are optional.
+    CreateOktaScimIntegrationRequest:
+      allOf:
+      - $ref: '#/components/schemas/IntegrationSyncFilters'
+      - type: object
+        description: Request payload for creating an Okta SCIM IDP integration
+        required:
+        - connection_name
+        properties:
+          connection_name:
+            type: string
+            description: The Okta enterprise connection name on Auth0
+            example: my-okta-connection
     IdpIntegrationSyncLog:
       type: object
       description: Represents a synchronization log entry for an integration
@@ -340,28 +371,6 @@ components:
           type: string
           description: Log message
           example: Successfully synchronized users and groups
-    CreateOktaScimIntegrationRequest:
-      allOf:
-      - $ref: '#/components/schemas/IntegrationSyncFilters'
-      - type: object
-        description: Request payload for creating an Okta SCIM IDP integration
-        required:
-        - connection_name
-        properties:
-          connection_name:
-            type: string
-            description: The Okta enterprise connection name on Auth0
-            example: my-okta-connection
-    ScimTokenResponse:
-      type: object
-      description: Response containing the regenerated SCIM token
-      required:
-      - auth_token
-      properties:
-        auth_token:
-          type: string
-          description: The newly generated SCIM API token
-          example: nbs_F3f0d...
     IntegrationEnabled:
       type: object
       properties:
@@ -369,27 +378,6 @@ components:
           type: boolean
           description: Whether the integration is enabled
           example: true
-    IntegrationSyncFilters:
-      type: object
-      properties:
-        group_prefixes:
-          type: array
-          description: List of start_with string patterns for groups to sync
-          items:
-            type: string
-          example:
-          - Engineering
-          - Sales
-        user_group_prefixes:
-          type: array
-          description: List of start_with string patterns for groups which users to sync
-          items:
-            type: string
-          example:
-          - Users
-        connector_id:
-          type: string
-          description: DEX connector ID for embedded IDP setups
     OktaScimIntegration:
       allOf:
       - $ref: '#/components/schemas/IntegrationEnabled'
@@ -418,12 +406,24 @@ components:
             format: date-time
             description: Timestamp of the last synchronization
             example: '2023-05-15T10:30:00Z'
-    UpdateOktaScimIntegrationRequest:
-      allOf:
-      - $ref: '#/components/schemas/IntegrationEnabled'
-      - $ref: '#/components/schemas/IntegrationSyncFilters'
-      - type: object
-        description: Request payload for updating an Okta SCIM IDP integration. All fields are optional.
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
+    ScimTokenResponse:
+      type: object
+      description: Response containing the regenerated SCIM token
+      required:
+      - auth_token
+      properties:
+        auth_token:
+          type: string
+          description: The newly generated SCIM API token
+          example: nbs_F3f0d...
   securitySchemes:
     BearerAuth:
       type: http

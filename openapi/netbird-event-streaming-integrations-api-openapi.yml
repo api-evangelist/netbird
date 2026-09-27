@@ -222,6 +222,45 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
+    CreateIntegrationRequest:
+      type: object
+      description: Request payload for creating a new event streaming integration. Also used as the structure for the PUT request body, but not all fields are applicable for updates (see PUT operation description).
+      required:
+      - platform
+      - config
+      - enabled
+      properties:
+        platform:
+          type: string
+          description: The event streaming platform to integrate with (e.g., "datadog", "s3", "firehose"). This field is used for creation. For updates (PUT), this field, if sent, is ignored by the backend.
+          enum:
+          - datadog
+          - s3
+          - firehose
+          - generic_http
+          example: s3
+        config:
+          type: object
+          additionalProperties:
+            type: string
+          description: Platform-specific configuration as key-value pairs. For creation, all necessary credentials and settings must be provided. For updates, provide the fields to change or the entire new configuration.
+          example:
+            bucket_name: my-event-logs
+            region: us-east-1
+            access_key_id: AKIA...
+            secret_access_key: YOUR_SECRET_KEY
+        enabled:
+          type: boolean
+          description: Specifies whether the integration is enabled. During creation (POST), this value is sent by the client, but the provided backend manager function `CreateIntegration` does not appear to use it directly, so its effect on creation should be verified. During updates (PUT), this field is used to enable or disable the integration.
+          example: true
     IntegrationResponse:
       type: object
       description: Represents an event streaming integration.
@@ -268,45 +307,6 @@ components:
             api_key: '****'
             site: datadoghq.com
             region: us-east-1
-    ErrorResponse:
-      type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
-      properties:
-        message:
-          type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
-    CreateIntegrationRequest:
-      type: object
-      description: Request payload for creating a new event streaming integration. Also used as the structure for the PUT request body, but not all fields are applicable for updates (see PUT operation description).
-      required:
-      - platform
-      - config
-      - enabled
-      properties:
-        platform:
-          type: string
-          description: The event streaming platform to integrate with (e.g., "datadog", "s3", "firehose"). This field is used for creation. For updates (PUT), this field, if sent, is ignored by the backend.
-          enum:
-          - datadog
-          - s3
-          - firehose
-          - generic_http
-          example: s3
-        config:
-          type: object
-          additionalProperties:
-            type: string
-          description: Platform-specific configuration as key-value pairs. For creation, all necessary credentials and settings must be provided. For updates, provide the fields to change or the entire new configuration.
-          example:
-            bucket_name: my-event-logs
-            region: us-east-1
-            access_key_id: AKIA...
-            secret_access_key: YOUR_SECRET_KEY
-        enabled:
-          type: boolean
-          description: Specifies whether the integration is enabled. During creation (POST), this value is sent by the client, but the provided backend manager function `CreateIntegration` does not appear to use it directly, so its effect on creation should be verified. During updates (PUT), this field is used to enable or disable the integration.
-          example: true
   securitySchemes:
     BearerAuth:
       type: http

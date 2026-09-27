@@ -228,100 +228,27 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    GroupMinimum:
+    PeerTemporaryAccessResponse:
       type: object
       properties:
-        id:
-          description: Group ID
-          type: string
-          example: ch8i4ug6lnn4g9hqv7m0
         name:
-          description: Group Name identifier
+          description: Peer's hostname
           type: string
-          example: devs
-        peers_count:
-          description: Count of peers associated to the group
-          type: integer
-          example: 2
-        resources_count:
-          description: Count of resources associated to the group
-          type: integer
-          example: 5
-        issued:
-          description: How the group was issued (api, integration, jwt)
-          type: string
-          enum:
-          - api
-          - integration
-          - jwt
-          example: api
-      required:
-      - id
-      - name
-      - peers_count
-      - resources_count
-    AccessiblePeer:
-      allOf:
-      - $ref: '#/components/schemas/PeerMinimum'
-      - type: object
-        properties:
-          ip:
-            description: Peer's IP address
-            type: string
-            example: 10.64.0.1
-          dns_label:
-            description: Peer's DNS label is the parsed peer name for domain resolution. It is used to form an FQDN by appending the account's domain to the peer label. e.g. peer-dns-label.netbird.cloud
-            type: string
-            example: stage-host-1.netbird.cloud
-          user_id:
-            description: User ID of the user that enrolled this peer
-            type: string
-            example: google-oauth2|277474792786460067937
-          os:
-            description: Peer's operating system and version
-            type: string
-            example: linux
-          country_code:
-            $ref: '#/components/schemas/CountryCode'
-          city_name:
-            $ref: '#/components/schemas/CityName'
-          geoname_id:
-            description: Unique identifier from the GeoNames database for a specific geographical location.
-            type: integer
-            example: 2643743
-          connected:
-            description: Peer to Management connection status
-            type: boolean
-            example: true
-          last_seen:
-            description: Last time peer connected to Netbird's management service
-            type: string
-            format: date-time
-            example: '2023-05-05T10:05:26.420578Z'
-        required:
-        - ip
-        - dns_label
-        - user_id
-        - os
-        - country_code
-        - city_name
-        - geoname_id
-        - connected
-        - last_seen
-    PeerMinimum:
-      type: object
-      properties:
+          example: temp-host-1
         id:
           description: Peer ID
           type: string
           example: chacbco6lnnbn6cg5s90
-        name:
-          description: Peer's hostname
-          type: string
-          example: stage-host-1
+        rules:
+          description: List of temporary access rules
+          type: array
+          items:
+            type: string
+            example: tcp/80
       required:
-      - id
       - name
+      - id
+      - rules
     Peer:
       allOf:
       - $ref: '#/components/schemas/PeerMinimum'
@@ -460,27 +387,38 @@ components:
         - serial_number
         - extra_dns_labels
         - ephemeral
-    CityName:
-      description: Commonly used English name of the city
-      type: string
-      example: Berlin
-    PeerBatch:
-      allOf:
-      - $ref: '#/components/schemas/Peer'
-      - type: object
-        properties:
-          created_at:
-            description: Peer creation date (UTC)
-            type: string
-            format: date-time
-            example: '2023-05-05T09:00:35.477782Z'
-          accessible_peers_count:
-            description: Number of accessible peers
-            type: integer
-            example: 5
-        required:
-        - created_at
-        - accessible_peers_count
+    GroupMinimum:
+      type: object
+      properties:
+        id:
+          description: Group ID
+          type: string
+          example: ch8i4ug6lnn4g9hqv7m0
+        name:
+          description: Group Name identifier
+          type: string
+          example: devs
+        peers_count:
+          description: Count of peers associated to the group
+          type: integer
+          example: 2
+        resources_count:
+          description: Count of resources associated to the group
+          type: integer
+          example: 5
+        issued:
+          description: How the group was issued (api, integration, jwt)
+          type: string
+          enum:
+          - api
+          - integration
+          - jwt
+          example: api
+      required:
+      - id
+      - name
+      - peers_count
+      - resources_count
     PeerRequest:
       type: object
       properties:
@@ -510,6 +448,24 @@ components:
       - ssh_enabled
       - login_expiration_enabled
       - inactivity_expiration_enabled
+    CityName:
+      description: Commonly used English name of the city
+      type: string
+      example: Berlin
+    PeerMinimum:
+      type: object
+      properties:
+        id:
+          description: Peer ID
+          type: string
+          example: chacbco6lnnbn6cg5s90
+        name:
+          description: Peer's hostname
+          type: string
+          example: stage-host-1
+      required:
+      - id
+      - name
     PeerTemporaryAccessRequest:
       type: object
       properties:
@@ -531,10 +487,71 @@ components:
       - name
       - wg_pub_key
       - rules
-    CountryCode:
-      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
-      type: string
-      example: DE
+    AccessiblePeer:
+      allOf:
+      - $ref: '#/components/schemas/PeerMinimum'
+      - type: object
+        properties:
+          ip:
+            description: Peer's IP address
+            type: string
+            example: 10.64.0.1
+          dns_label:
+            description: Peer's DNS label is the parsed peer name for domain resolution. It is used to form an FQDN by appending the account's domain to the peer label. e.g. peer-dns-label.netbird.cloud
+            type: string
+            example: stage-host-1.netbird.cloud
+          user_id:
+            description: User ID of the user that enrolled this peer
+            type: string
+            example: google-oauth2|277474792786460067937
+          os:
+            description: Peer's operating system and version
+            type: string
+            example: linux
+          country_code:
+            $ref: '#/components/schemas/CountryCode'
+          city_name:
+            $ref: '#/components/schemas/CityName'
+          geoname_id:
+            description: Unique identifier from the GeoNames database for a specific geographical location.
+            type: integer
+            example: 2643743
+          connected:
+            description: Peer to Management connection status
+            type: boolean
+            example: true
+          last_seen:
+            description: Last time peer connected to Netbird's management service
+            type: string
+            format: date-time
+            example: '2023-05-05T10:05:26.420578Z'
+        required:
+        - ip
+        - dns_label
+        - user_id
+        - os
+        - country_code
+        - city_name
+        - geoname_id
+        - connected
+        - last_seen
+    PeerBatch:
+      allOf:
+      - $ref: '#/components/schemas/Peer'
+      - type: object
+        properties:
+          created_at:
+            description: Peer creation date (UTC)
+            type: string
+            format: date-time
+            example: '2023-05-05T09:00:35.477782Z'
+          accessible_peers_count:
+            description: Number of accessible peers
+            type: integer
+            example: 5
+        required:
+        - created_at
+        - accessible_peers_count
     PeerLocalFlags:
       type: object
       properties:
@@ -578,39 +595,22 @@ components:
           description: Indicates whether lazy connection is enabled on this peer
           type: boolean
           example: false
-    PeerTemporaryAccessResponse:
-      type: object
-      properties:
-        name:
-          description: Peer's hostname
-          type: string
-          example: temp-host-1
-        id:
-          description: Peer ID
-          type: string
-          example: chacbco6lnnbn6cg5s90
-        rules:
-          description: List of temporary access rules
-          type: array
-          items:
-            type: string
-            example: tcp/80
-      required:
-      - name
-      - id
-      - rules
+    CountryCode:
+      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
+      type: string
+      example: DE
   responses:
-    forbidden:
-      description: Forbidden
-      content: {}
     internal_error:
       description: Internal Server Error
       content: {}
-    bad_request:
-      description: Bad Request
-      content: {}
     requires_authentication:
       description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+    bad_request:
+      description: Bad Request
       content: {}
   securitySchemes:
     BearerAuth:

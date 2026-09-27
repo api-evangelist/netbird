@@ -96,6 +96,27 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    SetupResponse:
+      type: object
+      description: Response after successful instance setup
+      properties:
+        user_id:
+          description: The ID of the created user
+          type: string
+          example: abc123def456
+        email:
+          description: Email address of the created user
+          type: string
+          example: admin@example.com
+        personal_access_token:
+          description: Plain text Personal Access Token created during setup. Present only when create_pat was requested and the NB_SETUP_PAT_ENABLED feature was enabled on the server.
+          type: string
+          format: password
+          readOnly: true
+          example: nbp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      required:
+      - user_id
+      - email
     InstanceStatus:
       type: object
       description: Instance status information
@@ -162,36 +183,15 @@ components:
       - email
       - password
       - name
-    SetupResponse:
-      type: object
-      description: Response after successful instance setup
-      properties:
-        user_id:
-          description: The ID of the created user
-          type: string
-          example: abc123def456
-        email:
-          description: Email address of the created user
-          type: string
-          example: admin@example.com
-        personal_access_token:
-          description: Plain text Personal Access Token created during setup. Present only when create_pat was requested and the NB_SETUP_PAT_ENABLED feature was enabled on the server.
-          type: string
-          format: password
-          readOnly: true
-          example: nbp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-      required:
-      - user_id
-      - email
   responses:
     internal_error:
       description: Internal Server Error
       content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
     requires_authentication:
       description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     bad_request:
       description: Bad Request

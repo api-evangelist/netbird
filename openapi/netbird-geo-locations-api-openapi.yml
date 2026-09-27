@@ -88,6 +88,10 @@ components:
       required:
       - country_name
       - country_code
+    CountryCode:
+      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
+      type: string
+      example: DE
     City:
       description: Describe city geographical location information
       type: object
@@ -103,19 +107,15 @@ components:
       required:
       - geoname_id
       - city_name
-    CountryCode:
-      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
-      type: string
-      example: DE
   responses:
+    internal_error:
+      description: Internal Server Error
+      content: {}
     requires_authentication:
       description: Requires authentication
       content: {}
     forbidden:
       description: Forbidden
-      content: {}
-    internal_error:
-      description: Internal Server Error
       content: {}
     bad_request:
       description: Bad Request

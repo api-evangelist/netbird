@@ -7,14 +7,20 @@ description: >-
 type: Index
 deliveryModel:
   model: unknown
-  open_source: false
-  commercial: false
+  license_evidence:
+    repo: netbirdio/netbird
+    spdx: NOASSERTION
+    stars: 29514
+  open_source: unknown
+  commercial: true
   callable_host: true
   label: Delivery model not determined — needs a product licence on record
   confidence: low
   source:
   - openapi
-  generated: '2026-08-28'
+  - pricing
+  - repository-unlicensed
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: freemium
@@ -37,7 +43,7 @@ tags:
   - Networking
   - VPN
   - Zero Trust
-  - Open-Source
+  - Open Source
   - WireGuard
   - Security
 tags_raw:
@@ -47,6 +53,7 @@ tags_raw:
   - Open Source
   - WireGuard
   - Security
+  - Open-Source
 created: '2025-02-09'
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/netbird/refs/heads/main/apis.yml

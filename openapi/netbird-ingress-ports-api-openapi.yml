@@ -381,42 +381,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    IngressPortAllocationRequest:
-      type: object
-      properties:
-        name:
-          description: Name of the ingress port allocation
-          type: string
-          example: Ingress Port Allocation 1
-        enabled:
-          description: Indicates if an ingress port allocation is enabled
-          type: boolean
-          example: true
-        port_ranges:
-          description: List of port ranges that are forwarded by the ingress peer
-          type: array
-          items:
-            $ref: '#/components/schemas/IngressPortAllocationRequestPortRange'
-        direct_port:
-          description: Direct port allocation
-          $ref: '#/components/schemas/IngressPortAllocationRequestDirectPort'
-      required:
-      - name
-      - enabled
-    AvailablePorts:
-      type: object
-      properties:
-        tcp:
-          description: Number of available TCP  ports left on the ingress peer
-          type: integer
-          example: 45765
-        udp:
-          description: Number of available UDP ports left on the ingress peer
-          type: integer
-          example: 50000
-      required:
-      - tcp
-      - udp
     IngressPortAllocationPortMapping:
       type: object
       properties:
@@ -450,6 +414,140 @@ components:
       - ingress_start
       - ingress_end
       - protocol
+    IngressPortAllocationRequest:
+      type: object
+      properties:
+        name:
+          description: Name of the ingress port allocation
+          type: string
+          example: Ingress Port Allocation 1
+        enabled:
+          description: Indicates if an ingress port allocation is enabled
+          type: boolean
+          example: true
+        port_ranges:
+          description: List of port ranges that are forwarded by the ingress peer
+          type: array
+          items:
+            $ref: '#/components/schemas/IngressPortAllocationRequestPortRange'
+        direct_port:
+          description: Direct port allocation
+          $ref: '#/components/schemas/IngressPortAllocationRequestDirectPort'
+      required:
+      - name
+      - enabled
+    IngressPortAllocationRequestPortRange:
+      type: object
+      properties:
+        start:
+          description: The starting port of the range of forwarded ports
+          type: integer
+          example: 80
+        end:
+          description: The ending port of the range of forwarded ports
+          type: integer
+          example: 320
+        protocol:
+          description: The protocol accepted by the port range
+          type: string
+          enum:
+          - tcp
+          - udp
+          - tcp/udp
+          example: tcp
+      required:
+      - start
+      - end
+      - protocol
+    IngressPeerUpdateRequest:
+      type: object
+      properties:
+        enabled:
+          description: Defines if an ingress peer is enabled
+          type: boolean
+          example: true
+        fallback:
+          description: Defines if an ingress peer can be used as a fallback if no ingress peer can be found in the region of the forwarded peer
+          type: boolean
+          example: true
+      required:
+      - enabled
+      - fallback
+    AvailablePorts:
+      type: object
+      properties:
+        tcp:
+          description: Number of available TCP  ports left on the ingress peer
+          type: integer
+          example: 45765
+        udp:
+          description: Number of available UDP ports left on the ingress peer
+          type: integer
+          example: 50000
+      required:
+      - tcp
+      - udp
+    IngressPeerCreateRequest:
+      type: object
+      properties:
+        peer_id:
+          description: ID of the peer that is used as an ingress peer
+          type: string
+          example: ch8i4ug6lnn4g9hqv7m0
+        enabled:
+          description: Defines if an ingress peer is enabled
+          type: boolean
+          example: true
+        fallback:
+          description: Defines if an ingress peer can be used as a fallback if no ingress peer can be found in the region of the forwarded peer
+          type: boolean
+          example: true
+      required:
+      - peer_id
+      - enabled
+      - fallback
+    IngressPeer:
+      type: object
+      properties:
+        id:
+          description: ID of the ingress peer
+          type: string
+          example: ch8i4ug6lnn4g9hqv7m0
+        peer_id:
+          description: ID of the peer that is used as an ingress peer
+          type: string
+          example: x7p3kqf2rdd8j5zxw4n9
+        ingress_ip:
+          description: Ingress IP address of the ingress peer where the traffic arrives
+          type: string
+          example: 192.34.0.123
+        available_ports:
+          $ref: '#/components/schemas/AvailablePorts'
+        enabled:
+          description: Indicates if an ingress peer is enabled
+          type: boolean
+          example: true
+        connected:
+          description: Indicates if an ingress peer is connected to the management server
+          type: boolean
+          example: true
+        fallback:
+          description: Indicates if an ingress peer can be used as a fallback if no ingress peer can be found in the region of the forwarded peer
+          type: boolean
+          example: true
+        region:
+          description: Region of the ingress peer
+          type: string
+          example: germany
+      required:
+      - id
+      - peer_id
+      - ingress_ip
+      - available_ports
+      - enabled
+      - connected
+      - fallback
+      - region
     IngressPortAllocation:
       type: object
       properties:
@@ -508,113 +606,15 @@ components:
       required:
       - count
       - protocol
-    IngressPortAllocationRequestPortRange:
-      type: object
-      properties:
-        start:
-          description: The starting port of the range of forwarded ports
-          type: integer
-          example: 80
-        end:
-          description: The ending port of the range of forwarded ports
-          type: integer
-          example: 320
-        protocol:
-          description: The protocol accepted by the port range
-          type: string
-          enum:
-          - tcp
-          - udp
-          - tcp/udp
-          example: tcp
-      required:
-      - start
-      - end
-      - protocol
-    IngressPeerCreateRequest:
-      type: object
-      properties:
-        peer_id:
-          description: ID of the peer that is used as an ingress peer
-          type: string
-          example: ch8i4ug6lnn4g9hqv7m0
-        enabled:
-          description: Defines if an ingress peer is enabled
-          type: boolean
-          example: true
-        fallback:
-          description: Defines if an ingress peer can be used as a fallback if no ingress peer can be found in the region of the forwarded peer
-          type: boolean
-          example: true
-      required:
-      - peer_id
-      - enabled
-      - fallback
-    IngressPeerUpdateRequest:
-      type: object
-      properties:
-        enabled:
-          description: Defines if an ingress peer is enabled
-          type: boolean
-          example: true
-        fallback:
-          description: Defines if an ingress peer can be used as a fallback if no ingress peer can be found in the region of the forwarded peer
-          type: boolean
-          example: true
-      required:
-      - enabled
-      - fallback
-    IngressPeer:
-      type: object
-      properties:
-        id:
-          description: ID of the ingress peer
-          type: string
-          example: ch8i4ug6lnn4g9hqv7m0
-        peer_id:
-          description: ID of the peer that is used as an ingress peer
-          type: string
-          example: x7p3kqf2rdd8j5zxw4n9
-        ingress_ip:
-          description: Ingress IP address of the ingress peer where the traffic arrives
-          type: string
-          example: 192.34.0.123
-        available_ports:
-          $ref: '#/components/schemas/AvailablePorts'
-        enabled:
-          description: Indicates if an ingress peer is enabled
-          type: boolean
-          example: true
-        connected:
-          description: Indicates if an ingress peer is connected to the management server
-          type: boolean
-          example: true
-        fallback:
-          description: Indicates if an ingress peer can be used as a fallback if no ingress peer can be found in the region of the forwarded peer
-          type: boolean
-          example: true
-        region:
-          description: Region of the ingress peer
-          type: string
-          example: germany
-      required:
-      - id
-      - peer_id
-      - ingress_ip
-      - available_ports
-      - enabled
-      - connected
-      - fallback
-      - region
   responses:
     internal_error:
       description: Internal Server Error
       content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
     requires_authentication:
       description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     bad_request:
       description: Bad Request

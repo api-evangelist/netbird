@@ -231,28 +231,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    NameserverGroup:
-      allOf:
-      - type: object
-        properties:
-          id:
-            description: Nameserver group ID
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m0
-        required:
-        - id
-      - $ref: '#/components/schemas/NameserverGroupRequest'
-    DNSSettings:
-      type: object
-      properties:
-        disabled_management_groups:
-          description: Groups whose DNS management is disabled
-          type: array
-          items:
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m0
-      required:
-      - disabled_management_groups
     Nameserver:
       type: object
       properties:
@@ -274,6 +252,28 @@ components:
       - ip
       - ns_type
       - port
+    DNSSettings:
+      type: object
+      properties:
+        disabled_management_groups:
+          description: Groups whose DNS management is disabled
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+      required:
+      - disabled_management_groups
+    NameserverGroup:
+      allOf:
+      - type: object
+        properties:
+          id:
+            description: Nameserver group ID
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        required:
+        - id
+      - $ref: '#/components/schemas/NameserverGroupRequest'
     NameserverGroupRequest:
       type: object
       properties:
@@ -333,11 +333,11 @@ components:
     internal_error:
       description: Internal Server Error
       content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
     requires_authentication:
       description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     bad_request:
       description: Bad Request

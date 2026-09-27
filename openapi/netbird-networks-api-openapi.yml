@@ -581,125 +581,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    GroupMinimum:
-      type: object
-      properties:
-        id:
-          description: Group ID
-          type: string
-          example: ch8i4ug6lnn4g9hqv7m0
-        name:
-          description: Group Name identifier
-          type: string
-          example: devs
-        peers_count:
-          description: Count of peers associated to the group
-          type: integer
-          example: 2
-        resources_count:
-          description: Count of resources associated to the group
-          type: integer
-          example: 5
-        issued:
-          description: How the group was issued (api, integration, jwt)
-          type: string
-          enum:
-          - api
-          - integration
-          - jwt
-          example: api
-      required:
-      - id
-      - name
-      - peers_count
-      - resources_count
-    NetworkResource:
-      allOf:
-      - type: object
-        properties:
-          id:
-            description: Network Resource ID
-            type: string
-            example: chacdk86lnnboviihd7g
-          type:
-            $ref: '#/components/schemas/NetworkResourceType'
-          groups:
-            description: Groups that the resource belongs to
-            type: array
-            items:
-              $ref: '#/components/schemas/GroupMinimum'
-        required:
-        - id
-        - type
-        - groups
-      - $ref: '#/components/schemas/NetworkResourceMinimum'
-    NetworkResourceMinimum:
-      type: object
-      properties:
-        name:
-          description: Network resource name
-          type: string
-          example: Remote Resource 1
-        description:
-          description: Network resource description
-          type: string
-          example: A remote resource inside network 1
-        address:
-          description: Network resource address (either a direct host like 1.1.1.1 or 1.1.1.1/32, or a subnet like 192.168.178.0/24, or domains like example.com and *.example.com)
-          type: string
-          example: 1.1.1.1
-        enabled:
-          description: Network resource status
-          type: boolean
-          example: true
-      required:
-      - name
-      - address
-      - enabled
-    NetworkRequest:
-      type: object
-      properties:
-        name:
-          description: Network name
-          type: string
-          example: Remote Network 1
-        description:
-          description: Network description
-          type: string
-          example: A remote network that needs to be accessed
-      required:
-      - name
-    NetworkRouterRequest:
-      type: object
-      properties:
-        peer:
-          description: Peer Identifier associated with route. This property can not be set together with `peer_groups`
-          type: string
-          example: chacbco6lnnbn6cg5s91
-        peer_groups:
-          description: Peers Group Identifier associated with route. This property can not be set together with `peer`
-          type: array
-          items:
-            type: string
-            example: chacbco6lnnbn6cg5s91
-        metric:
-          description: Route metric number. Lowest number has higher priority
-          type: integer
-          maximum: 9999
-          minimum: 1
-          example: 9999
-        masquerade:
-          description: Indicate if peer should masquerade traffic to this route's prefix
-          type: boolean
-          example: true
-        enabled:
-          description: Network router status
-          type: boolean
-          example: true
-      required:
-      - metric
-      - masquerade
-      - enabled
     Network:
       allOf:
       - type: object
@@ -737,17 +618,60 @@ components:
         - routing_peers_count
         - policies
       - $ref: '#/components/schemas/NetworkRequest'
-    NetworkRouter:
-      allOf:
-      - type: object
-        properties:
-          id:
-            description: Network Router Id
+    NetworkResourceMinimum:
+      type: object
+      properties:
+        name:
+          description: Network resource name
+          type: string
+          example: Remote Resource 1
+        description:
+          description: Network resource description
+          type: string
+          example: A remote resource inside network 1
+        address:
+          description: Network resource address (either a direct host like 1.1.1.1 or 1.1.1.1/32, or a subnet like 192.168.178.0/24, or domains like example.com and *.example.com)
+          type: string
+          example: 1.1.1.1
+        enabled:
+          description: Network resource status
+          type: boolean
+          example: true
+      required:
+      - name
+      - address
+      - enabled
+    NetworkRouterRequest:
+      type: object
+      properties:
+        peer:
+          description: Peer Identifier associated with route. This property can not be set together with `peer_groups`
+          type: string
+          example: chacbco6lnnbn6cg5s91
+        peer_groups:
+          description: Peers Group Identifier associated with route. This property can not be set together with `peer`
+          type: array
+          items:
             type: string
-            example: chacdk86lnnboviihd7g
-        required:
-        - id
-      - $ref: '#/components/schemas/NetworkRouterRequest'
+            example: chacbco6lnnbn6cg5s91
+        metric:
+          description: Route metric number. Lowest number has higher priority
+          type: integer
+          maximum: 9999
+          minimum: 1
+          example: 9999
+        masquerade:
+          description: Indicate if peer should masquerade traffic to this route's prefix
+          type: boolean
+          example: true
+        enabled:
+          description: Network router status
+          type: boolean
+          example: true
+      required:
+      - metric
+      - masquerade
+      - enabled
     NetworkResourceType:
       description: Network resource type based of the address
       type: string
@@ -756,6 +680,26 @@ components:
       - subnet
       - domain
       example: host
+    NetworkResource:
+      allOf:
+      - type: object
+        properties:
+          id:
+            description: Network Resource ID
+            type: string
+            example: chacdk86lnnboviihd7g
+          type:
+            $ref: '#/components/schemas/NetworkResourceType'
+          groups:
+            description: Groups that the resource belongs to
+            type: array
+            items:
+              $ref: '#/components/schemas/GroupMinimum'
+        required:
+        - id
+        - type
+        - groups
+      - $ref: '#/components/schemas/NetworkResourceMinimum'
     NetworkResourceRequest:
       allOf:
       - $ref: '#/components/schemas/NetworkResourceMinimum'
@@ -770,15 +714,71 @@ components:
         required:
         - groups
         - address
+    GroupMinimum:
+      type: object
+      properties:
+        id:
+          description: Group ID
+          type: string
+          example: ch8i4ug6lnn4g9hqv7m0
+        name:
+          description: Group Name identifier
+          type: string
+          example: devs
+        peers_count:
+          description: Count of peers associated to the group
+          type: integer
+          example: 2
+        resources_count:
+          description: Count of resources associated to the group
+          type: integer
+          example: 5
+        issued:
+          description: How the group was issued (api, integration, jwt)
+          type: string
+          enum:
+          - api
+          - integration
+          - jwt
+          example: api
+      required:
+      - id
+      - name
+      - peers_count
+      - resources_count
+    NetworkRouter:
+      allOf:
+      - type: object
+        properties:
+          id:
+            description: Network Router Id
+            type: string
+            example: chacdk86lnnboviihd7g
+        required:
+        - id
+      - $ref: '#/components/schemas/NetworkRouterRequest'
+    NetworkRequest:
+      type: object
+      properties:
+        name:
+          description: Network name
+          type: string
+          example: Remote Network 1
+        description:
+          description: Network description
+          type: string
+          example: A remote network that needs to be accessed
+      required:
+      - name
   responses:
     internal_error:
       description: Internal Server Error
       content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
     requires_authentication:
       description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     bad_request:
       description: Bad Request
