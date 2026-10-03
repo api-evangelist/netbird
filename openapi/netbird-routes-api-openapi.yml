@@ -173,6 +173,19 @@ paths:
       operationId: deleteApiRoutesByRouteId
       x-operation-id-source: derived
 components:
+  responses:
+    forbidden:
+      description: Forbidden
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   schemas:
     RouteRequest:
       type: object
@@ -268,19 +281,6 @@ components:
         - id
         - network_type
       - $ref: '#/components/schemas/RouteRequest'
-  responses:
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
-    bad_request:
-      description: Bad Request
-      content: {}
   securitySchemes:
     BearerAuth:
       type: http

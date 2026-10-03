@@ -228,17 +228,17 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    PeerTemporaryAccessResponse:
+    PeerTemporaryAccessRequest:
       type: object
       properties:
         name:
           description: Peer's hostname
           type: string
           example: temp-host-1
-        id:
-          description: Peer ID
+        wg_pub_key:
+          description: Peer's WireGuard public key
           type: string
-          example: chacbco6lnnbn6cg5s90
+          example: n0r3pL4c3h0ld3rK3y==
         rules:
           description: List of temporary access rules
           type: array
@@ -247,8 +247,55 @@ components:
             example: tcp/80
       required:
       - name
-      - id
+      - wg_pub_key
       - rules
+    PeerRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: stage-host-1
+        ssh_enabled:
+          type: boolean
+          example: true
+        login_expiration_enabled:
+          type: boolean
+          example: false
+        inactivity_expiration_enabled:
+          type: boolean
+          example: false
+        approval_required:
+          description: (Cloud only) Indicates whether peer needs approval
+          type: boolean
+          example: true
+        ip:
+          description: Peer's IP address
+          type: string
+          format: ipv4
+          example: 100.64.0.15
+      required:
+      - name
+      - ssh_enabled
+      - login_expiration_enabled
+      - inactivity_expiration_enabled
+    CityName:
+      description: Commonly used English name of the city
+      type: string
+      example: Berlin
+    PeerMinimum:
+      type: object
+      properties:
+        id:
+          description: Peer ID
+          type: string
+          example: chacbco6lnnbn6cg5s90
+        name:
+          description: Peer's hostname
+          type: string
+          example: stage-host-1
+      required:
+      - id
+      - name
     Peer:
       allOf:
       - $ref: '#/components/schemas/PeerMinimum'
@@ -387,6 +434,70 @@ components:
         - serial_number
         - extra_dns_labels
         - ephemeral
+    CountryCode:
+      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
+      type: string
+      example: DE
+    PeerLocalFlags:
+      type: object
+      properties:
+        rosenpass_enabled:
+          description: Indicates whether Rosenpass is enabled on this peer
+          type: boolean
+          example: true
+        rosenpass_permissive:
+          description: Indicates whether Rosenpass is in permissive mode or not
+          type: boolean
+          example: false
+        server_ssh_allowed:
+          description: Indicates whether SSH access this peer is allowed or not
+          type: boolean
+          example: true
+        disable_client_routes:
+          description: Indicates whether client routes are disabled on this peer or not
+          type: boolean
+          example: false
+        disable_server_routes:
+          description: Indicates whether server routes are disabled on this peer or not
+          type: boolean
+          example: false
+        disable_dns:
+          description: Indicates whether DNS management is disabled on this peer or not
+          type: boolean
+          example: false
+        disable_firewall:
+          description: Indicates whether firewall management is disabled on this peer or not
+          type: boolean
+          example: false
+        block_lan_access:
+          description: Indicates whether LAN access is blocked on this peer when used as a routing peer
+          type: boolean
+          example: false
+        block_inbound:
+          description: Indicates whether inbound traffic is blocked on this peer
+          type: boolean
+          example: false
+        lazy_connection_enabled:
+          description: Indicates whether lazy connection is enabled on this peer
+          type: boolean
+          example: false
+    PeerBatch:
+      allOf:
+      - $ref: '#/components/schemas/Peer'
+      - type: object
+        properties:
+          created_at:
+            description: Peer creation date (UTC)
+            type: string
+            format: date-time
+            example: '2023-05-05T09:00:35.477782Z'
+          accessible_peers_count:
+            description: Number of accessible peers
+            type: integer
+            example: 5
+        required:
+        - created_at
+        - accessible_peers_count
     GroupMinimum:
       type: object
       properties:
@@ -419,64 +530,17 @@ components:
       - name
       - peers_count
       - resources_count
-    PeerRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          example: stage-host-1
-        ssh_enabled:
-          type: boolean
-          example: true
-        login_expiration_enabled:
-          type: boolean
-          example: false
-        inactivity_expiration_enabled:
-          type: boolean
-          example: false
-        approval_required:
-          description: (Cloud only) Indicates whether peer needs approval
-          type: boolean
-          example: true
-        ip:
-          description: Peer's IP address
-          type: string
-          format: ipv4
-          example: 100.64.0.15
-      required:
-      - name
-      - ssh_enabled
-      - login_expiration_enabled
-      - inactivity_expiration_enabled
-    CityName:
-      description: Commonly used English name of the city
-      type: string
-      example: Berlin
-    PeerMinimum:
-      type: object
-      properties:
-        id:
-          description: Peer ID
-          type: string
-          example: chacbco6lnnbn6cg5s90
-        name:
-          description: Peer's hostname
-          type: string
-          example: stage-host-1
-      required:
-      - id
-      - name
-    PeerTemporaryAccessRequest:
+    PeerTemporaryAccessResponse:
       type: object
       properties:
         name:
           description: Peer's hostname
           type: string
           example: temp-host-1
-        wg_pub_key:
-          description: Peer's WireGuard public key
+        id:
+          description: Peer ID
           type: string
-          example: n0r3pL4c3h0ld3rK3y==
+          example: chacbco6lnnbn6cg5s90
         rules:
           description: List of temporary access rules
           type: array
@@ -485,7 +549,7 @@ components:
             example: tcp/80
       required:
       - name
-      - wg_pub_key
+      - id
       - rules
     AccessiblePeer:
       allOf:
@@ -535,79 +599,15 @@ components:
         - geoname_id
         - connected
         - last_seen
-    PeerBatch:
-      allOf:
-      - $ref: '#/components/schemas/Peer'
-      - type: object
-        properties:
-          created_at:
-            description: Peer creation date (UTC)
-            type: string
-            format: date-time
-            example: '2023-05-05T09:00:35.477782Z'
-          accessible_peers_count:
-            description: Number of accessible peers
-            type: integer
-            example: 5
-        required:
-        - created_at
-        - accessible_peers_count
-    PeerLocalFlags:
-      type: object
-      properties:
-        rosenpass_enabled:
-          description: Indicates whether Rosenpass is enabled on this peer
-          type: boolean
-          example: true
-        rosenpass_permissive:
-          description: Indicates whether Rosenpass is in permissive mode or not
-          type: boolean
-          example: false
-        server_ssh_allowed:
-          description: Indicates whether SSH access this peer is allowed or not
-          type: boolean
-          example: true
-        disable_client_routes:
-          description: Indicates whether client routes are disabled on this peer or not
-          type: boolean
-          example: false
-        disable_server_routes:
-          description: Indicates whether server routes are disabled on this peer or not
-          type: boolean
-          example: false
-        disable_dns:
-          description: Indicates whether DNS management is disabled on this peer or not
-          type: boolean
-          example: false
-        disable_firewall:
-          description: Indicates whether firewall management is disabled on this peer or not
-          type: boolean
-          example: false
-        block_lan_access:
-          description: Indicates whether LAN access is blocked on this peer when used as a routing peer
-          type: boolean
-          example: false
-        block_inbound:
-          description: Indicates whether inbound traffic is blocked on this peer
-          type: boolean
-          example: false
-        lazy_connection_enabled:
-          description: Indicates whether lazy connection is enabled on this peer
-          type: boolean
-          example: false
-    CountryCode:
-      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
-      type: string
-      example: DE
   responses:
-    internal_error:
-      description: Internal Server Error
-      content: {}
     requires_authentication:
       description: Requires authentication
       content: {}
     forbidden:
       description: Forbidden
+      content: {}
+    internal_error:
+      description: Internal Server Error
       content: {}
     bad_request:
       description: Bad Request

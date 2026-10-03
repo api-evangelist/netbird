@@ -166,24 +166,64 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Process:
-      description: Describes the operational activity within a peer's system.
+    OSVersionCheck:
+      description: Posture check for the version of operating system
       type: object
       properties:
-        linux_path:
-          description: Path to the process executable file in a Linux operating system
+        android:
+          description: Minimum version of Android
+          $ref: '#/components/schemas/MinVersionCheck'
+        darwin:
+          $ref: '#/components/schemas/MinVersionCheck'
+        ios:
+          description: Minimum version of iOS
+          $ref: '#/components/schemas/MinVersionCheck'
+        linux:
+          description: Minimum Linux kernel version
+          $ref: '#/components/schemas/MinKernelVersionCheck'
+        windows:
+          description: Minimum Windows kernel build version
+          $ref: '#/components/schemas/MinKernelVersionCheck'
+      example:
+        android:
+          min_version: '13'
+        ios:
+          min_version: 17.3.1
+        darwin:
+          min_version: 14.2.1
+        linux:
+          min_kernel_version: 5.3.3
+        windows:
+          min_kernel_version: 10.0.1234
+    GeoLocationCheck:
+      description: Posture check for geo location
+      type: object
+      properties:
+        locations:
+          description: List of geo locations to which the policy applies
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+        action:
+          description: Action to take upon policy match
           type: string
-          example: /usr/local/bin/netbird
-        mac_path:
-          description: Path to the process executable file in a Mac operating system
-          type: string
-          example: /Applications/NetBird.app/Contents/MacOS/netbird
-        windows_path:
-          description: Path to the process executable file in a Windows operating system
-          type: string
-          example: 'C:             rogramData etBird
-
-            etbird.exe'
+          enum:
+          - allow
+          - deny
+          example: allow
+      required:
+      - locations
+      - action
+    ProcessCheck:
+      description: Posture Check for binaries exist and are running in the peer’s system
+      type: object
+      properties:
+        processes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Process'
+      required:
+      - processes
     PeerNetworkRangeCheck:
       description: 'Posture check for allow or deny access based on the peer''s IP addresses. A range matches when it
 
@@ -215,57 +255,20 @@ components:
       required:
       - ranges
       - action
-    NBVersionCheck:
-      description: Posture check for the version of NetBird
-      type: object
-      $ref: '#/components/schemas/MinVersionCheck'
-    GeoLocationCheck:
-      description: Posture check for geo location
-      type: object
-      properties:
-        locations:
-          description: List of geo locations to which the policy applies
-          type: array
-          items:
-            $ref: '#/components/schemas/Location'
-        action:
-          description: Action to take upon policy match
-          type: string
-          enum:
-          - allow
-          - deny
-          example: allow
-      required:
-      - locations
-      - action
     CityName:
       description: Commonly used English name of the city
       type: string
       example: Berlin
-    Checks:
-      description: List of objects that perform the actual checks
+    MinKernelVersionCheck:
+      description: Posture check with the kernel version
       type: object
       properties:
-        nb_version_check:
-          $ref: '#/components/schemas/NBVersionCheck'
-        os_version_check:
-          $ref: '#/components/schemas/OSVersionCheck'
-        geo_location_check:
-          $ref: '#/components/schemas/GeoLocationCheck'
-        peer_network_range_check:
-          $ref: '#/components/schemas/PeerNetworkRangeCheck'
-        process_check:
-          $ref: '#/components/schemas/ProcessCheck'
-    ProcessCheck:
-      description: Posture Check for binaries exist and are running in the peer’s system
-      type: object
-      properties:
-        processes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Process'
+        min_kernel_version:
+          description: Minimum acceptable version
+          type: string
+          example: 6.6.12
       required:
-      - processes
+      - min_kernel_version
     PostureCheckUpdate:
       type: object
       properties:
@@ -282,6 +285,14 @@ components:
       required:
       - name
       - description
+    NBVersionCheck:
+      description: Posture check for the version of NetBird
+      type: object
+      $ref: '#/components/schemas/MinVersionCheck'
+    CountryCode:
+      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
+      type: string
+      example: DE
     PostureCheck:
       type: object
       properties:
@@ -303,59 +314,6 @@ components:
       - id
       - name
       - checks
-    CountryCode:
-      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
-      type: string
-      example: DE
-    Location:
-      description: Describe geographical location information
-      type: object
-      properties:
-        country_code:
-          $ref: '#/components/schemas/CountryCode'
-        city_name:
-          $ref: '#/components/schemas/CityName'
-      required:
-      - country_code
-    OSVersionCheck:
-      description: Posture check for the version of operating system
-      type: object
-      properties:
-        android:
-          description: Minimum version of Android
-          $ref: '#/components/schemas/MinVersionCheck'
-        darwin:
-          $ref: '#/components/schemas/MinVersionCheck'
-        ios:
-          description: Minimum version of iOS
-          $ref: '#/components/schemas/MinVersionCheck'
-        linux:
-          description: Minimum Linux kernel version
-          $ref: '#/components/schemas/MinKernelVersionCheck'
-        windows:
-          description: Minimum Windows kernel build version
-          $ref: '#/components/schemas/MinKernelVersionCheck'
-      example:
-        android:
-          min_version: '13'
-        ios:
-          min_version: 17.3.1
-        darwin:
-          min_version: 14.2.1
-        linux:
-          min_kernel_version: 5.3.3
-        windows:
-          min_kernel_version: 10.0.1234
-    MinKernelVersionCheck:
-      description: Posture check with the kernel version
-      type: object
-      properties:
-        min_kernel_version:
-          description: Minimum acceptable version
-          type: string
-          example: 6.6.12
-      required:
-      - min_kernel_version
     MinVersionCheck:
       description: Posture check for the version of operating system
       type: object
@@ -366,15 +324,57 @@ components:
           example: '14.3'
       required:
       - min_version
+    Checks:
+      description: List of objects that perform the actual checks
+      type: object
+      properties:
+        nb_version_check:
+          $ref: '#/components/schemas/NBVersionCheck'
+        os_version_check:
+          $ref: '#/components/schemas/OSVersionCheck'
+        geo_location_check:
+          $ref: '#/components/schemas/GeoLocationCheck'
+        peer_network_range_check:
+          $ref: '#/components/schemas/PeerNetworkRangeCheck'
+        process_check:
+          $ref: '#/components/schemas/ProcessCheck'
+    Process:
+      description: Describes the operational activity within a peer's system.
+      type: object
+      properties:
+        linux_path:
+          description: Path to the process executable file in a Linux operating system
+          type: string
+          example: /usr/local/bin/netbird
+        mac_path:
+          description: Path to the process executable file in a Mac operating system
+          type: string
+          example: /Applications/NetBird.app/Contents/MacOS/netbird
+        windows_path:
+          description: Path to the process executable file in a Windows operating system
+          type: string
+          example: 'C:             rogramData etBird
+
+            etbird.exe'
+    Location:
+      description: Describe geographical location information
+      type: object
+      properties:
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+        city_name:
+          $ref: '#/components/schemas/CityName'
+      required:
+      - country_code
   responses:
-    internal_error:
-      description: Internal Server Error
-      content: {}
     forbidden:
       description: Forbidden
       content: {}
     requires_authentication:
       description: Requires authentication
+      content: {}
+    internal_error:
+      description: Internal Server Error
       content: {}
     bad_request:
       description: Bad Request

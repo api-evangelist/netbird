@@ -173,46 +173,55 @@ components:
         enum:
         - peer
         example: peer
-    NetworkResourceType:
-      description: Network resource type based of the address
-      type: string
-      enum:
-      - host
-      - subnet
-      - domain
-      example: host
-    GroupMinimum:
+    PolicyUpdate:
+      allOf:
+      - $ref: '#/components/schemas/PolicyMinimum'
+      - type: object
+        properties:
+          source_posture_checks:
+            description: Posture checks ID's applied to policy source groups
+            type: array
+            items:
+              type: string
+              example: chacdk86lnnboviihd70
+          rules:
+            description: Policy rule object for policy UI editor
+            type: array
+            items:
+              $ref: '#/components/schemas/PolicyRuleUpdate'
+        required:
+        - rules
+    Resource:
       type: object
       properties:
         id:
-          description: Group ID
+          description: ID of the resource
           type: string
-          example: ch8i4ug6lnn4g9hqv7m0
-        name:
-          description: Group Name identifier
-          type: string
-          example: devs
-        peers_count:
-          description: Count of peers associated to the group
-          type: integer
-          example: 2
-        resources_count:
-          description: Count of resources associated to the group
-          type: integer
-          example: 5
-        issued:
-          description: How the group was issued (api, integration, jwt)
-          type: string
-          enum:
-          - api
-          - integration
-          - jwt
-          example: api
+          example: chacdk86lnnboviihd7g
+        type:
+          description: Type of the resource
+          $ref: '#/components/schemas/ResourceType'
       required:
       - id
+      - type
+    PolicyMinimum:
+      type: object
+      properties:
+        name:
+          description: Policy name identifier
+          type: string
+          example: ch8i4ug6lnn4g9hqv7mg
+        description:
+          description: Policy friendly description
+          type: string
+          example: This is a default policy that allows connections between all the resources
+        enabled:
+          description: Policy status
+          type: boolean
+          example: true
+      required:
       - name
-      - peers_count
-      - resources_count
+      - enabled
     RulePortRange:
       description: Policy rule affected ports range
       type: object
@@ -228,6 +237,33 @@ components:
       required:
       - start
       - end
+    PolicyRuleUpdate:
+      allOf:
+      - $ref: '#/components/schemas/PolicyRuleMinimum'
+      - type: object
+        properties:
+          id:
+            description: Policy rule ID
+            type: string
+            example: ch8i4ug6lnn4g9hqv7mg
+          sources:
+            description: Policy rule source group IDs
+            type: array
+            items:
+              type: string
+              example: ch8i4ug6lnn4g9hqv797
+          sourceResource:
+            description: Policy rule source resource that the rule is applied to
+            $ref: '#/components/schemas/Resource'
+          destinations:
+            description: Policy rule destination group IDs
+            type: array
+            items:
+              type: string
+              example: ch8i4ug6lnn4g9h7v7m0
+          destinationResource:
+            description: Policy rule destination resource that the rule is applied to
+            $ref: '#/components/schemas/Resource'
     PolicyRuleMinimum:
       type: object
       properties:
@@ -314,38 +350,7 @@ components:
           destinationResource:
             description: Policy rule destination resource that the rule is applied to
             $ref: '#/components/schemas/Resource'
-    Resource:
-      type: object
-      properties:
-        id:
-          description: ID of the resource
-          type: string
-          example: chacdk86lnnboviihd7g
-        type:
-          description: Type of the resource
-          $ref: '#/components/schemas/ResourceType'
-      required:
-      - id
-      - type
     PolicyCreate:
-      allOf:
-      - $ref: '#/components/schemas/PolicyMinimum'
-      - type: object
-        properties:
-          source_posture_checks:
-            description: Posture checks ID's applied to policy source groups
-            type: array
-            items:
-              type: string
-              example: chacdk86lnnboviihd70
-          rules:
-            description: Policy rule object for policy UI editor
-            type: array
-            items:
-              $ref: '#/components/schemas/PolicyRuleUpdate'
-        required:
-        - rules
-    PolicyUpdate:
       allOf:
       - $ref: '#/components/schemas/PolicyMinimum'
       - type: object
@@ -386,57 +391,52 @@ components:
         required:
         - rules
         - source_posture_checks
-    PolicyMinimum:
+    GroupMinimum:
       type: object
       properties:
+        id:
+          description: Group ID
+          type: string
+          example: ch8i4ug6lnn4g9hqv7m0
         name:
-          description: Policy name identifier
+          description: Group Name identifier
           type: string
-          example: ch8i4ug6lnn4g9hqv7mg
-        description:
-          description: Policy friendly description
+          example: devs
+        peers_count:
+          description: Count of peers associated to the group
+          type: integer
+          example: 2
+        resources_count:
+          description: Count of resources associated to the group
+          type: integer
+          example: 5
+        issued:
+          description: How the group was issued (api, integration, jwt)
           type: string
-          example: This is a default policy that allows connections between all the resources
-        enabled:
-          description: Policy status
-          type: boolean
-          example: true
+          enum:
+          - api
+          - integration
+          - jwt
+          example: api
       required:
+      - id
       - name
-      - enabled
-    PolicyRuleUpdate:
-      allOf:
-      - $ref: '#/components/schemas/PolicyRuleMinimum'
-      - type: object
-        properties:
-          id:
-            description: Policy rule ID
-            type: string
-            example: ch8i4ug6lnn4g9hqv7mg
-          sources:
-            description: Policy rule source group IDs
-            type: array
-            items:
-              type: string
-              example: ch8i4ug6lnn4g9hqv797
-          sourceResource:
-            description: Policy rule source resource that the rule is applied to
-            $ref: '#/components/schemas/Resource'
-          destinations:
-            description: Policy rule destination group IDs
-            type: array
-            items:
-              type: string
-              example: ch8i4ug6lnn4g9h7v7m0
-          destinationResource:
-            description: Policy rule destination resource that the rule is applied to
-            $ref: '#/components/schemas/Resource'
+      - peers_count
+      - resources_count
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
   responses:
-    internal_error:
-      description: Internal Server Error
-      content: {}
     forbidden:
       description: Forbidden
+      content: {}
+    internal_error:
+      description: Internal Server Error
       content: {}
     requires_authentication:
       description: Requires authentication

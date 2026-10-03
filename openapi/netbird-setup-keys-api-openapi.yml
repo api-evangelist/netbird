@@ -172,19 +172,6 @@ paths:
       operationId: deleteApiSetupKeysByKeyId
       x-operation-id-source: derived
 components:
-  responses:
-    bad_request:
-      description: Bad Request
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
   schemas:
     SetupKeyBase:
       type: object
@@ -345,6 +332,19 @@ components:
       - expires_in
       - auto_groups
       - usage_limit
+  responses:
+    forbidden:
+      description: Forbidden
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   securitySchemes:
     BearerAuth:
       type: http

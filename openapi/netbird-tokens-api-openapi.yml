@@ -162,22 +162,18 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    PersonalAccessTokenRequest:
+    PersonalAccessTokenGenerated:
       type: object
       properties:
-        name:
-          description: Name of the token
+        plain_token:
+          description: Plain text representation of the generated token
           type: string
-          example: My first token
-        expires_in:
-          description: Expiration in days
-          type: integer
-          minimum: 1
-          maximum: 365
-          example: 30
+          example: 2023-05-02 14:48:20.465209+00:00
+        personal_access_token:
+          $ref: '#/components/schemas/PersonalAccessToken'
       required:
-      - name
-      - expires_in
+      - plain_token
+      - personal_access_token
     PersonalAccessToken:
       type: object
       properties:
@@ -214,27 +210,31 @@ components:
       - expiration_date
       - created_by
       - created_at
-    PersonalAccessTokenGenerated:
+    PersonalAccessTokenRequest:
       type: object
       properties:
-        plain_token:
-          description: Plain text representation of the generated token
+        name:
+          description: Name of the token
           type: string
-          example: 2023-05-02 14:48:20.465209+00:00
-        personal_access_token:
-          $ref: '#/components/schemas/PersonalAccessToken'
+          example: My first token
+        expires_in:
+          description: Expiration in days
+          type: integer
+          minimum: 1
+          maximum: 365
+          example: 30
       required:
-      - plain_token
-      - personal_access_token
+      - name
+      - expires_in
   responses:
-    internal_error:
-      description: Internal Server Error
+    forbidden:
+      description: Forbidden
       content: {}
     requires_authentication:
       description: Requires authentication
       content: {}
-    forbidden:
-      description: Forbidden
+    internal_error:
+      description: Internal Server Error
       content: {}
     bad_request:
       description: Bad Request

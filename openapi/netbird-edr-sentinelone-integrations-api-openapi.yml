@@ -181,46 +181,75 @@ components:
         enum:
         - peer
         example: peer
-    NetworkResourceType:
-      description: Network resource type based of the address
-      type: string
-      enum:
-      - host
-      - subnet
-      - domain
-      example: host
-    GroupMinimum:
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
+    Resource:
       type: object
       properties:
         id:
-          description: Group ID
+          description: ID of the resource
           type: string
-          example: ch8i4ug6lnn4g9hqv7m0
+          example: chacdk86lnnboviihd7g
+        type:
+          description: Type of the resource
+          $ref: '#/components/schemas/ResourceType'
+      required:
+      - id
+      - type
+    PeerMinimum:
+      type: object
+      properties:
+        id:
+          description: Peer ID
+          type: string
+          example: chacbco6lnnbn6cg5s90
         name:
-          description: Group Name identifier
+          description: Peer's hostname
           type: string
-          example: devs
-        peers_count:
-          description: Count of peers associated to the group
-          type: integer
-          example: 2
-        resources_count:
-          description: Count of resources associated to the group
-          type: integer
-          example: 5
-        issued:
-          description: How the group was issued (api, integration, jwt)
-          type: string
-          enum:
-          - api
-          - integration
-          - jwt
-          example: api
+          example: stage-host-1
       required:
       - id
       - name
-      - peers_count
-      - resources_count
+    SentinelOneMatchAttributes:
+      type: object
+      description: Attribute conditions to match when approving agents
+      additionalProperties: false
+      properties:
+        active_threats:
+          description: The maximum allowed number of active threats on the agent
+          type: integer
+          example: 0
+        encrypted_applications:
+          description: Whether disk encryption is enabled on the agent
+          type: boolean
+        firewall_enabled:
+          description: Whether the agent firewall is enabled
+          type: boolean
+        infected:
+          description: Whether the agent is currently flagged as infected
+          type: boolean
+        is_active:
+          description: Whether the agent has been recently active and reporting
+          type: boolean
+        is_up_to_date:
+          description: Whether the agent is running the latest available version
+          type: boolean
+        network_status:
+          description: The current network connectivity status of the device
+          type: string
+          enum:
+          - connected
+          - disconnected
+          - quarantined
+        operational_state:
+          description: The current operational state of the agent
+          type: string
     EDRSentinelOneResponse:
       type: object
       description: Represents a SentinelOne EDR integration configuration
@@ -280,67 +309,38 @@ components:
         enabled:
           type: boolean
           description: Indicates whether the integration is enabled
-    SentinelOneMatchAttributes:
-      type: object
-      description: Attribute conditions to match when approving agents
-      additionalProperties: false
-      properties:
-        active_threats:
-          description: The maximum allowed number of active threats on the agent
-          type: integer
-          example: 0
-        encrypted_applications:
-          description: Whether disk encryption is enabled on the agent
-          type: boolean
-        firewall_enabled:
-          description: Whether the agent firewall is enabled
-          type: boolean
-        infected:
-          description: Whether the agent is currently flagged as infected
-          type: boolean
-        is_active:
-          description: Whether the agent has been recently active and reporting
-          type: boolean
-        is_up_to_date:
-          description: Whether the agent is running the latest available version
-          type: boolean
-        network_status:
-          description: The current network connectivity status of the device
-          type: string
-          enum:
-          - connected
-          - disconnected
-          - quarantined
-        operational_state:
-          description: The current operational state of the agent
-          type: string
-    PeerMinimum:
+    GroupMinimum:
       type: object
       properties:
         id:
-          description: Peer ID
+          description: Group ID
           type: string
-          example: chacbco6lnnbn6cg5s90
+          example: ch8i4ug6lnn4g9hqv7m0
         name:
-          description: Peer's hostname
+          description: Group Name identifier
           type: string
-          example: stage-host-1
+          example: devs
+        peers_count:
+          description: Count of peers associated to the group
+          type: integer
+          example: 2
+        resources_count:
+          description: Count of resources associated to the group
+          type: integer
+          example: 5
+        issued:
+          description: How the group was issued (api, integration, jwt)
+          type: string
+          enum:
+          - api
+          - integration
+          - jwt
+          example: api
       required:
       - id
       - name
-    Resource:
-      type: object
-      properties:
-        id:
-          description: ID of the resource
-          type: string
-          example: chacdk86lnnboviihd7g
-        type:
-          description: Type of the resource
-          $ref: '#/components/schemas/ResourceType'
-      required:
-      - id
-      - type
+      - peers_count
+      - resources_count
     EDRSentinelOneRequest:
       type: object
       description: Request payload for creating or updating a EDR SentinelOne integration
@@ -372,14 +372,14 @@ components:
       - groups
       - last_synced_interval
       - match_attributes
-    ErrorResponse:
-      type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
-      properties:
-        message:
-          type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
     Group:
       allOf:
       - $ref: '#/components/schemas/GroupMinimum'

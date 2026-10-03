@@ -111,20 +111,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AccountOnboarding:
-      type: object
-      properties:
-        signup_form_pending:
-          description: Indicates whether the account signup form is pending
-          type: boolean
-          example: true
-        onboarding_flow_pending:
-          description: Indicates whether the account onboarding flow is pending
-          type: boolean
-          example: false
-      required:
-      - signup_form_pending
-      - onboarding_flow_pending
     AccountSettings:
       type: object
       properties:
@@ -289,6 +275,20 @@ components:
       - created_at
       - created_by
       - onboarding
+    AccountOnboarding:
+      type: object
+      properties:
+        signup_form_pending:
+          description: Indicates whether the account signup form is pending
+          type: boolean
+          example: true
+        onboarding_flow_pending:
+          description: Indicates whether the account onboarding flow is pending
+          type: boolean
+          example: false
+      required:
+      - signup_form_pending
+      - onboarding_flow_pending
     AccountRequest:
       type: object
       properties:
@@ -299,14 +299,14 @@ components:
       required:
       - settings
   responses:
-    internal_error:
-      description: Internal Server Error
+    forbidden:
+      description: Forbidden
       content: {}
     requires_authentication:
       description: Requires authentication
       content: {}
-    forbidden:
-      description: Forbidden
+    internal_error:
+      description: Internal Server Error
       content: {}
     bad_request:
       description: Bad Request

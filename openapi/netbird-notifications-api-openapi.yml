@@ -186,62 +186,20 @@ paths:
           $ref: '#/components/responses/internal_error'
 components:
   schemas:
-    NotificationChannelResponse:
+    NotificationTypeEntry:
       type: object
-      description: A notification channel configuration.
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the notification channel.
-          readOnly: true
-          example: ch8i4ug6lnn4g9hqv7m0
-        type:
-          $ref: '#/components/schemas/NotificationChannelType'
-        target:
-          description: 'Channel-specific target configuration. The shape depends on the `type` field:
-
-            - `email`: an `EmailTarget` object
-
-            - `webhook`: a `WebhookTarget` object
-
-            '
-          oneOf:
-          - $ref: '#/components/schemas/EmailTarget'
-          - $ref: '#/components/schemas/WebhookTarget'
-        event_types:
-          type: array
-          description: List of activity event type codes this channel subscribes to.
-          items:
-            $ref: '#/components/schemas/NotificationEventType'
-          example:
-          - user.join
-          - peer.user.add
-          - peer.login.expire
-        enabled:
-          type: boolean
-          description: Whether this notification channel is active.
-          example: true
-      required:
-      - id
-      - type
-      - event_types
-      - enabled
-    EmailTarget:
-      type: object
-      description: Target configuration for email notification channels.
-      properties:
-        emails:
-          type: array
-          description: List of email addresses to send notifications to.
-          minItems: 1
-          items:
-            type: string
-            format: email
-          example:
-          - admin@example.com
-          - ops@example.com
-      required:
-      - emails
+      description: A map of event type codes to their human-readable descriptions.
+      additionalProperties:
+        type: string
+      example:
+        user.join: User joined
+    NotificationChannelType:
+      type: string
+      description: The type of notification channel.
+      enum:
+      - email
+      - webhook
+      example: email
     NotificationChannelRequest:
       type: object
       description: Request body for creating or updating a notification channel.
@@ -284,20 +242,22 @@ components:
 
         '
       example: user.join
-    NotificationTypeEntry:
+    EmailTarget:
       type: object
-      description: A map of event type codes to their human-readable descriptions.
-      additionalProperties:
-        type: string
-      example:
-        user.join: User joined
-    NotificationChannelType:
-      type: string
-      description: The type of notification channel.
-      enum:
-      - email
-      - webhook
-      example: email
+      description: Target configuration for email notification channels.
+      properties:
+        emails:
+          type: array
+          description: List of email addresses to send notifications to.
+          minItems: 1
+          items:
+            type: string
+            format: email
+          example:
+          - admin@example.com
+          - ops@example.com
+      required:
+      - emails
     WebhookTarget:
       type: object
       description: Target configuration for webhook notification channels.
@@ -321,18 +281,58 @@ components:
             X-Webhook-Secret: secret
       required:
       - url
+    NotificationChannelResponse:
+      type: object
+      description: A notification channel configuration.
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the notification channel.
+          readOnly: true
+          example: ch8i4ug6lnn4g9hqv7m0
+        type:
+          $ref: '#/components/schemas/NotificationChannelType'
+        target:
+          description: 'Channel-specific target configuration. The shape depends on the `type` field:
+
+            - `email`: an `EmailTarget` object
+
+            - `webhook`: a `WebhookTarget` object
+
+            '
+          oneOf:
+          - $ref: '#/components/schemas/EmailTarget'
+          - $ref: '#/components/schemas/WebhookTarget'
+        event_types:
+          type: array
+          description: List of activity event type codes this channel subscribes to.
+          items:
+            $ref: '#/components/schemas/NotificationEventType'
+          example:
+          - user.join
+          - peer.user.add
+          - peer.login.expire
+        enabled:
+          type: boolean
+          description: Whether this notification channel is active.
+          example: true
+      required:
+      - id
+      - type
+      - event_types
+      - enabled
   responses:
-    not_found:
-      description: Resource not found
-      content: {}
-    internal_error:
-      description: Internal Server Error
+    forbidden:
+      description: Forbidden
       content: {}
     requires_authentication:
       description: Requires authentication
       content: {}
-    forbidden:
-      description: Forbidden
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    not_found:
+      description: Resource not found
       content: {}
     bad_request:
       description: Bad Request

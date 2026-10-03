@@ -96,6 +96,39 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    SetupRequest:
+      type: object
+      description: Request to set up the initial admin user
+      properties:
+        email:
+          description: Email address for the admin user
+          type: string
+          example: admin@example.com
+        password:
+          description: Password for the admin user (minimum 8 characters)
+          type: string
+          format: password
+          minLength: 8
+          example: securepassword123
+        name:
+          description: Display name for the admin user (defaults to email if not provided)
+          type: string
+          example: Admin User
+        create_pat:
+          description: If true and the server has setup-time PAT issuance enabled (NB_SETUP_PAT_ENABLED=true), create a Personal Access Token for the new owner user and return it in the response. Ignored when the server feature is disabled.
+          type: boolean
+          example: true
+        pat_expire_in:
+          description: Expiration of the Personal Access Token in days. Applies only when create_pat is true and the server feature is enabled. Defaults to 1 day when omitted.
+          type: integer
+          minimum: 1
+          maximum: 365
+          default: 1
+          example: 30
+      required:
+      - email
+      - password
+      - name
     SetupResponse:
       type: object
       description: Response after successful instance setup
@@ -150,48 +183,15 @@ components:
       required:
       - management_current_version
       - management_update_available
-    SetupRequest:
-      type: object
-      description: Request to set up the initial admin user
-      properties:
-        email:
-          description: Email address for the admin user
-          type: string
-          example: admin@example.com
-        password:
-          description: Password for the admin user (minimum 8 characters)
-          type: string
-          format: password
-          minLength: 8
-          example: securepassword123
-        name:
-          description: Display name for the admin user (defaults to email if not provided)
-          type: string
-          example: Admin User
-        create_pat:
-          description: If true and the server has setup-time PAT issuance enabled (NB_SETUP_PAT_ENABLED=true), create a Personal Access Token for the new owner user and return it in the response. Ignored when the server feature is disabled.
-          type: boolean
-          example: true
-        pat_expire_in:
-          description: Expiration of the Personal Access Token in days. Applies only when create_pat is true and the server feature is enabled. Defaults to 1 day when omitted.
-          type: integer
-          minimum: 1
-          maximum: 365
-          default: 1
-          example: 30
-      required:
-      - email
-      - password
-      - name
   responses:
-    internal_error:
-      description: Internal Server Error
-      content: {}
     requires_authentication:
       description: Requires authentication
       content: {}
     forbidden:
       description: Forbidden
+      content: {}
+    internal_error:
+      description: Internal Server Error
       content: {}
     bad_request:
       description: Bad Request

@@ -263,17 +263,6 @@ components:
             example: ch8i4ug6lnn4g9hqv7m0
       required:
       - disabled_management_groups
-    NameserverGroup:
-      allOf:
-      - type: object
-        properties:
-          id:
-            description: Nameserver group ID
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m0
-        required:
-        - id
-      - $ref: '#/components/schemas/NameserverGroupRequest'
     NameserverGroupRequest:
       type: object
       properties:
@@ -329,15 +318,26 @@ components:
       - primary
       - domains
       - search_domains_enabled
+    NameserverGroup:
+      allOf:
+      - type: object
+        properties:
+          id:
+            description: Nameserver group ID
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        required:
+        - id
+      - $ref: '#/components/schemas/NameserverGroupRequest'
   responses:
-    internal_error:
-      description: Internal Server Error
+    forbidden:
+      description: Forbidden
       content: {}
     requires_authentication:
       description: Requires authentication
       content: {}
-    forbidden:
-      description: Forbidden
+    internal_error:
+      description: Internal Server Error
       content: {}
     bad_request:
       description: Bad Request

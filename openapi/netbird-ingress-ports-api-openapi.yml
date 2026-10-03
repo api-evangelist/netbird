@@ -381,6 +381,29 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    IngressPortAllocationRequestPortRange:
+      type: object
+      properties:
+        start:
+          description: The starting port of the range of forwarded ports
+          type: integer
+          example: 80
+        end:
+          description: The ending port of the range of forwarded ports
+          type: integer
+          example: 320
+        protocol:
+          description: The protocol accepted by the port range
+          type: string
+          enum:
+          - tcp
+          - udp
+          - tcp/udp
+          example: tcp
+      required:
+      - start
+      - end
+      - protocol
     IngressPortAllocationPortMapping:
       type: object
       properties:
@@ -436,28 +459,23 @@ components:
       required:
       - name
       - enabled
-    IngressPortAllocationRequestPortRange:
+    IngressPortAllocationRequestDirectPort:
       type: object
       properties:
-        start:
-          description: The starting port of the range of forwarded ports
+        count:
+          description: The number of ports to be forwarded
           type: integer
-          example: 80
-        end:
-          description: The ending port of the range of forwarded ports
-          type: integer
-          example: 320
+          example: 5
         protocol:
-          description: The protocol accepted by the port range
+          description: The protocol accepted by the port
           type: string
           enum:
           - tcp
           - udp
           - tcp/udp
-          example: tcp
+          example: udp
       required:
-      - start
-      - end
+      - count
       - protocol
     IngressPeerUpdateRequest:
       type: object
@@ -471,39 +489,6 @@ components:
           type: boolean
           example: true
       required:
-      - enabled
-      - fallback
-    AvailablePorts:
-      type: object
-      properties:
-        tcp:
-          description: Number of available TCP  ports left on the ingress peer
-          type: integer
-          example: 45765
-        udp:
-          description: Number of available UDP ports left on the ingress peer
-          type: integer
-          example: 50000
-      required:
-      - tcp
-      - udp
-    IngressPeerCreateRequest:
-      type: object
-      properties:
-        peer_id:
-          description: ID of the peer that is used as an ingress peer
-          type: string
-          example: ch8i4ug6lnn4g9hqv7m0
-        enabled:
-          description: Defines if an ingress peer is enabled
-          type: boolean
-          example: true
-        fallback:
-          description: Defines if an ingress peer can be used as a fallback if no ingress peer can be found in the region of the forwarded peer
-          type: boolean
-          example: true
-      required:
-      - peer_id
       - enabled
       - fallback
     IngressPeer:
@@ -588,33 +573,48 @@ components:
       - enabled
       - ingress_ip
       - port_range_mappings
-    IngressPortAllocationRequestDirectPort:
+    AvailablePorts:
       type: object
       properties:
-        count:
-          description: The number of ports to be forwarded
+        tcp:
+          description: Number of available TCP  ports left on the ingress peer
           type: integer
-          example: 5
-        protocol:
-          description: The protocol accepted by the port
-          type: string
-          enum:
-          - tcp
-          - udp
-          - tcp/udp
-          example: udp
+          example: 45765
+        udp:
+          description: Number of available UDP ports left on the ingress peer
+          type: integer
+          example: 50000
       required:
-      - count
-      - protocol
+      - tcp
+      - udp
+    IngressPeerCreateRequest:
+      type: object
+      properties:
+        peer_id:
+          description: ID of the peer that is used as an ingress peer
+          type: string
+          example: ch8i4ug6lnn4g9hqv7m0
+        enabled:
+          description: Defines if an ingress peer is enabled
+          type: boolean
+          example: true
+        fallback:
+          description: Defines if an ingress peer can be used as a fallback if no ingress peer can be found in the region of the forwarded peer
+          type: boolean
+          example: true
+      required:
+      - peer_id
+      - enabled
+      - fallback
   responses:
-    internal_error:
-      description: Internal Server Error
+    forbidden:
+      description: Forbidden
       content: {}
     requires_authentication:
       description: Requires authentication
       content: {}
-    forbidden:
-      description: Forbidden
+    internal_error:
+      description: Internal Server Error
       content: {}
     bad_request:
       description: Bad Request

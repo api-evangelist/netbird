@@ -36,6 +36,30 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Price:
+      type: object
+      properties:
+        price_id:
+          type: string
+          description: Unique identifier for the price.
+          example: price_H2KmRb4u1tP0sR7s
+        currency:
+          type: string
+          description: Currency code for this price.
+          example: USD
+        price:
+          type: integer
+          description: Price amount in minor units (e.g., cents).
+          example: 1000
+        unit:
+          type: string
+          description: Unit of measurement for this price (e.g., per user).
+          example: user
+      required:
+      - price_id
+      - currency
+      - price
+      - unit
     Product:
       type: object
       properties:
@@ -70,30 +94,6 @@ components:
       - features
       - prices
       - free
-    Price:
-      type: object
-      properties:
-        price_id:
-          type: string
-          description: Unique identifier for the price.
-          example: price_H2KmRb4u1tP0sR7s
-        currency:
-          type: string
-          description: Currency code for this price.
-          example: USD
-        price:
-          type: integer
-          description: Price amount in minor units (e.g., cents).
-          example: 1000
-        unit:
-          type: string
-          description: Unit of measurement for this price (e.g., per user).
-          example: user
-      required:
-      - price_id
-      - currency
-      - price
-      - unit
   responses:
     internal_error:
       description: Internal Server Error

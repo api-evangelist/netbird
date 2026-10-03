@@ -305,21 +305,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    CreateScimIntegrationRequest:
-      allOf:
-      - $ref: '#/components/schemas/IntegrationSyncFilters'
-      - type: object
-        description: Request payload for creating an SCIM IDP integration
-        required:
-        - prefix
-        - provider
-        properties:
-          prefix:
-            type: string
-            description: The connection prefix used for the SCIM provider
-          provider:
-            type: string
-            description: Name of the SCIM identity provider
     ScimIntegration:
       allOf:
       - $ref: '#/components/schemas/IntegrationEnabled'
@@ -356,6 +341,34 @@ components:
             format: date-time
             description: Timestamp of when the integration was last synced
             example: '2023-05-15T10:30:00Z'
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
+    UpdateScimIntegrationRequest:
+      allOf:
+      - $ref: '#/components/schemas/IntegrationEnabled'
+      - $ref: '#/components/schemas/IntegrationSyncFilters'
+      - type: object
+        description: Request payload for updating an SCIM IDP integration
+        properties:
+          prefix:
+            type: string
+            description: The connection prefix used for the SCIM provider
+    ScimTokenResponse:
+      type: object
+      description: Response containing the regenerated SCIM token
+      required:
+      - auth_token
+      properties:
+        auth_token:
+          type: string
+          description: The newly generated SCIM API token
+          example: nbs_F3f0d...
     IntegrationSyncFilters:
       type: object
       properties:
@@ -377,24 +390,6 @@ components:
         connector_id:
           type: string
           description: DEX connector ID for embedded IDP setups
-    UpdateScimIntegrationRequest:
-      allOf:
-      - $ref: '#/components/schemas/IntegrationEnabled'
-      - $ref: '#/components/schemas/IntegrationSyncFilters'
-      - type: object
-        description: Request payload for updating an SCIM IDP integration
-        properties:
-          prefix:
-            type: string
-            description: The connection prefix used for the SCIM provider
-    ErrorResponse:
-      type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
-      properties:
-        message:
-          type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
     IdpIntegrationSyncLog:
       type: object
       description: Represents a synchronization log entry for an integration
@@ -429,16 +424,21 @@ components:
           type: boolean
           description: Whether the integration is enabled
           example: true
-    ScimTokenResponse:
-      type: object
-      description: Response containing the regenerated SCIM token
-      required:
-      - auth_token
-      properties:
-        auth_token:
-          type: string
-          description: The newly generated SCIM API token
-          example: nbs_F3f0d...
+    CreateScimIntegrationRequest:
+      allOf:
+      - $ref: '#/components/schemas/IntegrationSyncFilters'
+      - type: object
+        description: Request payload for creating an SCIM IDP integration
+        required:
+        - prefix
+        - provider
+        properties:
+          prefix:
+            type: string
+            description: The connection prefix used for the SCIM provider
+          provider:
+            type: string
+            description: Name of the SCIM identity provider
   securitySchemes:
     BearerAuth:
       type: http

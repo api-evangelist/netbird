@@ -74,11 +74,11 @@ paths:
       x-operation-id-source: derived
 components:
   responses:
-    internal_error:
-      description: Internal Server Error
-      content: {}
     requires_authentication:
       description: Requires authentication
+      content: {}
+    internal_error:
+      description: Internal Server Error
       content: {}
     bad_request:
       description: Bad Request

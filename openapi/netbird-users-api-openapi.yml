@@ -528,37 +528,27 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    UserInviteInfo:
+    UserRequest:
       type: object
-      description: Public information about an invite
       properties:
-        email:
-          description: User's email address
+        role:
+          description: User's NetBird account role
           type: string
-          example: user@example.com
-        name:
-          description: User's full name
-          type: string
-          example: John Doe
-        expires_at:
-          description: Invite expiration time
-          type: string
-          format: date-time
-          example: '2024-01-25T10:00:00Z'
-        valid:
-          description: Whether the invite is still valid (not expired)
+          example: admin
+        auto_groups:
+          description: Group IDs to auto-assign to peers registered by this user
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        is_blocked:
+          description: If set to true then user is blocked and can't use the system
           type: boolean
-          example: true
-        invited_by:
-          description: Name of the user who sent the invite
-          type: string
-          example: Admin User
+          example: false
       required:
-      - email
-      - name
-      - expires_at
-      - valid
-      - invited_by
+      - role
+      - auto_groups
+      - is_blocked
     UserCreateRequest:
       type: object
       properties:
@@ -588,6 +578,16 @@ components:
       - role
       - auto_groups
       - is_service_user
+    UserInviteAcceptResponse:
+      type: object
+      description: Response after accepting an invite
+      properties:
+        success:
+          description: Whether the invite was accepted successfully
+          type: boolean
+          example: true
+      required:
+      - success
     UserInviteCreateRequest:
       type: object
       description: Request to create a user invite link
@@ -627,83 +627,6 @@ components:
           description: Invite expiration time in seconds (default 72 hours)
           type: integer
           example: 259200
-    PasswordChangeRequest:
-      type: object
-      properties:
-        old_password:
-          description: The current password
-          type: string
-          example: currentPassword123
-        new_password:
-          description: The new password to set
-          type: string
-          example: newSecurePassword456
-      required:
-      - old_password
-      - new_password
-    UserInvite:
-      type: object
-      description: A user invite
-      properties:
-        id:
-          description: Invite ID
-          type: string
-          example: d5p7eedra0h0lt6f59hg
-        email:
-          description: User's email address
-          type: string
-          example: user@example.com
-        name:
-          description: User's full name
-          type: string
-          example: John Doe
-        role:
-          description: User's NetBird account role
-          type: string
-          example: user
-        auto_groups:
-          description: Group IDs to auto-assign to peers registered by this user
-          type: array
-          items:
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m0
-        expires_at:
-          description: Invite expiration time
-          type: string
-          format: date-time
-          example: '2024-01-25T10:00:00Z'
-        created_at:
-          description: Invite creation time
-          type: string
-          format: date-time
-          example: '2024-01-22T10:00:00Z'
-        expired:
-          description: Whether the invite has expired
-          type: boolean
-          example: false
-        invite_token:
-          description: The invite link to be shared with the user. Only returned when the invite is created or regenerated.
-          type: string
-          example: nbi_Xk5Lz9mP2vQwRtYu1aN3bC4dE5fGh0ABC123
-      required:
-      - id
-      - email
-      - name
-      - role
-      - auto_groups
-      - expires_at
-      - created_at
-      - expired
-    UserInviteAcceptResponse:
-      type: object
-      description: Response after accepting an invite
-      properties:
-        success:
-          description: Whether the invite was accepted successfully
-          type: boolean
-          example: true
-      required:
-      - success
     UserInviteAcceptRequest:
       type: object
       description: Request to accept an invite and set password
@@ -717,43 +640,6 @@ components:
           example: SecurePass123!
       required:
       - password
-    UserInviteRegenerateResponse:
-      type: object
-      description: Response after regenerating an invite
-      properties:
-        invite_token:
-          description: The new invite token
-          type: string
-          example: nbi_Xk5Lz9mP2vQwRtYu1aN3bC4dE5fGh0ABC123
-        invite_expires_at:
-          description: New invite expiration time
-          type: string
-          format: date-time
-          example: '2024-01-28T10:00:00Z'
-      required:
-      - invite_token
-      - invite_expires_at
-    UserRequest:
-      type: object
-      properties:
-        role:
-          description: User's NetBird account role
-          type: string
-          example: admin
-        auto_groups:
-          description: Group IDs to auto-assign to peers registered by this user
-          type: array
-          items:
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m0
-        is_blocked:
-          description: If set to true then user is blocked and can't use the system
-          type: boolean
-          example: false
-      required:
-      - role
-      - auto_groups
-      - is_blocked
     User:
       type: object
       properties:
@@ -865,6 +751,120 @@ components:
       required:
       - modules
       - is_restricted
+    UserInviteInfo:
+      type: object
+      description: Public information about an invite
+      properties:
+        email:
+          description: User's email address
+          type: string
+          example: user@example.com
+        name:
+          description: User's full name
+          type: string
+          example: John Doe
+        expires_at:
+          description: Invite expiration time
+          type: string
+          format: date-time
+          example: '2024-01-25T10:00:00Z'
+        valid:
+          description: Whether the invite is still valid (not expired)
+          type: boolean
+          example: true
+        invited_by:
+          description: Name of the user who sent the invite
+          type: string
+          example: Admin User
+      required:
+      - email
+      - name
+      - expires_at
+      - valid
+      - invited_by
+    PasswordChangeRequest:
+      type: object
+      properties:
+        old_password:
+          description: The current password
+          type: string
+          example: currentPassword123
+        new_password:
+          description: The new password to set
+          type: string
+          example: newSecurePassword456
+      required:
+      - old_password
+      - new_password
+    UserInviteRegenerateResponse:
+      type: object
+      description: Response after regenerating an invite
+      properties:
+        invite_token:
+          description: The new invite token
+          type: string
+          example: nbi_Xk5Lz9mP2vQwRtYu1aN3bC4dE5fGh0ABC123
+        invite_expires_at:
+          description: New invite expiration time
+          type: string
+          format: date-time
+          example: '2024-01-28T10:00:00Z'
+      required:
+      - invite_token
+      - invite_expires_at
+    UserInvite:
+      type: object
+      description: A user invite
+      properties:
+        id:
+          description: Invite ID
+          type: string
+          example: d5p7eedra0h0lt6f59hg
+        email:
+          description: User's email address
+          type: string
+          example: user@example.com
+        name:
+          description: User's full name
+          type: string
+          example: John Doe
+        role:
+          description: User's NetBird account role
+          type: string
+          example: user
+        auto_groups:
+          description: Group IDs to auto-assign to peers registered by this user
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        expires_at:
+          description: Invite expiration time
+          type: string
+          format: date-time
+          example: '2024-01-25T10:00:00Z'
+        created_at:
+          description: Invite creation time
+          type: string
+          format: date-time
+          example: '2024-01-22T10:00:00Z'
+        expired:
+          description: Whether the invite has expired
+          type: boolean
+          example: false
+        invite_token:
+          description: The invite link to be shared with the user. Only returned when the invite is created or regenerated.
+          type: string
+          example: nbi_Xk5Lz9mP2vQwRtYu1aN3bC4dE5fGh0ABC123
+      required:
+      - id
+      - email
+      - name
+      - role
+      - auto_groups
+      - expires_at
+      - created_at
+      - expired
   responses:
     validation_failed:
       description: Validation failed

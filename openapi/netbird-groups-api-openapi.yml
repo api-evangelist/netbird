@@ -183,22 +183,6 @@ paths:
       operationId: deleteApiGroupsByGroupId
       x-operation-id-source: derived
 components:
-  responses:
-    not_found:
-      description: Resource not found
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
-    bad_request:
-      description: Bad Request
-      content: {}
   schemas:
     ResourceType:
       allOf:
@@ -207,14 +191,52 @@ components:
         enum:
         - peer
         example: peer
-    NetworkResourceType:
-      description: Network resource type based of the address
-      type: string
-      enum:
-      - host
-      - subnet
-      - domain
-      example: host
+    Resource:
+      type: object
+      properties:
+        id:
+          description: ID of the resource
+          type: string
+          example: chacdk86lnnboviihd7g
+        type:
+          description: Type of the resource
+          $ref: '#/components/schemas/ResourceType'
+      required:
+      - id
+      - type
+    PeerMinimum:
+      type: object
+      properties:
+        id:
+          description: Peer ID
+          type: string
+          example: chacbco6lnnbn6cg5s90
+        name:
+          description: Peer's hostname
+          type: string
+          example: stage-host-1
+      required:
+      - id
+      - name
+    GroupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Group name identifier
+          example: devs
+        peers:
+          type: array
+          description: List of peers ids
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m1
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+      required:
+      - name
     GroupMinimum:
       type: object
       properties:
@@ -247,52 +269,14 @@ components:
       - name
       - peers_count
       - resources_count
-    GroupRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Group name identifier
-          example: devs
-        peers:
-          type: array
-          description: List of peers ids
-          items:
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m1
-        resources:
-          type: array
-          items:
-            $ref: '#/components/schemas/Resource'
-      required:
-      - name
-    PeerMinimum:
-      type: object
-      properties:
-        id:
-          description: Peer ID
-          type: string
-          example: chacbco6lnnbn6cg5s90
-        name:
-          description: Peer's hostname
-          type: string
-          example: stage-host-1
-      required:
-      - id
-      - name
-    Resource:
-      type: object
-      properties:
-        id:
-          description: ID of the resource
-          type: string
-          example: chacdk86lnnboviihd7g
-        type:
-          description: Type of the resource
-          $ref: '#/components/schemas/ResourceType'
-      required:
-      - id
-      - type
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
     Group:
       allOf:
       - $ref: '#/components/schemas/GroupMinimum'
@@ -310,6 +294,22 @@ components:
         required:
         - peers
         - resources
+  responses:
+    forbidden:
+      description: Forbidden
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
+    not_found:
+      description: Resource not found
+      content: {}
   securitySchemes:
     BearerAuth:
       type: http
