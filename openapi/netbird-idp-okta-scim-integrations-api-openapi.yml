@@ -305,45 +305,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
-      properties:
-        message:
-          type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
-    ScimTokenResponse:
-      type: object
-      description: Response containing the regenerated SCIM token
-      required:
-      - auth_token
-      properties:
-        auth_token:
-          type: string
-          description: The newly generated SCIM API token
-          example: nbs_F3f0d...
-    IntegrationSyncFilters:
-      type: object
-      properties:
-        group_prefixes:
-          type: array
-          description: List of start_with string patterns for groups to sync
-          items:
-            type: string
-          example:
-          - Engineering
-          - Sales
-        user_group_prefixes:
-          type: array
-          description: List of start_with string patterns for groups which users to sync
-          items:
-            type: string
-          example:
-          - Users
-        connector_id:
-          type: string
-          description: DEX connector ID for embedded IDP setups
     UpdateOktaScimIntegrationRequest:
       allOf:
       - $ref: '#/components/schemas/IntegrationEnabled'
@@ -405,13 +366,37 @@ components:
             format: date-time
             description: Timestamp of the last synchronization
             example: '2023-05-15T10:30:00Z'
-    IntegrationEnabled:
+    ScimTokenResponse:
+      type: object
+      description: Response containing the regenerated SCIM token
+      required:
+      - auth_token
+      properties:
+        auth_token:
+          type: string
+          description: The newly generated SCIM API token
+          example: nbs_F3f0d...
+    IntegrationSyncFilters:
       type: object
       properties:
-        enabled:
-          type: boolean
-          description: Whether the integration is enabled
-          example: true
+        group_prefixes:
+          type: array
+          description: List of start_with string patterns for groups to sync
+          items:
+            type: string
+          example:
+          - Engineering
+          - Sales
+        user_group_prefixes:
+          type: array
+          description: List of start_with string patterns for groups which users to sync
+          items:
+            type: string
+          example:
+          - Users
+        connector_id:
+          type: string
+          description: DEX connector ID for embedded IDP setups
     CreateOktaScimIntegrationRequest:
       allOf:
       - $ref: '#/components/schemas/IntegrationSyncFilters'
@@ -424,6 +409,21 @@ components:
             type: string
             description: The Okta enterprise connection name on Auth0
             example: my-okta-connection
+    IntegrationEnabled:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether the integration is enabled
+          example: true
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
   securitySchemes:
     BearerAuth:
       type: http

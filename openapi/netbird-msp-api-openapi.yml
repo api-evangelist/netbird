@@ -269,6 +269,35 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    UpdateTenantRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name for the MSP tenant
+          example: My new tenant
+        groups:
+          description: MSP users Groups that can access the Tenant and Roles to assume
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantGroupResponse'
+      required:
+      - name
+      - groups
+    TenantGroupResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Group ID
+          example: ch8i4ug6lnn4g9hqv7m0
+        role:
+          type: string
+          description: The Role name
+          example: admin
+      required:
+      - id
+      - role
     CreateTenantRequest:
       type: object
       properties:
@@ -289,39 +318,6 @@ components:
       - name
       - domain
       - groups
-    UpdateTenantRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name for the MSP tenant
-          example: My new tenant
-        groups:
-          description: MSP users Groups that can access the Tenant and Roles to assume
-          type: array
-          items:
-            $ref: '#/components/schemas/TenantGroupResponse'
-      required:
-      - name
-      - groups
-    GetTenantsResponse:
-      type: array
-      items:
-        $ref: '#/components/schemas/TenantResponse'
-    TenantGroupResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Group ID
-          example: ch8i4ug6lnn4g9hqv7m0
-        role:
-          type: string
-          description: The Role name
-          example: admin
-      required:
-      - id
-      - role
     TenantResponse:
       type: object
       properties:
@@ -384,6 +380,10 @@ components:
       - updated_at
       - status
       - dns_challenge
+    GetTenantsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/TenantResponse'
     DNSChallengeResponse:
       type: object
       properties:

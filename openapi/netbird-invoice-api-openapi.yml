@@ -103,16 +103,6 @@ paths:
       operationId: getApiIntegrationsBillingInvoicesByIdCsv
       x-operation-id-source: derived
 components:
-  responses:
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    bad_request:
-      description: Bad Request
-      content: {}
   schemas:
     InvoiceResponse:
       type: object
@@ -151,6 +141,16 @@ components:
           example: https://invoice.stripe.com/i/acct_1M2DaBKina4I2KUb/test_YWNjdF8xTTJEdVBLaW5hM0kyS1ViLF1SeFpQdEJZd3lUOGNEajNqeWdrdXY2RFM4aHcyCnpsLDEzMjg3GTgyNQ02000JoIHc1X?s=db
       required:
       - url
+  responses:
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   securitySchemes:
     BearerAuth:
       type: http

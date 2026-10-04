@@ -33,6 +33,13 @@ paths:
       operationId: getApiIntegrationsBillingUsage
       x-operation-id-source: derived
 components:
+  responses:
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
   schemas:
     UsageStats:
       type: object
@@ -62,13 +69,6 @@ components:
       - total_users
       - active_peers
       - total_peers
-  responses:
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    requires_authentication:
-      description: Requires authentication
-      content: {}
   securitySchemes:
     BearerAuth:
       type: http

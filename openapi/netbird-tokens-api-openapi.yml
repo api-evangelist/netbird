@@ -161,6 +161,19 @@ paths:
       operationId: deleteApiUsersByUserIdTokensByTokenId
       x-operation-id-source: derived
 components:
+  responses:
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   schemas:
     PersonalAccessTokenGenerated:
       type: object
@@ -226,19 +239,6 @@ components:
       required:
       - name
       - expires_in
-  responses:
-    forbidden:
-      description: Forbidden
-      content: {}
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    bad_request:
-      description: Bad Request
-      content: {}
   securitySchemes:
     BearerAuth:
       type: http

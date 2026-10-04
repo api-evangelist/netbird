@@ -172,112 +172,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ResourceType:
-      allOf:
-      - $ref: '#/components/schemas/NetworkResourceType'
-      - type: string
-        enum:
-        - peer
-        example: peer
-    EDRIntuneRequest:
-      type: object
-      description: Request payload for creating or updating a EDR Intune integration.
-      required:
-      - client_id
-      - tenant_id
-      - secret
-      - groups
-      - last_synced_interval
-      properties:
-        client_id:
-          type: string
-          description: The Azure application client id
-        tenant_id:
-          type: string
-          description: The Azure tenant id
-        secret:
-          type: string
-          description: The Azure application client secret
-        groups:
-          type: array
-          description: The Groups this integrations applies to
-          items:
-            type: string
-        last_synced_interval:
-          type: integer
-          description: The devices last sync requirement interval in hours. Minimum value is 24 hours.
-          minimum: 24
-        enabled:
-          type: boolean
-          description: Indicates whether the integration is enabled
-          default: true
-    ErrorResponse:
-      type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
-      properties:
-        message:
-          type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
-    Resource:
-      type: object
-      properties:
-        id:
-          description: ID of the resource
-          type: string
-          example: chacdk86lnnboviihd7g
-        type:
-          description: Type of the resource
-          $ref: '#/components/schemas/ResourceType'
-      required:
-      - id
-      - type
-    PeerMinimum:
-      type: object
-      properties:
-        id:
-          description: Peer ID
-          type: string
-          example: chacbco6lnnbn6cg5s90
-        name:
-          description: Peer's hostname
-          type: string
-          example: stage-host-1
-      required:
-      - id
-      - name
-    GroupMinimum:
-      type: object
-      properties:
-        id:
-          description: Group ID
-          type: string
-          example: ch8i4ug6lnn4g9hqv7m0
-        name:
-          description: Group Name identifier
-          type: string
-          example: devs
-        peers_count:
-          description: Count of peers associated to the group
-          type: integer
-          example: 2
-        resources_count:
-          description: Count of resources associated to the group
-          type: integer
-          example: 5
-        issued:
-          description: How the group was issued (api, integration, jwt)
-          type: string
-          enum:
-          - api
-          - integration
-          - jwt
-          example: api
-      required:
-      - id
-      - name
-      - peers_count
-      - resources_count
     EDRIntuneResponse:
       type: object
       description: Represents a Intune EDR integration configuration
@@ -349,6 +243,77 @@ components:
       - subnet
       - domain
       example: host
+    ResourceType:
+      allOf:
+      - $ref: '#/components/schemas/NetworkResourceType'
+      - type: string
+        enum:
+        - peer
+        example: peer
+    GroupMinimum:
+      type: object
+      properties:
+        id:
+          description: Group ID
+          type: string
+          example: ch8i4ug6lnn4g9hqv7m0
+        name:
+          description: Group Name identifier
+          type: string
+          example: devs
+        peers_count:
+          description: Count of peers associated to the group
+          type: integer
+          example: 2
+        resources_count:
+          description: Count of resources associated to the group
+          type: integer
+          example: 5
+        issued:
+          description: How the group was issued (api, integration, jwt)
+          type: string
+          enum:
+          - api
+          - integration
+          - jwt
+          example: api
+      required:
+      - id
+      - name
+      - peers_count
+      - resources_count
+    EDRIntuneRequest:
+      type: object
+      description: Request payload for creating or updating a EDR Intune integration.
+      required:
+      - client_id
+      - tenant_id
+      - secret
+      - groups
+      - last_synced_interval
+      properties:
+        client_id:
+          type: string
+          description: The Azure application client id
+        tenant_id:
+          type: string
+          description: The Azure tenant id
+        secret:
+          type: string
+          description: The Azure application client secret
+        groups:
+          type: array
+          description: The Groups this integrations applies to
+          items:
+            type: string
+        last_synced_interval:
+          type: integer
+          description: The devices last sync requirement interval in hours. Minimum value is 24 hours.
+          minimum: 24
+        enabled:
+          type: boolean
+          description: Indicates whether the integration is enabled
+          default: true
     Group:
       allOf:
       - $ref: '#/components/schemas/GroupMinimum'
@@ -366,6 +331,41 @@ components:
         required:
         - peers
         - resources
+    PeerMinimum:
+      type: object
+      properties:
+        id:
+          description: Peer ID
+          type: string
+          example: chacbco6lnnbn6cg5s90
+        name:
+          description: Peer's hostname
+          type: string
+          example: stage-host-1
+      required:
+      - id
+      - name
+    Resource:
+      type: object
+      properties:
+        id:
+          description: ID of the resource
+          type: string
+          example: chacdk86lnnboviihd7g
+        type:
+          description: Type of the resource
+          $ref: '#/components/schemas/ResourceType'
+      required:
+      - id
+      - type
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
   securitySchemes:
     BearerAuth:
       type: http

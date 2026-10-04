@@ -173,7 +173,59 @@ paths:
       operationId: deleteApiIdentityProvidersByIdpId
       x-operation-id-source: derived
 components:
+  responses:
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   schemas:
+    IdentityProvider:
+      type: object
+      properties:
+        id:
+          description: Identity provider ID
+          type: string
+          example: ch8i4ug6lnn4g9hqv7l0
+        type:
+          $ref: '#/components/schemas/IdentityProviderType'
+        name:
+          description: Human-readable name for the identity provider
+          type: string
+          example: My OIDC Provider
+        issuer:
+          description: OIDC issuer URL
+          type: string
+          example: https://accounts.google.com
+        client_id:
+          description: OAuth2 client ID
+          type: string
+          example: 123456789.apps.googleusercontent.com
+      required:
+      - type
+      - name
+      - issuer
+      - client_id
+    IdentityProviderType:
+      type: string
+      description: Type of identity provider
+      enum:
+      - oidc
+      - zitadel
+      - entra
+      - google
+      - okta
+      - pocketid
+      - microsoft
+      - adfs
+      example: oidc
     IdentityProviderRequest:
       type: object
       properties:
@@ -201,58 +253,6 @@ components:
       - issuer
       - client_id
       - client_secret
-    IdentityProviderType:
-      type: string
-      description: Type of identity provider
-      enum:
-      - oidc
-      - zitadel
-      - entra
-      - google
-      - okta
-      - pocketid
-      - microsoft
-      - adfs
-      example: oidc
-    IdentityProvider:
-      type: object
-      properties:
-        id:
-          description: Identity provider ID
-          type: string
-          example: ch8i4ug6lnn4g9hqv7l0
-        type:
-          $ref: '#/components/schemas/IdentityProviderType'
-        name:
-          description: Human-readable name for the identity provider
-          type: string
-          example: My OIDC Provider
-        issuer:
-          description: OIDC issuer URL
-          type: string
-          example: https://accounts.google.com
-        client_id:
-          description: OAuth2 client ID
-          type: string
-          example: 123456789.apps.googleusercontent.com
-      required:
-      - type
-      - name
-      - issuer
-      - client_id
-  responses:
-    forbidden:
-      description: Forbidden
-      content: {}
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    bad_request:
-      description: Bad Request
-      content: {}
   securitySchemes:
     BearerAuth:
       type: http

@@ -385,6 +385,22 @@ paths:
       operationId: deleteApiDnsZonesByZoneIdRecordsByRecordId
       x-operation-id-source: derived
 components:
+  responses:
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+    not_found:
+      description: Resource not found
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   schemas:
     Zone:
       allOf:
@@ -404,6 +420,14 @@ components:
         - enabled
         - records
       - $ref: '#/components/schemas/ZoneRequest'
+    DNSRecordType:
+      type: string
+      description: DNS record type
+      enum:
+      - A
+      - AAAA
+      - CNAME
+      example: A
     DNSRecord:
       allOf:
       - type: object
@@ -415,6 +439,31 @@ components:
         required:
         - id
       - $ref: '#/components/schemas/DNSRecordRequest'
+    DNSRecordRequest:
+      type: object
+      properties:
+        name:
+          description: FQDN for the DNS record. Must be a subdomain within or match the zone's domain.
+          type: string
+          example: www.example.com
+        type:
+          $ref: '#/components/schemas/DNSRecordType'
+        content:
+          description: DNS record content (IP address for A/AAAA, domain for CNAME)
+          type: string
+          maxLength: 255
+          minLength: 1
+          example: 192.168.1.1
+        ttl:
+          description: Time to live in seconds
+          type: integer
+          minimum: 0
+          example: 300
+      required:
+      - name
+      - type
+      - content
+      - ttl
     ZoneRequest:
       type: object
       properties:
@@ -447,55 +496,6 @@ components:
       - domain
       - enable_search_domain
       - distribution_groups
-    DNSRecordType:
-      type: string
-      description: DNS record type
-      enum:
-      - A
-      - AAAA
-      - CNAME
-      example: A
-    DNSRecordRequest:
-      type: object
-      properties:
-        name:
-          description: FQDN for the DNS record. Must be a subdomain within or match the zone's domain.
-          type: string
-          example: www.example.com
-        type:
-          $ref: '#/components/schemas/DNSRecordType'
-        content:
-          description: DNS record content (IP address for A/AAAA, domain for CNAME)
-          type: string
-          maxLength: 255
-          minLength: 1
-          example: 192.168.1.1
-        ttl:
-          description: Time to live in seconds
-          type: integer
-          minimum: 0
-          example: 300
-      required:
-      - name
-      - type
-      - content
-      - ttl
-  responses:
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    bad_request:
-      description: Bad Request
-      content: {}
-    not_found:
-      description: Resource not found
-      content: {}
   securitySchemes:
     BearerAuth:
       type: http

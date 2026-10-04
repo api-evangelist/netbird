@@ -166,6 +166,52 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    NBVersionCheck:
+      description: Posture check for the version of NetBird
+      type: object
+      $ref: '#/components/schemas/MinVersionCheck'
+    ProcessCheck:
+      description: Posture Check for binaries exist and are running in the peer’s system
+      type: object
+      properties:
+        processes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Process'
+      required:
+      - processes
+    CountryCode:
+      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
+      type: string
+      example: DE
+    CityName:
+      description: Commonly used English name of the city
+      type: string
+      example: Berlin
+    Location:
+      description: Describe geographical location information
+      type: object
+      properties:
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+        city_name:
+          $ref: '#/components/schemas/CityName'
+      required:
+      - country_code
+    Checks:
+      description: List of objects that perform the actual checks
+      type: object
+      properties:
+        nb_version_check:
+          $ref: '#/components/schemas/NBVersionCheck'
+        os_version_check:
+          $ref: '#/components/schemas/OSVersionCheck'
+        geo_location_check:
+          $ref: '#/components/schemas/GeoLocationCheck'
+        peer_network_range_check:
+          $ref: '#/components/schemas/PeerNetworkRangeCheck'
+        process_check:
+          $ref: '#/components/schemas/ProcessCheck'
     OSVersionCheck:
       description: Posture check for the version of operating system
       type: object
@@ -195,35 +241,32 @@ components:
           min_kernel_version: 5.3.3
         windows:
           min_kernel_version: 10.0.1234
-    GeoLocationCheck:
-      description: Posture check for geo location
+    MinVersionCheck:
+      description: Posture check for the version of operating system
       type: object
       properties:
-        locations:
-          description: List of geo locations to which the policy applies
-          type: array
-          items:
-            $ref: '#/components/schemas/Location'
-        action:
-          description: Action to take upon policy match
+        min_version:
+          description: Minimum acceptable version
           type: string
-          enum:
-          - allow
-          - deny
-          example: allow
+          example: '14.3'
       required:
-      - locations
-      - action
-    ProcessCheck:
-      description: Posture Check for binaries exist and are running in the peer’s system
+      - min_version
+    PostureCheckUpdate:
       type: object
       properties:
-        processes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Process'
+        name:
+          description: Posture check name identifier
+          type: string
+          example: Default
+        description:
+          description: Posture check friendly description
+          type: string
+          example: This checks if the peer is running required NetBird's version
+        checks:
+          $ref: '#/components/schemas/Checks'
       required:
-      - processes
+      - name
+      - description
     PeerNetworkRangeCheck:
       description: 'Posture check for allow or deny access based on the peer''s IP addresses. A range matches when it
 
@@ -255,10 +298,6 @@ components:
       required:
       - ranges
       - action
-    CityName:
-      description: Commonly used English name of the city
-      type: string
-      example: Berlin
     MinKernelVersionCheck:
       description: Posture check with the kernel version
       type: object
@@ -269,30 +308,6 @@ components:
           example: 6.6.12
       required:
       - min_kernel_version
-    PostureCheckUpdate:
-      type: object
-      properties:
-        name:
-          description: Posture check name identifier
-          type: string
-          example: Default
-        description:
-          description: Posture check friendly description
-          type: string
-          example: This checks if the peer is running required NetBird's version
-        checks:
-          $ref: '#/components/schemas/Checks'
-      required:
-      - name
-      - description
-    NBVersionCheck:
-      description: Posture check for the version of NetBird
-      type: object
-      $ref: '#/components/schemas/MinVersionCheck'
-    CountryCode:
-      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
-      type: string
-      example: DE
     PostureCheck:
       type: object
       properties:
@@ -314,30 +329,6 @@ components:
       - id
       - name
       - checks
-    MinVersionCheck:
-      description: Posture check for the version of operating system
-      type: object
-      properties:
-        min_version:
-          description: Minimum acceptable version
-          type: string
-          example: '14.3'
-      required:
-      - min_version
-    Checks:
-      description: List of objects that perform the actual checks
-      type: object
-      properties:
-        nb_version_check:
-          $ref: '#/components/schemas/NBVersionCheck'
-        os_version_check:
-          $ref: '#/components/schemas/OSVersionCheck'
-        geo_location_check:
-          $ref: '#/components/schemas/GeoLocationCheck'
-        peer_network_range_check:
-          $ref: '#/components/schemas/PeerNetworkRangeCheck'
-        process_check:
-          $ref: '#/components/schemas/ProcessCheck'
     Process:
       description: Describes the operational activity within a peer's system.
       type: object
@@ -356,22 +347,31 @@ components:
           example: 'C:             rogramData etBird
 
             etbird.exe'
-    Location:
-      description: Describe geographical location information
+    GeoLocationCheck:
+      description: Posture check for geo location
       type: object
       properties:
-        country_code:
-          $ref: '#/components/schemas/CountryCode'
-        city_name:
-          $ref: '#/components/schemas/CityName'
+        locations:
+          description: List of geo locations to which the policy applies
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+        action:
+          description: Action to take upon policy match
+          type: string
+          enum:
+          - allow
+          - deny
+          example: allow
       required:
-      - country_code
+      - locations
+      - action
   responses:
-    forbidden:
-      description: Forbidden
-      content: {}
     requires_authentication:
       description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     internal_error:
       description: Internal Server Error

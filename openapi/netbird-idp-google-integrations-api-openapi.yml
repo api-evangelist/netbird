@@ -305,38 +305,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    UpdateGoogleIntegrationRequest:
-      allOf:
-      - $ref: '#/components/schemas/IntegrationEnabled'
-      - $ref: '#/components/schemas/IntegrationSyncFilters'
-      - type: object
-        description: Request payload for updating a Google Workspace IDP integration. All fields are optional.
-        properties:
-          service_account_key:
-            type: string
-            description: Base64-encoded Google service account key
-          customer_id:
-            type: string
-            description: Customer ID from Google Workspace Account Settings
-          sync_interval:
-            type: integer
-            description: Sync interval in seconds (minimum 300)
-            minimum: 300
-    ErrorResponse:
-      type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
-      properties:
-        message:
-          type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
-    SyncResult:
-      type: object
-      description: Response for a manual sync trigger
-      properties:
-        result:
-          type: string
-          example: ok
     GoogleIntegration:
       allOf:
       - $ref: '#/components/schemas/IntegrationEnabled'
@@ -370,27 +338,6 @@ components:
             format: date-time
             description: Timestamp of the last synchronization
             example: '2023-05-15T10:30:00Z'
-    IntegrationSyncFilters:
-      type: object
-      properties:
-        group_prefixes:
-          type: array
-          description: List of start_with string patterns for groups to sync
-          items:
-            type: string
-          example:
-          - Engineering
-          - Sales
-        user_group_prefixes:
-          type: array
-          description: List of start_with string patterns for groups which users to sync
-          items:
-            type: string
-          example:
-          - Users
-        connector_id:
-          type: string
-          description: DEX connector ID for embedded IDP setups
     IdpIntegrationSyncLog:
       type: object
       description: Represents a synchronization log entry for an integration
@@ -418,6 +365,44 @@ components:
           type: string
           description: Log message
           example: Successfully synchronized users and groups
+    UpdateGoogleIntegrationRequest:
+      allOf:
+      - $ref: '#/components/schemas/IntegrationEnabled'
+      - $ref: '#/components/schemas/IntegrationSyncFilters'
+      - type: object
+        description: Request payload for updating a Google Workspace IDP integration. All fields are optional.
+        properties:
+          service_account_key:
+            type: string
+            description: Base64-encoded Google service account key
+          customer_id:
+            type: string
+            description: Customer ID from Google Workspace Account Settings
+          sync_interval:
+            type: integer
+            description: Sync interval in seconds (minimum 300)
+            minimum: 300
+    IntegrationSyncFilters:
+      type: object
+      properties:
+        group_prefixes:
+          type: array
+          description: List of start_with string patterns for groups to sync
+          items:
+            type: string
+          example:
+          - Engineering
+          - Sales
+        user_group_prefixes:
+          type: array
+          description: List of start_with string patterns for groups which users to sync
+          items:
+            type: string
+          example:
+          - Users
+        connector_id:
+          type: string
+          description: DEX connector ID for embedded IDP setups
     CreateGoogleIntegrationRequest:
       allOf:
       - $ref: '#/components/schemas/IntegrationSyncFilters'
@@ -440,6 +425,13 @@ components:
             description: Sync interval in seconds (minimum 300). Defaults to 300 if not specified.
             minimum: 300
             example: 300
+    SyncResult:
+      type: object
+      description: Response for a manual sync trigger
+      properties:
+        result:
+          type: string
+          example: ok
     IntegrationEnabled:
       type: object
       properties:
@@ -447,6 +439,14 @@ components:
           type: boolean
           description: Whether the integration is enabled
           example: true
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
   securitySchemes:
     BearerAuth:
       type: http

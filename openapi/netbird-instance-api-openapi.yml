@@ -95,7 +95,64 @@ paths:
       operationId: postApiSetup
       x-operation-id-source: derived
 components:
+  responses:
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   schemas:
+    SetupResponse:
+      type: object
+      description: Response after successful instance setup
+      properties:
+        user_id:
+          description: The ID of the created user
+          type: string
+          example: abc123def456
+        email:
+          description: Email address of the created user
+          type: string
+          example: admin@example.com
+        personal_access_token:
+          description: Plain text Personal Access Token created during setup. Present only when create_pat was requested and the NB_SETUP_PAT_ENABLED feature was enabled on the server.
+          type: string
+          format: password
+          readOnly: true
+          example: nbp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      required:
+      - user_id
+      - email
+    InstanceVersionInfo:
+      type: object
+      description: Version information for NetBird components
+      properties:
+        management_current_version:
+          description: The current running version of the management server
+          type: string
+          example: 0.35.0
+        dashboard_available_version:
+          description: The latest available version of the dashboard (from GitHub releases)
+          type: string
+          example: 2.10.0
+        management_available_version:
+          description: The latest available version of the management server (from GitHub releases)
+          type: string
+          example: 0.35.0
+        management_update_available:
+          description: Indicates if a newer management version is available
+          type: boolean
+          example: true
+      required:
+      - management_current_version
+      - management_update_available
     SetupRequest:
       type: object
       description: Request to set up the initial admin user
@@ -129,27 +186,6 @@ components:
       - email
       - password
       - name
-    SetupResponse:
-      type: object
-      description: Response after successful instance setup
-      properties:
-        user_id:
-          description: The ID of the created user
-          type: string
-          example: abc123def456
-        email:
-          description: Email address of the created user
-          type: string
-          example: admin@example.com
-        personal_access_token:
-          description: Plain text Personal Access Token created during setup. Present only when create_pat was requested and the NB_SETUP_PAT_ENABLED feature was enabled on the server.
-          type: string
-          format: password
-          readOnly: true
-          example: nbp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-      required:
-      - user_id
-      - email
     InstanceStatus:
       type: object
       description: Instance status information
@@ -160,42 +196,6 @@ components:
           example: true
       required:
       - setup_required
-    InstanceVersionInfo:
-      type: object
-      description: Version information for NetBird components
-      properties:
-        management_current_version:
-          description: The current running version of the management server
-          type: string
-          example: 0.35.0
-        dashboard_available_version:
-          description: The latest available version of the dashboard (from GitHub releases)
-          type: string
-          example: 2.10.0
-        management_available_version:
-          description: The latest available version of the management server (from GitHub releases)
-          type: string
-          example: 0.35.0
-        management_update_available:
-          description: Indicates if a newer management version is available
-          type: boolean
-          example: true
-      required:
-      - management_current_version
-      - management_update_available
-  responses:
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    bad_request:
-      description: Bad Request
-      content: {}
   securitySchemes:
     BearerAuth:
       type: http

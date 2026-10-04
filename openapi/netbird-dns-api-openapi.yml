@@ -231,38 +231,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Nameserver:
-      type: object
-      properties:
-        ip:
-          description: Nameserver IP
-          type: string
-          example: 8.8.8.8
-        ns_type:
-          description: Nameserver Type
-          type: string
-          enum:
-          - udp
-          example: udp
-        port:
-          description: Nameserver Port
-          type: integer
-          example: 53
-      required:
-      - ip
-      - ns_type
-      - port
-    DNSSettings:
-      type: object
-      properties:
-        disabled_management_groups:
-          description: Groups whose DNS management is disabled
-          type: array
-          items:
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m0
-      required:
-      - disabled_management_groups
     NameserverGroupRequest:
       type: object
       properties:
@@ -318,6 +286,38 @@ components:
       - primary
       - domains
       - search_domains_enabled
+    Nameserver:
+      type: object
+      properties:
+        ip:
+          description: Nameserver IP
+          type: string
+          example: 8.8.8.8
+        ns_type:
+          description: Nameserver Type
+          type: string
+          enum:
+          - udp
+          example: udp
+        port:
+          description: Nameserver Port
+          type: integer
+          example: 53
+      required:
+      - ip
+      - ns_type
+      - port
+    DNSSettings:
+      type: object
+      properties:
+        disabled_management_groups:
+          description: Groups whose DNS management is disabled
+          type: array
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+      required:
+      - disabled_management_groups
     NameserverGroup:
       allOf:
       - type: object
@@ -330,11 +330,11 @@ components:
         - id
       - $ref: '#/components/schemas/NameserverGroupRequest'
   responses:
-    forbidden:
-      description: Forbidden
-      content: {}
     requires_authentication:
       description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     internal_error:
       description: Internal Server Error

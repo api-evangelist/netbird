@@ -228,27 +228,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    PeerTemporaryAccessRequest:
-      type: object
-      properties:
-        name:
-          description: Peer's hostname
-          type: string
-          example: temp-host-1
-        wg_pub_key:
-          description: Peer's WireGuard public key
-          type: string
-          example: n0r3pL4c3h0ld3rK3y==
-        rules:
-          description: List of temporary access rules
-          type: array
-          items:
-            type: string
-            example: tcp/80
-      required:
-      - name
-      - wg_pub_key
-      - rules
     PeerRequest:
       type: object
       properties:
@@ -278,24 +257,6 @@ components:
       - ssh_enabled
       - login_expiration_enabled
       - inactivity_expiration_enabled
-    CityName:
-      description: Commonly used English name of the city
-      type: string
-      example: Berlin
-    PeerMinimum:
-      type: object
-      properties:
-        id:
-          description: Peer ID
-          type: string
-          example: chacbco6lnnbn6cg5s90
-        name:
-          description: Peer's hostname
-          type: string
-          example: stage-host-1
-      required:
-      - id
-      - name
     Peer:
       allOf:
       - $ref: '#/components/schemas/PeerMinimum'
@@ -434,53 +395,118 @@ components:
         - serial_number
         - extra_dns_labels
         - ephemeral
+    AccessiblePeer:
+      allOf:
+      - $ref: '#/components/schemas/PeerMinimum'
+      - type: object
+        properties:
+          ip:
+            description: Peer's IP address
+            type: string
+            example: 10.64.0.1
+          dns_label:
+            description: Peer's DNS label is the parsed peer name for domain resolution. It is used to form an FQDN by appending the account's domain to the peer label. e.g. peer-dns-label.netbird.cloud
+            type: string
+            example: stage-host-1.netbird.cloud
+          user_id:
+            description: User ID of the user that enrolled this peer
+            type: string
+            example: google-oauth2|277474792786460067937
+          os:
+            description: Peer's operating system and version
+            type: string
+            example: linux
+          country_code:
+            $ref: '#/components/schemas/CountryCode'
+          city_name:
+            $ref: '#/components/schemas/CityName'
+          geoname_id:
+            description: Unique identifier from the GeoNames database for a specific geographical location.
+            type: integer
+            example: 2643743
+          connected:
+            description: Peer to Management connection status
+            type: boolean
+            example: true
+          last_seen:
+            description: Last time peer connected to Netbird's management service
+            type: string
+            format: date-time
+            example: '2023-05-05T10:05:26.420578Z'
+        required:
+        - ip
+        - dns_label
+        - user_id
+        - os
+        - country_code
+        - city_name
+        - geoname_id
+        - connected
+        - last_seen
     CountryCode:
       description: 2-letter ISO 3166-1 alpha-2 code that represents the country
       type: string
       example: DE
-    PeerLocalFlags:
+    CityName:
+      description: Commonly used English name of the city
+      type: string
+      example: Berlin
+    PeerTemporaryAccessResponse:
       type: object
       properties:
-        rosenpass_enabled:
-          description: Indicates whether Rosenpass is enabled on this peer
-          type: boolean
-          example: true
-        rosenpass_permissive:
-          description: Indicates whether Rosenpass is in permissive mode or not
-          type: boolean
-          example: false
-        server_ssh_allowed:
-          description: Indicates whether SSH access this peer is allowed or not
-          type: boolean
-          example: true
-        disable_client_routes:
-          description: Indicates whether client routes are disabled on this peer or not
-          type: boolean
-          example: false
-        disable_server_routes:
-          description: Indicates whether server routes are disabled on this peer or not
-          type: boolean
-          example: false
-        disable_dns:
-          description: Indicates whether DNS management is disabled on this peer or not
-          type: boolean
-          example: false
-        disable_firewall:
-          description: Indicates whether firewall management is disabled on this peer or not
-          type: boolean
-          example: false
-        block_lan_access:
-          description: Indicates whether LAN access is blocked on this peer when used as a routing peer
-          type: boolean
-          example: false
-        block_inbound:
-          description: Indicates whether inbound traffic is blocked on this peer
-          type: boolean
-          example: false
-        lazy_connection_enabled:
-          description: Indicates whether lazy connection is enabled on this peer
-          type: boolean
-          example: false
+        name:
+          description: Peer's hostname
+          type: string
+          example: temp-host-1
+        id:
+          description: Peer ID
+          type: string
+          example: chacbco6lnnbn6cg5s90
+        rules:
+          description: List of temporary access rules
+          type: array
+          items:
+            type: string
+            example: tcp/80
+      required:
+      - name
+      - id
+      - rules
+    PeerMinimum:
+      type: object
+      properties:
+        id:
+          description: Peer ID
+          type: string
+          example: chacbco6lnnbn6cg5s90
+        name:
+          description: Peer's hostname
+          type: string
+          example: stage-host-1
+      required:
+      - id
+      - name
+    PeerTemporaryAccessRequest:
+      type: object
+      properties:
+        name:
+          description: Peer's hostname
+          type: string
+          example: temp-host-1
+        wg_pub_key:
+          description: Peer's WireGuard public key
+          type: string
+          example: n0r3pL4c3h0ld3rK3y==
+        rules:
+          description: List of temporary access rules
+          type: array
+          items:
+            type: string
+            example: tcp/80
+      required:
+      - name
+      - wg_pub_key
+      - rules
     PeerBatch:
       allOf:
       - $ref: '#/components/schemas/Peer'
@@ -530,81 +556,55 @@ components:
       - name
       - peers_count
       - resources_count
-    PeerTemporaryAccessResponse:
+    PeerLocalFlags:
       type: object
       properties:
-        name:
-          description: Peer's hostname
-          type: string
-          example: temp-host-1
-        id:
-          description: Peer ID
-          type: string
-          example: chacbco6lnnbn6cg5s90
-        rules:
-          description: List of temporary access rules
-          type: array
-          items:
-            type: string
-            example: tcp/80
-      required:
-      - name
-      - id
-      - rules
-    AccessiblePeer:
-      allOf:
-      - $ref: '#/components/schemas/PeerMinimum'
-      - type: object
-        properties:
-          ip:
-            description: Peer's IP address
-            type: string
-            example: 10.64.0.1
-          dns_label:
-            description: Peer's DNS label is the parsed peer name for domain resolution. It is used to form an FQDN by appending the account's domain to the peer label. e.g. peer-dns-label.netbird.cloud
-            type: string
-            example: stage-host-1.netbird.cloud
-          user_id:
-            description: User ID of the user that enrolled this peer
-            type: string
-            example: google-oauth2|277474792786460067937
-          os:
-            description: Peer's operating system and version
-            type: string
-            example: linux
-          country_code:
-            $ref: '#/components/schemas/CountryCode'
-          city_name:
-            $ref: '#/components/schemas/CityName'
-          geoname_id:
-            description: Unique identifier from the GeoNames database for a specific geographical location.
-            type: integer
-            example: 2643743
-          connected:
-            description: Peer to Management connection status
-            type: boolean
-            example: true
-          last_seen:
-            description: Last time peer connected to Netbird's management service
-            type: string
-            format: date-time
-            example: '2023-05-05T10:05:26.420578Z'
-        required:
-        - ip
-        - dns_label
-        - user_id
-        - os
-        - country_code
-        - city_name
-        - geoname_id
-        - connected
-        - last_seen
+        rosenpass_enabled:
+          description: Indicates whether Rosenpass is enabled on this peer
+          type: boolean
+          example: true
+        rosenpass_permissive:
+          description: Indicates whether Rosenpass is in permissive mode or not
+          type: boolean
+          example: false
+        server_ssh_allowed:
+          description: Indicates whether SSH access this peer is allowed or not
+          type: boolean
+          example: true
+        disable_client_routes:
+          description: Indicates whether client routes are disabled on this peer or not
+          type: boolean
+          example: false
+        disable_server_routes:
+          description: Indicates whether server routes are disabled on this peer or not
+          type: boolean
+          example: false
+        disable_dns:
+          description: Indicates whether DNS management is disabled on this peer or not
+          type: boolean
+          example: false
+        disable_firewall:
+          description: Indicates whether firewall management is disabled on this peer or not
+          type: boolean
+          example: false
+        block_lan_access:
+          description: Indicates whether LAN access is blocked on this peer when used as a routing peer
+          type: boolean
+          example: false
+        block_inbound:
+          description: Indicates whether inbound traffic is blocked on this peer
+          type: boolean
+          example: false
+        lazy_connection_enabled:
+          description: Indicates whether lazy connection is enabled on this peer
+          type: boolean
+          example: false
   responses:
-    requires_authentication:
-      description: Requires authentication
-      content: {}
     forbidden:
       description: Forbidden
+      content: {}
+    requires_authentication:
+      description: Requires authentication
       content: {}
     internal_error:
       description: Internal Server Error

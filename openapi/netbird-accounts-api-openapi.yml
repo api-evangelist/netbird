@@ -111,6 +111,29 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    AccountRequest:
+      type: object
+      properties:
+        settings:
+          $ref: '#/components/schemas/AccountSettings'
+        onboarding:
+          $ref: '#/components/schemas/AccountOnboarding'
+      required:
+      - settings
+    AccountOnboarding:
+      type: object
+      properties:
+        signup_form_pending:
+          description: Indicates whether the account signup form is pending
+          type: boolean
+          example: true
+        onboarding_flow_pending:
+          description: Indicates whether the account onboarding flow is pending
+          type: boolean
+          example: false
+      required:
+      - signup_form_pending
+      - onboarding_flow_pending
     AccountSettings:
       type: object
       properties:
@@ -275,35 +298,12 @@ components:
       - created_at
       - created_by
       - onboarding
-    AccountOnboarding:
-      type: object
-      properties:
-        signup_form_pending:
-          description: Indicates whether the account signup form is pending
-          type: boolean
-          example: true
-        onboarding_flow_pending:
-          description: Indicates whether the account onboarding flow is pending
-          type: boolean
-          example: false
-      required:
-      - signup_form_pending
-      - onboarding_flow_pending
-    AccountRequest:
-      type: object
-      properties:
-        settings:
-          $ref: '#/components/schemas/AccountSettings'
-        onboarding:
-          $ref: '#/components/schemas/AccountOnboarding'
-      required:
-      - settings
   responses:
-    forbidden:
-      description: Forbidden
-      content: {}
     requires_authentication:
       description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     internal_error:
       description: Internal Server Error

@@ -169,48 +169,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ResourceType:
-      allOf:
-      - $ref: '#/components/schemas/NetworkResourceType'
-      - type: string
-        enum:
-        - peer
-        example: peer
-    ErrorResponse:
-      type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
-      properties:
-        message:
-          type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
-    Resource:
-      type: object
-      properties:
-        id:
-          description: ID of the resource
-          type: string
-          example: chacdk86lnnboviihd7g
-        type:
-          description: Type of the resource
-          $ref: '#/components/schemas/ResourceType'
-      required:
-      - id
-      - type
-    PeerMinimum:
-      type: object
-      properties:
-        id:
-          description: Peer ID
-          type: string
-          example: chacbco6lnnbn6cg5s90
-        name:
-          description: Peer's hostname
-          type: string
-          example: stage-host-1
-      required:
-      - id
-      - name
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
     EDRFalconRequest:
       type: object
       description: Request payload for creating or updating a EDR Falcon integration
@@ -245,6 +211,13 @@ components:
       - cloud_id
       - groups
       - zta_score_threshold
+    ResourceType:
+      allOf:
+      - $ref: '#/components/schemas/NetworkResourceType'
+      - type: string
+        enum:
+        - peer
+        example: peer
     GroupMinimum:
       type: object
       properties:
@@ -277,6 +250,50 @@ components:
       - name
       - peers_count
       - resources_count
+    Group:
+      allOf:
+      - $ref: '#/components/schemas/GroupMinimum'
+      - type: object
+        properties:
+          peers:
+            description: List of peers object
+            type: array
+            items:
+              $ref: '#/components/schemas/PeerMinimum'
+          resources:
+            type: array
+            items:
+              $ref: '#/components/schemas/Resource'
+        required:
+        - peers
+        - resources
+    PeerMinimum:
+      type: object
+      properties:
+        id:
+          description: Peer ID
+          type: string
+          example: chacbco6lnnbn6cg5s90
+        name:
+          description: Peer's hostname
+          type: string
+          example: stage-host-1
+      required:
+      - id
+      - name
+    Resource:
+      type: object
+      properties:
+        id:
+          description: ID of the resource
+          type: string
+          example: chacdk86lnnboviihd7g
+        type:
+          description: Type of the resource
+          $ref: '#/components/schemas/ResourceType'
+      required:
+      - id
+      - type
     EDRFalconResponse:
       type: object
       description: Represents a Falcon EDR integration
@@ -333,31 +350,14 @@ components:
         enabled:
           type: boolean
           description: Indicates whether the integration is enabled
-    NetworkResourceType:
-      description: Network resource type based of the address
-      type: string
-      enum:
-      - host
-      - subnet
-      - domain
-      example: host
-    Group:
-      allOf:
-      - $ref: '#/components/schemas/GroupMinimum'
-      - type: object
-        properties:
-          peers:
-            description: List of peers object
-            type: array
-            items:
-              $ref: '#/components/schemas/PeerMinimum'
-          resources:
-            type: array
-            items:
-              $ref: '#/components/schemas/Resource'
-        required:
-        - peers
-        - resources
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
   securitySchemes:
     BearerAuth:
       type: http

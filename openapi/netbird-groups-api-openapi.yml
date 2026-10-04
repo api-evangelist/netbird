@@ -184,6 +184,33 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    GroupRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Group name identifier
+          example: devs
+        peers:
+          type: array
+          description: List of peers ids
+          items:
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m1
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+      required:
+      - name
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
     ResourceType:
       allOf:
       - $ref: '#/components/schemas/NetworkResourceType'
@@ -191,6 +218,23 @@ components:
         enum:
         - peer
         example: peer
+    Group:
+      allOf:
+      - $ref: '#/components/schemas/GroupMinimum'
+      - type: object
+        properties:
+          peers:
+            description: List of peers object
+            type: array
+            items:
+              $ref: '#/components/schemas/PeerMinimum'
+          resources:
+            type: array
+            items:
+              $ref: '#/components/schemas/Resource'
+        required:
+        - peers
+        - resources
     Resource:
       type: object
       properties:
@@ -217,25 +261,6 @@ components:
           example: stage-host-1
       required:
       - id
-      - name
-    GroupRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Group name identifier
-          example: devs
-        peers:
-          type: array
-          description: List of peers ids
-          items:
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m1
-        resources:
-          type: array
-          items:
-            $ref: '#/components/schemas/Resource'
-      required:
       - name
     GroupMinimum:
       type: object
@@ -269,46 +294,21 @@ components:
       - name
       - peers_count
       - resources_count
-    NetworkResourceType:
-      description: Network resource type based of the address
-      type: string
-      enum:
-      - host
-      - subnet
-      - domain
-      example: host
-    Group:
-      allOf:
-      - $ref: '#/components/schemas/GroupMinimum'
-      - type: object
-        properties:
-          peers:
-            description: List of peers object
-            type: array
-            items:
-              $ref: '#/components/schemas/PeerMinimum'
-          resources:
-            type: array
-            items:
-              $ref: '#/components/schemas/Resource'
-        required:
-        - peers
-        - resources
   responses:
+    requires_authentication:
+      description: Requires authentication
+      content: {}
     forbidden:
       description: Forbidden
       content: {}
-    requires_authentication:
-      description: Requires authentication
+    not_found:
+      description: Resource not found
       content: {}
     internal_error:
       description: Internal Server Error
       content: {}
     bad_request:
       description: Bad Request
-      content: {}
-    not_found:
-      description: Resource not found
       content: {}
   securitySchemes:
     BearerAuth:

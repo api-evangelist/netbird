@@ -75,10 +75,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    CountryCode:
-      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
-      type: string
-      example: DE
     Country:
       description: Describe country geographical location information
       type: object
@@ -92,6 +88,10 @@ components:
       required:
       - country_name
       - country_code
+    CountryCode:
+      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
+      type: string
+      example: DE
     City:
       description: Describe city geographical location information
       type: object
@@ -108,11 +108,11 @@ components:
       - geoname_id
       - city_name
   responses:
-    forbidden:
-      description: Forbidden
-      content: {}
     requires_authentication:
       description: Requires authentication
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     internal_error:
       description: Internal Server Error
