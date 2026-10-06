@@ -55,7 +55,7 @@ tags_raw:
   - Security
   - Open-Source
 created: '2025-02-09'
-modified: '2026-05-19'
+modified: '2026-10-06'
 url: https://raw.githubusercontent.com/api-evangelist/netbird/refs/heads/main/apis.yml
 specificationVersion: '0.23'
 apis:
@@ -542,6 +542,8 @@ apis:
   - type: Documentation
     url: https://docs.netbird.io/
 common:
+  - url: https://netbird.io/rss.xml
+    type: BlogRSS
   - type: Pricing
     url: https://netbird.io/pricing
   - type: Plans
