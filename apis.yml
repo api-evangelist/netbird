@@ -542,6 +542,10 @@ apis:
   - type: Documentation
     url: https://docs.netbird.io/
 common:
+  - type: RateLimits
+    url: rate-limits/netbird-rate-limits.yml
+  - type: FinOps
+    url: finops/netbird-finops.yml
   - url: https://netbird.io/rss.xml
     type: BlogRSS
   - type: Pricing
