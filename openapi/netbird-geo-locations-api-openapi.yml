@@ -74,20 +74,20 @@ paths:
       operationId: getApiLocationsCountriesByCountryCities
       x-operation-id-source: derived
 components:
+  responses:
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   schemas:
-    Country:
-      description: Describe country geographical location information
-      type: object
-      properties:
-        country_name:
-          description: Commonly used English name of the country
-          type: string
-          example: Germany
-        country_code:
-          $ref: '#/components/schemas/CountryCode'
-      required:
-      - country_name
-      - country_code
     CountryCode:
       description: 2-letter ISO 3166-1 alpha-2 code that represents the country
       type: string
@@ -107,19 +107,19 @@ components:
       required:
       - geoname_id
       - city_name
-  responses:
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    bad_request:
-      description: Bad Request
-      content: {}
+    Country:
+      description: Describe country geographical location information
+      type: object
+      properties:
+        country_name:
+          description: Commonly used English name of the country
+          type: string
+          example: Germany
+        country_code:
+          $ref: '#/components/schemas/CountryCode'
+      required:
+      - country_name
+      - country_code
   securitySchemes:
     BearerAuth:
       type: http

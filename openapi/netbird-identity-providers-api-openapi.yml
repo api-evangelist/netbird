@@ -177,16 +177,29 @@ components:
     requires_authentication:
       description: Requires authentication
       content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
     internal_error:
       description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     bad_request:
       description: Bad Request
       content: {}
   schemas:
+    IdentityProviderType:
+      type: string
+      description: Type of identity provider
+      enum:
+      - oidc
+      - zitadel
+      - entra
+      - google
+      - okta
+      - pocketid
+      - microsoft
+      - adfs
+      example: oidc
     IdentityProvider:
       type: object
       properties:
@@ -213,19 +226,6 @@ components:
       - name
       - issuer
       - client_id
-    IdentityProviderType:
-      type: string
-      description: Type of identity provider
-      enum:
-      - oidc
-      - zitadel
-      - entra
-      - google
-      - okta
-      - pocketid
-      - microsoft
-      - adfs
-      example: oidc
     IdentityProviderRequest:
       type: object
       properties:

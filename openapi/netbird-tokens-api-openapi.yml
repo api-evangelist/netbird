@@ -165,11 +165,11 @@ components:
     requires_authentication:
       description: Requires authentication
       content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
     internal_error:
       description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     bad_request:
       description: Bad Request

@@ -293,81 +293,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    NetworkTrafficUser:
-      type: object
-      properties:
-        id:
-          type: string
-          description: UserID is the ID of the user that initiated the event (can be empty as not every event is user-initiated).
-          example: google-oauth2|123456789012345678901
-        email:
-          type: string
-          description: Email of the user who initiated the event (if any).
-          example: alice@netbird.io
-        name:
-          type: string
-          description: Name of the user who initiated the event (if any).
-          example: Alice Smith
-      required:
-      - id
-      - email
-      - name
-    ProxyAccessLogsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          description: List of proxy access log entries
-          items:
-            $ref: '#/components/schemas/ProxyAccessLog'
-        page:
-          type: integer
-          description: Current page number
-          example: 1
-        page_size:
-          type: integer
-          description: Number of items per page
-          example: 50
-        total_records:
-          type: integer
-          description: Total number of log records available
-          example: 523
-        total_pages:
-          type: integer
-          description: Total number of pages available
-          example: 11
-      required:
-      - data
-      - page
-      - page_size
-      - total_records
-      - total_pages
-    NetworkTrafficEventsResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          description: List of network traffic events
-          items:
-            $ref: '#/components/schemas/NetworkTrafficEvent'
-        page:
-          type: integer
-          description: Current page number
-        page_size:
-          type: integer
-          description: Number of items per page
-        total_records:
-          type: integer
-          description: Total number of event records available
-        total_pages:
-          type: integer
-          description: Total number of pages available
-      required:
-      - data
-      - page
-      - page_size
-      - total_records
-      - total_pages
     ProxyAccessLog:
       type: object
       properties:
@@ -462,6 +387,74 @@ components:
       - status_code
       - bytes_upload
       - bytes_download
+    NetworkTrafficEndpoint:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of this endpoint (e.g., peer ID or resource ID).
+          example: ch8i4ug6lnn4g9hqv7m0
+        type:
+          type: string
+          description: Type of the endpoint object (e.g., UNKNOWN, PEER, HOST_RESOURCE).
+          example: PEER
+        name:
+          type: string
+          description: Name is the name of the endpoint object (e.g., a peer name).
+          example: My Peer
+        geo_location:
+          $ref: '#/components/schemas/NetworkTrafficLocation'
+        os:
+          type: string
+          nullable: true
+          description: Operating system of the peer, if applicable.
+          example: Linux
+        address:
+          type: string
+          description: IP address (and possibly port) in string form.
+          example: 100.64.0.10:51820
+        dns_label:
+          type: string
+          nullable: true
+          description: DNS label/name if available.
+          example: '*.mydomain.com'
+      required:
+      - id
+      - type
+      - name
+      - geo_location
+      - os
+      - address
+      - dns_label
+    NetworkTrafficPolicy:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the policy that allowed this event.
+          example: ch8i4ug6lnn4g9hqv7m0
+        name:
+          type: string
+          description: Name of the policy that allowed this event.
+          example: All to All
+      required:
+      - id
+      - name
+    NetworkTrafficSubEvent:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of the event (e.g., TYPE_UNKNOWN, TYPE_START, TYPE_END, TYPE_DROP).
+          example: TYPE_START
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the event as sent by the peer.
+          example: 2025-03-20 16:23:58.125397+00:00
+      required:
+      - type
+      - timestamp
     NetworkTrafficICMP:
       type: object
       properties:
@@ -476,19 +469,38 @@ components:
       required:
       - type
       - code
-    NetworkTrafficPolicy:
+    NetworkTrafficLocation:
+      type: object
+      properties:
+        city_name:
+          type: string
+          description: Name of the city (if known).
+          example: Berlin
+        country_code:
+          type: string
+          description: ISO country code (if known).
+          example: DE
+      required:
+      - city_name
+      - country_code
+    NetworkTrafficUser:
       type: object
       properties:
         id:
           type: string
-          description: ID of the policy that allowed this event.
-          example: ch8i4ug6lnn4g9hqv7m0
+          description: UserID is the ID of the user that initiated the event (can be empty as not every event is user-initiated).
+          example: google-oauth2|123456789012345678901
+        email:
+          type: string
+          description: Email of the user who initiated the event (if any).
+          example: alice@netbird.io
         name:
           type: string
-          description: Name of the policy that allowed this event.
-          example: All to All
+          description: Name of the user who initiated the event (if any).
+          example: Alice Smith
       required:
       - id
+      - email
       - name
     NetworkTrafficEvent:
       type: object
@@ -557,6 +569,62 @@ components:
       - tx_bytes
       - tx_packets
       - events
+    NetworkTrafficEventsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of network traffic events
+          items:
+            $ref: '#/components/schemas/NetworkTrafficEvent'
+        page:
+          type: integer
+          description: Current page number
+        page_size:
+          type: integer
+          description: Number of items per page
+        total_records:
+          type: integer
+          description: Total number of event records available
+        total_pages:
+          type: integer
+          description: Total number of pages available
+      required:
+      - data
+      - page
+      - page_size
+      - total_records
+      - total_pages
+    ProxyAccessLogsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of proxy access log entries
+          items:
+            $ref: '#/components/schemas/ProxyAccessLog'
+        page:
+          type: integer
+          description: Current page number
+          example: 1
+        page_size:
+          type: integer
+          description: Number of items per page
+          example: 50
+        total_records:
+          type: integer
+          description: Total number of log records available
+          example: 523
+        total_pages:
+          type: integer
+          description: Total number of pages available
+          example: 11
+      required:
+      - data
+      - page
+      - page_size
+      - total_records
+      - total_pages
     Event:
       type: object
       properties:
@@ -725,83 +793,15 @@ components:
       - initiator_email
       - target_id
       - meta
-    NetworkTrafficSubEvent:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of the event (e.g., TYPE_UNKNOWN, TYPE_START, TYPE_END, TYPE_DROP).
-          example: TYPE_START
-        timestamp:
-          type: string
-          format: date-time
-          description: Timestamp of the event as sent by the peer.
-          example: 2025-03-20 16:23:58.125397+00:00
-      required:
-      - type
-      - timestamp
-    NetworkTrafficLocation:
-      type: object
-      properties:
-        city_name:
-          type: string
-          description: Name of the city (if known).
-          example: Berlin
-        country_code:
-          type: string
-          description: ISO country code (if known).
-          example: DE
-      required:
-      - city_name
-      - country_code
-    NetworkTrafficEndpoint:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ID of this endpoint (e.g., peer ID or resource ID).
-          example: ch8i4ug6lnn4g9hqv7m0
-        type:
-          type: string
-          description: Type of the endpoint object (e.g., UNKNOWN, PEER, HOST_RESOURCE).
-          example: PEER
-        name:
-          type: string
-          description: Name is the name of the endpoint object (e.g., a peer name).
-          example: My Peer
-        geo_location:
-          $ref: '#/components/schemas/NetworkTrafficLocation'
-        os:
-          type: string
-          nullable: true
-          description: Operating system of the peer, if applicable.
-          example: Linux
-        address:
-          type: string
-          description: IP address (and possibly port) in string form.
-          example: 100.64.0.10:51820
-        dns_label:
-          type: string
-          nullable: true
-          description: DNS label/name if available.
-          example: '*.mydomain.com'
-      required:
-      - id
-      - type
-      - name
-      - geo_location
-      - os
-      - address
-      - dns_label
   responses:
     requires_authentication:
       description: Requires authentication
       content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
     internal_error:
       description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     bad_request:
       description: Bad Request

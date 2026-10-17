@@ -174,73 +174,92 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    EDRSentinelOneResponse:
+    PeerMinimum:
       type: object
-      description: Represents a SentinelOne EDR integration configuration
-      required:
-      - id
-      - account_id
-      - created_by
-      - last_synced_at
-      - created_at
-      - updated_at
-      - api_url
-      - groups
-      - last_synced_interval
-      - match_attributes
-      - enabled
       properties:
         id:
+          description: Peer ID
+          type: string
+          example: chacbco6lnnbn6cg5s90
+        name:
+          description: Peer's hostname
+          type: string
+          example: stage-host-1
+      required:
+      - id
+      - name
+    Resource:
+      type: object
+      properties:
+        id:
+          description: ID of the resource
+          type: string
+          example: chacdk86lnnboviihd7g
+        type:
+          description: Type of the resource
+          $ref: '#/components/schemas/ResourceType'
+      required:
+      - id
+      - type
+    ErrorResponse:
+      type: object
+      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
+      properties:
+        message:
+          type: string
+          description: A human-readable error message.
+          example: couldn't parse JSON request
+    SentinelOneMatchAttributes:
+      type: object
+      description: Attribute conditions to match when approving agents
+      additionalProperties: false
+      properties:
+        active_threats:
+          description: The maximum allowed number of active threats on the agent
           type: integer
-          format: int64
-          description: The unique numeric identifier for the integration.
-          example: 123
-        account_id:
-          type: string
-          description: The identifier of the account this integration belongs to.
-          example: ch8i4ug6lnn4g9hqv7l0
-        last_synced_at:
-          type: string
-          format: date-time
-          description: Timestamp of when the integration was last synced.
-          example: '2023-05-15T10:30:00Z'
-        created_by:
-          type: string
-          description: The user id that created the integration
-        created_at:
-          type: string
-          format: date-time
-          description: Timestamp of when the integration was created.
-          example: '2023-05-15T10:30:00Z'
-        updated_at:
-          type: string
-          format: date-time
-          description: Timestamp of when the integration was last updated.
-          example: '2023-05-16T11:45:00Z'
-        api_url:
-          type: string
-          description: The Base URL of SentinelOne API
-        groups:
-          type: array
-          description: List of groups
-          items:
-            $ref: '#/components/schemas/Group'
-        last_synced_interval:
-          type: integer
-          description: The devices last sync requirement interval in hours.
-        match_attributes:
-          $ref: '#/components/schemas/SentinelOneMatchAttributes'
-        enabled:
+          example: 0
+        encrypted_applications:
+          description: Whether disk encryption is enabled on the agent
           type: boolean
-          description: Indicates whether the integration is enabled
-    NetworkResourceType:
-      description: Network resource type based of the address
-      type: string
-      enum:
-      - host
-      - subnet
-      - domain
-      example: host
+        firewall_enabled:
+          description: Whether the agent firewall is enabled
+          type: boolean
+        infected:
+          description: Whether the agent is currently flagged as infected
+          type: boolean
+        is_active:
+          description: Whether the agent has been recently active and reporting
+          type: boolean
+        is_up_to_date:
+          description: Whether the agent is running the latest available version
+          type: boolean
+        network_status:
+          description: The current network connectivity status of the device
+          type: string
+          enum:
+          - connected
+          - disconnected
+          - quarantined
+        operational_state:
+          description: The current operational state of the agent
+          type: string
+    Group:
+      allOf:
+      - $ref: '#/components/schemas/GroupMinimum'
+      - type: object
+        properties:
+          peers:
+            description: List of peers object
+            type: array
+            items:
+              $ref: '#/components/schemas/PeerMinimum'
+          resources:
+            type: array
+            items:
+              $ref: '#/components/schemas/Resource'
+        required:
+        - peers
+        - resources
     ResourceType:
       allOf:
       - $ref: '#/components/schemas/NetworkResourceType'
@@ -311,92 +330,73 @@ components:
       - groups
       - last_synced_interval
       - match_attributes
-    SentinelOneMatchAttributes:
+    EDRSentinelOneResponse:
       type: object
-      description: Attribute conditions to match when approving agents
-      additionalProperties: false
+      description: Represents a SentinelOne EDR integration configuration
+      required:
+      - id
+      - account_id
+      - created_by
+      - last_synced_at
+      - created_at
+      - updated_at
+      - api_url
+      - groups
+      - last_synced_interval
+      - match_attributes
+      - enabled
       properties:
-        active_threats:
-          description: The maximum allowed number of active threats on the agent
+        id:
           type: integer
-          example: 0
-        encrypted_applications:
-          description: Whether disk encryption is enabled on the agent
+          format: int64
+          description: The unique numeric identifier for the integration.
+          example: 123
+        account_id:
+          type: string
+          description: The identifier of the account this integration belongs to.
+          example: ch8i4ug6lnn4g9hqv7l0
+        last_synced_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the integration was last synced.
+          example: '2023-05-15T10:30:00Z'
+        created_by:
+          type: string
+          description: The user id that created the integration
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the integration was created.
+          example: '2023-05-15T10:30:00Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of when the integration was last updated.
+          example: '2023-05-16T11:45:00Z'
+        api_url:
+          type: string
+          description: The Base URL of SentinelOne API
+        groups:
+          type: array
+          description: List of groups
+          items:
+            $ref: '#/components/schemas/Group'
+        last_synced_interval:
+          type: integer
+          description: The devices last sync requirement interval in hours.
+        match_attributes:
+          $ref: '#/components/schemas/SentinelOneMatchAttributes'
+        enabled:
           type: boolean
-        firewall_enabled:
-          description: Whether the agent firewall is enabled
-          type: boolean
-        infected:
-          description: Whether the agent is currently flagged as infected
-          type: boolean
-        is_active:
-          description: Whether the agent has been recently active and reporting
-          type: boolean
-        is_up_to_date:
-          description: Whether the agent is running the latest available version
-          type: boolean
-        network_status:
-          description: The current network connectivity status of the device
-          type: string
-          enum:
-          - connected
-          - disconnected
-          - quarantined
-        operational_state:
-          description: The current operational state of the agent
-          type: string
-    Group:
-      allOf:
-      - $ref: '#/components/schemas/GroupMinimum'
-      - type: object
-        properties:
-          peers:
-            description: List of peers object
-            type: array
-            items:
-              $ref: '#/components/schemas/PeerMinimum'
-          resources:
-            type: array
-            items:
-              $ref: '#/components/schemas/Resource'
-        required:
-        - peers
-        - resources
-    PeerMinimum:
-      type: object
-      properties:
-        id:
-          description: Peer ID
-          type: string
-          example: chacbco6lnnbn6cg5s90
-        name:
-          description: Peer's hostname
-          type: string
-          example: stage-host-1
-      required:
-      - id
-      - name
-    Resource:
-      type: object
-      properties:
-        id:
-          description: ID of the resource
-          type: string
-          example: chacdk86lnnboviihd7g
-        type:
-          description: Type of the resource
-          $ref: '#/components/schemas/ResourceType'
-      required:
-      - id
-      - type
-    ErrorResponse:
-      type: object
-      description: 'Standard error response. Note: The exact structure of this error response is inferred from `util.WriteErrorResponse` and `util.WriteError` usage in the provided Go code, as a specific Go struct for errors was not provided.'
-      properties:
-        message:
-          type: string
-          description: A human-readable error message.
-          example: couldn't parse JSON request
+          description: Indicates whether the integration is enabled
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
   securitySchemes:
     BearerAuth:
       type: http

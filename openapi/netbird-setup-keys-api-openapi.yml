@@ -173,28 +173,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    SetupKey:
-      allOf:
-      - $ref: '#/components/schemas/SetupKeyBase'
-      - type: object
-        properties:
-          key:
-            description: Setup Key as secret
-            type: string
-            example: A6160****
-        required:
-        - key
-    SetupKeyClear:
-      allOf:
-      - $ref: '#/components/schemas/SetupKeyBase'
-      - type: object
-        properties:
-          key:
-            description: Setup Key as plain text
-            type: string
-            example: A616097E-FCF0-48FA-9354-CA4A61142761
-        required:
-        - key
     CreateSetupKeyRequest:
       type: object
       properties:
@@ -236,6 +214,17 @@ components:
       - expires_in
       - auto_groups
       - usage_limit
+    SetupKey:
+      allOf:
+      - $ref: '#/components/schemas/SetupKeyBase'
+      - type: object
+        properties:
+          key:
+            description: Setup Key as secret
+            type: string
+            example: A6160****
+        required:
+        - key
     SetupKeyBase:
       type: object
       properties:
@@ -332,15 +321,26 @@ components:
       required:
       - revoked
       - auto_groups
+    SetupKeyClear:
+      allOf:
+      - $ref: '#/components/schemas/SetupKeyBase'
+      - type: object
+        properties:
+          key:
+            description: Setup Key as plain text
+            type: string
+            example: A616097E-FCF0-48FA-9354-CA4A61142761
+        required:
+        - key
   responses:
     requires_authentication:
       description: Requires authentication
       content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
     internal_error:
       description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     bad_request:
       description: Bad Request

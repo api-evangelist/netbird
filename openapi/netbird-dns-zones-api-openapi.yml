@@ -385,60 +385,7 @@ paths:
       operationId: deleteApiDnsZonesByZoneIdRecordsByRecordId
       x-operation-id-source: derived
 components:
-  responses:
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
-    not_found:
-      description: Resource not found
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    bad_request:
-      description: Bad Request
-      content: {}
   schemas:
-    Zone:
-      allOf:
-      - type: object
-        properties:
-          id:
-            description: Zone ID
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m0
-          records:
-            description: DNS records associated with this zone
-            type: array
-            items:
-              $ref: '#/components/schemas/DNSRecord'
-        required:
-        - id
-        - enabled
-        - records
-      - $ref: '#/components/schemas/ZoneRequest'
-    DNSRecordType:
-      type: string
-      description: DNS record type
-      enum:
-      - A
-      - AAAA
-      - CNAME
-      example: A
-    DNSRecord:
-      allOf:
-      - type: object
-        properties:
-          id:
-            description: DNS record ID
-            type: string
-            example: ch8i4ug6lnn4g9hqv7m0
-        required:
-        - id
-      - $ref: '#/components/schemas/DNSRecordRequest'
     DNSRecordRequest:
       type: object
       properties:
@@ -464,6 +411,25 @@ components:
       - type
       - content
       - ttl
+    DNSRecord:
+      allOf:
+      - type: object
+        properties:
+          id:
+            description: DNS record ID
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+        required:
+        - id
+      - $ref: '#/components/schemas/DNSRecordRequest'
+    DNSRecordType:
+      type: string
+      description: DNS record type
+      enum:
+      - A
+      - AAAA
+      - CNAME
+      example: A
     ZoneRequest:
       type: object
       properties:
@@ -496,6 +462,40 @@ components:
       - domain
       - enable_search_domain
       - distribution_groups
+    Zone:
+      allOf:
+      - type: object
+        properties:
+          id:
+            description: Zone ID
+            type: string
+            example: ch8i4ug6lnn4g9hqv7m0
+          records:
+            description: DNS records associated with this zone
+            type: array
+            items:
+              $ref: '#/components/schemas/DNSRecord'
+        required:
+        - id
+        - enabled
+        - records
+      - $ref: '#/components/schemas/ZoneRequest'
+  responses:
+    not_found:
+      description: Resource not found
+      content: {}
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   securitySchemes:
     BearerAuth:
       type: http

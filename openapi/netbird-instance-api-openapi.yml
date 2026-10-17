@@ -95,41 +95,17 @@ paths:
       operationId: postApiSetup
       x-operation-id-source: derived
 components:
-  responses:
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    bad_request:
-      description: Bad Request
-      content: {}
   schemas:
-    SetupResponse:
+    InstanceStatus:
       type: object
-      description: Response after successful instance setup
+      description: Instance status information
       properties:
-        user_id:
-          description: The ID of the created user
-          type: string
-          example: abc123def456
-        email:
-          description: Email address of the created user
-          type: string
-          example: admin@example.com
-        personal_access_token:
-          description: Plain text Personal Access Token created during setup. Present only when create_pat was requested and the NB_SETUP_PAT_ENABLED feature was enabled on the server.
-          type: string
-          format: password
-          readOnly: true
-          example: nbp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        setup_required:
+          description: Indicates whether the instance requires initial setup
+          type: boolean
+          example: true
       required:
-      - user_id
-      - email
+      - setup_required
     InstanceVersionInfo:
       type: object
       description: Version information for NetBird components
@@ -186,16 +162,40 @@ components:
       - email
       - password
       - name
-    InstanceStatus:
+    SetupResponse:
       type: object
-      description: Instance status information
+      description: Response after successful instance setup
       properties:
-        setup_required:
-          description: Indicates whether the instance requires initial setup
-          type: boolean
-          example: true
+        user_id:
+          description: The ID of the created user
+          type: string
+          example: abc123def456
+        email:
+          description: Email address of the created user
+          type: string
+          example: admin@example.com
+        personal_access_token:
+          description: Plain text Personal Access Token created during setup. Present only when create_pat was requested and the NB_SETUP_PAT_ENABLED feature was enabled on the server.
+          type: string
+          format: password
+          readOnly: true
+          example: nbp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       required:
-      - setup_required
+      - user_id
+      - email
+  responses:
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   securitySchemes:
     BearerAuth:
       type: http

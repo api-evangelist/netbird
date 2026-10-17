@@ -228,35 +228,41 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    PeerRequest:
+    PeerMinimum:
+      type: object
+      properties:
+        id:
+          description: Peer ID
+          type: string
+          example: chacbco6lnnbn6cg5s90
+        name:
+          description: Peer's hostname
+          type: string
+          example: stage-host-1
+      required:
+      - id
+      - name
+    PeerTemporaryAccessRequest:
       type: object
       properties:
         name:
+          description: Peer's hostname
           type: string
-          example: stage-host-1
-        ssh_enabled:
-          type: boolean
-          example: true
-        login_expiration_enabled:
-          type: boolean
-          example: false
-        inactivity_expiration_enabled:
-          type: boolean
-          example: false
-        approval_required:
-          description: (Cloud only) Indicates whether peer needs approval
-          type: boolean
-          example: true
-        ip:
-          description: Peer's IP address
+          example: temp-host-1
+        wg_pub_key:
+          description: Peer's WireGuard public key
           type: string
-          format: ipv4
-          example: 100.64.0.15
+          example: n0r3pL4c3h0ld3rK3y==
+        rules:
+          description: List of temporary access rules
+          type: array
+          items:
+            type: string
+            example: tcp/80
       required:
       - name
-      - ssh_enabled
-      - login_expiration_enabled
-      - inactivity_expiration_enabled
+      - wg_pub_key
+      - rules
     Peer:
       allOf:
       - $ref: '#/components/schemas/PeerMinimum'
@@ -395,6 +401,92 @@ components:
         - serial_number
         - extra_dns_labels
         - ephemeral
+    CityName:
+      description: Commonly used English name of the city
+      type: string
+      example: Berlin
+    PeerBatch:
+      allOf:
+      - $ref: '#/components/schemas/Peer'
+      - type: object
+        properties:
+          created_at:
+            description: Peer creation date (UTC)
+            type: string
+            format: date-time
+            example: '2023-05-05T09:00:35.477782Z'
+          accessible_peers_count:
+            description: Number of accessible peers
+            type: integer
+            example: 5
+        required:
+        - created_at
+        - accessible_peers_count
+    PeerRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: stage-host-1
+        ssh_enabled:
+          type: boolean
+          example: true
+        login_expiration_enabled:
+          type: boolean
+          example: false
+        inactivity_expiration_enabled:
+          type: boolean
+          example: false
+        approval_required:
+          description: (Cloud only) Indicates whether peer needs approval
+          type: boolean
+          example: true
+        ip:
+          description: Peer's IP address
+          type: string
+          format: ipv4
+          example: 100.64.0.15
+      required:
+      - name
+      - ssh_enabled
+      - login_expiration_enabled
+      - inactivity_expiration_enabled
+    CountryCode:
+      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
+      type: string
+      example: DE
+    GroupMinimum:
+      type: object
+      properties:
+        id:
+          description: Group ID
+          type: string
+          example: ch8i4ug6lnn4g9hqv7m0
+        name:
+          description: Group Name identifier
+          type: string
+          example: devs
+        peers_count:
+          description: Count of peers associated to the group
+          type: integer
+          example: 2
+        resources_count:
+          description: Count of resources associated to the group
+          type: integer
+          example: 5
+        issued:
+          description: How the group was issued (api, integration, jwt)
+          type: string
+          enum:
+          - api
+          - integration
+          - jwt
+          example: api
+      required:
+      - id
+      - name
+      - peers_count
+      - resources_count
     AccessiblePeer:
       allOf:
       - $ref: '#/components/schemas/PeerMinimum'
@@ -443,14 +535,6 @@ components:
         - geoname_id
         - connected
         - last_seen
-    CountryCode:
-      description: 2-letter ISO 3166-1 alpha-2 code that represents the country
-      type: string
-      example: DE
-    CityName:
-      description: Commonly used English name of the city
-      type: string
-      example: Berlin
     PeerTemporaryAccessResponse:
       type: object
       properties:
@@ -472,90 +556,6 @@ components:
       - name
       - id
       - rules
-    PeerMinimum:
-      type: object
-      properties:
-        id:
-          description: Peer ID
-          type: string
-          example: chacbco6lnnbn6cg5s90
-        name:
-          description: Peer's hostname
-          type: string
-          example: stage-host-1
-      required:
-      - id
-      - name
-    PeerTemporaryAccessRequest:
-      type: object
-      properties:
-        name:
-          description: Peer's hostname
-          type: string
-          example: temp-host-1
-        wg_pub_key:
-          description: Peer's WireGuard public key
-          type: string
-          example: n0r3pL4c3h0ld3rK3y==
-        rules:
-          description: List of temporary access rules
-          type: array
-          items:
-            type: string
-            example: tcp/80
-      required:
-      - name
-      - wg_pub_key
-      - rules
-    PeerBatch:
-      allOf:
-      - $ref: '#/components/schemas/Peer'
-      - type: object
-        properties:
-          created_at:
-            description: Peer creation date (UTC)
-            type: string
-            format: date-time
-            example: '2023-05-05T09:00:35.477782Z'
-          accessible_peers_count:
-            description: Number of accessible peers
-            type: integer
-            example: 5
-        required:
-        - created_at
-        - accessible_peers_count
-    GroupMinimum:
-      type: object
-      properties:
-        id:
-          description: Group ID
-          type: string
-          example: ch8i4ug6lnn4g9hqv7m0
-        name:
-          description: Group Name identifier
-          type: string
-          example: devs
-        peers_count:
-          description: Count of peers associated to the group
-          type: integer
-          example: 2
-        resources_count:
-          description: Count of resources associated to the group
-          type: integer
-          example: 5
-        issued:
-          description: How the group was issued (api, integration, jwt)
-          type: string
-          enum:
-          - api
-          - integration
-          - jwt
-          example: api
-      required:
-      - id
-      - name
-      - peers_count
-      - resources_count
     PeerLocalFlags:
       type: object
       properties:
@@ -600,14 +600,14 @@ components:
           type: boolean
           example: false
   responses:
-    forbidden:
-      description: Forbidden
-      content: {}
     requires_authentication:
       description: Requires authentication
       content: {}
     internal_error:
       description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     bad_request:
       description: Bad Request

@@ -580,15 +580,110 @@ paths:
       operationId: getApiNetworksRouters
       x-operation-id-source: derived
 components:
+  responses:
+    requires_authentication:
+      description: Requires authentication
+      content: {}
+    internal_error:
+      description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
+      content: {}
+    bad_request:
+      description: Bad Request
+      content: {}
   schemas:
-    NetworkResourceType:
-      description: Network resource type based of the address
-      type: string
-      enum:
-      - host
-      - subnet
-      - domain
-      example: host
+    NetworkRequest:
+      type: object
+      properties:
+        name:
+          description: Network name
+          type: string
+          example: Remote Network 1
+        description:
+          description: Network description
+          type: string
+          example: A remote network that needs to be accessed
+      required:
+      - name
+    NetworkRouter:
+      allOf:
+      - type: object
+        properties:
+          id:
+            description: Network Router Id
+            type: string
+            example: chacdk86lnnboviihd7g
+        required:
+        - id
+      - $ref: '#/components/schemas/NetworkRouterRequest'
+    NetworkResourceRequest:
+      allOf:
+      - $ref: '#/components/schemas/NetworkResourceMinimum'
+      - type: object
+        properties:
+          groups:
+            description: Group IDs containing the resource
+            type: array
+            items:
+              type: string
+              example: chacdk86lnnboviihd70
+        required:
+        - groups
+        - address
+    NetworkResource:
+      allOf:
+      - type: object
+        properties:
+          id:
+            description: Network Resource ID
+            type: string
+            example: chacdk86lnnboviihd7g
+          type:
+            $ref: '#/components/schemas/NetworkResourceType'
+          groups:
+            description: Groups that the resource belongs to
+            type: array
+            items:
+              $ref: '#/components/schemas/GroupMinimum'
+        required:
+        - id
+        - type
+        - groups
+      - $ref: '#/components/schemas/NetworkResourceMinimum'
+    GroupMinimum:
+      type: object
+      properties:
+        id:
+          description: Group ID
+          type: string
+          example: ch8i4ug6lnn4g9hqv7m0
+        name:
+          description: Group Name identifier
+          type: string
+          example: devs
+        peers_count:
+          description: Count of peers associated to the group
+          type: integer
+          example: 2
+        resources_count:
+          description: Count of resources associated to the group
+          type: integer
+          example: 5
+        issued:
+          description: How the group was issued (api, integration, jwt)
+          type: string
+          enum:
+          - api
+          - integration
+          - jwt
+          example: api
+      required:
+      - id
+      - name
+      - peers_count
+      - resources_count
     Network:
       allOf:
       - type: object
@@ -626,31 +721,6 @@ components:
         - routing_peers_count
         - policies
       - $ref: '#/components/schemas/NetworkRequest'
-    NetworkResourceRequest:
-      allOf:
-      - $ref: '#/components/schemas/NetworkResourceMinimum'
-      - type: object
-        properties:
-          groups:
-            description: Group IDs containing the resource
-            type: array
-            items:
-              type: string
-              example: chacdk86lnnboviihd70
-        required:
-        - groups
-        - address
-    NetworkRouter:
-      allOf:
-      - type: object
-        properties:
-          id:
-            description: Network Router Id
-            type: string
-            example: chacdk86lnnboviihd7g
-        required:
-        - id
-      - $ref: '#/components/schemas/NetworkRouterRequest'
     NetworkResourceMinimum:
       type: object
       properties:
@@ -705,84 +775,14 @@ components:
       - metric
       - masquerade
       - enabled
-    NetworkResource:
-      allOf:
-      - type: object
-        properties:
-          id:
-            description: Network Resource ID
-            type: string
-            example: chacdk86lnnboviihd7g
-          type:
-            $ref: '#/components/schemas/NetworkResourceType'
-          groups:
-            description: Groups that the resource belongs to
-            type: array
-            items:
-              $ref: '#/components/schemas/GroupMinimum'
-        required:
-        - id
-        - type
-        - groups
-      - $ref: '#/components/schemas/NetworkResourceMinimum'
-    GroupMinimum:
-      type: object
-      properties:
-        id:
-          description: Group ID
-          type: string
-          example: ch8i4ug6lnn4g9hqv7m0
-        name:
-          description: Group Name identifier
-          type: string
-          example: devs
-        peers_count:
-          description: Count of peers associated to the group
-          type: integer
-          example: 2
-        resources_count:
-          description: Count of resources associated to the group
-          type: integer
-          example: 5
-        issued:
-          description: How the group was issued (api, integration, jwt)
-          type: string
-          enum:
-          - api
-          - integration
-          - jwt
-          example: api
-      required:
-      - id
-      - name
-      - peers_count
-      - resources_count
-    NetworkRequest:
-      type: object
-      properties:
-        name:
-          description: Network name
-          type: string
-          example: Remote Network 1
-        description:
-          description: Network description
-          type: string
-          example: A remote network that needs to be accessed
-      required:
-      - name
-  responses:
-    requires_authentication:
-      description: Requires authentication
-      content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
-    internal_error:
-      description: Internal Server Error
-      content: {}
-    bad_request:
-      description: Bad Request
-      content: {}
+    NetworkResourceType:
+      description: Network resource type based of the address
+      type: string
+      enum:
+      - host
+      - subnet
+      - domain
+      example: host
   securitySchemes:
     BearerAuth:
       type: http

@@ -269,55 +269,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    UpdateTenantRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name for the MSP tenant
-          example: My new tenant
-        groups:
-          description: MSP users Groups that can access the Tenant and Roles to assume
-          type: array
-          items:
-            $ref: '#/components/schemas/TenantGroupResponse'
-      required:
-      - name
-      - groups
-    TenantGroupResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Group ID
-          example: ch8i4ug6lnn4g9hqv7m0
-        role:
-          type: string
-          description: The Role name
-          example: admin
-      required:
-      - id
-      - role
-    CreateTenantRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name for the MSP tenant
-          example: My new tenant
-        domain:
-          type: string
-          description: The name for the MSP tenant
-          example: tenant.com
-        groups:
-          description: MSP users Groups that can access the Tenant and Roles to assume
-          type: array
-          items:
-            $ref: '#/components/schemas/TenantGroupResponse'
-      required:
-      - name
-      - domain
-      - groups
     TenantResponse:
       type: object
       properties:
@@ -384,6 +335,55 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TenantResponse'
+    UpdateTenantRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name for the MSP tenant
+          example: My new tenant
+        groups:
+          description: MSP users Groups that can access the Tenant and Roles to assume
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantGroupResponse'
+      required:
+      - name
+      - groups
+    CreateTenantRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name for the MSP tenant
+          example: My new tenant
+        domain:
+          type: string
+          description: The name for the MSP tenant
+          example: tenant.com
+        groups:
+          description: MSP users Groups that can access the Tenant and Roles to assume
+          type: array
+          items:
+            $ref: '#/components/schemas/TenantGroupResponse'
+      required:
+      - name
+      - domain
+      - groups
+    TenantGroupResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Group ID
+          example: ch8i4ug6lnn4g9hqv7m0
+        role:
+          type: string
+          description: The Role name
+          example: admin
+      required:
+      - id
+      - role
     DNSChallengeResponse:
       type: object
       properties:

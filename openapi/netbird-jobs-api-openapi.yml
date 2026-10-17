@@ -129,13 +129,46 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    WorkloadResponse:
-      oneOf:
-      - $ref: '#/components/schemas/BundleWorkloadResponse'
-      discriminator:
-        propertyName: type
-        mapping:
-          bundle: '#/components/schemas/BundleWorkloadResponse'
+    BundleWorkloadResponse:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/WorkloadType'
+        parameters:
+          $ref: '#/components/schemas/BundleParameters'
+        result:
+          $ref: '#/components/schemas/BundleResult'
+      required:
+      - type
+      - parameters
+      - result
+    WorkloadType:
+      type: string
+      description: 'Identifies the type of workload the job will execute.
+
+        Currently only `"bundle"` is supported.
+
+        '
+      enum:
+      - bundle
+      example: bundle
+    BundleWorkloadRequest:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/WorkloadType'
+        parameters:
+          $ref: '#/components/schemas/BundleParameters'
+      required:
+      - type
+      - parameters
+    BundleResult:
+      type: object
+      properties:
+        upload_key:
+          type: string
+          example: upload_key_123
+          nullable: true
     BundleParameters:
       type: object
       description: These parameters control what gets included in the bundle and how it is processed.
@@ -165,13 +198,27 @@ components:
       - bundle_for_time
       - log_file_count
       - anonymize
-    BundleResult:
+    WorkloadRequest:
+      oneOf:
+      - $ref: '#/components/schemas/BundleWorkloadRequest'
+      discriminator:
+        propertyName: type
+        mapping:
+          bundle: '#/components/schemas/BundleWorkloadRequest'
+    WorkloadResponse:
+      oneOf:
+      - $ref: '#/components/schemas/BundleWorkloadResponse'
+      discriminator:
+        propertyName: type
+        mapping:
+          bundle: '#/components/schemas/BundleWorkloadResponse'
+    JobRequest:
       type: object
       properties:
-        upload_key:
-          type: string
-          example: upload_key_123
-          nullable: true
+        workload:
+          $ref: '#/components/schemas/WorkloadRequest'
+      required:
+      - workload
     JobResponse:
       type: object
       properties:
@@ -203,62 +250,15 @@ components:
       - status
       - triggered_by
       - workload
-    BundleWorkloadResponse:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/WorkloadType'
-        parameters:
-          $ref: '#/components/schemas/BundleParameters'
-        result:
-          $ref: '#/components/schemas/BundleResult'
-      required:
-      - type
-      - parameters
-      - result
-    BundleWorkloadRequest:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/WorkloadType'
-        parameters:
-          $ref: '#/components/schemas/BundleParameters'
-      required:
-      - type
-      - parameters
-    WorkloadType:
-      type: string
-      description: 'Identifies the type of workload the job will execute.
-
-        Currently only `"bundle"` is supported.
-
-        '
-      enum:
-      - bundle
-      example: bundle
-    WorkloadRequest:
-      oneOf:
-      - $ref: '#/components/schemas/BundleWorkloadRequest'
-      discriminator:
-        propertyName: type
-        mapping:
-          bundle: '#/components/schemas/BundleWorkloadRequest'
-    JobRequest:
-      type: object
-      properties:
-        workload:
-          $ref: '#/components/schemas/WorkloadRequest'
-      required:
-      - workload
   responses:
     requires_authentication:
       description: Requires authentication
       content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
     internal_error:
       description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     bad_request:
       description: Bad Request

@@ -174,22 +174,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Route:
-      allOf:
-      - type: object
-        properties:
-          id:
-            description: Route Id
-            type: string
-            example: chacdk86lnnboviihd7g
-          network_type:
-            description: Network type indicating if it is a domain route or a IPv4/IPv6 route
-            type: string
-            example: IPv4
-        required:
-        - id
-        - network_type
-      - $ref: '#/components/schemas/RouteRequest'
     RouteRequest:
       type: object
       properties:
@@ -268,15 +252,31 @@ components:
       - masquerade
       - groups
       - keep_route
+    Route:
+      allOf:
+      - type: object
+        properties:
+          id:
+            description: Route Id
+            type: string
+            example: chacdk86lnnboviihd7g
+          network_type:
+            description: Network type indicating if it is a domain route or a IPv4/IPv6 route
+            type: string
+            example: IPv4
+        required:
+        - id
+        - network_type
+      - $ref: '#/components/schemas/RouteRequest'
   responses:
     requires_authentication:
       description: Requires authentication
       content: {}
-    forbidden:
-      description: Forbidden
-      content: {}
     internal_error:
       description: Internal Server Error
+      content: {}
+    forbidden:
+      description: Forbidden
       content: {}
     bad_request:
       description: Bad Request

@@ -104,6 +104,15 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    InvoicePDFResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          description: URL to redirect the user to invoice.
+          example: https://invoice.stripe.com/i/acct_1M2DaBKina4I2KUb/test_YWNjdF8xTTJEdVBLaW5hM0kyS1ViLF1SeFpQdEJZd3lUOGNEajNqeWdrdXY2RFM4aHcyCnpsLDEzMjg3GTgyNQ02000JoIHc1X?s=db
+      required:
+      - url
     InvoiceResponse:
       type: object
       properties:
@@ -132,15 +141,6 @@ components:
       - type
       - period_start
       - period_end
-    InvoicePDFResponse:
-      type: object
-      properties:
-        url:
-          type: string
-          description: URL to redirect the user to invoice.
-          example: https://invoice.stripe.com/i/acct_1M2DaBKina4I2KUb/test_YWNjdF8xTTJEdVBLaW5hM0kyS1ViLF1SeFpQdEJZd3lUOGNEajNqeWdrdXY2RFM4aHcyCnpsLDEzMjg3GTgyNQ02000JoIHc1X?s=db
-      required:
-      - url
   responses:
     requires_authentication:
       description: Requires authentication
